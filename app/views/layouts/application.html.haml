@@ -1,10 +1,10 @@
 !!!
-%html
+%html{lang: "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title SniWdApp
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all'
+    = render "layouts/head"
   %body
-    = yield
+    .container-fluid.mt-3.mb-3
+      -# = render "layouts/nav"
+      = render "layouts/flash"
+      = yield
+    = render "layouts/tail"
