@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'uglifier', '~> 4.2'
 gem 'jquery-rails', '~> 4.3'
+gem 'meta-tags'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
