@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :find_blog, only: [:show, :edit, :update, :destroy]
+  before_action :protect_production, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @blogs = Blog.search(params, blogs_path, remote: true, per_page: 10)
@@ -35,6 +36,12 @@ class BlogsController < ApplicationController
 
   def find_blog
     @blog = Blog.find(params[:id])
+  end
+
+  def protect_production
+    if Rails.env.production?
+      redirect_to blogs_path
+    end
   end
 
   def strong_params
