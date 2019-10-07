@@ -1,0 +1,20 @@
+- set_meta_tags title: t("blog.blog").pluralize, description: t("blog.description"), keyswords: t("blog.keywords")
+
+= form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center" do
+  = label_tag :query, t("query"), class: "sr-only"
+  = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
+  = label_tag :order, t("order"), class: "sr-only"
+  = select_tag :order, blog_order_menu(params[:order]), class: "form-control mr-1 mb-1 auto-submit"
+  = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
+%table{class: "table table-bordered table-striped table-sm mt-3"}
+  %thead
+    %tr.d-flex
+      %th.col-3= t("blog.title")
+      %th.col-5= t("blog.summary")
+      %th.col-2.text-center= t("created")
+      %th.col-2.text-center= t("updated")
+  %tbody#results
+    = render "results", blogs: @blogs
+
+.text-center
+  = link_to t("blog.new"), new_blog_path, class: "btn btn-info"

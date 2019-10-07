@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_101554) do
     t.boolean "draft", default: false
     t.string "title", limit: 50
     t.text "story"
+    t.text "summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

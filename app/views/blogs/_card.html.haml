@@ -1,0 +1,28 @@
+- defined?(home) || home = false
+
+.card{class: "border-primary mb-3"}
+  %h3.card-header{class: blog.draft ? "text-danger" : ""}
+    = blog.title_with_draft
+    .float-right
+      %small= blog.created_at.strftime('%b %e %Y')
+  .card-body
+    - if home
+      ~ blog.summary_html
+    - else
+      ~ blog.story_html
+  - if home
+    - if blog.story.present?
+      .card-footer
+        = link_to t("blog.more"), blog
+  - else
+    .card-footer.small
+      = succeed(":") do
+        = t("created_at")
+      = time_ago_in_words(blog.created_at)
+      = succeed(".") do
+        = t("ago")
+      = succeed(":") do
+        = t("updated_at")
+      = time_ago_in_words(blog.updated_at)
+      = succeed(".") do
+        = t("ago")

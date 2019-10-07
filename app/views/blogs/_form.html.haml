@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    = form_for blog, html: { class: "form-horizontal" } do |f|
+      - shared = { form: f, object: blog, col: "md", pad: 1, width: 9}
+      = render "utils/text_field_for", shared.merge(param: :title, text: t("blog.title"))
+      = render "utils/text_area_for", shared.merge(param: :summary, text: t("blog.summary"), rows: 8)
+      = render "utils/text_area_for", shared.merge(param: :story, text: t("blog.story"), rows: 32)
+      = render "utils/check_box_for", shared.merge(param: :draft, text: t("blog.draft"), width: 1)
+
+      .row
+        .offset-md-1.col-md-11
+          = f.submit t("save"), class: "btn btn-primary"
+          = link_to t("cancel"), blog.new_record?? blogs_path : blog, class: "btn btn-secondary"
+          - unless blog.new_record?
+            = link_to t("delete"), blog, class: "btn btn-danger", method: :delete, data: { confirm: t("sure") }

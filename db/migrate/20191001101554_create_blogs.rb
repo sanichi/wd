@@ -4,6 +4,7 @@ class CreateBlogs < ActiveRecord::Migration[6.0]
       t.boolean  :draft, default: false
       t.string   :title, limit: Blog::MAX_TITLE
       t.text     :story
+      t.text     :summary
 
       t.timestamps
     end

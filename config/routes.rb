@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     get page => "pages##{page}"
   end
 
-  get "news_items" => "news_items#index"
+  resources :blogs
 end

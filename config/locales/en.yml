@@ -1,4 +1,23 @@
 en:
+  ago: ago
+  cancel: Cancel
+  created: Created
+  created_at: Created
+  delete: Delete
+  edit: Edit
+  order: Order
+  query: Query
+  search: Search
+  save: Save
   site: Wandering Dragons
+  sure: Are you sure?
+  updated: Updated
+  updated_at: Last updated
+  pagination:
+    frst: first
+    next: next
+    prev: previous
+    last: last
+    of: of
   symbol:
      cross: ✘

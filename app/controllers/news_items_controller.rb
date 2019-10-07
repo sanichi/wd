@@ -1,2 +1,0 @@
-class NewsItemsController < ApplicationController
-end

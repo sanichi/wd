@@ -1,0 +1,17 @@
+en:
+  blog:
+    blog: Blog
+    description: Latest news for the Wandering Dragons Chess Club.
+    draft: Draft
+    edit: Edit Blog
+    keywords: blog, news, latest, recent, chess, games, results, players
+    more: Read more →
+    new: New Blog
+    story: Story
+    summary: Summary
+    title: Title
+    order:
+      created_des: Created ↓
+      created_asc: Created ↑
+      updated_des: Updated ↓
+      updated_asc: Updated ↑
