@@ -2,7 +2,7 @@
 
 .card{class: "border-primary mb-3"}
   %h3.card-header{class: blog.draft ? "text-danger" : ""}
-    = blog.title_with_draft
+    = blog_title_with_draft(blog)
     .float-right
       %small= blog.created_at.strftime('%b %e %Y')
   .card-body

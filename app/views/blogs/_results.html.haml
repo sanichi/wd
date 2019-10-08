@@ -1,6 +1,6 @@
 - @blogs.matches.each do |blog|
   %tr.d-flex
-    %td.col-3= link_to blog.title_with_draft, blog, class: (blog.draft ? "text-danger" : "")
+    %td.col-3= link_to blog_title_with_draft(blog), blog, class: (blog.draft ? "text-danger" : "")
     %td.col-5= blog.summary.truncate(50)
     %td.col-2.text-center= blog.created_at.strftime('%Y-%m-%d')
     %td.col-2.text-center= blog.updated_at.strftime('%Y-%m-%d')

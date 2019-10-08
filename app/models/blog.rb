@@ -30,10 +30,6 @@ class Blog < ApplicationRecord
     paginate(matches, params, path, opt)
   end
 
-  def title_with_draft
-    draft ? "#{title} (draft)" : title
-  end
-
   def story_html
     if story.present?
       fst_half = summary.rstrip
