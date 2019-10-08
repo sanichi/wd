@@ -16,5 +16,6 @@
   %tbody#results
     = render "results", blogs: @blogs
 
-.text-center
-  = link_to t("blog.new"), new_blog_path, class: "btn btn-info"
+- unless Rails.env.production?
+  .text-center
+    = link_to t("blog.new"), new_blog_path, class: "btn btn-info"
