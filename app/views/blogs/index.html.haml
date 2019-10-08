@@ -1,6 +1,6 @@
 - set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keyswords: t("blog.keywords")
 
-%h1.text-center= t("blog.blogs")
+%h3.text-center= t("blog.blogs")
 
 = form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
   = label_tag :query, t("query"), class: "sr-only"

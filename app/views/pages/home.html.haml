@@ -1,4 +1,6 @@
 - set_meta_tags title: t("home.title"), description: t("home.description"), keyswords: t("home.keywords")
 
+%h3.text-center.mb-3= t("site")
+
 - @blogs.each do |blog|
   = render "blogs/card", blog: blog, home: true
