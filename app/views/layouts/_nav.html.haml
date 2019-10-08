@@ -1,7 +1,7 @@
-%nav{class: "navbar navbar-expand-lg navbar-dark bg-primary mb-3"}
-  %span{class: "navbar-brand text-decoration-none"}= link_to t("site"), home_path
+%nav{class: "navbar navbar-expand-lg navbar-dark bg-dark mb-3"}
+  %span{class: "navbar-brand text-decoration-none"}= link_to t("site"), home_path, class: "nav-link"
   %button{class: "navbar-toggler", type: "button", "data-toggle" => "collapse", "data-target" => "#navbarNav", "aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation"}
     %span.navbar-toggler-icon
   .collapse.navbar-collapse#navbarNav
     .navbar-nav
-      = link_to t("blog.blogs"), blogs_path, class: "nav-link nav-item"
+      = link_to t("blog.blogs"), blogs_path, class: "nav-item nav-link"
