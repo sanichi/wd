@@ -50,3 +50,16 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+Capybara.configure do |config|
+  # Exact matches.
+  config.exact = true
+end
+
+def t(key)
+  I18n.t(key)
+end
+
+def error
+  "div.help-block"
+end

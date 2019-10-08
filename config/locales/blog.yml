@@ -1,6 +1,7 @@
 en:
   blog:
     blog: Blog
+    blogs: Blogs
     description: Latest news for the Wandering Dragons Chess Club.
     draft: Draft
     edit: Edit Blog

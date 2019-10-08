@@ -1,6 +1,9 @@
+- set_meta_tags title: @blog.title
+
 = render "card", blog: @blog
 
+
 .text-center
-  = link_to t("blog.blog").pluralize, blogs_path, class: "btn btn-success"
+  = link_to t("blog.blogs"), blogs_path, class: "btn btn-success"
   - unless Rails.env.production?
     = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info"

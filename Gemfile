@@ -22,6 +22,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
+  gem "capybara", "~> 3.28"
   gem 'factory_bot_rails', '~> 5.0'
   gem 'faker', '~> 2.1'
 end
