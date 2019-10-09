@@ -18,33 +18,21 @@ form.crud
     margin-bottom: 0.75rem
     width: 100%
 
-  select.datetime
-    display: inline-block
-    margin-bottom: 0.75rem
-
-  input[type="submit"]
-    @extend .btn, .btn-primary
-
   input[type="checkbox"]
     // @extend .form-check-input   // this is causing problems
     width: 20px
     height: 20px
 
-  input[type="checkbox"] + label
-    @extend .form-check-label
-    padding-left: 0.5rem
-    margin-bottom: 0.5rem
-
-  .checkboxes
-    @extend .form-check
-    margin-top: 1.5rem
+  input[type="submit"]
+    @extend .btn, .btn-primary
 
   div.field_with_errors
     display: inline
     label
       color: $red
-    input, textarea, select
+    input[type="text"], textarea, select
       background: lighten($pink, 40%)
 
   div.crud_error_message
     color: $red
+    margin-bottom: 1.0rem
