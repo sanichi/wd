@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_101554) do
+ActiveRecord::Schema.define(version: 2019_10_09_192334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "blogs", force: :cascade do |t|
-    t.boolean "draft", default: false
+    t.boolean "draft", default: true
     t.string "title", limit: 50
     t.text "story"
     t.text "summary"
