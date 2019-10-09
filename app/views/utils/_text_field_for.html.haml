@@ -1,9 +1,0 @@
-- defined?(autofocus)   || autofocus   = nil
-- defined?(placeholder) || placeholder = nil
-- defined?(type)        || type        = "text"
-- defined?(side)        || side        = "left"
-
-.form-group.row{class: object.errors[param].any? ? "has-error" : ""}
-  = form.label param, text, class: "col-form-label col-#{col}-#{pad} text-#{side}"
-  %div{class: "col-#{col}-#{width}"}= form.text_field param, class: "form-control", type: type, placeholder: placeholder, autofocus: autofocus
-  %div{class: "col-#{col}-#{12-pad-width} help-block"}= object.errors[param].first

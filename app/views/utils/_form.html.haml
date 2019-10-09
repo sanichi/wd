@@ -1,0 +1,8 @@
+.row
+  .offset-lg-2.col-lg-8.offset-md-1.col-md-10
+    = form_for object, html: { class: "crud" } do |form|
+      - args = { form: form, object: object }
+      - inputs.each do | input |
+        - type, param, label, opts = input
+        = render "utils/form_#{type}", args.merge({ param: param, label: label }).merge(opts || {})
+      = render "utils/form_buttons", form: form, object: object, index: index

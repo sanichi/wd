@@ -61,5 +61,5 @@ def t(key)
 end
 
 def error
-  "div.help-block"
+  "div.form_error_message"
 end
