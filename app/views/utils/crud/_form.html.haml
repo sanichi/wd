@@ -4,5 +4,5 @@
       - args = { form: form, object: object }
       - inputs.each do | input |
         - type, param, label, opts = input
-        = render "utils/form_#{type}", args.merge({ param: param, label: label }).merge(opts || {})
-      = render "utils/form_buttons", form: form, object: object, index: index
+        = render "utils/crud/#{type}", args.merge({ param: param, label: label }).merge(opts || {})
+      = render "utils/crud/buttons", form: form, object: object, index: index

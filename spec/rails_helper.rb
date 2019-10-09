@@ -61,5 +61,5 @@ def t(key)
 end
 
 def error
-  "div.form_error_message"
+  "div.crud_error_message"
 end

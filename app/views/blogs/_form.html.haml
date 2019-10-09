@@ -5,4 +5,4 @@
     [:text_area, :story,   t("blog.story"),   { rows: 24 }],
     [:check_box, :draft,   t("blog.draft")],
   ]
-= render "utils/form", object: blog, index: blogs_path, inputs: inputs
+= render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs
