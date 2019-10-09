@@ -1,8 +1,8 @@
 :ruby
   inputs = [
-    [:text,      :title,   t("blog.title")],
-    [:text_area, :summary, t("blog.summary"), { rows: 4  }],
-    [:text_area, :story,   t("blog.story"),   { rows: 24 }],
+    [:text,      :title,   t("blog.title"),   autofocus: true],
+    [:text_area, :summary, t("blog.summary"), rows: 8],
+    [:text_area, :story,   t("blog.story"),   rows: 24],
     [:check_box, :draft,   t("blog.draft")],
   ]
 = render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs

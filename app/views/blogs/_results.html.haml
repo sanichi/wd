@@ -4,4 +4,4 @@
     %td.col-5= blog.summary.truncate(50)
     %td.col-2.text-center= blog.created_at.strftime('%Y-%m-%d')
     %td.col-2.text-center= blog.updated_at.strftime('%Y-%m-%d')
-= render "utils/pagination_links", pager: @blogs, columns: 4
+= render "utils/pagination/links", pager: @blogs, columns: 4

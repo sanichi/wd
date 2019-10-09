@@ -1,2 +1,4 @@
+:ruby
+  defined?(rows) || rows = 10
 = render "utils/crud/label_and_errors", form: form, object: object, param: param, label: label
 = form.text_area param, rows: rows
