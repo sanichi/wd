@@ -24,7 +24,7 @@ class Blog < ApplicationRecord
       when "updated_asc" then updated_asc
       else created_des
       end
-    if sql = cross_constraint(params[:query], %w{title story})
+    if sql = cross_constraint(params[:query], %w{title summary story})
       matches = matches.where(sql)
     end
     paginate(matches, params, path, opt)
