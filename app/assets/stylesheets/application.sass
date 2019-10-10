@@ -40,17 +40,8 @@ form.crud
     color: $red
     margin-bottom: 1.0rem
 
-// Flashes
-
-// .flash
-//   @extend .alert, .alert-dismissible
-//   text-align: center
-//
-//   &.notice
-//     @extend .alert-success
-//
-//   &.alert
-//     @extend .alert-danger
+// Flash notices. Note that, for dismissal, the class "alert" needs to be
+// explicitly present in the HTML, so we can't just extend .flash with .alert.
 
 .flash
   text-align: center
