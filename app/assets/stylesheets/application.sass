@@ -1,10 +1,13 @@
 // Bootstrap overides.
+
 $link-hover-color: #007bff
 
+// Bootstrap
+
 @import "bootstrap"
-@import "my_utils"
 
 // Crud forms - adpated from Pragmatic Studio prepared files for Rails 6 course.
+
 form.crud
   margin-top: 1.5rem
 
@@ -36,3 +39,26 @@ form.crud
   div.crud_error_message
     color: $red
     margin-bottom: 1.0rem
+
+// Flashes
+
+// .flash
+//   @extend .alert, .alert-dismissible
+//   text-align: center
+//
+//   &.notice
+//     @extend .alert-success
+//
+//   &.alert
+//     @extend .alert-danger
+
+.flash
+  text-align: center
+  margin-top: -1rem
+  margin-bottom: 2rem
+
+  &.notice
+    @extend .alert-success
+
+  &.rails-alert
+    @extend .alert-danger

@@ -13,23 +13,23 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(strong_params)
     if @blog.save
-      redirect_to @blog
+      redirect_to @blog, notice: t("created", thing: %Q("#{@blog.title}"))
     else
-      render "new"
+      render :new
     end
   end
 
   def update
     if @blog.update(strong_params)
-      redirect_to @blog
+      redirect_to @blog, notice: t("updated", thing: %Q("#{@blog.title}"))
     else
-      render action: "edit"
+      render :edit
     end
   end
 
   def destroy
     @blog.destroy
-    redirect_to blogs_path
+    redirect_to blogs_path, alert: t("deleted", thing: %Q("#{@blog.title}"))
   end
 
   private

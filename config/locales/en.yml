@@ -1,9 +1,10 @@
 en:
   ago: ago
   cancel: Cancel
-  created: Created
-  created_at: Created
+  created: '%{thing} created!'
+  created_at: Created at
   delete: Delete
+  deleted: '%{thing} deleted!'
   edit: Edit
   order: Order
   query: Query
@@ -12,7 +13,7 @@ en:
   site: Wandering Dragons Chess Club
   sure: Are you sure?
   title: WD
-  updated: Updated
+  updated: '%{thing} updated!'
   updated_at: Last updated
   pagination:
     frst: first
