@@ -1,0 +1,28 @@
+- title = "#{t('user.user')} #{@user.handle}"
+- set_meta_tags title: title
+= render "utils/page/title", text: title
+
+.row
+  .offset-xl-4.col-xl-4.offset-lg-3.col-lg-6.offset-md-2.col-md-8.offset-sm-1.col-sm-10
+    %table{class: "table table-bordered mt-3"}
+      %tbody
+        %tr
+          %th= t("user.name")
+          %td= @user.name
+        %tr
+          %th= t("user.role")
+          %td= t("user.roles.#{@user.role}")
+        %tr
+          %th= t("created_at")
+          %td
+            = time_ago_in_words(@user.created_at)
+            = t("ago")
+        %tr
+          %th= t("updated_at")
+          %td
+            = time_ago_in_words(@user.updated_at)
+            = t("ago")
+
+.text-center
+  = link_to t("user.users"), users_path, class: "btn btn-success"
+  = link_to t("edit"), edit_user_path(@user), class: "btn btn-info"

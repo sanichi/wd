@@ -1,0 +1,20 @@
+- set_meta_tags title: t("user.users")
+= render "utils/page/title", text: t("user.users")
+
+.row
+  .offset-xl-4.col-xl-4.offset-lg-3.col-lg-6.offset-md-2.col-md-8.offset-sm-1.col-sm-10
+    %table{class: "table table-bordered table-striped table-sm mt-3"}
+      %thead
+        %tr
+          %th= t("user.handle")
+          %th= t("user.name")
+          %th= t("user.role")
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user.handle, user
+            %td= user.name
+            %td= t("user.roles.#{user.role}")
+
+.text-center.mt-3
+  = link_to t("user.new"), new_user_path, class: "btn btn-info"

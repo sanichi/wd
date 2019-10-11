@@ -1,6 +1,5 @@
 - set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keyswords: t("blog.keywords")
-
-%h3.text-center= t("blog.blogs")
+= render "utils/page/title", text: t("blog.blogs")
 
 = form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
   = label_tag :query, t("query"), class: "sr-only"
@@ -18,6 +17,5 @@
   %tbody#results
     = render "results", blogs: @blogs
 
-- unless Rails.env.production?
-  .text-center.mt-3
-    = link_to t("blog.new"), new_blog_path, class: "btn btn-info"
+.text-center.mt-3
+  = link_to t("blog.new"), new_blog_path, class: "btn btn-info"

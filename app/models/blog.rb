@@ -44,6 +44,10 @@ class Blog < ApplicationRecord
     to_html(summary)
   end
 
+  def thing
+    "#{I18n.t('blog.blog')} #{title}"
+  end
+
   private
 
   def normalize_attributes

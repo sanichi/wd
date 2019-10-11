@@ -12,10 +12,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'uglifier', '~> 4.2'
 gem 'jquery-rails', '~> 4.3'
 gem 'meta-tags', '~> 2.12'
-gem "redcarpet", "~> 3.5"
-gem "bootstrap", "~> 4.3"
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem "redcarpet", '~> 3.5'
+gem "bootstrap", '~> 4.3'
+gem 'bcrypt', '~> 3.1.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

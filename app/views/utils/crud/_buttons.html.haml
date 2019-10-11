@@ -1,4 +1,4 @@
-.text-center
+.text-center.mt-3
   = form.submit t("save"), class: "btn btn-primary"
   = link_to t("cancel"), object.new_record?? index : object, class: "btn btn-secondary"
   - unless object.new_record?
