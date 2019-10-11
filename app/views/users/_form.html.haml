@@ -1,8 +1,9 @@
 :ruby
   inputs = [
-    [:name,     t("user.name"),     :text],
-    [:handle,   t("user.handle"),   :text],
-    [:password, t("user.password"), :password],
-    [:role,     t("user.role"),     :select, menu: user_role_menu(user.role)],
+    [:handle,     t("user.handle"),     :text],
+    [:password,   t("user.password"),   :password],
+    [:role,       t("user.role"),       :select, menu: user_role_menu(user.role)],
+    [:first_name, t("user.first_name"), :text],
+    [:last_name,  t("user.last_name"),  :text],
   ]
 = render "utils/crud/form", object: user, index: users_path, inputs: inputs

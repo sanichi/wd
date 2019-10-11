@@ -25,8 +25,9 @@ ActiveRecord::Schema.define(version: 2019_10_11_084551) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "first_name", limit: 20
+    t.string "last_name", limit: 20
     t.string "handle", limit: 4
-    t.string "name", limit: 25
     t.string "role", limit: 20, default: "member"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false

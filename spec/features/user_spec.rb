@@ -11,28 +11,31 @@ describe User do
   context "create" do
     it "success" do
       click_link t("user.new")
-      fill_in t("user.name"), with: data.name
       fill_in t("user.handle"), with: data.handle
       fill_in t("user.password"), with: data.password
       select t("user.roles.#{data.role}"), from: t("user.role")
+      fill_in t("user.first_name"), with: data.first_name
+      fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
 
       expect(page).to have_title "#{t('user.user')} #{data.handle}"
 
       expect(User.count).to eq 2
       u = User.last
-      expect(u.name).to eq data.name
       expect(u.handle).to eq data.handle
       expect(u.password).to be_nil
       expect(u.password_digest).to be_present
       expect(u.role).to eq data.role
+      expect(u.first_name).to eq data.first_name
+      expect(u.last_name).to eq data.last_name
     end
 
-    it "failure" do
+    it "no password" do
       click_link t("user.new")
-      fill_in t("user.name"), with: data.name
       fill_in t("user.handle"), with: data.handle
       select t("user.roles.#{data.role}"), from: t("user.role")
+      fill_in t("user.first_name"), with: data.first_name
+      fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
 
       expect(page).to have_title t("user.new")
@@ -48,14 +51,16 @@ describe User do
       click_link t("edit")
 
       expect(page).to have_title t("user.edit")
-      fill_in t("user.name"), with: data.name
+      fill_in t("user.first_name"), with: data.first_name
+      fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
 
       expect(page).to have_title "#{t('user.user')} #{user.handle}"
       expect(User.count).to eq 1
 
       u = User.last
-      expect(u.name).to eq data.name
+      expect(u.first_name).to eq data.first_name
+      expect(u.last_name).to eq data.last_name
     end
   end
 

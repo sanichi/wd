@@ -6,6 +6,21 @@ $link-hover-color: #007bff
 
 @import "bootstrap"
 
+// Navbar
+nav
+  @extend .navbar, .navbar-expand-lg, .navbar-dark, .bg-dark, .mb-3
+
+  button
+    @extend .navbar-toggler
+    span
+      @extend .navbar-toggler-icon
+
+  div.navbar-nav
+    a
+      @extend .nav-item, .nav-link
+      color: white
+
+
 // Crud forms - adpated from Pragmatic Studio prepared files for Rails 6 course.
 
 form.crud

@@ -1,7 +1,9 @@
 en:
   user:
     edit: Edit User
-    handle: Handle
+    first_name: First name
+    handle: Username
+    last_name: Last name
     name: Name
     new: New User
     password: Password
@@ -11,5 +13,6 @@ en:
     roles:
       admin: Administrator
       blogger: Blogger
+      guest: Guest
       librarian: Librarian
       member: Member

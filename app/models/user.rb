@@ -1,16 +1,17 @@
 class User < ApplicationRecord
   has_secure_password
 
-  MAX_NAME = 25
-  MAX_ROLE = 20
+  MAX_NAME = 20
   MAX_HANDLE = 4
+  MAX_ROLE = 20
   MIN_HANDLE = 2
   MIN_PASSWORD = 10
-  ROLES = %w/member blogger librarian admin/.each do |r|
+  ROLES = %w/guest member blogger librarian admin/.each do |r|
     define_method "#{r}?" do
       r == role
     end
   end
+  ALLOWED_ROLES = ROLES.reject { |r| r == "guest" }
 
   before_validation :normalize_attributes
 
@@ -18,11 +19,16 @@ class User < ApplicationRecord
     format: { with: /\A[A-Z]+\z/, message: "is invalid (all caps)"},
     length: { minimum: MIN_HANDLE, maximum: MAX_HANDLE },
     uniqueness: true
-  validates :name, format: { with: /\A[A-Z][a-z]+ (O'|Mc|Mac)?[A-Z][a-z]+\z/, message: "is invalid (first and last names)" }
+  validates :first_name, format: { with: /\A[A-Z][a-z]+\z/ }
+  validates :last_name, format: { with: /\A(O'|Mac|Mc)?[A-Z][a-z]+\z/ }
   validates :password, length: { minimum: MIN_PASSWORD }, allow_nil: true
-  validates :role, inclusion: { in: ROLES }
+  validates :role, inclusion: { in: ALLOWED_ROLES }
 
-  scope :by_name, -> { order(:name) }
+  scope :by_name, -> { order(:first_name, :last_name) }
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 
   def thing
     "#{I18n.t('user.user')} #{handle}"
@@ -31,7 +37,8 @@ class User < ApplicationRecord
   private
 
   def normalize_attributes
-    name&.squish!
+    first_name&.squish!
+    last_name&.squish!
     handle&.squish!&.upcase!
   end
 end

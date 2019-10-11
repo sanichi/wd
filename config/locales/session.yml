@@ -1,0 +1,10 @@
+en:
+  session:
+    description: Member sign in.
+    goodbye: 'Goodbye %{name}'
+    invalid: Unknown username/password combination
+    keywords: sign in, login, log in
+    sign_in: Sign in
+    sign_out: Sign out
+    success: 'Hello %{name}'
+    success_with_role: 'Hello %{name} (%{role})'

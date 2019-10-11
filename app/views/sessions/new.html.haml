@@ -1,0 +1,12 @@
+- set_meta_tags title: t("session.sign_in"), description: t("session.description"), keywords: t("session.keywords")
+
+.row
+  .offset-xl-5.col-xl-2.offset-lg-4.col-lg-4.offset-sm-3.col-sm-6.offset-2.col-8
+    = form_with url: session_path, local: true, html: { class: "crud" } do |f|
+      = f.label :handle, t("user.handle")
+      = f.text_field :handle, autofocus: true, required: true
+      = f.label :password, t("user.password")
+      = f.password_field :password, required: true
+      .text-center.mt-3
+        = f.submit t("session.sign_in"), class: "btn btn-primary"
+        = link_to t("cancel"), home_path, class: "btn btn-secondary"
