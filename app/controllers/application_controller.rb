@@ -5,5 +5,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) || Guest.new
   end
 
-  helper_method :current_user
+  private
+
+  def skip_sign_in?
+    !!@skip_sign_in
+  end
+
+  helper_method :current_user, :skip_sign_in?
 end
