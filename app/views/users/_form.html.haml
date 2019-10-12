@@ -6,4 +6,4 @@
     [:first_name, t("user.first_name"), :text],
     [:last_name,  t("user.last_name"),  :text],
   ]
-= render "utils/crud/form", object: user, index: users_path, inputs: inputs
+= render "utils/crud/form", object: user, index: users_path, inputs: inputs, klass: center(lg: 4, md: 6, sm: 8, xs: 10)

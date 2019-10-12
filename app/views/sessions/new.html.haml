@@ -2,7 +2,7 @@
 = render "utils/page/title", text: t("session.sign_in")
 
 .row
-  .offset-xl-5.col-xl-2.offset-lg-4.col-lg-4.offset-sm-3.col-sm-6.offset-2.col-8
+  %div{class: center(xl: 3, lg: 4, md: 5, sm: 6, xs: 7)}
     = form_with url: session_path, local: true, html: { class: "crud" } do |f|
       = f.label :handle, t("user.handle")
       = f.text_field :handle, autofocus: true, required: true

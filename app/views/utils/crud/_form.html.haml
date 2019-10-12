@@ -1,5 +1,7 @@
+- defined?(klass) || klass = center(lg: 8, md: 10)
+
 .row
-  .offset-lg-2.col-lg-8.offset-md-1.col-md-10
+  %div{class: klass}
     = form_for object, html: { class: "crud" } do |form|
       - vars = { form: form, object: object }
       - inputs.each do | param, label, type, options |
