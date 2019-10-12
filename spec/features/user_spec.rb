@@ -5,7 +5,8 @@ describe User do
   let!(:user) { create(:user) }
 
   before(:each) do
-    visit users_path
+    login :admin
+    click_link t("user.users")
   end
 
   context "create" do
@@ -20,9 +21,8 @@ describe User do
 
       expect(page).to have_title "#{t('user.user')} #{data.handle}"
 
-      expect(User.count).to eq 2
-      u = User.last
-      expect(u.handle).to eq data.handle
+      expect(User.count).to eq 3
+      u = User.find_by(handle: data.handle)
       expect(u.password).to be_nil
       expect(u.password_digest).to be_present
       expect(u.role).to eq data.role
@@ -41,7 +41,7 @@ describe User do
       expect(page).to have_title t("user.new")
       expect(page).to have_css(error, text: "blank")
 
-      expect(User.count).to eq 1
+      expect(User.count).to eq 2
     end
   end
 
@@ -56,9 +56,9 @@ describe User do
       click_button t("save")
 
       expect(page).to have_title "#{t('user.user')} #{user.handle}"
-      expect(User.count).to eq 1
+      expect(User.count).to eq 2
 
-      u = User.last
+      u = User.find_by(handle: user.handle)
       expect(u.first_name).to eq data.first_name
       expect(u.last_name).to eq data.last_name
     end
@@ -66,7 +66,7 @@ describe User do
 
   context "delete" do
     it "success" do
-      expect(User.count).to eq 1
+      expect(User.count).to eq 2
 
       click_link user.handle
       click_link t("edit")
@@ -74,7 +74,7 @@ describe User do
 
       expect(page).to have_title t("user.users")
 
-      expect(User.count).to eq 0
+      expect(User.count).to eq 1
     end
   end
 end

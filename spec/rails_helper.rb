@@ -56,6 +56,16 @@ Capybara.configure do |config|
   config.exact = true
 end
 
+def login(role)
+  user = create(:user, role: role.to_s)
+  visit home_path
+  click_link t("session.sign_in")
+  fill_in t("user.handle"), with: user.handle
+  fill_in t("user.password"), with: user.password
+  click_button t("session.sign_in")
+  user
+end
+
 def t(key)
   I18n.t(key)
 end

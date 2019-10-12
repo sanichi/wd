@@ -12,9 +12,10 @@
       %tbody
         - @users.each do |user|
           %tr
-            %td= link_to user.handle, user
+            %td= link_to_if can?(:show, User), user.handle, user
             %td= user.name
             %td= t("user.roles.#{user.role}")
 
-.text-center.mt-3
-  = link_to t("user.new"), new_user_path, class: "btn btn-info"
+- if can?(:create, User)
+  .text-center.mt-3
+    = link_to t("user.new"), new_user_path, class: "btn btn-info"

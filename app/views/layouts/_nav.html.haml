@@ -7,8 +7,9 @@
     %ul
       %li
         = link_to t("blog.blogs"), blogs_path
-      %li
-        = link_to t("user.users"), users_path
+      - if can?(:index, User)
+        %li
+          = link_to t("user.users"), users_path
     %ul.right
       - unless skip_sign_in?
         %li

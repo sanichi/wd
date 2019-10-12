@@ -4,4 +4,5 @@
 
 .text-center
   = link_to t("blog.blogs"), blogs_path, class: "btn btn-success"
-  = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info"
+  - if can? :edit, @blog
+    = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info"

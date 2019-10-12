@@ -17,5 +17,6 @@
   %tbody#results
     = render "results", blogs: @blogs
 
-.text-center.mt-3
-  = link_to t("blog.new"), new_blog_path, class: "btn btn-info"
+- if can?(:create, Blog)
+  .text-center.mt-3
+    = link_to t("blog.new"), new_blog_path, class: "btn btn-info"

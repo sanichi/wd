@@ -5,6 +5,7 @@ describe Blog do
   let!(:blog) { create(:blog, draft: false) }
 
   before(:each) do
+    login :blogger
     visit blogs_path
   end
 
@@ -20,7 +21,7 @@ describe Blog do
       expect(page).to have_title data.title
 
       expect(Blog.count).to eq 2
-      b = Blog.last
+      b = Blog.order(:created_at).last
       expect(b.title).to eq data.title
       expect(b.summary).to eq data.summary
       expect(b.story).to eq data.story
@@ -54,8 +55,8 @@ describe Blog do
       expect(page).to have_title data.title
 
       expect(Blog.count).to eq 1
-      b = Blog.last
-      expect(b.title).to eq data.title
+      blog.reload
+      expect(blog.title).to eq data.title
     end
 
     it "failure" do

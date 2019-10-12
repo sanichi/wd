@@ -1,4 +1,8 @@
 class Guest
+  def id
+    0
+  end
+
   def role
     "guest"
   end
@@ -15,11 +19,9 @@ class Guest
     true
   end
 
-  User::ROLES.each do |r|
-    unless r == "guest"
-      define_method "#{r}?" do
-        false
-      end
+  User::ALLOWED_ROLES.each do |r|
+    define_method "#{r}?" do
+      false
     end
   end
 end

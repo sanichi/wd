@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  authorize_resource
   before_action :find_blog, only: [:show, :edit, :update, :destroy]
 
   def index
