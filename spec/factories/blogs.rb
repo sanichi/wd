@@ -4,5 +4,6 @@ FactoryBot.define do
     story   { Faker::Lorem.paragraphs(number: 3) }
     summary { Faker::Lorem.paragraph }
     title   { Faker::Lorem.sentence(word_count: 5).truncate(Blog::MAX_TITLE) }
+    user    { nil }
   end
 end

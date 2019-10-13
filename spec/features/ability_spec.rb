@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 describe Ability do
+  let!(:blog) { create(:blog, draft: false) }
+
   let(:admin)   { create(:user, role: "admin") }
   let(:blogger) { create(:user, role: "blogger") }
   let(:member)  { create(:user, role: "member") }
-  let!(:blog)   { create(:blog, draft: false) }
 
   context "admin" do
     before(:each) do
-      login(admin)
+      login admin
     end
 
     it "blogs" do
@@ -38,7 +39,7 @@ describe Ability do
 
   context "blogger" do
     before(:each) do
-      login(blogger)
+      login blogger
     end
 
     it "blogs" do
@@ -66,7 +67,7 @@ describe Ability do
 
   context "member" do
     before(:each) do
-      login(member)
+      login member
     end
 
     it "blogs" do

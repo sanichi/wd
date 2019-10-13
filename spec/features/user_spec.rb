@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe User do
-  let(:data)  { build(:user) }
   let!(:user) { create(:user) }
 
+  let(:admin) { create(:user, role: "admin") }
+  let(:data)  { build(:user) }
+
   before(:each) do
-    login :admin
+    login admin
     click_link t("user.users")
   end
 

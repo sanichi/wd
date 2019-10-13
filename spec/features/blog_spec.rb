@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe Blog do
-  let(:data)  { build(:blog) }
   let!(:blog) { create(:blog, draft: false) }
 
+  let(:data)    { build(:blog) }
+  let(:blogger) { create(:user, role: "blogger") }
+
   before(:each) do
-    login :blogger
+    login blogger
     visit blogs_path
   end
 
@@ -26,6 +28,7 @@ describe Blog do
       expect(b.summary).to eq data.summary
       expect(b.story).to eq data.story
       expect(b.draft).to eq data.draft
+      expect(b.user).to eq blogger
     end
 
     it "failure" do

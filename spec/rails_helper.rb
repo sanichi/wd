@@ -56,8 +56,7 @@ Capybara.configure do |config|
   config.exact = true
 end
 
-def login(role_or_user)
-  user = role_or_user.is_a?(User) ? role_or_user : create(:user, role: role_or_user.to_s)
+def login(user)
   visit home_path
   click_link t("session.sign_in")
   fill_in t("user.handle"), with: user.handle
