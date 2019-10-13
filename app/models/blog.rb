@@ -3,6 +3,8 @@ class Blog < ApplicationRecord
   include Pageable
   include Remarkable
 
+  belongs_to :user, inverse_of: :blogs, optional: true
+
   MAX_TITLE = 50
 
   before_validation :normalize_attributes
@@ -24,6 +26,7 @@ class Blog < ApplicationRecord
       when "updated_asc" then updated_asc
       else created_des
       end
+    matches = matches.includes(:user)
     if sql = cross_constraint(params[:query], %w{title summary story})
       matches = matches.where(sql)
     end

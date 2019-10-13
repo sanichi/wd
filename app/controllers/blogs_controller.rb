@@ -13,7 +13,8 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(strong_params)
     if @blog.save
-      redirect_to @blog, notice: t("created", thing: @blog.thing)
+      @blog.update_column(:user_id, current_user.id)
+      redirect_to @blog, notice: t("thing.created", thing: @blog.thing)
     else
       render :new
     end
@@ -21,7 +22,8 @@ class BlogsController < ApplicationController
 
   def update
     if @blog.update(strong_params)
-      redirect_to @blog, notice: t("updated", thing: @blog.thing)
+      @blog.update_column(:user_id, current_user.id) unless @blog.user.present?
+      redirect_to @blog, notice: t("thing.updated", thing: @blog.thing)
     else
       render :edit
     end
@@ -29,7 +31,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog.destroy
-    redirect_to blogs_path, alert: t("deleted", thing: @blog.thing)
+    redirect_to blogs_path, alert: t("thing.deleted", thing: @blog.thing)
   end
 
   private

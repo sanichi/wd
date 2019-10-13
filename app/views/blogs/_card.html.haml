@@ -16,13 +16,15 @@
         = link_to t("blog.more"), blog
   - else
     .card-footer.small
-      = succeed(":") do
-        = t("created_at")
+      - if blog.user.present?
+        = t("blog.author")
+        = succeed(",") do
+          = blog.user.handle
+      = blog.user.present? ? t("created_at").downcase : t("created_at")
       = time_ago_in_words(blog.created_at)
-      = succeed(".") do
+      = succeed(",") do
         = t("ago")
-      = succeed(":") do
-        = t("updated_at")
+      = t("updated_at").downcase
       = time_ago_in_words(blog.updated_at)
       = succeed(".") do
         = t("ago")

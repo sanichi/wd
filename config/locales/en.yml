@@ -1,11 +1,8 @@
 en:
   ago: ago
   cancel: Cancel
-  created: '%{thing} created!'
-  created_at: Created at
-  created_on: Created on
+  created_at: Created
   delete: Delete
-  deleted: '%{thing} deleted!'
   edit: Edit
   order: Order
   query: Query
@@ -14,8 +11,7 @@ en:
   site: Wandering Dragons Chess Club
   sure: Are you sure?
   title: WD
-  updated: '%{thing} updated!'
-  updated_at: Last updated
+  updated_at: Updated
   pagination:
     frst: first
     next: next
@@ -24,5 +20,9 @@ en:
     of: of
   symbol:
      cross: ✘
+  thing:
+    deleted: '%{thing} deleted!'
+    created: '%{thing} created!'
+    updated: '%{thing} updated!'
   unauthorized:
     default: 'You are not authorized to access that page!'

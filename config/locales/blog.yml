@@ -1,5 +1,6 @@
 en:
   blog:
+    author: Author
     blog: Blog
     blogs: Blogs
     description: Latest news for the Wandering Dragons Chess Club.

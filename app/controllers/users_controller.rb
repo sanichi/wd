@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(strong_params)
     if @user.save
-      redirect_to @user, notice: t("created", thing: @user.thing)
+      redirect_to @user, notice: t("thing.created", thing: @user.thing)
     else
       render :new
     end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(strong_params)
-      redirect_to @user, notice: t("updated", thing: @user.thing)
+      redirect_to @user, notice: t("thing.updated", thing: @user.thing)
     else
       render :edit
     end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_path, alert: t("deleted", thing: @user.thing)
+    redirect_to users_path, alert: t("thing.deleted", thing: @user.thing)
   end
 
   private
