@@ -4,13 +4,13 @@
   %button{type: "button", "data-toggle" => "collapse", "data-target" => "#navbar"}
     %span
   #navbar.collapse.navbar-collapse
-    %ul
+    %ul.left
       %li
         = link_to t("blog.blogs"), blogs_path
+    %ul.right
       - if can?(:index, User)
         %li
           = link_to t("user.users"), users_path
-    %ul.right
       - unless skip_sign_in?
         %li
           - if current_user.guest?

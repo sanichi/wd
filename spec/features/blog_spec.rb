@@ -36,7 +36,7 @@ describe Blog do
       click_button t("save")
 
       expect(page).to have_title t("blog.new")
-      expect(page).to have_css(error, text: "blank")
+      expect_error(page, "blank")
 
       expect(Blog.count).to eq 1
     end
@@ -67,7 +67,7 @@ describe Blog do
       click_button t("save")
 
       expect(page).to have_title t("blog.edit")
-      expect(page).to have_css(error, text: "blank")
+      expect_error(page, "blank")
     end
   end
 

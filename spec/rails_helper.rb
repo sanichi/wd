@@ -56,20 +56,23 @@ Capybara.configure do |config|
   config.exact = true
 end
 
-def login(role)
-  user = create(:user, role: role.to_s)
+def login(role_or_user)
+  user = role_or_user.is_a?(User) ? role_or_user : create(:user, role: role_or_user.to_s)
   visit home_path
   click_link t("session.sign_in")
   fill_in t("user.handle"), with: user.handle
   fill_in t("user.password"), with: user.password
   click_button t("session.sign_in")
-  user
 end
 
 def t(key)
   I18n.t(key)
 end
 
-def error
-  "div.crud_error_message"
+def expect_error(page, text)
+  expect(page).to have_css("div.crud_error_message", text: text)
+end
+
+def expect_unauthorized(page)
+  expect(page).to have_selector "div.alert.alert-dismissable", text: t("unauthorized.default")
 end

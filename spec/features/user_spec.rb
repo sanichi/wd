@@ -39,7 +39,7 @@ describe User do
       click_button t("save")
 
       expect(page).to have_title t("user.new")
-      expect(page).to have_css(error, text: "blank")
+      expect_error(page, "blank")
 
       expect(User.count).to eq 2
     end

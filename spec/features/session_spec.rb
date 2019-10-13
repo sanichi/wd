@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Sesssion" do
+describe SessionsController do
   let(:data) { build(:user) }
   let(:user) { create(:user) }
 

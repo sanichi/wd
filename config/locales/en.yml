@@ -3,6 +3,7 @@ en:
   cancel: Cancel
   created: '%{thing} created!'
   created_at: Created at
+  created_on: Created on
   delete: Delete
   deleted: '%{thing} deleted!'
   edit: Edit
