@@ -3,16 +3,20 @@ class Guest
     0
   end
 
+  def handle
+    "GGG"
+  end
+
   def role
     "guest"
   end
 
   def first_name
-    "Dummy"
+    "Guest"
   end
 
   def last_name
-    "McDummy"
+    "Guest"
   end
 
   def guest?
