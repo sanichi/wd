@@ -63,13 +63,6 @@ describe Ability do
       click_link blog2.title
       expect_no_edit page
       expect_no_go edit_blog_path(blog2), page
-
-      blogger2.destroy
-
-      click_link t("blog.blogs")
-      click_link blog2.title
-      click_link t("edit")
-      expect_save_cancel_delete(page)
     end
 
     it "users" do

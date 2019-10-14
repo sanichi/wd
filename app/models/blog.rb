@@ -17,16 +17,16 @@ class Blog < ApplicationRecord
   scope :updated_des, -> { order(updated_at: :desc) }
   scope :updated_asc, -> { order(updated_at: :asc) }
 
-  def self.search(params, path, opt={})
+  def self.search(matches, params, path, opt={})
+    matches = matches.includes(:user)
     matches =
       case params[:order]
-      when "created_des" then created_des
-      when "created_asc" then created_asc
-      when "updated_des" then updated_des
-      when "updated_asc" then updated_asc
-      else created_des
+      when "created_des" then matches.created_des
+      when "created_asc" then matches.created_asc
+      when "updated_des" then matches.updated_des
+      when "updated_asc" then matches.updated_asc
+      else matches.created_des
       end
-    matches = matches.includes(:user)
     if sql = cross_constraint(params[:query], %w{title summary story})
       matches = matches.where(sql)
     end
@@ -49,6 +49,11 @@ class Blog < ApplicationRecord
 
   def thing
     "#{I18n.t('blog.blog')} #{title}"
+  end
+
+  # for rspec tests
+  def to_s
+    "blog"
   end
 
   private

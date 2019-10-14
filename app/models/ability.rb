@@ -11,10 +11,10 @@ class Ability
       return
     end
 
+    can :read, Blog, draft: false
+
     if user.blogger?
-      can :crud, Blog, user_id: [user.id, nil]
-    else
-      can :read, Blog
+      can :crud, Blog, user_id: user.id
     end
 
     if !user.guest?

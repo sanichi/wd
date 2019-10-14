@@ -1,18 +1,13 @@
 class BlogsController < ApplicationController
+  # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
   load_and_authorize_resource
 
   def index
-    @blogs = Blog.search(params, blogs_path, remote: true, per_page: 10)
-  end
-
-  def new
-    @blog = Blog.new
+    @blogs = Blog.search(@blogs, params, blogs_path, remote: true, per_page: 10)
   end
 
   def create
-    @blog = Blog.new(resource_params)
     if @blog.save
-      @blog.update_column(:user_id, current_user.id)
       redirect_to @blog, notice: t("thing.created", thing: @blog.thing)
     else
       render :new
@@ -21,7 +16,6 @@ class BlogsController < ApplicationController
 
   def update
     if @blog.update(resource_params)
-      @blog.update_column(:user_id, current_user.id) unless @blog.user.present?
       redirect_to @blog, notice: t("thing.updated", thing: @blog.thing)
     else
       render :edit
@@ -34,10 +28,6 @@ class BlogsController < ApplicationController
   end
 
   private
-
-  def find_blog
-    @blog = Blog.find(params[:id])
-  end
 
   def resource_params
     params.require(:blog).permit(:draft, :story, :summary, :title)

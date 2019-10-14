@@ -36,6 +36,11 @@ class User < ApplicationRecord
     "#{I18n.t('user.user')} #{handle}"
   end
 
+  # for rspec tests
+  def to_s
+    "user"
+  end
+
   private
 
   def normalize_attributes

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @blogs = Blog.created_des.where(draft: false).limit(5)
+    @blogs = Blog.where(draft: false).created_des.limit(5)
   end
 end

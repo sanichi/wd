@@ -26,7 +26,8 @@ group :development, :test do
   gem "capybara", "~> 3.28"
   gem 'factory_bot_rails', '~> 5.0'
   gem 'faker', '~> 2.1'
-  gem 'launchy'
+  gem 'launchy', '~> 2.4'
+  gem 'awesome_print', require: "ap"
 end
 
 group :test do
@@ -36,7 +37,6 @@ end
 group :development do
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-passenger', '~> 0.2', require: false
-  gem 'awesome_print', require: "ap"
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
