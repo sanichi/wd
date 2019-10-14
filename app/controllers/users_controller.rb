@@ -1,16 +1,8 @@
 class UsersController < ApplicationController
+  # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
   load_and_authorize_resource
 
-  def index
-    @users = User.by_name.all
-  end
-
-  def new
-    @user = User.new
-  end
-
   def create
-    @user = User.new(resource_params)
     if @user.save
       redirect_to @user, notice: t("thing.created", thing: @user.thing)
     else

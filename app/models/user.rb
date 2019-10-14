@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: MIN_PASSWORD }, allow_nil: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
 
-  scope :by_name, -> { order(:first_name, :last_name) }
+  default_scope { order(:handle) }
 
   def name
     "#{first_name} #{last_name}"
