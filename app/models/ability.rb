@@ -4,13 +4,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
+
     if user.admin?
       can :manage, :all
       return
     end
 
     if user.blogger?
-      can :manage, Blog, user_id: [user.id, nil]
+      can :crud, Blog, user_id: [user.id, nil]
     else
       can :read, Blog
     end

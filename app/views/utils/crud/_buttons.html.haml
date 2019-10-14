@@ -1,5 +1,5 @@
 .text-center.mt-3
   = form.submit t("save"), class: "btn btn-primary"
   = link_to t("cancel"), object.new_record?? index : object, class: "btn btn-secondary"
-  - if !object.new_record? && can?(:delete, object)
+  - if !object.new_record? && can?(:destroy, object)
     = link_to t("delete"), object, class: "btn btn-danger", method: :delete, data: { confirm: t("sure") }
