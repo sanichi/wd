@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  authorize_resource
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @users = User.by_name.all
@@ -11,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(strong_params)
+    @user = User.new(resource_params)
     if @user.save
       redirect_to @user, notice: t("thing.created", thing: @user.thing)
     else
@@ -20,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(strong_params)
+    if @user.update(resource_params)
       redirect_to @user, notice: t("thing.updated", thing: @user.thing)
     else
       render :edit
@@ -34,11 +33,7 @@ class UsersController < ApplicationController
 
   private
 
-  def find_user
-    @user = User.find(params[:id])
-  end
-
-  def strong_params
+  def resource_params
     params.require(:user).permit(:handle, :password, :first_name, :last_name, :role)
   end
 end

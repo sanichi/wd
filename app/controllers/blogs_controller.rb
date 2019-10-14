@@ -1,6 +1,5 @@
 class BlogsController < ApplicationController
-  authorize_resource
-  before_action :find_blog, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @blogs = Blog.search(params, blogs_path, remote: true, per_page: 10)
@@ -11,7 +10,7 @@ class BlogsController < ApplicationController
   end
 
   def create
-    @blog = Blog.new(strong_params)
+    @blog = Blog.new(resource_params)
     if @blog.save
       @blog.update_column(:user_id, current_user.id)
       redirect_to @blog, notice: t("thing.created", thing: @blog.thing)
@@ -20,13 +19,8 @@ class BlogsController < ApplicationController
     end
   end
 
-  def edit
-    fix_cancan(:edit)
-  end
-
   def update
-    fix_cancan(:update)
-    if @blog.update(strong_params)
+    if @blog.update(resource_params)
       @blog.update_column(:user_id, current_user.id) unless @blog.user.present?
       redirect_to @blog, notice: t("thing.updated", thing: @blog.thing)
     else
@@ -35,7 +29,6 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    fix_cancan(:destroy)
     @blog.destroy
     redirect_to blogs_path, alert: t("thing.deleted", thing: @blog.thing)
   end
@@ -46,13 +39,7 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
-  def strong_params
+  def resource_params
     params.require(:blog).permit(:draft, :story, :summary, :title)
-  end
-
-  def fix_cancan(action)
-    if current_user.blogger? && @blog.user.present? && @blog.user.id != current_user.id
-      raise CanCan::AccessDenied.new(I18n.t("unauthorized.default"), action, @blog)
-    end
   end
 end
