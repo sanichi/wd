@@ -71,7 +71,3 @@ end
 def expect_error(page, text)
   expect(page).to have_css("div.crud_error_message", text: text)
 end
-
-def expect_unauthorized(page)
-  expect(page).to have_selector "div.alert.alert-dismissable", text: t("unauthorized.default")
-end

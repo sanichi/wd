@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(handle: params[:handle])&.authenticate(params[:password])
+    user = User.find_by(handle: params[:handle])
+    user = user&.authenticate(params[:password]) unless current_user.admin?
     if user
       session[:user_id] = user.id
       notice = t("session.success", name: user.first_name)

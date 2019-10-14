@@ -23,7 +23,6 @@
             = time_ago_in_words(@user.updated_at)
             = t("ago")
 
-.text-center
-  = link_to t("user.users"), users_path, class: "btn btn-success"
-  - if can?(:edit, @user)
+- if can?(:edit, @user)
+  .text-center
     = link_to t("edit"), edit_user_path(@user), class: "btn btn-info"

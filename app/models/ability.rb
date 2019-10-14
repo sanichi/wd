@@ -10,7 +10,7 @@ class Ability
     end
 
     if user.blogger?
-      can :manage, Blog
+      can :manage, Blog, user_id: [user.id, nil]
     else
       can :read, Blog
     end
