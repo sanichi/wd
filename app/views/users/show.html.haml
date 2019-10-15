@@ -1,28 +1,29 @@
 - title = "#{t('user.user')} #{@user.handle}"
 - set_meta_tags title: title
-= render "utils/page/title", text: title
 
 .row
   %div{class: center(xl: 4, lg: 6, md:8, sm: 10)}
-    %table{class: "table table-bordered mt-3"}
-      %tbody
-        %tr
-          %th= t("user.name")
-          %td= @user.name
-        %tr
-          %th= t("user.role")
-          %td= t("user.roles.#{@user.role}")
-        %tr
-          %th= t("created_at")
-          %td
-            = time_ago_in_words(@user.created_at)
-            = t("ago")
-        %tr
-          %th= t("updated_at")
-          %td
-            = time_ago_in_words(@user.updated_at)
-            = t("ago")
-
-- if can?(:edit, @user)
-  .text-center
-    = link_to t("edit"), edit_user_path(@user), class: "btn btn-info"
+    .card
+      %h3.card-header
+        = title
+        - if can?(:edit, @user)
+          .float-right.small= link_to t("edit"), edit_user_path(@user), class: "btn btn-info"
+      .card-body
+        %table{class: "table table-bordered mt-3"}
+          %tbody
+            %tr
+              %th= t("user.name")
+              %td= @user.name
+            %tr
+              %th= t("user.role")
+              %td= t("user.roles.#{@user.role}")
+            %tr
+              %th= t("created_at")
+              %td
+                = time_ago_in_words(@user.created_at)
+                = t("ago")
+            %tr
+              %th= t("updated_at")
+              %td
+                = time_ago_in_words(@user.updated_at)
+                = t("ago")

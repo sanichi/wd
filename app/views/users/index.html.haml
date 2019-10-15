@@ -1,21 +1,22 @@
 - set_meta_tags title: t("user.users")
-= render "utils/page/title", text: t("user.users")
 
 .row
   %div{class: center(xl: 4, lg: 6, md: 8, sm: 10)}
-    %table{class: "table table-bordered table-striped table-sm mt-3"}
-      %thead
-        %tr
-          %th= t("user.handle")
-          %th= t("user.name")
-          %th= t("user.role")
-      %tbody
-        - @users.each do |user|
-          %tr
-            %td= link_to_if can?(:show, User), user.handle, user
-            %td= user.name
-            %td= t("user.roles.#{user.role}")
-
-- if can?(:create, User)
-  .text-center.mt-3
-    = link_to t("user.new"), new_user_path, class: "btn btn-info"
+    .card
+      %h3.card-header
+        = t("user.users")
+        - if can?(:create, User)
+          .float-right.small= link_to t("user.new"), new_user_path, class: "btn btn-info"
+      .card-body
+        %table{class: "table table-bordered table-striped table-sm mt-3"}
+          %thead
+            %tr
+              %th= t("user.handle")
+              %th= t("user.name")
+              %th= t("user.role")
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= link_to_if can?(:show, User), user.handle, user
+                %td= user.name
+                %td= t("user.roles.#{user.role}")
