@@ -1,6 +1,5 @@
 %nav
-  = link_to root_path, class: "navbar-brand" do
-    = image_tag("logo.jpg", width: 30, height: 30, alt: t("site"))
+  = link_to t("brand"), root_path, class: "navbar-brand"
   %button{type: "button", "data-toggle" => "collapse", "data-target" => "#navbar"}
     %span
   #navbar.collapse.navbar-collapse

@@ -1,5 +1,6 @@
 en:
   ago: ago
+  brand: Wandering Dragons
   cancel: Cancel
   created_at: Created
   delete: Delete
@@ -8,7 +9,6 @@ en:
   query: Query
   search: Search
   save: Save
-  site: Wandering Dragons Chess Club
   sure: Are you sure?
   title: WD
   updated_at: Updated
