@@ -18,16 +18,17 @@ describe Ability do
       end
 
       context "different or no user" do
+        let(:blogger) { create(:user, role: "blogger") }
 
         context "finished" do
-          let(:blog) { create(:blog, user: [create(:user, role: "blogger"), nil].sample, draft: false) }
+          let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
 
           it { is_expected.to be_able_to(:read, blog) }
           it { is_expected.to_not be_able_to(:crud, blog) }
         end
 
         context "draft" do
-          let(:blog) { create(:blog, user: create(:user, role: "blogger"), draft: true) }
+          let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
 
           it { is_expected.to_not be_able_to(:read, blog) }
           it { is_expected.to_not be_able_to(:crud, blog) }
@@ -46,16 +47,17 @@ describe Ability do
     let(:user) { create(:user, role: "member") }
 
     context "blog" do
+      let(:blogger) { create(:user, role: "blogger") }
 
       context "finished" do
-        let(:blog) { create(:blog, user: [create(:user, role: "blogger"), nil].sample, draft: false) }
+        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
 
         it { is_expected.to be_able_to(:read, blog) }
         it { is_expected.to_not be_able_to(:crud, blog) }
       end
 
       context "draft" do
-        let(:blog) { create(:blog, user: [create(:user, role: "blogger"), nil].sample, draft: true) }
+        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
 
         it { is_expected.to_not be_able_to(:read, blog) }
         it { is_expected.to_not be_able_to(:crud, blog) }
@@ -73,16 +75,17 @@ describe Ability do
     let(:user) { Guest.new }
 
     context "blog" do
+      let(:blogger) { create(:user, role: "blogger") }
 
       context "finished" do
-        let(:blog) { create(:blog, user: [create(:user, role: "blogger"), nil].sample, draft: false) }
+        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
 
         it { is_expected.to be_able_to(:read, blog) }
         it { is_expected.to_not be_able_to(:crud, blog) }
       end
 
       context "draft" do
-        let(:blog) { create(:blog, user: [create(:user, role: "blogger"), nil].sample, draft: true) }
+        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
 
         it { is_expected.to_not be_able_to(:read, blog) }
         it { is_expected.to_not be_able_to(:crud, blog) }
