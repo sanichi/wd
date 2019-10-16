@@ -11,7 +11,13 @@ $navbar-dark-active-color: #ddd
 
 // Navbar
 nav
-  @extend .navbar, .navbar-expand-lg, .navbar-dark, .bg-dark, .mb-3
+  @extend .navbar, .navbar-expand-md, .navbar-dark, .bg-dark, .mb-3
+
+  &>a
+    @extend .navbar-brand
+
+    span
+      @extend .d-md-inline, .d-none
 
   button
     @extend .navbar-toggler

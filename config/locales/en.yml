@@ -1,6 +1,5 @@
 en:
   ago: ago
-  brand: Wandering Dragons
   cancel: Cancel
   created_at: Created
   delete: Delete
@@ -12,6 +11,9 @@ en:
   sure: Are you sure?
   title: WD
   updated_at: Updated
+  brand:
+    wd: Wandering Dragons
+    cc: Chess Club
   pagination:
     frst: first
     next: next
