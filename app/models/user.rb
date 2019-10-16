@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def thing
-    "#{I18n.t('user.user')} #{handle}"
+    "#{I18n.t('user.user')} «#{handle}»"
   end
 
   # for rspec tests

@@ -55,7 +55,7 @@ class Blog < ApplicationRecord
   end
 
   def thing
-    "#{I18n.t('blog.blog')} #{title}"
+    "#{I18n.t('blog.blog')} «#{title}»"
   end
 
   # for rspec tests
