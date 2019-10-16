@@ -4,6 +4,7 @@ en:
   created_at: Created
   delete: Delete
   edit: Edit
+  history: History
   order: Order
   query: Query
   search: Search
