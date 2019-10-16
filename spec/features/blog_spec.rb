@@ -17,6 +17,7 @@ describe Blog do
       fill_in t("blog.title"), with: data.title
       fill_in t("blog.summary"), with: data.summary
       fill_in t("blog.story"), with: data.story
+      fill_in t("blog.tag"), with: data.tag
       data.draft ? check(t("blog.draft")) : uncheck(t("blog.draft"))
       click_button t("save")
 
@@ -27,6 +28,7 @@ describe Blog do
       expect(b.title).to eq data.title
       expect(b.summary).to eq data.summary
       expect(b.story).to eq data.story
+      expect(b.tag).to eq data.tag
       expect(b.draft).to eq data.draft
       expect(b.user).to eq blogger
     end
@@ -46,7 +48,7 @@ describe Blog do
   end
 
   context "edit" do
-    it "success" do
+    it "title" do
       click_link blog.title
       click_link t("edit")
 
@@ -60,6 +62,26 @@ describe Blog do
       expect(Blog.count).to eq 1
       blog.reload
       expect(blog.title).to eq data.title
+    end
+
+    it "tag" do
+      click_link blog.title
+      click_link t("edit")
+
+      expect(page).to have_title t("blog.edit")
+
+      tag = "my_tag"
+      fill_in t("blog.tag"), with: tag
+      click_button t("save")
+
+      expect(page).to have_title blog.title
+
+      expect(Blog.count).to eq 1
+      blog.reload
+      expect(blog.tag).to eq tag
+
+      visit blog_path(tag)
+      expect(page).to have_title blog.title
     end
 
     it "failure" do

@@ -3,6 +3,7 @@
     [:title,   t("blog.title"),   :text,      autofocus: true],
     [:summary, t("blog.summary"), :text_area, rows: 8],
     [:story,   t("blog.story"),   :text_area, rows: 24],
+    [:tag,     t("blog.tag"),     :text],
     [:draft,   t("blog.draft"),   :check_box],
   ]
 = render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs

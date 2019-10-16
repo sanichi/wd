@@ -5,12 +5,19 @@ class Blog < ApplicationRecord
 
   belongs_to :user, inverse_of: :blogs, optional: true
 
+  MAX_TAG = 25
   MAX_TITLE = 50
+  VALID_TAG = /\A[a-z][a-z0-9_]+\z/
 
   before_validation :normalize_attributes
 
   validates :summary, presence: true
   validates :title, presence: true, length: { maximum: MAX_TITLE }
+  validates :tag,
+    length: { maximum: MAX_TAG },
+    format: { with: VALID_TAG },
+    uniqueness: true,
+    allow_nil: true
 
   scope :created_des, -> { order(created_at: :desc) }
   scope :created_asc, -> { order(created_at: :asc) }
@@ -59,6 +66,7 @@ class Blog < ApplicationRecord
   private
 
   def normalize_attributes
+    self.tag = nil if tag.blank?
     title&.squish!
     summary&.strip!
     summary&.gsub!(/\r\n/, "\n")
