@@ -1,10 +1,12 @@
 - defined?(home) || home = false
 
 .card{class: "border-primary mb-3"}
-  %h3.card-header{class: blog.draft ? "text-danger" : ""}
-    = blog_title_with_draft(blog)
-    .float-right
-      %small= blog.created_at.strftime('%b %e %Y')
+  .card-header
+    %h3.d-inline{class: blog.draft ? "text-danger" : ""}= blog_title_with_draft(blog)
+    .float-right.mt-1
+      - if can?(:edit, blog) && !home
+        = link_to t("edit"), edit_blog_path(blog), class: "btn btn-info"
+      = blog.created_at.strftime('%b %e %Y')
   .card-body
     - if home
       ~ blog.summary_html
