@@ -17,7 +17,7 @@ en:
     title: Title
     unpin: Unpin
     order:
-      created_des: Created ↓
-      created_asc: Created ↑
-      updated_des: Updated ↓
-      updated_asc: Updated ↑
+      created_descending: Created ↓
+      created_ascending: Created ↑
+      updated_descending: Updated ↓
+      updated_ascending: Updated ↑
