@@ -39,6 +39,11 @@ class BlogsController < ApplicationController
     redirect_to blogs_path, alert: t("thing.deleted", thing: @blog.thing)
   end
 
+  def pin
+    @blog.update_column(:pin, !@blog.pin)
+    @blog.touch
+  end
+
   private
 
   def resource_params

@@ -9,10 +9,13 @@ en:
     keywords: blog, news, latest, recent, chess, games, results, players
     more: Read more →
     new: New Blog
+    pin: Pin
+    pinned: 📌
     story: Story
     summary: Summary
     tag: Tag
     title: Title
+    unpin: Unpin
     order:
       created_des: Created ↓
       created_asc: Created ↑

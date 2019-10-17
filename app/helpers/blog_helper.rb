@@ -7,4 +7,12 @@ module BlogHelper
   def blog_title_with_draft(blog)
     blog.draft ? "#{blog.title} (draft)" : blog.title
   end
+
+  def pin_blog_text(blog)
+    if blog.pin
+      t("blog.unpin")
+    else
+      t("blog.pin")
+    end
+  end
 end
