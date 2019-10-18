@@ -1,0 +1,5 @@
+- unless current_user.guest?
+  - if blog.draft
+    = t("blog.icon.draft")
+  - if blog.pin
+    = t("blog.icon.pin")

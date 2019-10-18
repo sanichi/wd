@@ -1,9 +1,8 @@
 - @blogs.matches.each do |blog|
   %tr
     %td
-      = link_to blog_title_with_draft(blog), blog, class: (blog.draft ? "text-danger" : "")
-      - if blog.pin && !current_user.guest?
-        = t("blog.pinned")
+      = link_to blog.title, blog
+      = render "blogs/title_icons", blog: blog
     %td.d-none.d-md-table-cell= blog.summary.truncate(50)
     %td.text-center= blog.user&.handle
     %td.text-center.d-none.d-lg-table-cell= blog.created_at.strftime('%Y-%m-%d')

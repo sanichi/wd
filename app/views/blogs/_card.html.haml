@@ -1,6 +1,8 @@
 .blog
   .header
-    %h3.d-inline{class: blog.draft ? "text-danger" : ""}= blog_title_with_draft(blog)
+    %h3.d-inline
+      = blog.title
+      = render "title_icons", blog: blog
     .float-right.mt-1
       - if can?(:edit, blog)
         = link_to t("edit"), edit_blog_path(blog), class: "btn btn-info"

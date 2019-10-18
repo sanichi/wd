@@ -4,10 +4,6 @@ module BlogHelper
     options_for_select(opts, selected)
   end
 
-  def blog_title_with_draft(blog)
-    blog.draft ? "#{blog.title} (draft)" : blog.title
-  end
-
   def pin_blog_text(blog)
     if blog.pin
       t("blog.unpin")

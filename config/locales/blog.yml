@@ -10,7 +10,6 @@ en:
     more: Read more →
     new: New Blog
     pin: Pin
-    pinned: 📌
     story: Story
     summary: Summary
     tag: Tag
@@ -21,3 +20,6 @@ en:
       created_ascending: Created ↑
       updated_descending: Updated ↓
       updated_ascending: Updated ↑
+    icon:
+      draft: ✏️
+      pin: 📌
