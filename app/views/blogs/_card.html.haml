@@ -1,25 +1,16 @@
-- defined?(home) || home = false
-
-.card{class: "border-dark mb-3"}
-  .card-header
+.blog
+  .header
     %h3.d-inline{class: blog.draft ? "text-danger" : ""}= blog_title_with_draft(blog)
     .float-right.mt-1
-      - unless home
-        - if can?(:edit, blog)
-          = link_to t("edit"), edit_blog_path(blog), class: "btn btn-info"
-        - if can?(:pin, blog)
-          = link_to pin_blog_text(blog), pin_blog_path(blog), class: "btn btn-info", id: "pin_button", remote: true
+      - if can?(:edit, blog)
+        = link_to t("edit"), edit_blog_path(blog), class: "btn btn-info"
+      - if can?(:pin, blog)
+        = link_to pin_blog_text(blog), pin_blog_path(blog), class: "btn btn-info", id: "pin_button", remote: true
       = blog.created_at.strftime('%b %e %Y')
-  - if home
-    .card-body
-      ~ blog.summary_html
-    - if blog.story.present?
-      .card-footer
-        = link_to t("blog.more"), blog
-  - else
-    .card-body
-      ~ blog.story_html
-    .card-footer.small
+  .body
+    ~ blog.story_html
+  .footer
+    .small
       - if blog.user.present?
         = t("blog.author")
         = succeed(",") do

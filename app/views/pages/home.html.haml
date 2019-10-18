@@ -1,4 +1,4 @@
 - set_meta_tags title: t("home.title"), description: t("home.description"), keyswords: t("home.keywords")
 
 - @blogs.each do |blog|
-  = render "blogs/card", blog: blog, home: true
+  = render "blogs/card_home", blog: blog, home: true
