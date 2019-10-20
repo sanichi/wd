@@ -6,8 +6,6 @@
     .float-right.mt-1
       - if can?(:edit, blog)
         = link_to t("edit"), edit_blog_path(blog), class: "btn btn-info"
-      - if can?(:pin, blog)
-        = link_to pin_blog_text(blog), pin_blog_path(blog), class: "btn btn-info", id: "pin_button", remote: true
       = blog.created_at.strftime('%b %e %Y')
   .body
     ~ blog.story_html

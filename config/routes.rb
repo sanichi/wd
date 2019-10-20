@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
-  resources :blogs do
-    get :pin, on: :member
-  end
+  resources :blogs
   resources :users
 end

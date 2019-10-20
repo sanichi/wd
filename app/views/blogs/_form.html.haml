@@ -6,4 +6,5 @@
     [:tag,     t("blog.tag"),     :text],
     [:draft,   t("blog.draft"),   :check_box],
   ]
+  inputs.push [:pin, t("blog.pin"), :check_box] if current_user.admin?
 = render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs

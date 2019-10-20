@@ -39,15 +39,12 @@ class BlogsController < ApplicationController
     redirect_to blogs_path, alert: t("thing.deleted", thing: @blog.thing)
   end
 
-  def pin
-    @blog.update_column(:pin, !@blog.pin)
-    @blog.touch
-  end
-
   private
 
   def resource_params
-    params.require(:blog).permit(:draft, :story, :summary, :tag, :title)
+    permitted = [:draft, :story, :summary, :tag, :title]
+    permitted.push :pin if current_user.admin?
+    params.require(:blog).permit(*permitted)
   end
 
   # load_and_authorize_resource will not set the user_id for admins since they can manage all
