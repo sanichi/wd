@@ -1,3 +1,27 @@
 - set_meta_tags title: @blog.title
 
-= render "blog", blog: @blog
+.blog
+  .header
+    %h3.d-inline
+      = @blog.title
+      = render "title_icons", blog: @blog
+    .float-right.mt-1
+      - if can?(:edit, @blog)
+        = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info"
+      = @blog.created_at.strftime('%b %e %Y')
+  .body
+    ~ @blog.story_html
+  .footer
+    .small
+      - if @blog.user.present?
+        = t("blog.author")
+        = succeed(",") do
+          = @blog.user.handle
+      = @blog.user.present? ? t("created_at").downcase : t("created_at")
+      = time_ago_in_words(@blog.created_at)
+      = succeed(",") do
+        = t("ago")
+      = t("updated_at").downcase
+      = time_ago_in_words(@blog.updated_at)
+      = succeed(".") do
+        = t("ago")
