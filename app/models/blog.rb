@@ -54,12 +54,7 @@ class Blog < ApplicationRecord
     to_html(summary)
   end
 
-  def thing
-    "#{I18n.t('blog.blog')} «#{title}»"
-  end
-
-  # for rspec tests
-  def to_s
+  def to_s # for rspec tests
     "blog"
   end
 

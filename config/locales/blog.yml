@@ -13,6 +13,7 @@ en:
     story: Story
     summary: Summary
     tag: Tag
+    thing: 'Blog «%{title}»'
     title: Title
     order:
       created_descending: Created ↓

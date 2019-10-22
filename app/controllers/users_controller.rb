@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      redirect_to @user, notice: t("thing.created", thing: @user.thing)
+      redirect_to @user, notice: message("created")
     else
       render :new
     end
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(resource_params)
-      redirect_to @user, notice: t("thing.updated", thing: @user.thing)
+      redirect_to @user, notice: message("updated")
     else
       render :edit
     end
@@ -20,12 +20,16 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to users_path, alert: t("thing.deleted", thing: @user.thing)
+    redirect_to users_path, alert: message("deleted")
   end
 
   private
 
   def resource_params
     params.require(:user).permit(:handle, :password, :first_name, :last_name, roles: [])
+  end
+
+  def message(action)
+    t("thing.#{action}", thing: t("user.thing", handle: @user.handle))
   end
 end

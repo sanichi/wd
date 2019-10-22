@@ -19,7 +19,7 @@ class BlogsController < ApplicationController
   def create
     if @blog.save
       assign_to_admin_if_no_user
-      redirect_to @blog, notice: t("thing.created", thing: @blog.thing)
+      redirect_to @blog, notice: message("created")
     else
       render :new
     end
@@ -28,7 +28,7 @@ class BlogsController < ApplicationController
   def update
     if @blog.update(resource_params)
       assign_to_admin_if_no_user
-      redirect_to @blog, notice: t("thing.updated", thing: @blog.thing)
+      redirect_to @blog, notice: message("updated")
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog.destroy
-    redirect_to blogs_path, alert: t("thing.deleted", thing: @blog.thing)
+    redirect_to blogs_path, alert: message("deleted")
   end
 
   private
@@ -52,5 +52,9 @@ class BlogsController < ApplicationController
     if @blog.user.blank? && current_user.admin?
       @blog.update_column(:user_id, current_user.id)
     end
+  end
+
+  def message(action)
+    t("thing.#{action}", thing: t("blog.thing", title: @blog.title))
   end
 end
