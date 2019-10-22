@@ -26,6 +26,6 @@ class UsersController < ApplicationController
   private
 
   def resource_params
-    params.require(:user).permit(:handle, :password, :first_name, :last_name, :role)
+    params.require(:user).permit(:handle, :password, :first_name, :last_name, roles: [])
   end
 end

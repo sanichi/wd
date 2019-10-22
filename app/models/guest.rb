@@ -4,11 +4,11 @@ class Guest
   end
 
   def handle
-    "GGG"
+    "GG"
   end
 
-  def role
-    "guest"
+  def roles
+    ["guest"]
   end
 
   def first_name
@@ -23,8 +23,8 @@ class Guest
     true
   end
 
-  User::ALLOWED_ROLES.each do |r|
-    define_method "#{r}?" do
+  User::ALLOWED_ROLES.each do |role|
+    define_method "#{role}?" do
       false
     end
   end

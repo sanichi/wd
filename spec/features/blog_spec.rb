@@ -4,7 +4,7 @@ describe Blog do
   let!(:blog) { create(:blog, draft: false, user: blogger) }
 
   let(:data)    { build(:blog) }
-  let(:blogger) { create(:user, role: "blogger") }
+  let(:blogger) { create(:user, roles: ["blogger"]) }
 
   before(:each) do
     login blogger

@@ -19,10 +19,10 @@ describe Ability do
   let!(:blog1) { create(:blog, draft: false, user: blogger1) }
   let!(:blog2) { create(:blog, draft: false, user: blogger2) }
 
-  let(:admin)    { create(:user, role: "admin") }
-  let(:blogger1) { create(:user, role: "blogger") }
-  let(:blogger2) { create(:user, role: "blogger") }
-  let(:member)   { create(:user, role: "member") }
+  let(:admin)    { create(:user, roles: ["admin"]) }
+  let(:blogger1) { create(:user, roles: ["blogger"]) }
+  let(:blogger2) { create(:user, roles: ["blogger"]) }
+  let(:member)   { create(:user, roles: ["member"]) }
 
   context "admin" do
     before(:each) do

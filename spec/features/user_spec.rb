@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User do
   let!(:user) { create(:user) }
 
-  let(:admin) { create(:user, role: "admin") }
+  let(:admin) { create(:user, roles: ["admin"]) }
   let(:data)  { build(:user) }
 
   before(:each) do
@@ -16,7 +16,7 @@ describe User do
       click_link t("user.new")
       fill_in t("user.handle"), with: data.handle
       fill_in t("user.password"), with: data.password
-      select t("user.roles.#{data.role}"), from: t("user.role")
+      data.roles.each { |role| select t("user.roles.#{role}"), from: t("user.roles.roles") }
       fill_in t("user.first_name"), with: data.first_name
       fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
@@ -27,7 +27,7 @@ describe User do
       u = User.find_by(handle: data.handle)
       expect(u.password).to be_nil
       expect(u.password_digest).to be_present
-      expect(u.role).to eq data.role
+      expect(u.roles).to eq data.roles
       expect(u.first_name).to eq data.first_name
       expect(u.last_name).to eq data.last_name
     end
@@ -35,7 +35,7 @@ describe User do
     it "no password" do
       click_link t("user.new")
       fill_in t("user.handle"), with: data.handle
-      select t("user.roles.#{data.role}"), from: t("user.role")
+      data.roles.each { |role| select t("user.roles.#{role}"), from: t("user.roles.roles") }
       fill_in t("user.first_name"), with: data.first_name
       fill_in t("user.last_name"), with: data.last_name
       click_button t("save")

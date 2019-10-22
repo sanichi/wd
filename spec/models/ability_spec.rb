@@ -6,7 +6,7 @@ describe Ability do
   let(:user) { nil }
 
   context "blogger" do
-    let(:user) { create(:user, role: "blogger") }
+    let(:user) { create(:user, roles: ["blogger"]) }
 
     context "blog" do
 
@@ -18,7 +18,7 @@ describe Ability do
       end
 
       context "different or no user" do
-        let(:blogger) { create(:user, role: "blogger") }
+        let(:blogger) { create(:user, roles: ["blogger"]) }
 
         context "finished" do
           let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
@@ -44,10 +44,10 @@ describe Ability do
   end
 
   context "member" do
-    let(:user) { create(:user, role: "member") }
+    let(:user) { create(:user, roles: ["member"]) }
 
     context "blog" do
-      let(:blogger) { create(:user, role: "blogger") }
+      let(:blogger) { create(:user, roles: ["blogger"]) }
 
       context "finished" do
         let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
@@ -75,7 +75,7 @@ describe Ability do
     let(:user) { Guest.new }
 
     context "blog" do
-      let(:blogger) { create(:user, role: "blogger") }
+      let(:blogger) { create(:user, roles: ["blogger"]) }
 
       context "finished" do
         let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
