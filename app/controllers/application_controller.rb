@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.json { head :forbidden, content_type: "text/html" }
       format.html { redirect_to home_path, alert: exception.message }
+      format.json { head :forbidden, content_type: "text/html" }
       format.js   { head :forbidden, content_type: "text/html" }
     end
   end
@@ -13,9 +13,5 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) || Guest.new
   end
 
-  def skip_sign_in?
-    !!@skip_sign_in
-  end
-
-  helper_method :current_user, :skip_sign_in?
+  helper_method :current_user
 end

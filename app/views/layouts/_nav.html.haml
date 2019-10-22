@@ -15,7 +15,7 @@
       - if can?(:index, User)
         %li
           = link_to t("user.users"), users_path
-      - unless skip_sign_in?
+      - unless controller_name == "sessions"
         %li
           - if current_user.guest?
             = link_to t("session.sign_in"), signin_path
