@@ -1,13 +1,16 @@
 - set_meta_tags title: t("session.sign_in"), description: t("session.description"), keywords: t("session.keywords")
-= render "utils/page/title", text: t("session.sign_in")
 
 .row
-  %div{class: center(xl: 3, lg: 4, md: 5, sm: 6, xs: 7)}
-    = form_with url: session_path, local: true, html: { class: "crud" } do |f|
-      = f.label :handle, t("user.handle")
-      = f.text_field :handle, autofocus: true, required: true
-      = f.label :password, t("user.password")
-      = f.password_field :password, required: true
-      .text-center.mt-3
-        = f.submit t("session.sign_in"), class: "btn btn-primary"
-        = link_to t("cancel"), home_path, class: "btn btn-secondary"
+  %div{class: center(xl: 4, lg: 5, md: 6, sm: 7, xs: 8)}
+    %section
+      .header
+        %h3= t("session.sign_in")
+      .body
+        = form_with url: session_path, local: true, html: { class: "crud" } do |f|
+          = f.label :handle, t("user.handle")
+          = f.text_field :handle, autofocus: true, required: true
+          = f.label :password, t("user.password")
+          = f.password_field :password, required: true
+          .text-center.mt-3
+            = f.submit t("session.sign_in"), class: "btn btn-primary"
+            = link_to t("cancel"), home_path, class: "btn btn-secondary"

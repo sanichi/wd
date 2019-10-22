@@ -1,11 +1,12 @@
 - set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keyswords: t("blog.keywords")
 
-.card
-  %h3.card-header
-    = t("blog.blogs")
-    - if can?(:create, Blog)
-      .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
-  .card-body
+%section
+  .header
+    %h3
+      = t("blog.blogs")
+      - if can?(:create, Blog)
+        .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
+  .body
     = form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
       = label_tag :query, t("query"), class: "sr-only"
       = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
