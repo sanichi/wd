@@ -8,9 +8,9 @@
     %ul.left
       %li
         = link_to t("blog.blogs"), blogs_path
-      - if early_history = Blog.find_by(tag: "early_history", draft: false)
+      - if Blog.exists?(tag: "early_history", draft: false)
         %li
-          = link_to t("history"), early_history
+          = link_to t("history"), "/blogs/early_history"
     %ul.right
       - if can?(:index, User)
         %li
