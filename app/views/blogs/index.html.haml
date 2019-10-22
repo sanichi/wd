@@ -18,8 +18,8 @@
         %tr
           %th= t("blog.title")
           %th.d-none.d-md-table-cell= t("blog.summary")
-          %th.text-center= t("blog.author")
-          %th.text-center.d-none.d-lg-table-cell= t("created_at")
-          %th.text-center.d-none.d-lg-table-cell= t("updated_at")
+          %th.d-none.d-sm-table-cell.text-center= t("blog.author")
+          %th.text-center= t("created_at")
+          %th.d-none.d-lg-table-cell.text-center= t("updated_at")
       %tbody#results
         = render "results", blogs: @blogs
