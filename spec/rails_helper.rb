@@ -64,8 +64,8 @@ def login(user)
   click_button t("session.sign_in")
 end
 
-def t(key)
-  I18n.t(key)
+def t(key, **opts)
+  I18n.t(key, opts)
 end
 
 def expect_error(page, text)

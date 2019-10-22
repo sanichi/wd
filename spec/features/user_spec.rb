@@ -21,7 +21,7 @@ describe User do
       fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
 
-      expect(page).to have_title "#{t('user.user')} #{data.handle}"
+      expect(page).to have_title t("user.thing", handle: data.handle)
 
       expect(User.count).to eq 3
       u = User.find_by(handle: data.handle)
@@ -57,7 +57,7 @@ describe User do
       fill_in t("user.last_name"), with: data.last_name
       click_button t("save")
 
-      expect(page).to have_title "#{t('user.user')} #{user.handle}"
+      expect(page).to have_title t("user.thing", handle: user.handle)
       expect(User.count).to eq 2
 
       u = User.find_by(handle: user.handle)
