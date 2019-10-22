@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
+    session[:intended_path] = request.fullpath
     respond_to do |format|
-      format.html { redirect_to home_path, alert: exception.message }
+      format.html { redirect_to signin_path, alert: exception.message }
       format.json { head :forbidden, content_type: "text/html" }
       format.js   { head :forbidden, content_type: "text/html" }
     end
