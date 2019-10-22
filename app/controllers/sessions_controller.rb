@@ -8,10 +8,7 @@ class SessionsController < ApplicationController
     user = user&.authenticate(params[:password]) unless current_user.admin?
     if user
       session[:user_id] = user.id
-      notice = t("session.success", name: user.first_name)
-      role = t("user.roles.#{user.role}").downcase
-      notice += " (#{role})" unless user.member?
-      redirect_to home_path, notice: notice
+      redirect_to home_path, notice: t("session.success", name: user.first_name)
     else
       flash.now[:alert] = t("session.invalid")
       skip_sign_in

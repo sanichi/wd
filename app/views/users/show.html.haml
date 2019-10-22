@@ -16,7 +16,7 @@
               %td= @user.name
             %tr
               %th= t("user.roles.roles")
-              %td= @user.roles.map { |role| t("user.roles.#{role}") }.join(", ")
+              %td= user_roles(@user)
             %tr
               %th= t("created_at")
               %td

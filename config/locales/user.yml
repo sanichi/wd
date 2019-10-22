@@ -7,7 +7,6 @@ en:
     name: Name
     new: New User
     password: Password
-    role: Role
     user: User
     users: Users
     roles:

@@ -13,10 +13,10 @@
             %tr
               %th= t("user.handle")
               %th= t("user.name")
-              %th= t("user.role")
+              %th= t("user.roles.roles")
           %tbody
             - @users.each do |user|
               %tr
                 %td= link_to_if can?(:show, User), user.handle, user
                 %td= user.name
-                %td= t("user.roles.#{user.role}")
+                %td= user_roles(user)
