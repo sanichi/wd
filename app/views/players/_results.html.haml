@@ -1,0 +1,6 @@
+- players.each do |player|
+  %tr
+    %td= link_to player.name, player
+    %td= player.sca_rating
+    %td= player.fide_rating
+    %td.d-none.d-md-table-cell= player_roles(player)

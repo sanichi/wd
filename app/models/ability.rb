@@ -10,6 +10,7 @@ class Ability
     end
 
     can :read, Blog, draft: false
+    can :read, Player
 
     if user.blogger?
       can :crud, Blog, user_id: user.id

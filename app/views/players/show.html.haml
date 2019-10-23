@@ -1,0 +1,44 @@
+- set_meta_tags title: @player.name, description: t("player.description"), keywords: t("player.keywords")
+
+.row
+  %div{class: center(xl: 6, lg: 8, md:10)}
+    %section
+      .header
+        %h3
+          = @player.name
+          - if can?(:edit, @player)
+            .float-right.small= link_to t("edit"), edit_player_path(@player), class: "btn btn-info"
+      .body
+        %table{class: "table table-bordered mt-3"}
+          %tbody
+            %tr
+              %th= t("player.roles.roles")
+              %td= player_roles(@player)
+            %tr
+              %th= t("player.sca_rating")
+              %td= @player.sca_rating
+            %tr
+              %th= t("player.fide_rating")
+              %td= @player.fide_rating
+            %tr
+              %th= t("player.sca_id")
+              %td= @player.sca_id
+            %tr
+              %th= t("player.fide_id")
+              %td= @player.fide_id
+            %tr
+              %th= t("player.federation")
+              %td= @player.federation
+            %tr
+              %th= t("player.title")
+              %td= @player.title
+            - unless current_user.guest?
+              %tr
+                %th= t("player.email")
+                %td= mail_to(@player.email, nil, encode: "javascript") if @player.email.present?
+              %tr
+                %th= t("player.phone")
+                %td= @player.phone
+              %tr
+                %th= t("player.contact")
+                %td= @player.contact

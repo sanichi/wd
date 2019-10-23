@@ -1,0 +1,38 @@
+en:
+  player:
+    contact: Contact
+    edit: Edit Player
+    email: Email
+    description: Members of the Wandering Dragons Chess Club.
+    federation: Federation
+    fide_id: FIDE Id
+    fide_rating: FIDE Rating
+    first_name: First name
+    keywords: players, members, chess, club, wandering, dragons
+    last_name: Last name
+    name: Name
+    new: New Player
+    thing: 'Player «%{name}»'
+    title: Title
+    phone: Phone
+    players: Players
+    sca_id: SCA Id
+    sca_rating: SCA Rating
+    roles:
+      captain1: 1st Team Captain
+      captain2: 2nd Team Captain
+      captain3: 3rd Team Captain
+      captain4: 4th Team Captain
+      captainr: Richardson Team Captain
+      captains: Spens Team Captain
+      member: Member
+      player1: 1st Team Player
+      player2: 2nd Team Player
+      player3: 3rd Team Player
+      player4: 4th Team Player
+      playerr: Richardson Cup Player
+      players: Spens Cup Player
+      president: President
+      roles: Status
+      treasurer: Treasurer
+      webmaster: Webmaster

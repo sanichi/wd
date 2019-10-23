@@ -1,6 +1,6 @@
 module UserHelper
   def user_role_menu(selected)
-    opts = User::ALLOWED_ROLES.map { |r| [t("user.roles.#{r}"), r] }
+    opts = User::ALLOWED_ROLES.map { |role| [t("user.roles.#{role}"), role] }
     options_for_select(opts, selected)
   end
 

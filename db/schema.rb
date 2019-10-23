@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_133714) do
+ActiveRecord::Schema.define(version: 2019_10_23_073735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,23 @@ ActiveRecord::Schema.define(version: 2019_10_22_133714) do
     t.string "tag", limit: 25
     t.boolean "pin", default: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.boolean "contact", default: false
+    t.string "email", limit: 50
+    t.string "federation", limit: 3, default: "SCO"
+    t.integer "fide_id"
+    t.integer "fide_rating", limit: 2
+    t.string "first_name", limit: 20
+    t.string "last_name", limit: 20
+    t.string "phone", limit: 20
+    t.string "roles", limit: 20, default: ["member"], array: true
+    t.integer "sca_id"
+    t.integer "sca_rating", limit: 2
+    t.string "title", limit: 3
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
