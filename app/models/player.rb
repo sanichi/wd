@@ -18,7 +18,7 @@ class Player < ApplicationRecord
     captain_r captain_s/
   OTHER_ROLES = %w/
     player_el1 player_el2 player_el3 player_el4
-    player_nl1 player_nl1
+    player_nl1 player_nl2
     player_r player_s
     member/
   ROLES = PRINCIPLE_ROLES + OTHER_ROLES
