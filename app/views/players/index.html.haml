@@ -10,7 +10,7 @@
       = label_tag :name, t("player.name"), class: "sr-only"
       = text_field_tag :name, params[:name], class: "form-control mr-1 mb-1", placeholder: t("player.name"), size: 10
       = label_tag :role, t("player.roles"), class: "sr-only"
-      = select_tag :role, player_role_menu(params[:role]), class: "form-control mr-1 mb-1 auto-submit"
+      = select_tag :role, player_role_menu(params[:role], search: true), class: "form-control mr-1 mb-1 auto-submit"
       = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
     %table{class: "table table-bordered table-striped table-sm mt-3"}
       %thead

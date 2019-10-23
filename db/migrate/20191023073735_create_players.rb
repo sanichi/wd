@@ -9,6 +9,7 @@ class CreatePlayers < ActiveRecord::Migration[6.0]
       t.string   :first_name, limit: Player::MAX_NAME
       t.string   :last_name, limit: Player::MAX_NAME
       t.string   :phone, limit: Player::MAX_PHONE
+      t.integer  :rank, limit: 1
       t.string   :roles, array: true, limit: Player::MAX_ROLE, default: ["member"]
       t.integer  :sca_id
       t.integer  :sca_rating, limit: 2

@@ -7,7 +7,7 @@
         %tr
           %th= t("player.name")
           %th= t("player.email")
-          %th= t("player.phone")
+          %th= t("contact.position")
           %th.d-none.d-md-table-cell= t("player.roles.roles")
       %tbody
         - players.each do |player|
@@ -15,4 +15,4 @@
             %td= player.name
             %td= player.email
             %td= player.phone
-            %td.d-none.d-md-table-cell= player_roles(player).truncate(45)
+            %td.d-none.d-md-table-cell= player_roles(player.principle_roles)

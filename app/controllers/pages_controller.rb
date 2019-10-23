@@ -5,6 +5,6 @@ class PagesController < ApplicationController
   end
 
   def contacts
-    @players = Player.where(contact: true)
+    @players = Player.where(contact: true).order(:rank)
   end
 end

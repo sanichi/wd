@@ -1,6 +1,7 @@
 module PlayerHelper
-  def player_role_menu(selected)
+  def player_role_menu(selected, search: false)
     opts = Player::ROLES.map { |role| [t("player.roles.#{role}"), role] }
+    opts.unshift [t("any"), ""] if search
     options_for_select(opts, selected)
   end
 
@@ -10,7 +11,7 @@ module PlayerHelper
     options_for_select(opts, selected)
   end
 
-  def player_roles(player)
-    player.roles.map { |role| t("player.roles.#{role}") }.join(", ")
+  def player_roles(roles)
+    roles.map { |role| t("player.roles.#{role}") }.join(", ")
   end
 end

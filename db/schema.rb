@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_10_23_073735) do
     t.string "first_name", limit: 20
     t.string "last_name", limit: 20
     t.string "phone", limit: 20
+    t.integer "rank", limit: 2
     t.string "roles", limit: 20, default: ["member"], array: true
     t.integer "sca_id"
     t.integer "sca_rating", limit: 2
