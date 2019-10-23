@@ -41,6 +41,11 @@ describe Ability do
       it { is_expected.to_not be_able_to(:show, user) }
       it { is_expected.to_not be_able_to(:crud, user) }
     end
+
+    context "player" do
+      it { is_expected.to be_able_to(:read, Player) }
+      it { is_expected.to_not be_able_to(:crud, Player) }
+    end
   end
 
   context "member" do
@@ -68,6 +73,11 @@ describe Ability do
       it { is_expected.to be_able_to(:index, User) }
       it { is_expected.to_not be_able_to(:show, user) }
       it { is_expected.to_not be_able_to(:crud, user) }
+    end
+
+    context "player" do
+      it { is_expected.to be_able_to(:read, Player) }
+      it { is_expected.to_not be_able_to(:crud, Player) }
     end
   end
 
@@ -98,6 +108,11 @@ describe Ability do
       it { is_expected.to_not be_able_to(:index, User) }
       it { is_expected.to_not be_able_to(:show, other) }
       it { is_expected.to_not be_able_to(:crud, other) }
+    end
+
+    context "player" do
+      it { is_expected.to be_able_to(:read, Player) }
+      it { is_expected.to_not be_able_to(:crud, Player) }
     end
   end
 end
