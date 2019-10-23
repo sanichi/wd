@@ -5,7 +5,7 @@
         %h3= title
       .body
         = form_for object, html: { class: "crud" } do |form|
-          - vars = { form: form, object: object }
+          - vars = { form: form }
           - inputs.each do | param, label, type, options |
-            = render "utils/crud/#{type}", vars.merge({ param: param, label: label }).merge(options || {})
+            = render "utils/crud/#{type}", {form: form, param: param, label: label }.merge(options || {})
           = render "utils/crud/buttons", form: form, object: object, index: index

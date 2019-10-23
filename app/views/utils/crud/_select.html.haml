@@ -1,5 +1,5 @@
 - defined?(multiple) || multiple = false
 - defined?(size) || size = 1
 
-= render "utils/crud/label_and_errors", form: form, object: object, param: param, label: label
+= form.label param, label
 = form.select param, menu, {}, { multiple: multiple, size: size }

@@ -69,5 +69,5 @@ def t(key, **opts)
 end
 
 def expect_error(page, text)
-  expect(page).to have_css("div.crud_error_message", text: text)
+  expect(page).to have_css("div.rails-alert", text: text)
 end
