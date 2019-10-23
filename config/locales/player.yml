@@ -28,15 +28,15 @@ en:
       captain_r: Richardson Captain
       captain_s: Spens Captain
       member: Member
-      player_el1: A Team Player
-      player_el2: B Team Player
-      player_el3: C Team Player
-      player_el4: D Team Player
-      player_nl1: SNCL 1 Player
-      player_nl2: SNCL 2 Player
-      player_r: Richardson Player
-      player_s: Spens Player
+      player_el1: A Team
+      player_el2: B Team
+      player_el3: C Team
+      player_el4: D Team
+      player_nl1: SNCL 1
+      player_nl2: SNCL 2
+      player_r: Richardson
+      player_s: Spens
       president: President
-      roles: Positions
+      roles: Roles and Teams
       treasurer: Treasurer
       webmaster: Webmaster
