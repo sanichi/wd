@@ -23,9 +23,9 @@ class Player < ApplicationRecord
     member/
   ROLES = PRINCIPLE_ROLES + OTHER_ROLES
   TITLES = %w/GM IM FM CM WGM WIM WFM WCM/
+  RANK = ROLES.each_with_object({}).each_with_index{ |(r, h), i| h[r] = i }
 
   before_validation :normalize_attributes
-  after_save :set_rank
 
   validates :email, format: { with: /\A[^\s@]+@[^\s@]+\z/ }, length: { maximum: MAX_EMAIL }, uniqueness: true, allow_nil: true
   validates :federation, format: { with: /[A-Z]{3}\z/ }
@@ -81,16 +81,8 @@ class Player < ApplicationRecord
     self.roles.select! { |role| ROLES.include?(role) }
     self.roles = ["member"] if roles.empty?
     self.roles.uniq!
-    self.roles.sort!
+    self.roles.sort_by! { |role| RANK[role] }
     self.roles.reject! { |role| role == "member" } if roles.include?("member") && roles.length > 1
-  end
-
-  def set_rank
-    rank = MAX_RANK
-    roles.each do |role|
-      index = ROLES.index(role)
-      rank = index if index && index < rank
-    end
-    update_column(:rank, rank)
+    self.rank = RANK[roles.first]
   end
 end
