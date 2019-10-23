@@ -19,19 +19,23 @@ en:
     sca_id: SCA Id
     sca_rating: SCA Rating
     roles:
-      captain1: 1st Team Captain
-      captain2: 2nd Team Captain
-      captain3: 3rd Team Captain
-      captain4: 4th Team Captain
-      captainr: Richardson Team Captain
-      captains: Spens Team Captain
+      captain_el1: A Team Captain
+      captain_el2: B Team Captain
+      captain_el3: C Team Captain
+      captain_el4: D Team Captain
+      captain_nl1: SNCL 1 Captain
+      captain_nl2: SNCL 2 Captain
+      captain_r: Richardson Captain
+      captain_s: Spens Captain
       member: Member
-      player1: 1st Team Player
-      player2: 2nd Team Player
-      player3: 3rd Team Player
-      player4: 4th Team Player
-      playerr: Richardson Cup Player
-      players: Spens Cup Player
+      player_el1: A Team Player
+      player_el2: B Team Player
+      player_el3: C Team Player
+      player_el4: D Team Player
+      player_nl1: SNCL 1 Player
+      player_nl2: SNCL 2 Player
+      player_r: Richardson Player
+      player_s: Spens Player
       president: President
       roles: Status
       treasurer: Treasurer
