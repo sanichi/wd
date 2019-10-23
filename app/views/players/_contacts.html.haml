@@ -1,0 +1,18 @@
+%section
+  .header
+    %h3= t("contact.contacts")
+  .body
+    %table{class: "table table-bordered table-striped table-sm mt-3"}
+      %thead
+        %tr
+          %th= t("player.name")
+          %th= t("player.email")
+          %th= t("player.phone")
+          %th.d-none.d-md-table-cell= t("player.roles.roles")
+      %tbody
+        - players.each do |player|
+          %tr
+            %td= player.name
+            %td= player.email
+            %td= player.phone
+            %td.d-none.d-md-table-cell= player_roles(player).truncate(45)

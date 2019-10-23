@@ -30,9 +30,8 @@ class Player < ApplicationRecord
   validates :title, inclusion: { in: TITLES }, allow_nil: true
   validate :roles_rules
 
-  default_scope { order(sca_rating: :desc) }
-
   def self.search(players, params)
+    players = players.order("sca_rating DESC NULLS LAST, first_name, last_name")
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end
