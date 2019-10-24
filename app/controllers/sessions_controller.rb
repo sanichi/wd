@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
     user = user&.authenticate(params[:password]) unless current_user.admin?
     if user
       session[:user_id] = user.id
-      redirect_to (session[:intended_path] || home_path), notice: t("session.success", name: user.first_name)
-      session[:intended_path] = nil
+      redirect_to (session[:last_guest_path] || root_path), notice: t("session.success", name: user.first_name)
+      session[:last_guest_path] = nil
     else
       flash.now[:alert] = t("session.invalid")
       render :new
@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
   def destroy
     name = current_user.first_name
     session[:user_id] = nil
-    redirect_to home_path, notice: t("session.goodbye", name: name)
+    redirect_to root_path, notice: t("session.goodbye", name: name)
   end
 end
