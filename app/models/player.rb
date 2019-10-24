@@ -38,7 +38,7 @@ class Player < ApplicationRecord
   validate :roles_rules
 
   def self.search(players, params)
-    players = players.order("sca_rating DESC NULLS LAST, first_name, last_name")
+    players = players.order("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end
