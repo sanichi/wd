@@ -7,12 +7,12 @@
         %tr
           %th= t("player.name")
           %th= t("player.email")
-          %th= t("player.phone")
+          %th.d-none.d-sm-table-cell= t("player.phone")
           %th.d-none.d-md-table-cell= t("contact.position")
       %tbody
         - players.each do |player|
           %tr
             %td= player.name
             %td= encrypted_mail_to(player.email)
-            %td= player.phone
+            %td.d-none.d-sm-table-cell= player.phone
             %td.d-none.d-md-table-cell= player_roles(player.principle_roles)
