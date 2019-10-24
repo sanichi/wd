@@ -49,7 +49,9 @@ class Player < ApplicationRecord
   end
 
   def principle_roles
-    roles.select { |role| PRINCIPLE_ROLES.include?(role) }
+    biggies = roles.select { |role| PRINCIPLE_ROLES.include?(role) }
+    biggies.push("member") if biggies.empty?
+    biggies
   end
 
   def name
