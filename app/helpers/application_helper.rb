@@ -28,4 +28,9 @@ module ApplicationHelper
     klass.push "offset-xl-#{(12 - xl) / 2} col-xl-#{xl}" if xl > 0
     klass.any? ? klass.join(" ") : "col-12"
   end
+
+  def encrypted_mail_to(email)
+    return unless email.present?
+    mail_to(email, nil, encode: "javascript")
+  end
 end

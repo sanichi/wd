@@ -4,10 +4,9 @@
   %div{class: center(xl: 6, lg: 8, md:10)}
     %section
       .header
-        %h3
-          = @player.name
-          - if can?(:edit, @player)
-            .float-right.small= link_to t("edit"), edit_player_path(@player), class: "btn btn-info"
+        %h3.d-inline= @player.name
+        - if can?(:edit, @player)
+          .float-right.small= link_to t("edit"), edit_player_path(@player), class: "btn btn-info"
       .body
         %table{class: "table table-bordered mt-3"}
           %tbody
@@ -35,7 +34,7 @@
             - unless current_user.guest?
               %tr
                 %th= t("player.email")
-                %td= mail_to(@player.email, nil, encode: "javascript") if @player.email.present?
+                %td= encrypted_mail_to(@player.email)
               %tr
                 %th= t("player.phone")
                 %td= @player.phone

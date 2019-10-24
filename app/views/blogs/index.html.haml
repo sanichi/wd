@@ -2,10 +2,9 @@
 
 %section
   .header
-    %h3
-      = t("blog.blogs")
-      - if can?(:create, Blog)
-        .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
+    %h3.d-inline= t("blog.blogs")
+    - if can?(:create, Blog)
+      .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
   .body
     = form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
       = label_tag :query, t("query"), class: "sr-only"

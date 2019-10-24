@@ -13,6 +13,6 @@
         - players.each do |player|
           %tr
             %td= player.name
-            %td= player.email
+            %td= encrypted_mail_to(player.email)
             %td= player.phone
             %td.d-none.d-md-table-cell= player_roles(player.principle_roles)
