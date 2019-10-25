@@ -1,7 +1,7 @@
 - set_meta_tags title: t("home.title"), description: t("home.description"), keywords: t("home.keywords")
 .row
-  .col-xl-4.col-lg-5.col-md-6.col-sm-12
-    = render "home"
   .col-xl-8.col-lg-7.col-md-6.col-sm-12
     - @blogs.each do |blog|
       = render "blogs/blog", blog: blog, home: true
+  .col-xl-4.col-lg-5.col-md-6.col-sm-12
+    = render "home"
