@@ -1,0 +1,4 @@
+- blog = Blog.find_by(tag: tag, draft: false)
+- defined?(klass) || klass = "dropdown-item"
+- if blog
+  = link_to blog.title, blog_path(tag), class: klass
