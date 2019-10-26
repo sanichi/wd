@@ -9,6 +9,14 @@ module Remarkable
       html
     end
 
+    def table(header, body)
+      <<-EOT
+      <table class="table-bordered table-striped" style="margin-left:auto;margin-right:auto">
+        #{header}#{body}
+      </table>
+      EOT
+    end
+
     private
 
     def split(link)
