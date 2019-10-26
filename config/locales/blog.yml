@@ -21,5 +21,6 @@ en:
       updated_descending: Updated ↓
       updated_ascending: Updated ↑
     icon:
+      book: 📖
       draft: ✏️
       pin: 📌

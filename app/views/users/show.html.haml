@@ -19,12 +19,12 @@
               %th= t("user.roles.roles")
               %td= user_roles(@user)
             %tr
-              %th= t("created_at")
+              %th= t("created")
               %td
                 = time_ago_in_words(@user.created_at)
                 = t("ago")
             %tr
-              %th= t("updated_at")
+              %th= t("updated")
               %td
                 = time_ago_in_words(@user.updated_at)
                 = t("ago")

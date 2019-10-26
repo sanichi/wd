@@ -2,7 +2,8 @@ en:
   ago: ago
   any: Any
   cancel: Cancel
-  created_at: Created
+  created: Created
+  created_by: 'Created by %{name}'
   delete: Delete
   edit: Edit
   history: History
@@ -13,7 +14,7 @@ en:
   save: Save
   sure: Are you sure?
   title: WD
-  updated_at: Updated
+  updated: Updated
   brand:
     wd: Wandering Dragons
     cc: Chess Club

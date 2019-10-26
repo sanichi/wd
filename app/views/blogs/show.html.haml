@@ -1,5 +1,9 @@
 - set_meta_tags title: @blog.title
 
+- if can?(:edit, Blog)
+  = content_for :javascript do
+    = render "markdown_button.js"
+
 %article
   .header
     %h3.d-inline
@@ -14,14 +18,20 @@
   .footer
     .small
       - if @blog.user.present?
-        = t("blog.author")
-        = succeed(",") do
-          = @blog.user.handle
-      = @blog.user.present? ? t("created_at").downcase : t("created_at")
+        = t("created_by", name: @blog.user.handle)
+      - else
+        = t("created")
       = time_ago_in_words(@blog.created_at)
       = succeed(",") do
         = t("ago")
-      = t("updated_at").downcase
+      = t("updated").downcase
       = time_ago_in_words(@blog.updated_at)
       = succeed(".") do
         = t("ago")
+      - if can?(:edit, Blog)
+        .float-right
+          = link_to t("blog.icon.book"), "#", id: "toggle_markdown"
+
+- if can?(:edit, Blog)
+  %pre.markdown= @blog.summary
+  %pre.markdown= @blog.story
