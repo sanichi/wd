@@ -15,6 +15,7 @@
 
 
 /public/assets
+/public/sitemap.xml
 .byebug_history
 /config/database.yml
 
