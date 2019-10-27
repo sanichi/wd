@@ -39,8 +39,16 @@ class Player < ApplicationRecord
   validates :title, inclusion: { in: TITLES }, allow_nil: true
   validate :roles_rules
 
+  scope :by_name,   -> { order(:first_name, :last_name) }
+  scope :by_rank,   -> { order(:rank) }
+  scope :by_rating, -> { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
+
   def self.search(players, params)
-    players = players.order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name"))
+    if params[:order] == "name"
+      players = players.by_name
+    else
+      players = players.by_rating
+    end
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end

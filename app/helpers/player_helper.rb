@@ -11,6 +11,11 @@ module PlayerHelper
     options_for_select(opts, selected)
   end
 
+  def player_order_menu(selected)
+    opts = ["rating", "name"].map { |order| [t("player.order.#{order}"), order] }
+    options_for_select(opts, selected)
+  end
+
   def player_roles(roles)
     roles.map { |role| t("player.roles.#{role}") }.join(", ")
   end

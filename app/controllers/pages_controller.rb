@@ -6,9 +6,9 @@ class PagesController < ApplicationController
 
   def contacts
     if current_user.guest?
-      @players = Player.where(contact: true).order(:rank)
+      @players = Player.where(contact: true).by_rank
     else
-      @players = Player.order(:first_name, :last_name)
+      @players = Player.by_name
     end
   end
 end

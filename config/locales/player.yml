@@ -18,6 +18,9 @@ en:
     players: Players
     sca_id: SCA Id
     sca_rating: SCA Rating
+    order:
+      rating: rating ↓
+      name: name ↓
     roles:
       captain_al1: Allegro A
       captain_al2: Allegro B
