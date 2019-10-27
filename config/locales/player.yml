@@ -22,8 +22,8 @@ en:
       rating: rating ↓
       name: name ↓
     roles:
-      captain_al1: Allegro A
-      captain_al2: Allegro B
+      captain_al1: Allegro A Captain
+      captain_al2: Allegro B Captain
       captain_el1: A Team Captain
       captain_el2: B Team Captain
       captain_el3: C Team Captain
