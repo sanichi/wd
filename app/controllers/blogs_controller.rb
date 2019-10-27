@@ -17,8 +17,8 @@ class BlogsController < ApplicationController
   end
 
   def create
+    assign_to_admin_if_no_user(@blog)
     if @blog.save
-      assign_to_admin_if_no_user
       redirect_to @blog, notice: success("created")
     else
       failure @blog
@@ -27,8 +27,8 @@ class BlogsController < ApplicationController
   end
 
   def update
+    assign_to_admin_if_no_user(@blog)
     if @blog.update(resource_params)
-      assign_to_admin_if_no_user
       redirect_to @blog, notice: success("updated")
     else
       failure @blog
@@ -47,13 +47,6 @@ class BlogsController < ApplicationController
     permitted = [:draft, :story, :summary, :tag, :title]
     permitted.push :pin if current_user.admin?
     params.require(:blog).permit(*permitted)
-  end
-
-  # load_and_authorize_resource will not set the user_id for admins since they can manage all
-  def assign_to_admin_if_no_user
-    if @blog.user.blank? && current_user.admin?
-      @blog.update_column(:user_id, current_user.id)
-    end
   end
 
   def success(action)

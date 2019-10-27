@@ -71,3 +71,7 @@ end
 def expect_error(page, text)
   expect(page).to have_css("div.rails-alert", text: text)
 end
+
+def file(name)
+  (Rails.root + "spec" + "files" + name).read
+end

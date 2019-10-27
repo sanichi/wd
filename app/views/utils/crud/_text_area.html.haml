@@ -1,4 +1,6 @@
 - defined?(rows) || rows = 10
+- defined?(autofocus) || autofocus = nil
+- defined?(maxlength) || maxlength = nil
 
 = form.label param, label
-= form.text_area param, rows: rows
+= form.text_area param, rows: rows, autofocus: autofocus, maxlength: maxlength

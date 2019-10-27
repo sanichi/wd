@@ -17,6 +17,7 @@ gem "bootstrap", '~> 4.3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 3.0'
 gem 'actionview-encoded_mail_to', '~> 1.0'
+gem 'pgn'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

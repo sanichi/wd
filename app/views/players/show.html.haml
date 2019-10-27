@@ -38,7 +38,7 @@
                 %td= @player.contact
             %tr
               %th= t("player.sca_id")
-              %td= @player.sca_id
+              %td= player_sca_profile(@player.sca_id)
             %tr
               %th= t("player.fide_id")
-              %td= @player.fide_id
+              %td= player_fide_profile(@player.fide_id)

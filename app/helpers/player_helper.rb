@@ -14,4 +14,12 @@ module PlayerHelper
   def player_roles(roles)
     roles.map { |role| t("player.roles.#{role}") }.join(", ")
   end
+
+  def player_fide_profile(id)
+    link_to id, "https://ratings.fide.com/profile/#{id}", target: "external" if id
+  end
+
+  def player_sca_profile(id)
+    link_to id, "https://www.chessscotland.com/players/#{id}/", target: "external" if id
+  end
 end

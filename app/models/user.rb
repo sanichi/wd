@@ -14,6 +14,7 @@ class User < ApplicationRecord
   ALLOWED_ROLES = ROLES.reject { |role| role == "guest" }
 
   has_many :blogs, dependent: :nullify, inverse_of: :user
+  has_many :games, dependent: :nullify, inverse_of: :user
 
   before_validation :normalize_attributes
 

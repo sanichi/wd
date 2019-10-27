@@ -1,0 +1,6 @@
+:ruby
+  inputs = [
+    [:title,   t("game.title"),   :text],
+    [:pgn,     t("game.pgn"),     :text_area, rows: 30, autofocus: true, maxlength: Game::MAX_PGN],
+  ]
+= render "utils/crud/form", object: game, index: games_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)

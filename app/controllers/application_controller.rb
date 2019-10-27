@@ -27,4 +27,12 @@ class ApplicationController < ActionController::Base
   def failure(object)
     flash.now[:alert] = object.errors.full_messages.join(", ")
   end
+
+  # load_and_authorize_resource will not set the user_id if user can manage all
+  # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
+  def assign_to_admin_if_no_user(object)
+    if object.user_id.blank? && current_user.admin?
+      object.user_id = current_user.id
+    end
+  end
 end

@@ -1,0 +1,4 @@
+- @games.matches.each do |game|
+  %tr
+    %td= link_to game.title, game
+= render "utils/pagination/links", pager: @games, columns: 1

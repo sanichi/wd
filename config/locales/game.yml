@@ -1,0 +1,10 @@
+en:
+  game:
+    description: Collection of PGN chess games.
+    edit: Edit game
+    games: Games
+    keywords: chess, games, pgn, collection
+    new: New game
+    pgn: PGN
+    thing: 'Game %{title}'
+    title: Title

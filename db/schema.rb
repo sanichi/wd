@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_073735) do
+ActiveRecord::Schema.define(version: 2019_10_27_064954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2019_10_23_073735) do
     t.string "tag", limit: 25
     t.boolean "pin", default: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.text "pgn"
+    t.string "title", limit: 64
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -57,4 +66,5 @@ ActiveRecord::Schema.define(version: 2019_10_23_073735) do
   end
 
   add_foreign_key "blogs", "users"
+  add_foreign_key "games", "users"
 end

@@ -12,6 +12,9 @@
         = link_to t("player.players"), players_path
       %li
         = link_to t("contact.contacts"), contacts_path
+      - if can?(:read, Game)
+        %li
+          = link_to t("game.games"), games_path
       %li.dropdown
         = link_to t("history"), "#", class: "dropdown-toggle", id: "history-dropdown", "data-toggle" => "dropdown"
         .dropdown-menu

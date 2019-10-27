@@ -1,0 +1,18 @@
+- set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
+
+%section
+  .header
+    %h3.d-inline= t("game.games")
+    - if can?(:create, Game)
+      .float-right.small= link_to t("game.new"), new_game_path, class: "btn btn-info"
+  .body
+    = form_tag games_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
+      = label_tag :query, t("query"), class: "sr-only"
+      = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
+      = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
+    %table{class: "table table-bordered table-striped table-sm mt-3"}
+      %thead
+        %tr
+          %th= t("game.title")
+      %tbody#results
+        = render "results", games: @games

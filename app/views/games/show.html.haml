@@ -1,0 +1,18 @@
+- set_meta_tags title: @game.title
+
+= content_for :javascript do
+  = render "pgn_button.js"
+
+%article
+  .header
+    %h3.d-inline= @game.title
+    - if can?(:edit, @game)
+      .float-right.mt-1
+        = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
+  .footer
+    .small
+      = render "utils/misc/user_stamp", object: @game
+      .float-right
+        = link_to t("game.pgn"), "#", id: "toggle_pgn"
+
+%pre.pgn= @game.pgn
