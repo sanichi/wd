@@ -13,13 +13,15 @@ class Player < ApplicationRecord
   MIN_RATING = 0
   PRINCIPLE_ROLES = %w/
     president treasurer webmaster
-    captain_el1 captain_el2 captain_el3 captain_el4
+    captain_el1 captain_el2 captain_el3
     captain_nl1 captain_nl2
-    captain_r captain_s/
+    captain_r captain_s
+    captain_al1 captain_al2/
   OTHER_ROLES = %w/
-    player_el1 player_el2 player_el3 player_el4
+    player_el1 player_el2 player_el3
     player_nl1 player_nl2
     player_r player_s
+    player_al1 player_al2
     member/
   ROLES = PRINCIPLE_ROLES + OTHER_ROLES
   TITLES = %w/GM IM FM CM WGM WIM WFM WCM/
