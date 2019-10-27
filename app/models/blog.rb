@@ -19,20 +19,20 @@ class Blog < ApplicationRecord
     uniqueness: true,
     allow_nil: true
 
-  scope :created_descending, -> { order(created_at: :desc) }
-  scope :created_ascending,  -> { order(created_at: :asc) }
-  scope :updated_descending, -> { order(updated_at: :desc) }
-  scope :updated_ascending,  -> { order(updated_at: :asc) }
+  scope :created_des, -> { order(created_at: :desc) }
+  scope :created_asc, -> { order(created_at: :asc) }
+  scope :updated_des, -> { order(updated_at: :desc) }
+  scope :updated_asc, -> { order(updated_at: :asc) }
 
   def self.search(matches, params, path, opt={})
     matches = matches.includes(:user)
     matches =
       case params[:order]
-      when "created_descending" then matches.created_descending
-      when "created_ascending"  then matches.created_ascending
-      when "updated_descending" then matches.updated_descending
-      when "updated_ascending"  then matches.updated_ascending
-      else matches.created_descending
+      when "created_des" then matches.created_des
+      when "created_asc" then matches.created_asc
+      when "updated_des" then matches.updated_des
+      when "updated_asc" then matches.updated_asc
+      else matches.created_des
       end
     if sql = cross_constraint(params[:query], %w{title summary story})
       matches = matches.where(sql)

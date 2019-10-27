@@ -16,10 +16,10 @@ en:
     thing: 'Blog «%{title}»'
     title: Title
     order:
-      created_descending: created ↓
-      created_ascending: created ↑
-      updated_descending: updated ↓
-      updated_ascending: updated ↑
+      created_des: created ↓
+      created_asc: created ↑
+      updated_des: updated ↓
+      updated_asc: updated ↑
     icon:
       book: 📖
       draft: ✏️
