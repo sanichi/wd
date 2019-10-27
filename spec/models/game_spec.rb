@@ -5,7 +5,8 @@ describe Game do
     "h#{nl}" * headers + nl + "m#{nl}" * moves
   end
 
-  let(:data) { build(:game, pgn: file("lee_orr.pgn")) }
+  let(:data1) { file("lee_orr.pgn") }
+  let(:data2) { file("vaganian_pogonina.pgn") }
 
   describe "clean" do
     it "detects rubbish" do
@@ -29,7 +30,8 @@ describe Game do
     end
 
     it "no change to clean file" do
-      expect(Game.clean(data.pgn)).to eq data.pgn
+      expect(Game.clean(data1)).to eq data1
+      expect(Game.clean(data2)).to eq data2
     end
   end
 end

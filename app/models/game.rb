@@ -7,7 +7,7 @@ class Game < ApplicationRecord
   MAX_TITLE = 64
   MAX_PGN = 10000
 
-  before_validation :normalize_attributes, :guess_title
+  before_validation :clean_and_parse_pgn, :do_title
 
   validates :pgn, presence: true, length: { maximum: MAX_PGN }
   validates :title, presence: true, length: { maximum: MAX_TITLE }
@@ -32,37 +32,52 @@ class Game < ApplicationRecord
 
   private
 
-  def normalize_attributes
-    @clean = Game.clean(pgn)
-    if @clean
-      self.pgn = @clean
+  def clean_and_parse_pgn
+    @clean_pgn = Game.clean(pgn)
+    if @clean_pgn
+      self.pgn = @clean_pgn
       begin
-        @parse = PGN.parse(@clean)
-        @first = @parse.first
+        games = PGN.parse(@clean_pgn)
+        @game = games.first
       rescue Whittle::ParseError => e
         logger.error "PGN parse error (#{e.message})"
       rescue StandardError => e
         logger.error "PGN error (#{e.message})"
       end
     end
-    title&.squish!
-    guess_title if title.blank?
   end
 
-  def guess_title
-    return unless @first
-    white = @first.tags["White"]
-    white = "Unknown" if white.blank? || !white.match(/[a-z]/i)
-    black = @first.tags["Black"]
-    black = "Unknown" if black.blank? || !black.match(/[a-z]/i)
-    year = $1 if @first.tags["Date"]&.match(/(\d{4})/)
-    self.title = "#{white} - #{black}#{year ? ', ' : ''}#{year}".truncate(MAX_TITLE)
+  def do_title
+    if title.present?
+      title.squish!
+    elsif @game
+      w, b, e, y = tag("White"), tag("Black"), tag("Event"), year("Date")
+      if w && b
+        self.title = "#{w} - #{b}"
+        self.title+= ", #{e}" if e
+        self.title+= ", #{y}" if y
+      end
+    end
+  end
+
+  def tag(name)
+    val = @game.tags[name]
+    return unless val.present?
+    return unless val.match(/[a-z]/i)
+    val.squish
+  end
+
+  def year(name)
+    val = @game.tags[name]
+    return unless val.present?
+    return unless val.match(/\b([12]\d{3})\b/)
+    $1
   end
 
   def check_pgn
-    if !@clean
+    if !@clean_pgn
       errors.add(:pgn, "invalid")
-    elsif !@first
+    elsif !@game
       errors.add(:pgn, "unparsable")
     end
   end

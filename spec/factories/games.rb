@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :game do
-    pgn { (Rails.root + "spec" + "files" + ["lee_orr.pgn"].sample).read }
-    user nil
+    pgn   { random_file("*.pgn") }
+    title { Faker::Lorem.sentence(word_count: 5).truncate(Game::MAX_TITLE) }
+    user  nil
   end
 end

@@ -75,3 +75,7 @@ end
 def file(name)
   (Rails.root + "spec" + "files" + name).read
 end
+
+def random_file(pattern)
+  (Rails.root + "spec" + "files").glob(pattern).sample.read
+end
