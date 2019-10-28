@@ -5,7 +5,7 @@
 
 %article
   .header
-    %h3.d-inline= @game.title
+    %h3.d-inline= title_and_difficulty(@game)
     - if can?(:edit, @game)
       .float-right.mt-1
         = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"

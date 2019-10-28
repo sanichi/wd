@@ -33,7 +33,7 @@ class GamesController < ApplicationController
   private
 
   def resource_params
-    params.require(:game).permit(:pgn, :title)
+    params.require(:game).permit(:difficulty, :pgn, :title)
   end
 
   def success(action)

@@ -4,17 +4,27 @@ class Game < ApplicationRecord
 
   belongs_to :user, inverse_of: :games, optional: true
 
+  DIFFICULTIES = %w/easy medium hard/;
+  MAX_DIFFICULTY = 10
   MAX_TITLE = 64
   MAX_PGN = 10000
 
-  before_validation :clean_and_parse_pgn, :do_title
+  before_validation :clean_and_parse_pgn, :do_title, :do_difficulty
 
+  validates :difficulty, inclusion: { in: DIFFICULTIES }, allow_nil: true
   validates :pgn, presence: true, length: { maximum: MAX_PGN }
   validates :title, presence: { message: "could not be guessed" }, length: { maximum: MAX_TITLE }
   validate :check_pgn
 
   def self.search(matches, params, path, opt={})
     matches = matches.includes(:user)
+    if params[:difficulty] == "games"
+      matches = matches.where(difficulty: nil)
+    elsif params[:difficulty] == "problems"
+      matches = matches.where.not(difficulty: nil)
+    elsif DIFFICULTIES.include?(params[:difficulty])
+      matches = matches.where(difficulty: params[:difficulty])
+    end
     if sql = cross_constraint(params[:query], %w{title pgn})
       matches = matches.where(sql)
     end
@@ -53,15 +63,7 @@ class Game < ApplicationRecord
       title.squish!
     elsif @game
       title = nil
-      if @game.positions.first.to_fen.to_s == PGN::FEN::INITIAL
-        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), result
-        if w && b
-          title = "#{w} - #{b}"
-          title+= ", #{e}" if e
-          title+= ", #{y}" if y
-          title+= ", #{r}" if r
-        end
-      else
+      if problem?
         r = result
         if player == :white
           if r == "1-0" && mate?
@@ -76,8 +78,26 @@ class Game < ApplicationRecord
             title = "Black to play and #{r == '0-1' ? 'win' : 'draw'}"
           end
         end
+      else
+        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), result
+        if w && b
+          title = "#{w} - #{b}"
+          title+= ", #{e}" if e
+          title+= ", #{y}" if y
+          title+= ", #{r}" if r
+        end
       end
       self.title = title.squish.truncate(MAX_TITLE) if title.present?
+    end
+  end
+
+  def do_difficulty
+    if @game
+      if problem?
+        self.difficulty == "easy" unless DIFFICULTIES.include?(difficulty)
+      else
+        self.difficulty = nil
+      end
     end
   end
 
@@ -109,6 +129,10 @@ class Game < ApplicationRecord
 
   def mate?
     @game.moves.last.to_s.match(/#/)
+  end
+
+  def problem?
+    @game.positions.first.to_fen.to_s != PGN::FEN::INITIAL
   end
 
   def number_of_moves

@@ -1,6 +1,7 @@
 en:
   game:
     description: Collection of PGN chess games.
+    difficulty: Difficulty
     edit: Edit game
     games: Games
     keywords: chess, games, pgn, collection
@@ -8,6 +9,13 @@ en:
     pgn: PGN
     thing: 'Game «%{title}»'
     title: Title
+    difficulties:
+      choose: Select for problems only
+      easy: Easy
+      games: Games
+      hard: Hard
+      medium: Medium
+      problems: Problems
     placeholders:
       pgn: PGN for one game or problem
       title: Leave blank to make guess from PGN
