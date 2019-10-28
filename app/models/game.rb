@@ -92,12 +92,10 @@ class Game < ApplicationRecord
   end
 
   def do_difficulty
-    if @game
-      if problem?
-        self.difficulty == "easy" unless DIFFICULTIES.include?(difficulty)
-      else
-        self.difficulty = nil
-      end
+    if @game && problem?
+      self.difficulty = "easy" unless DIFFICULTIES.include?(difficulty)
+    else
+      self.difficulty = nil
     end
   end
 

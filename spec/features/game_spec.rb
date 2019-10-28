@@ -55,6 +55,18 @@ describe Game do
         expect(g.title).to be_present
         expect(g.difficulty).to eq prob.difficulty
       end
+
+      it "without difficulty" do
+        click_link t("game.new")
+        fill_in t("game.pgn"), with: prob.pgn
+        click_button t("save")
+
+        expect(Game.count).to eq 2
+        g = Game.order(:created_at).last
+        expect(g.pgn).to eq prob.pgn
+        expect(g.title).to be_present
+        expect(g.difficulty).to eq "easy"
+      end
     end
 
     context "failure" do
