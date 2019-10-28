@@ -8,3 +8,6 @@ en:
     pgn: PGN
     thing: 'Game «%{title}»'
     title: Title
+    placeholders:
+      pgn: PGN for one game or problem
+      title: Leave blank to make guess from PGN
