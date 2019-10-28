@@ -10,7 +10,7 @@ class Game < ApplicationRecord
   before_validation :clean_and_parse_pgn, :do_title
 
   validates :pgn, presence: true, length: { maximum: MAX_PGN }
-  validates :title, presence: true, length: { maximum: MAX_TITLE }
+  validates :title, presence: { message: "could not be guessed" }, length: { maximum: MAX_TITLE }
   validate :check_pgn
 
   def self.search(matches, params, path, opt={})
@@ -22,28 +22,28 @@ class Game < ApplicationRecord
   end
 
   def self.clean(pgn)
-    return if pgn.blank?
-    pgn.gsub!(/\r\n/, "\n")
-    pgn.gsub!(/\r/, "\n")
-    pgn.sub!(/\A[\s\n]+/, "")
-    return unless pgn.match(/\A((?:[^\n\s][^\n]*\n)+)\n+((?:[^\n\s][^\n]*\n)+)/)
-    "#{$1}\n#{$2}"
+    return pgn if pgn.blank?
+    pgn.gsub!(/\r\n/, "\n")                         # convert line  endings
+    pgn.gsub!(/\r/, "\n")                           # convert line  endings
+    pgn.sub!(/\A[\n\s]+/, "")                       # remove leading space
+    pgn.gsub!(/\][\n\s]*\[/, "]\n[")                # headers always start a new line
+    pgn.sub!(/\][\n\s]*([^\[\n\s])/, "]\n\n\\1")    # two new lines between last header and moves
+    pgn.sub!(/[\n\s]{2,}\[.*\z/m, "\n")             # remove any games after the first
+    pgn.sub!(/[\n\s]+\z/, "\n")                     # remove trailing space
+    pgn
   end
 
   private
 
   def clean_and_parse_pgn
-    @clean_pgn = Game.clean(pgn)
-    if @clean_pgn
-      self.pgn = @clean_pgn
-      begin
-        games = PGN.parse(@clean_pgn)
-        @game = games.first
-      rescue Whittle::ParseError => e
-        logger.error "PGN parse error (#{e.message})"
-      rescue StandardError => e
-        logger.error "PGN error (#{e.message})"
-      end
+    Game.clean(pgn)
+    begin
+      games = PGN.parse(pgn)
+      @game = games.first
+    rescue Whittle::ParseError => e
+      logger.error "PGN parse error (#{e.message})"
+    rescue StandardError => e
+      logger.error "PGN error (#{e.message})"
     end
   end
 
@@ -88,10 +88,6 @@ class Game < ApplicationRecord
   end
 
   def check_pgn
-    if !@clean_pgn
-      errors.add(:pgn, "invalid")
-    elsif !@game
-      errors.add(:pgn, "unparsable")
-    end
+    errors.add(:pgn, "unparsable") unless @game
   end
 end
