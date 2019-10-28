@@ -6,5 +6,5 @@ en:
     keywords: chess, games, pgn, collection
     new: New game
     pgn: PGN
-    thing: 'Game %{title}'
+    thing: 'Game «%{title}»'
     title: Title
