@@ -72,10 +72,22 @@ def expect_error(page, text)
   expect(page).to have_css("div.rails-alert", text: text)
 end
 
-def file(name)
-  (Rails.root + "spec" + "files" + name).read
+def files
+  Rails.root + "spec" + "files"
 end
 
-def random_file(pattern)
-  (Rails.root + "spec" + "files").glob(pattern).sample.read
+def pgn_files
+  files + "pgn"
+end
+
+def pgn_file(name)
+  (pgn_files + name).read
+end
+
+def random_pgn_file
+  pgn_files.glob("*.pgn").sample.read
+end
+
+def all_pgn_files
+  pgn_files.glob("*.pgn").map { |p| p.read }
 end

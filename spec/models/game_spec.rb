@@ -28,8 +28,7 @@ describe Game do
     end
 
     it "no change to clean file" do
-      %w/lee_orr vaganian_pogonina zaitsev_karpov b_h_wood/.each do |name|
-        pgn = file("#{name}.pgn")
+      all_pgn_files.each do |pgn|
         expect(Game.clean(pgn)).to eq pgn
       end
     end

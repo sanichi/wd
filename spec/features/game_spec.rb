@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Game do
-  let!(:game) { create(:game, user: admin, pgn: file("vaganian_pogonina.pgn")) }
+  let!(:game) { create(:game, user: admin, pgn: pgn_file("vaganian_pogonina.pgn")) }
 
-  let(:data)  { build(:game, pgn: file("lee_orr.pgn")) }
+  let(:data)  { build(:game, pgn: pgn_file("lee_orr.pgn")) }
   let(:admin) { create(:user, roles: ["admin"]) }
 
   before(:each) do

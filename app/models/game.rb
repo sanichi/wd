@@ -22,6 +22,7 @@ class Game < ApplicationRecord
   end
 
   def self.clean(pgn)
+    pgn = pgn.dup
     return pgn if pgn.blank?
     pgn.gsub!(/\r\n/, "\n")                      # convert line  endings
     pgn.gsub!(/\r/, "\n")                        # convert line  endings
@@ -36,7 +37,7 @@ class Game < ApplicationRecord
   private
 
   def clean_and_parse_pgn
-    Game.clean(pgn)
+    self.pgn = Game.clean(pgn)
     begin
       games = PGN.parse(pgn)
       @game = games.first
