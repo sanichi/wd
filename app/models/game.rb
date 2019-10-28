@@ -82,9 +82,9 @@ class Game < ApplicationRecord
   def result
     val = @game.result
     return unless val.present?
-    return val if val == "1-0" || val == "0-1"
-    return "½-½" if val = "1/2-1/2" || val == "½-½"
-    return
+    val = "½-½" if val == "1/2-1/2"
+    return unless %w/1-0 0-1 ½-½/.include?(val)
+    val
   end
 
   def check_pgn
