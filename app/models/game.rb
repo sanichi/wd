@@ -23,13 +23,13 @@ class Game < ApplicationRecord
 
   def self.clean(pgn)
     return pgn if pgn.blank?
-    pgn.gsub!(/\r\n/, "\n")                         # convert line  endings
-    pgn.gsub!(/\r/, "\n")                           # convert line  endings
-    pgn.sub!(/\A[\n\s]+/, "")                       # remove leading space
-    pgn.gsub!(/\][\n\s]*\[/, "]\n[")                # headers always start a new line
-    pgn.sub!(/\][\n\s]*([^\[\n\s])/, "]\n\n\\1")    # two new lines between last header and moves
-    pgn.sub!(/[\n\s]{2,}\[.*\z/m, "\n")             # remove any games after the first
-    pgn.sub!(/[\n\s]+\z/, "\n")                     # remove trailing space
+    pgn.gsub!(/\r\n/, "\n")                      # convert line  endings
+    pgn.gsub!(/\r/, "\n")                        # convert line  endings
+    pgn.sub!(/\A[\n\s]+/, "")                    # remove leading space
+    pgn.gsub!(/\][\n\s]*\[/, "]\n[")             # headers always start a new line
+    pgn.sub!(/\][\n\s]*([^\[\n\s])/, "]\n\n\\1") # two new lines between last header and moves
+    pgn.sub!(/[\n\s]{2,}\[.*\z/m, "\n")          # remove any games after the first
+    pgn.sub!(/[\n\s]+\z/, "\n")                  # remove trailing space
     pgn
   end
 
