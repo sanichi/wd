@@ -9,4 +9,5 @@
 [SetUp "1"]
 [Note "Composed by the late Eric Allen of Civil Service Chess Club"]
 
-1.h4+ Kg6 ( 1...Kxh4 2.Rd5 ) 2.Rd6 Qxd6 3.h5+ 1-0
+1.h4+ Kg6 ( 1...Kxh4 2.Rd6 ( 2.Rd5 $2 Qb6+ ) 2...Qe8 3.Rd5 ) 2.Rd6 Qxd6 3.h5+
+1-0
