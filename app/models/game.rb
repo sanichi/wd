@@ -51,11 +51,16 @@ class Game < ApplicationRecord
     if title.present?
       title.squish!
     elsif @game
-      w, b, e, y = tag("White"), tag("Black"), tag("Event"), year("Date")
-      if w && b
-        self.title = "#{w} - #{b}"
-        self.title+= ", #{e}" if e
-        self.title+= ", #{y}" if y
+      if @game.positions.first.to_fen.to_s == PGN::FEN::INITIAL
+        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), result
+        if w && b
+          self.title = "#{w} - #{b}"
+          self.title+= ", #{e}" if e
+          self.title+= ", #{y}" if y
+          self.title+= ", #{r}" if r
+        end
+      else
+        self.title = "Study"
       end
     end
   end
@@ -72,6 +77,14 @@ class Game < ApplicationRecord
     return unless val.present?
     return unless val.match(/\b([12]\d{3})\b/)
     $1
+  end
+
+  def result
+    val = @game.result
+    return unless val.present?
+    return val if val == "1-0" || val == "0-1"
+    return "½-½" if val = "1/2-1/2" || val == "½-½"
+    return
   end
 
   def check_pgn

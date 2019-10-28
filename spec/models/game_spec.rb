@@ -1,14 +1,11 @@
 require 'rails_helper'
 
 describe Game do
-  def pgn(headers, moves, nl="\n")
-    "h#{nl}" * headers + nl + "m#{nl}" * moves
-  end
-
-  let(:data1) { file("lee_orr.pgn") }
-  let(:data2) { file("vaganian_pogonina.pgn") }
-
   describe "clean" do
+    def pgn(headers, moves, nl="\n")
+      "h#{nl}" * headers + nl + "m#{nl}" * moves
+    end
+
     it "detects rubbish" do
       expect(Game.clean(nil)).to be_nil
       expect(Game.clean("")).to be_nil
@@ -30,8 +27,10 @@ describe Game do
     end
 
     it "no change to clean file" do
-      expect(Game.clean(data1)).to eq data1
-      expect(Game.clean(data2)).to eq data2
+      %w/lee_orr vaganian_pogonina zaitsev_karpov/.each do |name|
+        pgn = file("#{name}.pgn")
+        expect(Game.clean(pgn)).to eq pgn
+      end
     end
   end
 end

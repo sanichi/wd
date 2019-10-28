@@ -32,7 +32,7 @@ describe Game do
         fill_in t("game.pgn"), with: data.pgn
         click_button t("save")
 
-        correct_title = "Lee, C. - Orr, M., Largs Open, 1998"
+        correct_title = "Lee, C. - Orr, M., Largs Open, 1998, 0-1"
         expect(page).to have_title correct_title
 
         expect(Game.count).to eq 2
