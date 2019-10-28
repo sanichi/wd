@@ -52,17 +52,32 @@ class Game < ApplicationRecord
     if title.present?
       title.squish!
     elsif @game
+      title = nil
       if @game.positions.first.to_fen.to_s == PGN::FEN::INITIAL
         w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), result
         if w && b
-          self.title = "#{w} - #{b}"
-          self.title+= ", #{e}" if e
-          self.title+= ", #{y}" if y
-          self.title+= ", #{r}" if r
+          title = "#{w} - #{b}"
+          title+= ", #{e}" if e
+          title+= ", #{y}" if y
+          title+= ", #{r}" if r
         end
       else
-        self.title = "Study"
+        r = result
+        if player == :white
+          if r == "1-0" && mate?
+            title = "White to play and mate in #{number_of_moves}"
+          elsif r != "0-1"
+            title = "White to play and #{r == '1-0' ? 'win' : 'draw'}"
+          end
+        else
+          if r == "0-1" && mate?
+            title = "Black to play and mate in #{number_of_moves}"
+          elsif r != "1-0"
+            title = "Black to play and #{r == '0-1' ? 'win' : 'draw'}"
+          end
+        end
       end
+      self.title = title.squish.truncate(MAX_TITLE) if title.present?
     end
   end
 
@@ -86,6 +101,18 @@ class Game < ApplicationRecord
     val = "½-½" if val == "1/2-1/2"
     return unless %w/1-0 0-1 ½-½/.include?(val)
     val
+  end
+
+  def player
+    @game.positions.first.player
+  end
+
+  def mate?
+    @game.moves.last.to_s.match(/#/)
+  end
+
+  def number_of_moves
+    @game.positions.last.fullmove - @game.positions.first.fullmove + 1
   end
 
   def check_pgn

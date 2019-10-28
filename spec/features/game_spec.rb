@@ -32,13 +32,10 @@ describe Game do
         fill_in t("game.pgn"), with: data.pgn
         click_button t("save")
 
-        correct_title = "Lee, C. - Orr, M., Largs Open, 1998, 0-1"
-        expect(page).to have_title correct_title
-
         expect(Game.count).to eq 2
         g = Game.order(:created_at).last
         expect(g.pgn).to eq data.pgn
-        expect(g.title).to eq correct_title
+        expect(g.title).to be_present
       end
     end
 
