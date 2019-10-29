@@ -1,7 +1,11 @@
 module PlayerHelper
   def player_role_menu(selected, search: false)
     opts = Player::ROLES.map { |role| [t("player.roles.#{role}"), role] }
-    opts.unshift [t("any"), ""] if search
+    if search
+      i = opts.index { |opt| opt[1] == "captain_el1" } || 0
+      opts.insert(i, [t("player.roles.captain"), "captain"])
+      opts.unshift [t("any"), ""]
+    end
     options_for_select(opts, selected)
   end
 

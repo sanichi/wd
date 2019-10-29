@@ -52,8 +52,14 @@ class Player < ApplicationRecord
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end
-    if ROLES.include?(params[:role]) && params[:role] != "member"
-      players = players.where("'#{params[:role]}' = ANY (roles)")
+    role = params[:role].to_s
+    if role == "captain"
+      sql = ROLES.select { |r| r.match?(/\Acaptain/) }.map { |r| "'#{r}' = ANY (roles)" }.join(" OR ")
+      players = players.where(sql)
+    elsif role.match(/\Aplayer_(\w+)\z/)
+      players = players.where("'player_#{$1}' = ANY (roles) OR 'captain_#{$1}' = ANY (roles)")
+    elsif ROLES.include?(role) && role != "member"
+      players = players.where("'#{role}' = ANY (roles)")
     end
     players
   end
@@ -93,6 +99,8 @@ class Player < ApplicationRecord
     self.roles.select! { |role| ROLES.include?(role) }
     self.roles = ["member"] if roles.empty?
     self.roles.uniq!
+    superfluous = roles.map { |role| role.match(/\Acaptain_(\w+)\z/) ? "player_#{$1}" : nil }.compact
+    self.roles.reject! { |role| superfluous.include?(role) }
     self.roles.sort_by! { |role| RANK[role] }
     self.roles.reject! { |role| role == "member" } if roles.include?("member") && roles.length > 1
     self.rank = RANK[roles.first]
