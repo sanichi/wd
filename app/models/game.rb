@@ -44,6 +44,10 @@ class Game < ApplicationRecord
     pgn
   end
 
+  def to_s # for rspec tests
+    "game"
+  end
+
   private
 
   def clean_and_parse_pgn
