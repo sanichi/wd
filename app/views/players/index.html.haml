@@ -18,8 +18,8 @@
       %thead
         %tr
           %th= t("player.name")
-          %th= t("player.sca_rating")
-          %th= t("player.fide_rating")
+          %th.text-center{colspan: 2}= t("player.ratings")
+          %th.text-center= t("player.fed")
           %th.d-none.d-md-table-cell= t("player.roles.roles")
       %tbody#results
         = render "results", players: @players

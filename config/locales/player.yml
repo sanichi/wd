@@ -4,6 +4,7 @@ en:
     edit: Edit Player
     email: Email
     description: Members of the Wandering Dragons Chess Club.
+    fed: Fed
     federation: Federation
     fide_id: FIDE Id
     fide_rating: FIDE Rating
@@ -16,6 +17,7 @@ en:
     title: Title
     phone: Phone
     players: Players
+    ratings: SCA, FIDE Rating
     sca_id: SCA Id
     sca_rating: SCA Rating
     order:
