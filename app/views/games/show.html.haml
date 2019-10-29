@@ -1,18 +1,23 @@
 - set_meta_tags title: @game.title
 
 = content_for :javascript do
+  = render "board.js"
   = render "pgn_button.js"
 
-%article
-  .header
-    %h3.d-inline= title_and_difficulty(@game)
-    - if can?(:edit, @game)
-      .float-right.mt-1
-        = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
-  .footer
-    .small
-      = render "utils/misc/user_stamp", object: @game
-      .float-right
-        = link_to t("game.pgn"), "#", id: "toggle_pgn"
+.row
+  %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
+    %article
+      .header
+        %h3.d-inline= title_and_difficulty(@game)
+        - if can?(:edit, @game)
+          .float-right.mt-1
+            = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
+      .body
+        #board.board
+      .footer
+        .small
+          = render "utils/misc/user_stamp", object: @game
+          .float-right
+            = link_to t("game.pgn"), "#", id: "toggle_pgn"
 
-%pre.pgn= @game.pgn
+    %pre.pgn= @game.pgn

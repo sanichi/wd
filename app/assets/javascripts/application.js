@@ -15,3 +15,4 @@
 //= require popper
 //= require bootstrap
 //= require my_utils
+//= require chessboard

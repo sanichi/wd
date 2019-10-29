@@ -1,0 +1,9 @@
+$(function() {
+  var board = Chessboard('board', {
+    showNotation: false,
+    position: "<%= j @fen %>",
+  });
+  $(window).resize(function() {
+    board.resize();
+  });
+});
