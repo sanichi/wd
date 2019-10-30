@@ -1,6 +1,9 @@
 var pgn = "<%= j @game.pgn.html_safe %>";
 var chess = new Chess();
 var ok = chess.load_pgn(pgn, { sloppy: true });
+if (ok) {
+  chess.back_to_start();
+}
 var board = Chessboard('board', {
     showNotation: false,
     position: ok ? chess.fen() : 'start',

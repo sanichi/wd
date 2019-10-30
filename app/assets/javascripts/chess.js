@@ -1630,6 +1630,10 @@ var Chess = function(fen) {
       }
 
       return move_history;
+    },
+
+    back_to_start: function() {
+      while (undo_move() != null) {}
     }
 
   };
