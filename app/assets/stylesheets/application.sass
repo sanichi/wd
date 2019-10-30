@@ -108,12 +108,15 @@ article, section
     @extend .card-footer
 
   table
-    @extend .table-bordered
+    @extend .table-bordered, .table-striped, .table-light, .mb-3
     margin-left: auto
     margin-right: auto
 
-    td, th
-      @extend .p-1
+    td
+      @extend .p-1, .table-success
+
+    th
+      @extend .p-1, .table-info
 
 // Images
 
