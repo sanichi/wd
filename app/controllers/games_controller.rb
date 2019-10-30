@@ -5,10 +5,6 @@ class GamesController < ApplicationController
     @games = Game.search(@games, params, games_path, remote: true, per_page: 10)
   end
 
-  def show
-    @fen = PGN.parse(@game.pgn).first.positions.first.to_fen
-  end
-
   def create
     assign_to_admin_if_no_user(@game)
     if @game.save

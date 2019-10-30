@@ -1,9 +1,12 @@
-$(function() {
-  var board = Chessboard('board', {
+var pgn = "<%= j @game.pgn %>";
+var chess = new Chess();
+console.log(chess.fen());
+var ok = chess.load_pgn(pgn, { sloppy: true });
+console.log('ok is: ' + ok);
+var board = Chessboard('board', {
     showNotation: false,
-    position: "<%= j @fen %>",
+    position: ok ? chess.fen() : 'start',
   });
-  $(window).resize(function() {
-    board.resize();
-  });
+$(window).resize(function() {
+  board.resize();
 });

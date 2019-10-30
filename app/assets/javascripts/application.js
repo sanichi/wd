@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require my_utils
 //= require chessboard
+//= require chess
