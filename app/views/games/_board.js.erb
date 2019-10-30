@@ -1,8 +1,6 @@
-var pgn = "<%= j @game.pgn %>";
+var pgn = "<%= j @game.pgn.html_safe %>";
 var chess = new Chess();
-console.log(chess.fen());
 var ok = chess.load_pgn(pgn, { sloppy: true });
-console.log('ok is: ' + ok);
 var board = Chessboard('board', {
     showNotation: false,
     position: ok ? chess.fen() : 'start',
