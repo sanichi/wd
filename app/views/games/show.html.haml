@@ -14,6 +14,8 @@
             = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
       .body
         #board.board
+      .body
+        .moves= @game.moves
       .footer
         .small
           = render "utils/misc/user_stamp", object: @game

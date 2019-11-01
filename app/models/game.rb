@@ -31,35 +31,19 @@ class Game < ApplicationRecord
     paginate(matches, params, path, opt)
   end
 
-  def self.clean(pgn)
-    pgn = pgn.dup
-    return pgn if pgn.blank?
-    pgn.gsub!(/\r\n/, "\n")                      # convert line  endings
-    pgn.gsub!(/\r/, "\n")                        # convert line  endings
-    pgn.sub!(/\A[\n\s]+/, "")                    # remove leading space
-    pgn.gsub!(/\][\n\s]*\[/, "]\n[")             # headers always start a new line
-    pgn.sub!(/\][\n\s]*([^\[\n\s])/, "]\n\n\\1") # two new lines between last header and moves
-    pgn.sub!(/[\n\s]{2,}\[.*\z/m, "\n")          # remove any games after the first
-    pgn.sub!(/[\n\s]+\z/, "\n")                  # remove trailing space
-    pgn
-  end
-
   def to_s # for rspec tests
     "game"
+  end
+
+  def moves
+    PgnGame.new(pgn).html(id)
   end
 
   private
 
   def clean_and_parse_pgn
-    self.pgn = Game.clean(pgn)
-    begin
-      games = PGN.parse(pgn)
-      @game = games.first
-    rescue Whittle::ParseError => e
-      logger.error "PGN parse error (#{e.message})"
-    rescue StandardError => e
-      logger.error "PGN error (#{e.message})"
-    end
+    self.pgn = PgnGame.clean(pgn)
+    @game = PgnGame.new(pgn).game
   end
 
   def do_title
