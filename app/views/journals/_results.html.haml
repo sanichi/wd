@@ -1,0 +1,9 @@
+- @journals.matches.each do |journal|
+  %tr
+    %td= journal.handle
+    %td= journal.remote_ip
+    %td= journal.resource
+    %td= journal.resource_id
+    %td= journal.action
+    %td= journal.created_at.strftime("%Y-%m-%d %H:%M")
+= render "utils/pagination/links", pager: @journals, columns: 6

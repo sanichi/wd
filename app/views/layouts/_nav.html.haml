@@ -25,6 +25,9 @@
       - if can?(:index, User)
         %li
           = link_to t("user.users"), users_path
+      - if can?(:index, Journal)
+        %li
+          = link_to t("journal.journal"), journals_path
       - unless controller_name == "sessions"
         %li
           - if current_user.guest?

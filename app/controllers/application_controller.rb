@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
     flash.now[:alert] = object.errors.full_messages.join(", ")
   end
 
+  def journal(resource, action, resource_id=nil, handle: nil)
+    handle = current_user.handle if handle.nil?
+    Journal.create(handle: handle, remote_ip: request.remote_ip, resource: resource, resource_id: resource_id, action: action)
+  end
+
   # load_and_authorize_resource will not set the user_id if user can manage all
   # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
   def assign_to_admin_if_no_user(object)

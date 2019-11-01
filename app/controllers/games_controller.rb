@@ -9,6 +9,7 @@ class GamesController < ApplicationController
     assign_to_admin_if_no_user(@game)
     if @game.save
       redirect_to @game, notice: success("created")
+      journal "Game", "create"
     else
       failure @game
       render :new
@@ -19,6 +20,7 @@ class GamesController < ApplicationController
     assign_to_admin_if_no_user(@game)
     if @game.update(resource_params)
       redirect_to @game, notice: success("updated")
+      journal "Game", "update"
     else
       failure @game
       render :edit
@@ -28,6 +30,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
     redirect_to games_path, alert: success("deleted")
+    journal "Game", "destroy"
   end
 
   private

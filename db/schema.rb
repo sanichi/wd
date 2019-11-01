@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_080054) do
+ActiveRecord::Schema.define(version: 2019_11_01_181146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2019_10_29_080054) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "difficulty", limit: 10
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.string "action", limit: 10
+    t.datetime "created_at"
+    t.string "handle", limit: 30
+    t.integer "resource_id"
+    t.string "remote_ip", limit: 40
+    t.string "resource", limit: 20
   end
 
   create_table "players", force: :cascade do |t|

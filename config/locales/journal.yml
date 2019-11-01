@@ -1,0 +1,8 @@
+en:
+  journal:
+    action: Action
+    handle: Handle
+    journal: Journal
+    remote_ip: Remote IP
+    resource: Resource
+    resource_id: ID

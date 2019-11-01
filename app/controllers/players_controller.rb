@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
   def create
     if @player.save
       redirect_to @player, notice: success("created")
+      journal "Player", "create"
     else
       failure @player
       render :new
@@ -17,6 +18,7 @@ class PlayersController < ApplicationController
   def update
     if @player.update(resource_params)
       redirect_to @player, notice: success("updated")
+      journal "Player", "update"
     else
       failure @player
       render :edit
@@ -26,6 +28,7 @@ class PlayersController < ApplicationController
   def destroy
     @player.destroy
     redirect_to players_path, alert: success("deleted")
+    journal "Player", "destroy"
   end
 
   private

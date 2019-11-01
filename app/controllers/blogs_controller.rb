@@ -20,6 +20,7 @@ class BlogsController < ApplicationController
     assign_to_admin_if_no_user(@blog)
     if @blog.save
       redirect_to @blog, notice: success("created")
+      journal "Blog", "create", @blog.id
     else
       failure @blog
       render :new
@@ -30,6 +31,7 @@ class BlogsController < ApplicationController
     assign_to_admin_if_no_user(@blog)
     if @blog.update(resource_params)
       redirect_to @blog, notice: success("updated")
+      journal "Blog", "update", @blog.id
     else
       failure @blog
       render :edit
@@ -39,6 +41,7 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     redirect_to blogs_path, alert: success("deleted")
+    journal "Blog", "destroy", @blog.id
   end
 
   private
