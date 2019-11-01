@@ -12,8 +12,10 @@
         - if can?(:edit, @game)
           .float-right.mt-1
             = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
-      .body
+      .body.pb-0
         #board.board
+      .body.pb-0
+        = render "controls.html.haml"
       .body
         .moves= @game.moves
       .footer
