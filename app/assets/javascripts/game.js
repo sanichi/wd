@@ -86,6 +86,10 @@ var Game = function(pgn, id) {
       }
     },
 
+    current_move: function() {
+      return current_move;
+    },
+
     resize: function() {
       board.resize();
     },

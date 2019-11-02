@@ -9,15 +9,19 @@ $(function() {
     switch($(this).data('direction')) {
       case '<<':
         game.goto_start();
+        highlight_current();
         break;
       case '<':
         game.take_back();
+        highlight_current();
         break;
       case '>':
         game.play_move();
+        highlight_current();
         break;
       case '>>':
         game.goto_end();
+        highlight_current();
         break;
     }
   });
@@ -27,15 +31,19 @@ $(function() {
     switch (e.keyCode) {
       case 39: // right arrow
         game.play_move();
+        highlight_current();
         break;
       case 37: // left arrow
         game.take_back();
+        highlight_current();
         break;
       case 69: // 'e' for end
         game.goto_end();
+        highlight_current();
         break;
       case 83: // 's' for start
         game.goto_start();
+        highlight_current();
         break;
     }
   });
@@ -67,5 +75,17 @@ $(function() {
       $('#show_moves').parent().hide();
     });
     $('#moves').hide();
+  }
+
+  function highlight_current() {
+    $('.moves .move').removeClass('current-move');
+    current_move = game.current_move();
+    if (current_move > 0) {
+      $('.moves .move').each(function(i) {
+        if (current_move == i + 1) {
+          $(this).addClass('current-move');
+        }
+      });
+    }
   }
 });
