@@ -45,7 +45,7 @@ class PgnGame
       %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s} %
         [label, i + 1, notation, annotation, comment, sep]
     end.join("")
-    ("\n" + html.rstrip + "\n").html_safe
+    ("\n" + html.rstrip + "\n" + result + "\n").html_safe
   end
 
   private
@@ -78,5 +78,11 @@ class PgnGame
     raw_comment = text.squish.sub(/\A\{\s*/, "").sub(/\s*\}\z/, "")
     safe_comment = Loofah.fragment(raw_comment).scrub!(:prune).to_s
     %Q[ <span class="comment">{ #{safe_comment} }</span>]
+  end
+
+  def result
+    val = @game.result
+    val = "½-½" if val == "1/2-1/2"
+    val
   end
 end
