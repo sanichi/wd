@@ -2,6 +2,7 @@ $(function() {
 
   // for displaying the game
   var game = new Game("<%= j @game.pgn.html_safe %>", 'board');
+  var study = <%= @game.study? ? 'true' : 'false' %>;
 
   // button controls
   $('.controls .btn').click(function(e) {
@@ -50,4 +51,15 @@ $(function() {
     $('pre.pgn').toggle();
   });
   $('pre.pgn').hide();
+
+  // for showing the moves which are initally hidden for studies
+  if (study)
+  {
+    $('#show_moves').click(function(e) {
+      e.preventDefault();
+      $('#moves').show();
+      $('#show_moves').parent().hide();
+    });
+    $('#moves').hide();
+  }
 });

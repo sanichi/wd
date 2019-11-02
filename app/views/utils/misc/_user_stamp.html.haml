@@ -1,11 +1,13 @@
+- defined?(updated) || updated = true
 - if object.user.present?
   = t("created_by", name: object.user.handle)
 - else
   = t("created")
 = time_ago_in_words(object.created_at)
-= succeed(",") do
+= succeed(updated ? "," : ".") do
   = t("ago")
-= t("updated").downcase
-= time_ago_in_words(object.updated_at)
-= succeed(".") do
-  = t("ago")
+- if updated
+  = t("updated").downcase
+  = time_ago_in_words(object.updated_at)
+  = succeed(".") do
+    = t("ago")

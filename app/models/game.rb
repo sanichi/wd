@@ -31,6 +31,10 @@ class Game < ApplicationRecord
     paginate(matches, params, path, opt)
   end
 
+  def study?
+    difficulty.present?
+  end
+
   def to_s # for rspec tests
     "game"
   end

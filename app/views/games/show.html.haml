@@ -15,11 +15,14 @@
         #board
       .body.pb-0
         = render "controls.html.haml"
-      .body
+      - if @game.study?
+        .body.text-center
+          = link_to t("game.show_moves"), "#", id: "show_moves"
+      .body#moves
         .moves= @game.moves
       .footer
         .small
-          = render "utils/misc/user_stamp", object: @game
+          = render "utils/misc/user_stamp", object: @game, updated: false
           .float-right
             = link_to t("game.pgn"), "#", id: "toggle_pgn"
 
