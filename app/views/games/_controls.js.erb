@@ -52,6 +52,7 @@ $(function() {
   $('.moves .move').click(function() {
     var i = parseInt($(this).data('i'));
     game.seek(i);
+    highlight_current();
   });
 
   // resize the board when the window changes
