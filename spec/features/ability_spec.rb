@@ -8,8 +8,8 @@ describe Ability do
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
-    # click_link t("game.games")
-    # expect(page).to_not have_css "a", text: t("game.new")
+    click_link t("game.games")
+    expect(page).to_not have_css "a", text: t("game.new")
 
     click_link t("player.players")
     expect(page).to_not have_css "a", text: t("players.new")
@@ -23,8 +23,8 @@ describe Ability do
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
-    # click_link t("game.games")
-    # expect(page).to_not have_css "a", text: t("game.new")
+    click_link t("game.games")
+    expect(page).to_not have_css "a", text: t("game.new")
 
     click_link t("player.players")
     expect(page).to_not have_css "a", text: t("players.new")
@@ -39,8 +39,8 @@ describe Ability do
     click_link t("blog.blogs")
     click_link t("blog.new")
 
-    # click_link t("game.games")
-    # click_link t("game.new")
+    click_link t("game.games")
+    click_link t("game.new")
 
     click_link t("player.players")
     expect(page).to_not have_css "a", text: t("players.new")

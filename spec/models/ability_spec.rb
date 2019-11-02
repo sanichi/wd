@@ -40,15 +40,15 @@ describe Ability do
       context "same user" do
         let(:game) { create(:game, user: user) }
 
-        # it { is_expected.to be_able_to(:read, game) }
-        # it { is_expected.to be_able_to(:crud, game) }
+        it { is_expected.to be_able_to(:read, game) }
+        it { is_expected.to be_able_to(:crud, game) }
       end
 
       context "different or no user" do
         let(:blogger) { create(:user, roles: ["blogger"]) }
         let(:game) { create(:game, user: [blogger, nil].sample) }
 
-        # it { is_expected.to be_able_to(:read, game) }
+        it { is_expected.to be_able_to(:read, game) }
         it { is_expected.to_not be_able_to(:crud, game) }
       end
     end
@@ -90,7 +90,7 @@ describe Ability do
       let(:blogger) { create(:user, roles: ["blogger"]) }
       let(:game) { create(:game, user: [blogger, nil].sample) }
 
-      # it { is_expected.to be_able_to(:read, game) }
+      it { is_expected.to be_able_to(:read, game) }
       it { is_expected.to_not be_able_to(:crud, game) }
     end
 
@@ -131,7 +131,7 @@ describe Ability do
       let(:blogger) { create(:user, roles: ["blogger"]) }
       let(:game) { create(:game, user: [blogger, nil].sample) }
 
-      # it { is_expected.to be_able_to(:read, game) }
+      it { is_expected.to be_able_to(:read, game) }
       it { is_expected.to_not be_able_to(:crud, game) }
     end
 

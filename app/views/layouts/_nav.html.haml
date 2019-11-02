@@ -6,28 +6,21 @@
     %span
   #navbar.collapse.navbar-collapse
     %ul.left
-      %li
-        = link_to t("blog.blogs"), blogs_path
-      %li
-        = link_to t("player.players"), players_path
-      %li
-        = link_to t("contact.contacts"), contacts_path
-      - if can?(:read, Game)
-        %li
-          = link_to t("game.games"), games_path
+      %li= link_to t("contact.contacts"), contacts_path
+      %li= link_to t("player.players"), players_path
+      %li= link_to t("game.games"), games_path
       %li.dropdown
-        = link_to t("history"), "#", class: "dropdown-toggle", id: "history-dropdown", "data-toggle" => "dropdown"
+        = link_to t("other"), "#", class: "dropdown-toggle", id: "history-dropdown", "data-toggle" => "dropdown"
         .dropdown-menu
+          = link_to t("blog.blogs"), blogs_path
+          - if can?(:index, User)
+            = link_to t("user.users"), users_path
+          - if can?(:index, Journal)
+            = link_to t("journal.journal"), journals_path
           = render "blogs/blog_link", tag: "early_history"
           = render "blogs/blog_link", tag: "club_championships"
           = render "blogs/blog_link", tag: "team_titles"
     %ul.right
-      - if can?(:index, User)
-        %li
-          = link_to t("user.users"), users_path
-      - if can?(:index, Journal)
-        %li
-          = link_to t("journal.journal"), journals_path
       - unless controller_name == "sessions"
         %li
           - if current_user.guest?
