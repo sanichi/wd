@@ -5,7 +5,7 @@ $(function() {
   var study = <%= @game.study? ? 'true' : 'false' %>;
 
   // button controls
-  $('.controls .btn').click(function(e) {
+  $('.controls .control').click(function(e) {
     switch($(this).data('direction')) {
       case '<<':
         game.goto_start();
