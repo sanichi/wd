@@ -9,9 +9,11 @@ class Journal < ApplicationRecord
 
   before_validation :normalise_attributes
 
+  scope :by_latest, -> { order(created_at: :desc) }
+
   def self.search(matches, params, path, opt={})
-    matches = matches.order(created_at: :desc)
-    if sql = cross_constraint(params[:query], %w{action handle remote_ip resource})
+    matches = matches.by_latest
+    if sql = cross_constraint(params[:query], %w{action handle remote_ip resource}.push("to_char(created_at, 'YYYY-MM-DD HH24-MI-SS')"))
       matches = matches.where(sql)
     end
     paginate(matches, params, path, opt)
