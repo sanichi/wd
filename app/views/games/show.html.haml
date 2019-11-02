@@ -12,9 +12,10 @@
           .float-right.mt-1
             = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
       .body.pb-0
-        #board
-      .body.pb-0
-        = render "controls.html.haml"
+        .row
+          %div{class: center(sm: 6, xs: 8)}
+            #board.mb-3
+            = render "controls.html.haml"
       - if @game.study?
         .body.text-center
           = link_to t("game.show_moves"), "#", id: "show_moves"
