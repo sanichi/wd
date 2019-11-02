@@ -17,3 +17,4 @@
 //= require my_utils
 //= require chessboard
 //= require chess
+//= require game

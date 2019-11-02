@@ -1,81 +1,53 @@
-var moves = [];
-var current_move = 0;
-var first_move = 0;
-var last_move = 0;
-var pgn = "<%= j @game.pgn.html_safe %>";
-var chess = new Chess();
-var ok = chess.load_pgn(pgn, { sloppy: true });
-ok ? get_moves() : chess.clear();
-var board = Chessboard('board', {
-    showNotation: false,
-    position: chess.fen(),
+$(function() {
+
+  // for displaying the game
+  var game = new Game("<%= j @game.pgn.html_safe %>", 'board');
+
+  // button controls
+  $('.controls .btn').click(function(e) {
+    switch($(this).data('btn')) {
+      case '<<':
+        game.goto_start();
+        break;
+      case '<':
+        game.take_back();
+        break;
+      case '>':
+        game.play_move();
+        break;
+      case '>>':
+        game.goto_end();
+        break;
+    }
   });
-$(window).resize(function() {
-  board.resize();
-});
-$(window).keydown(function(e) {
-  switch (e.keyCode) {
-    case 39: // right arrow
-      play_move();
-      break;
-    case 37: // left arrow
-      take_back();
-      break;
-    case 69: // 'e' for end
-      goto_end();
-      break;
-    case 83: // 's' for start
-      goto_start();
-      break;
-  }
-});
 
-function get_moves()
-{
-  while (true) {
-    var move = chess.undo();
-    if (move == null)
-    {
-      break;
+  // keyboard controls
+  $(window).keydown(function(e) {
+    switch (e.keyCode) {
+      case 39: // right arrow
+        game.play_move();
+        break;
+      case 37: // left arrow
+        game.take_back();
+        break;
+      case 69: // 'e' for end
+        game.goto_end();
+        break;
+      case 83: // 's' for start
+        game.goto_start();
+        break;
     }
-    else
-    {
-        moves.unshift(move);
-    }
-  }
-  last_move = moves.length;
-}
+  });
 
-function play_move() {
-  if (current_move == last_move) return;
-  chess.move(moves[current_move]);
-  current_move++;
-  display_board();
-}
+  // resize the board when the window changes
+  $(window).resize(function() {
+    game.resize();
+  });
 
-function take_back() {
-  if (current_move == 0) return;
-  chess.undo();
-  current_move--;
-  display_board();
-}
-
-function goto_end() {
-  while (current_move < last_move) {
-    chess.move(moves[current_move]);
-    current_move++;
-  }
-  display_board();
-}
-
-function goto_start() {
-  while (current_move > first_move) {
-    chess.undo();
-    current_move--;
-  }
-  display_board();
-}
-
-function display_board() {
-  board.position(chess.fen());
-}
+  // for toggling the PGN which is initally hidden
+  $('#toggle_pgn').click(function(e) {
+    e.preventDefault();
+    $('pre.pgn').toggle();
+  });
+  $('pre.pgn').hide();
+});
