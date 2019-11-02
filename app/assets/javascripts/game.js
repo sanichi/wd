@@ -30,6 +30,20 @@ var Game = function(pgn, id) {
     last_move = moves.length;
   }
 
+  function go_forward(number) {
+    while (current_move < number) {
+      chess.move(moves[current_move]);
+      current_move++;
+    }
+  }
+
+  function go_back(number) {
+    while (current_move > number) {
+      chess.undo();
+      current_move--;
+    }
+  }
+
   function display_board() {
     board.position(chess.fen());
   }
@@ -51,24 +65,28 @@ var Game = function(pgn, id) {
     },
 
     goto_end: function() {
-      while (current_move < last_move) {
-        chess.move(moves[current_move]);
-        current_move++;
-      }
+      go_forward(last_move);
       display_board();
     },
 
     goto_start: function() {
-      while (current_move > first_move) {
-        chess.undo();
-        current_move--;
-      }
+      go_back(first_move);
       display_board();
+    },
+
+    seek: function(i) {
+      if (i < current_move) {
+        go_back(i);
+        display_board();
+      } else if (i > current_move) {
+        go_forward(i);
+        display_board();
+      }
     },
 
     resize: function() {
       board.resize();
-    }
+    },
 
   };
 };

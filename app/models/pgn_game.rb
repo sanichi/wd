@@ -35,16 +35,15 @@ class PgnGame
     show_label = true
     html = moves.each_with_index.map do |move, i|
       position = positions[i]
-      number = position.fullmove
-      player = position.player == :white ? "w" : "b"
-      label = "#{number}.#{player == 'w' ? '' : '..'}" if show_label
-      show_label = player == 'b'
+      white = position.player == :white
+      label = "#{position.fullmove}.#{white ? '' : '..'}" if show_label
+      show_label = !white
       notation = move.notation
       annotation = decode(move.annotation)
       comment = comment(move.comment)
-      sep = player == 'b' ? "\n" : " "
-      %Q{%s<span class="move game_%d" data-move="%d_%d_%s">%s%s</span>%s%s} %
-        [label, id, id, number, player, notation, annotation, comment, sep]
+      sep = white ? " " : "\n"
+      %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s} %
+        [label, i + 1, notation, annotation, comment, sep]
     end.join("")
     ("\n" + html.rstrip + "\n").html_safe
   end

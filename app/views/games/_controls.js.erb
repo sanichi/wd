@@ -6,7 +6,7 @@ $(function() {
 
   // button controls
   $('.controls .btn').click(function(e) {
-    switch($(this).data('btn')) {
+    switch($(this).data('direction')) {
       case '<<':
         game.goto_start();
         break;
@@ -38,6 +38,12 @@ $(function() {
         game.goto_start();
         break;
     }
+  });
+
+  // click move controls
+  $('.moves .move').click(function() {
+    var i = parseInt($(this).data('i'));
+    game.seek(i);
   });
 
   // resize the board when the window changes
