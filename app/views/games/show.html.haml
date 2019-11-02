@@ -2,7 +2,7 @@
 
 = content_for :javascript do
   = render "board.js"
-  = render "pgn_button.js"
+  = render "controls.js"
 
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
@@ -13,7 +13,7 @@
           .float-right.mt-1
             = link_to t("edit"), edit_game_path(@game), class: "btn btn-info"
       .body.pb-0
-        #board.board
+        #board
       .body.pb-0
         = render "controls.html.haml"
       .body

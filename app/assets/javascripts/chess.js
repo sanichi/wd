@@ -1631,12 +1631,6 @@ var Chess = function(fen) {
       return move_history;
     },
 
-    // My custom methods added to version 0.10.2
-
-    back_to_start: function() {
-      while (undo_move() != null) {}
-    }
-
   };
 };
 

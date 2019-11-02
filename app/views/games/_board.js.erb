@@ -1,7 +1,11 @@
+var moves = [];
+var current_move = 0;
+var first_move = 0;
+var last_move = 0;
 var pgn = "<%= j @game.pgn.html_safe %>";
 var chess = new Chess();
 var ok = chess.load_pgn(pgn, { sloppy: true });
-ok ? chess.back_to_start() : chess.clear();
+ok ? get_moves() : chess.clear();
 var board = Chessboard('board', {
     showNotation: false,
     position: chess.fen(),
@@ -9,3 +13,69 @@ var board = Chessboard('board', {
 $(window).resize(function() {
   board.resize();
 });
+$(window).keydown(function(e) {
+  switch (e.keyCode) {
+    case 39: // right arrow
+      play_move();
+      break;
+    case 37: // left arrow
+      take_back();
+      break;
+    case 69: // 'e' for end
+      goto_end();
+      break;
+    case 83: // 's' for start
+      goto_start();
+      break;
+  }
+});
+
+function get_moves()
+{
+  while (true) {
+    var move = chess.undo();
+    if (move == null)
+    {
+      break;
+    }
+    else
+    {
+        moves.unshift(move);
+    }
+  }
+  last_move = moves.length;
+}
+
+function play_move() {
+  if (current_move == last_move) return;
+  chess.move(moves[current_move]);
+  current_move++;
+  display_board();
+}
+
+function take_back() {
+  if (current_move == 0) return;
+  chess.undo();
+  current_move--;
+  display_board();
+}
+
+function goto_end() {
+  while (current_move < last_move) {
+    chess.move(moves[current_move]);
+    current_move++;
+  }
+  display_board();
+}
+
+function goto_start() {
+  while (current_move > first_move) {
+    chess.undo();
+    current_move--;
+  }
+  display_board();
+}
+
+function display_board() {
+  board.position(chess.fen());
+}
