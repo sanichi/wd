@@ -58,18 +58,20 @@ var Game = function(pgn, id) {
     },
 
     take_back: function() {
-      if (current_move == 0) return;
+      if (current_move == first_move) return;
       chess.undo();
       current_move--;
       display_board();
     },
 
     goto_end: function() {
+      if (current_move == last_move) return;
       go_forward(last_move);
       display_board();
     },
 
     goto_start: function() {
+      if (current_move == first_move) return;
       go_back(first_move);
       display_board();
     },
