@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def create
     if @user.save
       redirect_to @user, notice: success("created")
-      journal "User", "create"
+      journal "User", "create", @user.id
     else
       failure @user
       render :new
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(resource_params)
       redirect_to @user, notice: success("updated")
-      journal "User", "update"
+      journal "User", "update", @user.id
     else
       failure @user
       render :edit
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to users_path, alert: success("deleted")
-    journal "User", "destroy"
+    journal "User", "destroy", @user.id
   end
 
   private
