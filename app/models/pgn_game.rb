@@ -5,9 +5,9 @@ class PgnGame
     begin
       @game = PGN.parse(pgn).first
     rescue Whittle::ParseError => e
-      logger.error "PGN parse error (#{e.message})"
+      Rails.logger.error "PGN parse error (#{e.message})"
     rescue StandardError => e
-      logger.error "PGN error (#{e.message})"
+      Rails.logger.error "PGN error (#{e.message})"
     end
   end
 
