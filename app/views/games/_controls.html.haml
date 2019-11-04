@@ -1,5 +1,6 @@
 .controls
-  .row.justify-content-center
+  .row
+    .offset-1
     .col-2.text-center
       %span.control{"data-direction" => "<<"}= "⇤"
     .col-2.text-center
@@ -8,3 +9,5 @@
       %span.control{"data-direction" => ">"}= "&nbsp;→&nbsp;".html_safe
     .col-2.text-center
       %span.control{"data-direction" => ">>"}= "⇥"
+    .col-2.text-center
+      %span.control{"data-direction" => "o"}= "↺"

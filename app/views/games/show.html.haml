@@ -15,7 +15,7 @@
             = render "controls.html.haml"
       - if @game.study?
         .body.text-center
-          = link_to t("game.show_moves"), "#", id: "show_moves"
+          = link_to t("game.show_moves"), "#", id: "show_moves", class: "btn btn-dark btn-sm"
       .body#moves
         .moves= @game.moves
       .footer

@@ -90,6 +90,10 @@ var Game = function(pgn, id) {
       return current_move;
     },
 
+    flip: function() {
+      board.flip();
+    },
+
     resize: function() {
       board.resize();
     },

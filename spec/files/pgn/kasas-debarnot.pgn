@@ -1,0 +1,11 @@
+[Event "?"]
+[Site "Buenos Aires"]
+[Date "1972.??.??"]
+[Round "?"]
+[White "Kasas"]
+[Black "Debarnot"]
+[Result "0-1"]
+[FEN "4r3/5pk1/2Q2n2/3B2pp/2b2q2/P6P/6P1/R2R2K1 b - - 0 1"]
+[SetUp "1"]
+
+1... Ng4 2.hg4 Qe3+ 3.Kh2 Rh8!! 4.Bf3 hg4+ 5.Kg3 Qf4+ 6.Kf2 g3+ 7.Kg1 Rh1+ 0-1
