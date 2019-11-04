@@ -1,12 +1,13 @@
 %h4= "Contents"
 
 %ul
-  %li= link_to "Get a Username and Password", "#get_login"
-  %li= link_to "Create a News Item", "#create_news"
-  %li= link_to "Create a Game", "#create_game"
-  %li= link_to "House Style", "#house_style"
+  %li= help_content :get_login
+  %li= help_content :create_news
+  %li= help_content :create_game
+  %li= help_content :house_style
 
-%h4{id: "get_login"}= "Get a Login"
+= help_section :get_login
+
 %p
   To become a registered user of the site you need to acquire a username and password
   from the webmaster (whose contact details should be on the
@@ -33,7 +34,7 @@
       = link_to "House Style", "#house_style"
     Has unlimited power (mwa ha ha).
 
-%h4{id: "create_news"}= "Create a News Item"
+= help_section :create_news
 
 %ul
   %li= t("session.sign_in").downcase
@@ -102,7 +103,7 @@
     %b= t("blog.markdown")
     (this button is in the bottom left and you need to be signed in to use it)
 
-%h4{id: "create_game"}= "Create a Game"
+= help_section :create_game
 
 %p
   For this you need to have a
@@ -143,7 +144,7 @@
   Note that the system is quite strict about syntax and may reject your PGN as invalid.
   If this happens and you can't figure out why, please contact the webmaster.
 
-%h4{id: "house_style"}= "House Style"
+= help_section :house_style
 
 %p
   To maintain a consistent look to news items and games, bloggers are encouraged to

@@ -17,4 +17,11 @@ describe PagesController do
       expect(page).to have_title t("contact.contacts")
     end
   end
+
+  context "help" do
+    it "show" do
+      click_link t("help.help")
+      expect(page).to have_title t("help.help")
+    end
+  end
 end

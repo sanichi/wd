@@ -38,6 +38,9 @@ Player.all.each do |p|
   urls("players/#{p.id}", p.updated_at.to_date, 0.8)
 end
 
+# Help
+urls("help", "2019-11-04", 0.5)
+
 # Sign in
 urls("signin", "2019-10-26", 0.2)
 
