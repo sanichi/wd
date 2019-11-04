@@ -4,7 +4,8 @@
       = link_to blog.title, blog
       = render "blogs/title_icons", blog: blog
     %td.d-none.d-lg-table-cell= blog.summary.truncate(50)
-    %td.d-none.d-sm-table-cell.text-center= blog.user&.handle
+    - unless current_user.guest?
+      %td.d-none.d-sm-table-cell.text-center= blog.user&.handle
     %td.text-center= blog.created_at.strftime('%Y-%m-%d')
     %td.d-none.d-md-table-cell.text-center= blog.updated_at.strftime('%Y-%m-%d')
-= render "utils/pagination/links", pager: @blogs, columns: 4
+= render "utils/pagination/links", pager: @blogs, columns: (current_user.guest?? 4 : 5)
