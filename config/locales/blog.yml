@@ -7,6 +7,7 @@ en:
     draft: Draft
     edit: Edit Blog
     keywords: blog, news, latest, recent, chess, games, results, players
+    markdown: M↓
     more: Read more →
     new: New Blog
     older: Older news →
@@ -22,6 +23,5 @@ en:
       updated_des: updated ↓
       updated_asc: updated ↑
     icon:
-      book: 📖
       draft: ✏️
       pin: 📌

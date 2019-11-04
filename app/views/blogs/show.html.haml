@@ -17,10 +17,12 @@
     ~ @blog.story_html
   .footer
     .small
-      = render "utils/misc/user_stamp", object: @blog
       - if can?(:edit, Blog)
-        .float-right
-          = link_to t("blog.icon.book"), "#", id: "toggle_markdown"
+        = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
+        .float-right.mt-1
+          = render "utils/misc/user_stamp", object: @blog
+      - else
+        = render "utils/misc/user_stamp", object: @blog
 
 - if can?(:edit, Blog)
   %pre.markdown= @blog.summary
