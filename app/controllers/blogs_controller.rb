@@ -47,8 +47,8 @@ class BlogsController < ApplicationController
   private
 
   def resource_params
-    permitted = [:draft, :story, :summary, :tag, :title]
-    permitted.push :pin if current_user.admin?
+    permitted = [:draft, :story, :summary, :title]
+    permitted.concat [:pin, :tag] if current_user.admin?
     params.require(:blog).permit(*permitted)
   end
 

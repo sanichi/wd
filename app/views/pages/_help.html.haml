@@ -1,0 +1,187 @@
+%h4= "Contents"
+
+%ul
+  %li= link_to "Get a Username and Password", "#get_login"
+  %li= link_to "Create a News Item", "#create_news"
+  %li= link_to "Create a Game", "#create_game"
+  %li= link_to "House Style", "#house_style"
+
+%h4{id: "get_login"}= "Get a Login"
+%p
+  To become a registered user of the site you need to acquire a username and password
+  from the webmaster (whose contact details should be on the
+  = t("contact.contacts")
+  page). The different types of users are as follows:
+%ul
+  %li
+    %b= t("user.roles.member")
+    Can view the contact details of all players (whereas ordinary visitors to the
+    site can only see the contact details of the principals - president, treasurer,
+    team captains etc).
+  %li
+    %b= t("user.roles.blogger")
+    Can create news items and edit those they have previously created themselves.
+    Similarly for games.
+  %li
+    %b= t("user.roles.librarian")
+    Manages the information we keep on our book collection.
+  %li
+    %b Administrator
+    Manages players, contacts and users and
+    and can edit any item to maintain the
+    = succeed(".") do
+      = link_to "House Style", "#house_style"
+    Has unlimited power (mwa ha ha).
+
+%h4{id: "create_news"}= "Create a News Item"
+
+%ul
+  %li= t("session.sign_in").downcase
+  %li
+    click
+    %b= t("blog.blogs")
+  %li
+    click
+    %b= t("blog.new")
+  %li
+    fill in
+    %ul
+      %li
+        %b= t("blog.title")
+        Keep this short and snappy.
+      %li
+        %b= t("blog.summary")
+        Keep this fairly short. It's for the home page when the item is still recent.
+      %li
+        %b= t("blog.story")
+        Optional. This is where you put the bulk of your news item unless it's very short.
+      %li
+        %b= t("blog.draft")
+        Leave this checked to begin with to prevents the item being published to the home
+        page or the list of news items before it's been perfected.
+  %li
+    if you need to make any corrections, then
+    %ul
+      %li
+        click
+        %b= t("edit")
+      %li make corrections
+      %li
+        click
+        %b= t("save")
+  %li
+    when your item is ready for publishing, then
+    %ul
+      %li
+        click
+        %b= t("edit")
+      %li
+        uncheck
+        %b= t("blog.draft")
+      %li
+        click
+        %b= t("save")
+%p
+  Note that the
+  = t("blog.summary")
+  and
+  = t("blog.story")
+  are written in
+  = succeed(".") do
+    = link_to "Markdown", "https://en.wikipedia.org/wiki/Markdown", target: "external"
+  If there are any features you're unsure how to write (in practice, the only tricky
+  things are tables), the easiest thing to do is see how someone else has done it.
+  To view the raw Markdown of any other news item:
+%ul
+  %li
+    click
+    %b= t("blog.blogs")
+  %li click on the title of the news item with the feature you're interested in
+  %li
+    click
+    %b= t("blog.markdown")
+    (this button is in the bottom left and you need to be signed in to use it)
+
+%h4{id: "create_game"}= "Create a Game"
+
+%p
+  For this you need to have a
+  = link_to "PGN", "https://en.wikipedia.org/wiki/Portable_Game_Notation", target: "external"
+  file of the game.
+%ul
+  %li= t("session.sign_in").downcase
+  %li
+    click
+    %b= t("game.games")
+  %li
+    click
+    %b= t("game.new")
+  %li
+    fill in
+    %ul
+      %li
+        %b= t("game.title")
+        You can leave this blank and let the system guess one from info in the PGN.
+      %li
+        %b= t("game.pgn")
+      %li
+        %b= t("game.difficulty")
+        Only for problems and studies (PGN files with a non-initial
+        = succeed(").") do
+          = link_to "FEN", "https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation", target: "external"
+  %li
+    if you need to make any corrections, then
+    %ul
+      %li
+        click
+        %b= t("edit")
+      %li make corrections
+      %li
+        click
+        %b= t("save")
+%p
+  Note that the system is quite strict about syntax and may reject your PGN as invalid.
+  If this happens and you can't figure out why, please contact the webmaster.
+
+%h4{id: "house_style"}= "House Style"
+
+%p
+  To maintain a consistent look to news items and games, bloggers are encouraged to
+  keep in mind the following guidance:
+%ul
+  %li
+    = t("blog.blogs")
+    %ul
+      %li keep blog summaries (meant for the home page) short
+      %li use relative URLs for internal links (see below)
+      %li use a target for off site links (see below)
+      %li use ½-½ for draws and not 0.5-0.5 or 1/2-1/2
+      %li for match scores don't use decimals (e.g. prefer 3½-2½ to 3.5-2.5)
+  %li
+    = t("game.games")
+    %ul
+      %li use ½-½ and not 0.5-0.5 in titles (obviously in PGN you must use 1/2-1/2)
+
+%h6 Use Relative URLs for Internal Links
+%p
+  In a news item you should link to other pages of this site with a relative URL.
+  For example to link to game number 123 use something like this Markdown:
+%pre [this great game](/games/123)
+%p as opposed to this:
+%pre [this great game](https://wanderingdragonschess.club/games/123)
+%p
+  The reason is that this site has a second domain (www.wanderingdragonschess.club).
+  If a user signed in to one domain followed a link to the other one, they would
+  no longer be signed in. Using relative links keeps everyone on the same domain.
+
+%h6 Use Targets for External Links
+%p
+  We want links to external pages to open a new tab in the user's browser instead
+  of replacing our site's page. The normal way to achieve this effect in HTML is
+  to add a target to the link but Markdown is so simplified it can't do this (and
+  note that, for security, we don't allow users to insert fragments of HTML into Markdown).
+  However, we have customised our Markdown processor to achieve this: just add
+  a pipe symbol (|) to the end of the URL as in this example:
+%pre [this great site](https://fide.com|)
+%p as opposed to this:
+%pre [this great site](https://fide.com)
