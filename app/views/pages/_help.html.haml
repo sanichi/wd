@@ -153,9 +153,9 @@
   %li
     = t("blog.blogs")
     %ul
-      %li keep blog summaries (meant for the home page) short
+      %li keep blog summaries short
       %li use relative URLs for internal links (see below)
-      %li use a target for off site links (see below)
+      %li use a target for external links (see below)
       %li use ½-½ for draws and not 0.5-0.5 or 1/2-1/2
       %li for match scores don't use decimals (e.g. prefer 3½-2½ to 3.5-2.5)
   %li
@@ -180,8 +180,8 @@
 %p
   We want links to external pages to open a new tab in the user's browser instead
   of replacing our site's page. The normal way to achieve this effect in HTML is
-  to add a target to the link but Markdown is so simplified it can't do this (and
-  note that, for security, we don't allow users to insert fragments of HTML into Markdown).
+  to add a target to the link but Markdown has no such feature (and note that, for
+  security, we don't allow users to insert fragments of HTML into the Markdown).
   However, we have customised our Markdown processor to achieve this: just add
   a pipe symbol (|) to the end of the URL as in this example:
 %pre [this great site](https://fide.com|)
