@@ -12,6 +12,7 @@ var Game = function(pgn, id) {
   var board = Chessboard(id, {
     showNotation: false,
     position: chess.fen(),
+    orientation: chess.turn() == 'w' ? 'white' : 'black',
   });
 
   function get_moves()
