@@ -1,22 +1,13 @@
 module Remarkable
   class CustomRenderer < Redcarpet::Render::HTML
     def link(link, title, content)
-      link, target = split(link)
+      link.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
+      link = "/" if link.blank?
       html = %Q(<a href="#{link}")
       html += %Q( title="#{title}") if title.present?
-      html += %Q( target="#{target}") if target.present?
+      html += %Q( target="external") if link.match?(/\Ahttps?:\/\//)
       html += %Q(>#{content}</a>)
       html
-    end
-
-    private
-
-    def split(link)
-      if link =~ /\A(.+)\|(\w*)\z/
-        [$1, $2.present? ? $2 : "external"]
-      else
-        [link, nil]
-      end
     end
   end
 
