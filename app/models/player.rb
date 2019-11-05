@@ -23,7 +23,7 @@ class Player < ApplicationRecord
     player_nl1 player_nl2
     player_r player_s
     player_al1 player_al2
-    member/
+    honorary member/
   ROLES = PRINCIPLE_ROLES + OTHER_ROLES
   TITLES = %w/GM IM FM CM WGM WIM WFM WCM/
   RANK = ROLES.each_with_object({}).each_with_index{ |(r, h), i| h[r] = i }
