@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Blog do
-  let!(:blog) { create(:blog, draft: false, user: blogger) }
+  let!(:blog) { create(:blog, draft: false, user: blogger, pin: false) }
 
-  let(:data)    { build(:blog) }
+  let(:data)    { build(:blog, tag: "my_tag") }
   let(:blogger) { create(:user, roles: ["blogger"]) }
 
   before(:each) do
@@ -73,8 +73,7 @@ describe Blog do
 
       expect(page).to have_title t("blog.edit")
 
-      tag = "my_tag"
-      fill_in t("blog.tag"), with: tag
+      fill_in t("blog.tag"), with: data.tag
       check t("blog.pin")
       click_button t("save")
 
@@ -82,10 +81,10 @@ describe Blog do
 
       expect(Blog.count).to eq 1
       blog.reload
-      expect(blog.tag).to eq tag
+      expect(blog.tag).to eq data.tag
       expect(blog.pin).to eq true
 
-      visit blog_path(tag)
+      visit blog_path(data.tag)
       expect(page).to have_title blog.title
     end
 
