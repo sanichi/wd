@@ -178,39 +178,12 @@
     = t("blog.blogs")
     %ul
       %li keep blog summaries short
-      %li use relative URLs for internal links (see below)
-      %li use a target for external links (see below)
       %li use ½-½ for draws and not 0.5-0.5 or 1/2-1/2
       %li for match scores don't use decimals (e.g. prefer 3½-2½ to 3.5-2.5)
   %li
     = t("game.games")
     %ul
-      %li use ½-½ and not 0.5-0.5 in titles (obviously in PGN you must use 1/2-1/2)
-
-%h6 Use Relative URLs for Internal Links
-%p
-  In a news item you should link to other pages of this site with a relative URL.
-  For example, to link to game number 123 use something like this Markdown:
-%pre [this great game](/games/123)
-%p as opposed to this:
-%pre [this great game](https://wanderingdragonschess.club/games/123)
-%p
-  The reason is that this site has a second domain (www.wanderingdragonschess.club).
-  If a user signed in to one domain followed a link to the other one, they would
-  no longer be signed in. Using relative links keeps users on the same domain they
-  started on. Also, relative URLs are shorter to type.
-
-%h6 Use Targets for External Links
-%p
-  We want links to external pages to open a new tab in the user's browser instead
-  of replacing our site's page. The normal way to achieve this effect in HTML is
-  to add a target to the link but Markdown has no such feature (and note that, for
-  security, we don't allow users to insert fragments of HTML into Markdown).
-  However, we have customised our Markdown processor in the following way:
-  just add a pipe symbol (|) to the end of the URL as in this example:
-%pre [this great site](https://fide.com|)
-%p as opposed to this (which would lack a target):
-%pre [this great site](https://fide.com)
+      %li use ½-½ and not 0.5-0.5 or 1/2-1/2 in titles (PGN is different, there you must use 1/2-1/2)
 
 = help_section :todo
 
