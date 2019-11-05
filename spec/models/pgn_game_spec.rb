@@ -27,7 +27,11 @@ describe PgnGame do
       expect(PgnGame.clean(pgn(7,1, nlh: "\n\n"))).to eq pgn(7,1)
     end
 
-    it "no change to clean file" do
+    it "removes timestamps" do
+      expect(PgnGame.clean("1.e4 {[%clk 0:04:59]} c5 {[%clk 0:05:03]} 1/2-1/2")).to eq "1.e4 c5 1/2-1/2"
+    end
+
+    it "does not modify a clean file" do
       all_pgn_files.each do |pgn|
         expect(PgnGame.clean(pgn)).to eq pgn
       end
