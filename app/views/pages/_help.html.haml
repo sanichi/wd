@@ -126,6 +126,15 @@
     click
     %b= t("blog.markdown")
     (this button is in the bottom left and you need to be signed in to use it)
+%p
+  To link to another blog, first find out it's ID number and then
+  insert a link something like the following example:
+%pre
+  [this previous news item](/blogs/2)
+%p
+  Similarly, for a game, first find out its ID and then insert something like:
+%pre
+  [this great game](/games/3)
 
 = help_section :create_game
 
@@ -193,4 +202,5 @@
   %li Create an image collection and allow images to be added to blogs.
   %li Create a books collection.
   %li Allow game variations to be displayed.
+  %li Allow a game to be included in a blog.
   %li Automatically update player ratings by periodically scraping SCA and FIDE websites.
