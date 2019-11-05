@@ -63,15 +63,16 @@ class Blog < ApplicationRecord
   def normalize_attributes
     self.tag = nil if tag.blank?
     title&.squish!
-    summary&.strip!
-    summary&.gsub!(/\r\n/, "\n")
-    summary&.gsub!(/([^\S\n]*\n){2,}[^\S\n]*/, "\n\n")
-    if story.blank?
-      self.story = nil
-    else
-      story&.strip!
-      story.gsub!(/\r\n/, "\n")
-      story.gsub!(/([^\S\n]*\n){2,}[^\S\n]*/, "\n\n")
-    end
+    self.summary = clean(summary)
+    self.story = clean(story)
+  end
+
+  def clean(markdown)
+    return nil if markdown.blank?
+    markdown.strip!
+    markdown.gsub!(/\r\n/, "\n")
+    markdown.gsub!(/([^\S\n]*\n){2,}[^\S\n]*/, "\n\n")
+    markdown.gsub!(/\[([^\[]+)\]\(https?:\/\/(?:www\.)?wanderingdragonschess.club\/?(.*)\)/, "[\\1](/\\2)")
+    markdown
   end
 end
