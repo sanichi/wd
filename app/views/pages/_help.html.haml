@@ -1,16 +1,44 @@
 %h4= "Contents"
 
 %ul
+  %li= help_content :game_controls
   %li= help_content :get_login
   %li= help_content :create_news
   %li= help_content :create_game
   %li= help_content :house_style
+  %li= help_content :todo
+
+= help_section :game_controls
+
+%ul
+  %li
+    make a move with the
+    = t("game.controls.move")
+    button or right-arrow-key
+  %li
+    undo one move with the
+    = t("game.controls.undo")
+    button or left-arrow-key
+  %li
+    go to the end with the
+    = t("game.controls.end")
+    button or e-key
+  %li
+    go to the start with the
+    = t("game.controls.start")
+    button or s-key
+  %li
+    flip the board with the
+    = t("game.controls.flip")
+    button or o-key
+  %li
+    goto any position by clicking in the list of moves
 
 = help_section :get_login
 
 %p
   To become a registered user of the site you need to acquire a username and password
-  from the webmaster (whose contact details should be on the
+  from the webmaster (whose contact details will be on the
   = t("contact.contacts")
   page). The different types of users are as follows:
 %ul
@@ -28,8 +56,8 @@
     Manages the information we keep on our book collection.
   %li
     %b Administrator
-    Manages everything else (players, contacts, users) and
-    can edit or even delete any news item or game.
+    Manages everything else (players, contacts, users, images) and
+    can edit or delete any news item or game.
 
 = help_section :create_news
 
@@ -162,7 +190,7 @@
 %h6 Use Relative URLs for Internal Links
 %p
   In a news item you should link to other pages of this site with a relative URL.
-  For example to link to game number 123 use something like this Markdown:
+  For example, to link to game number 123 use something like this Markdown:
 %pre [this great game](/games/123)
 %p as opposed to this:
 %pre [this great game](https://wanderingdragonschess.club/games/123)
@@ -170,16 +198,24 @@
   The reason is that this site has a second domain (www.wanderingdragonschess.club).
   If a user signed in to one domain followed a link to the other one, they would
   no longer be signed in. Using relative links keeps users on the same domain they
-  started on.
+  started on. Also, relative URLs are shorter to type.
 
 %h6 Use Targets for External Links
 %p
   We want links to external pages to open a new tab in the user's browser instead
   of replacing our site's page. The normal way to achieve this effect in HTML is
   to add a target to the link but Markdown has no such feature (and note that, for
-  security, we don't allow users to insert fragments of HTML into the Markdown).
-  However, we have customised our Markdown processor to achieve this: just add
-  a pipe symbol (|) to the end of the URL as in this example:
+  security, we don't allow users to insert fragments of HTML into Markdown).
+  However, we have customised our Markdown processor in the following way:
+  just add a pipe symbol (|) to the end of the URL as in this example:
 %pre [this great site](https://fide.com|)
-%p as opposed to this:
+%p as opposed to this (which would lack a target):
 %pre [this great site](https://fide.com)
+
+= help_section :todo
+
+%p This site is under construction and there are some features still to implement.
+%ul
+  %li Create an image collection and allow images to be added to blogs.
+  %li Create a books collection.
+  %li Allow game variations to be displayed.

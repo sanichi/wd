@@ -2,12 +2,12 @@
   .row
     .offset-1
     .col-2.text-center
-      %span.control{"data-direction" => "<<"}= "⇤"
+      %span.control{"data-direction" => "<<"}= t("game.controls.start")
     .col-2.text-center
-      %span.control{"data-direction" => "<"}= "&nbsp;←&nbsp;".html_safe
+      %span.control{"data-direction" => "<"}= "&nbsp;#{t('game.controls.undo')}&nbsp;".html_safe
     .col-2.text-center
-      %span.control{"data-direction" => ">"}= "&nbsp;→&nbsp;".html_safe
+      %span.control{"data-direction" => ">"}= "&nbsp;#{t('game.controls.move')}&nbsp;".html_safe
     .col-2.text-center
-      %span.control{"data-direction" => ">>"}= "⇥"
+      %span.control{"data-direction" => ">>"}= t("game.controls.end")
     .col-2.text-center
-      %span.control{"data-direction" => "o"}= "↺"
+      %span.control{"data-direction" => "o"}= t("game.controls.flip")

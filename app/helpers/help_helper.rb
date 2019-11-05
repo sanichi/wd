@@ -1,9 +1,11 @@
 module HelpHelper
   SECTIONS = {
-    get_login:   "Get a Username and Password",
-    create_news: "Create a News Item",
-    create_game: "Create a Game",
-    house_style: "House Style",
+    game_controls: "Game Controls",
+    get_login:     "Register as a User",
+    create_news:   "Create a News Item",
+    create_game:   "Create a Game",
+    house_style:   "House Style",
+    todo:          "Todo",
   }
 
   def help_content(id)

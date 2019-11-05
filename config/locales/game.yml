@@ -10,6 +10,12 @@ en:
     show_moves: Show moves
     thing: 'Game «%{title}»'
     title: Title
+    controls:
+      end: ⇥
+      flip: ↺
+      move: →
+      start: ⇤
+      undo: ←
     difficulties:
       choose: Select for problems only
       easy: Easy
