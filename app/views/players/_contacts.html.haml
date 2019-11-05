@@ -12,7 +12,7 @@
       %tbody
         - players.each do |player|
           %tr
-            %td= player.name
+            %td= link_to_if !current_user.guest?, player.name, player
             %td= encrypted_mail_to(player.email)
             %td.d-none.d-sm-table-cell= player.phone
             %td.d-none.d-md-table-cell= player_roles(player.principle_roles)
