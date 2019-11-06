@@ -1,11 +1,16 @@
 - @books.matches.each do |book|
   %tr
     %td
-      = link_to book.title, book
+      = link_to book do
+        - if book.number_borrowed >= book.copies
+          %del= book.title
+        - else
+          = book.title
       - if book.note.present?
         = t("book.note_symbol")
-    %td= book.author
-    %td= t("book.categories.#{book.category}")
-    %td= t("book.media.#{book.medium}")
+    %td.d-none.d-md-table-cell= book.author
+    %td.d-none.d-sm-table-cell= t("book.categories.#{book.category}")
+    %td.d-none.d-sm-table-cell= t("book.media.#{book.medium}")
     %td.text-center= book.year
-= render "utils/pagination/links", pager: @books, columns: 5
+    %td.d-none.d-lg-table-cell= book.borrowers
+= render "utils/pagination/links", pager: @books, columns: 6

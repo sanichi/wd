@@ -7,12 +7,12 @@
       .float-right.small= link_to t("book.new"), new_book_path, class: "btn btn-info"
   .body
     = form_tag books_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
-      = label_tag :title, t("query"), class: "sr-only"
-      = text_field_tag :title, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
+      = label_tag :query, t("query"), class: "sr-only"
+      = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/"), size: 16
       = label_tag :year, t("book.year"), class: "sr-only"
-      = text_field_tag :year, params[:year], class: "form-control mr-1 mb-1", placeholder: t("book.year"), size: 10
+      = text_field_tag :year, params[:year], class: "form-control mr-1 mb-1", placeholder: t("book.year"), size: 5
       = label_tag :borrowers, t("book.borrowers"), class: "sr-only"
-      = text_field_tag :borrowers, params[:borrowers], class: "form-control mr-1 mb-1", placeholders: t("book.borrowers"), size: 10
+      = text_field_tag :borrowers, params[:borrowers], class: "form-control mr-1 mb-1", placeholder: t("book.borrowers"), size: 10
       = label_tag :category, t("book.category"), class: "sr-only"
       = select_tag :category, book_category_menu(params[:category], search: true), class: "form-control mr-1 mb-1 auto-submit"
       = label_tag :medium, t("book.medium"), class: "sr-only"
@@ -24,9 +24,10 @@
       %thead
         %tr
           %th= t("book.title")
-          %th= t("book.author")
-          %th= t("book.category")
-          %th= t("book.medium")
+          %th.d-none.d-md-table-cell= t("book.author")
+          %th.d-none.d-sm-table-cell= t("book.category")
+          %th.d-none.d-sm-table-cell= t("book.medium")
           %th.text-center= t("book.year")
+          %th.d-none.d-lg-table-cell= t("book.borrowers")
       %tbody#results
         = render "results", books: @books
