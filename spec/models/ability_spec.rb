@@ -5,147 +5,132 @@ describe Ability do
   subject(:ability) { Ability.new(user) }
   let(:user) { nil }
 
-  context "blogger" do
-    let(:user) { create(:user, roles: ["blogger"]) }
+  context "blog" do
+    let(:blogger) { create(:user, roles: ["blogger"]) }
+    let(:finished) { create(:blog, user: [blogger, nil].sample, draft: false) }
+    let(:draft) { create(:blog, user: [blogger, nil].sample, draft: true) }
 
-    context "blog" do
+    context "blogger" do
+      let(:user) { create(:user, roles: ["blogger"]) }
+
       context "same user" do
-        let(:blog) { create(:blog, user: user) }
+        let(:his_blog) { create(:blog, user: user) }
 
-        it { is_expected.to be_able_to(:read, blog) }
-        it { is_expected.to be_able_to(:crud, blog) }
+        it { is_expected.to be_able_to(:read, his_blog) }
+        it { is_expected.to be_able_to(:crud, his_blog) }
       end
 
       context "different or no user" do
-        let(:blogger) { create(:user, roles: ["blogger"]) }
 
         context "finished" do
-          let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
-
-          it { is_expected.to be_able_to(:read, blog) }
-          it { is_expected.to_not be_able_to(:crud, blog) }
+          it { is_expected.to be_able_to(:read, finished) }
+          it { is_expected.to_not be_able_to(:crud, finished) }
         end
 
         context "draft" do
-          let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
-
-          it { is_expected.to_not be_able_to(:read, blog) }
-          it { is_expected.to_not be_able_to(:crud, blog) }
+          it { is_expected.to_not be_able_to(:read, draft) }
+          it { is_expected.to_not be_able_to(:crud, draft) }
         end
       end
     end
 
-    context "game" do
+    %w/librarian member guest/.each do |role|
+      context role do
+        let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
+
+        context "finished" do
+          it { is_expected.to be_able_to(:read, finished) }
+          it { is_expected.to_not be_able_to(:crud, finished) }
+        end
+
+        context "draft" do
+          it { is_expected.to_not be_able_to(:read, draft) }
+          it { is_expected.to_not be_able_to(:crud, draft) }
+        end
+      end
+    end
+  end
+
+  context "game" do
+    let(:blogger) { create(:user, roles: ["blogger"]) }
+    let(:game) { create(:game, user: [blogger, nil].sample) }
+
+    context "blogger" do
+      let(:user) { create(:user, roles: ["blogger"]) }
 
       context "same user" do
-        let(:game) { create(:game, user: user) }
+        let(:his_game) { create(:game, user: user) }
 
-        it { is_expected.to be_able_to(:read, game) }
-        it { is_expected.to be_able_to(:crud, game) }
+        it { is_expected.to be_able_to(:read, his_game) }
+        it { is_expected.to be_able_to(:crud, his_game) }
       end
 
       context "different or no user" do
-        let(:blogger) { create(:user, roles: ["blogger"]) }
-        let(:game) { create(:game, user: [blogger, nil].sample) }
-
         it { is_expected.to be_able_to(:read, game) }
         it { is_expected.to_not be_able_to(:crud, game) }
       end
     end
 
-    context "user" do
-      it { is_expected.to be_able_to(:index, User) }
-      it { is_expected.to_not be_able_to(:show, user) }
-      it { is_expected.to_not be_able_to(:crud, user) }
-    end
+    %w/librarian member guest/.each do |role|
+      context role do
+        let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
 
-    context "player" do
-      it { is_expected.to be_able_to(:read, Player) }
-      it { is_expected.to_not be_able_to(:crud, Player) }
+        it { is_expected.to be_able_to(:read, game) }
+        it { is_expected.to_not be_able_to(:crud, game) }
+      end
     end
   end
 
-  context "member" do
-    let(:user) { create(:user, roles: ["member"]) }
+  context "book" do
+    let(:book) { create(:book) }
 
-    context "blog" do
-      let(:blogger) { create(:user, roles: ["blogger"]) }
+    context "librarian" do
+      let(:user) { create(:user, roles: ["librarian"]) }
 
-      context "finished" do
-        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
+      it { is_expected.to be_able_to(:read, book) }
+      it { is_expected.to be_able_to(:crud, book) }
+    end
 
-        it { is_expected.to be_able_to(:read, blog) }
-        it { is_expected.to_not be_able_to(:crud, blog) }
+    %w/blogger member guest/.each do |role|
+      context role do
+        let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
+
+        it { is_expected.to be_able_to(:read, book) }
+        it { is_expected.to_not be_able_to(:crud, book) }
       end
-
-      context "draft" do
-        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
-
-        it { is_expected.to_not be_able_to(:read, blog) }
-        it { is_expected.to_not be_able_to(:crud, blog) }
-      end
-    end
-
-    context "game" do
-      let(:blogger) { create(:user, roles: ["blogger"]) }
-      let(:game) { create(:game, user: [blogger, nil].sample) }
-
-      it { is_expected.to be_able_to(:read, game) }
-      it { is_expected.to_not be_able_to(:crud, game) }
-    end
-
-    context "user" do
-      it { is_expected.to be_able_to(:index, User) }
-      it { is_expected.to_not be_able_to(:show, user) }
-      it { is_expected.to_not be_able_to(:crud, user) }
-    end
-
-    context "player" do
-      it { is_expected.to be_able_to(:read, Player) }
-      it { is_expected.to_not be_able_to(:crud, Player) }
     end
   end
 
-  context "guest" do
-    let(:user) { Guest.new }
+  context "player" do
 
-    context "blog" do
-      let(:blogger) { create(:user, roles: ["blogger"]) }
+    %w/blogger librarian member guest/.each do |role|
+      context role do
+        let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
 
-      context "finished" do
-        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: false) }
-
-        it { is_expected.to be_able_to(:read, blog) }
-        it { is_expected.to_not be_able_to(:crud, blog) }
+        it { is_expected.to be_able_to(:read, Player) }
+        it { is_expected.to_not be_able_to(:crud, Player) }
       end
+    end
+  end
 
-      context "draft" do
-        let(:blog) { create(:blog, user: [blogger, nil].sample, draft: true) }
+  context "user" do
 
-        it { is_expected.to_not be_able_to(:read, blog) }
-        it { is_expected.to_not be_able_to(:crud, blog) }
+    %w/blogger librarian member/.each do |role|
+      context role do
+        let(:user) { create(:user, roles: [role]) }
+
+        it { is_expected.to be_able_to(:index, User) }
+        it { is_expected.to_not be_able_to(:show, user) }
+        it { is_expected.to_not be_able_to(:crud, User) }
       end
     end
 
-    context "game" do
-      let(:blogger) { create(:user, roles: ["blogger"]) }
-      let(:game) { create(:game, user: [blogger, nil].sample) }
-
-      it { is_expected.to be_able_to(:read, game) }
-      it { is_expected.to_not be_able_to(:crud, game) }
-    end
-
-    context "user" do
-      let(:other) { create(:user) }
+    context "guest" do
+      let(:user) { Guest.new }
 
       it { is_expected.to_not be_able_to(:index, User) }
-      it { is_expected.to_not be_able_to(:show, other) }
-      it { is_expected.to_not be_able_to(:crud, other) }
-    end
-
-    context "player" do
-      it { is_expected.to be_able_to(:read, Player) }
-      it { is_expected.to_not be_able_to(:crud, Player) }
+      it { is_expected.to_not be_able_to(:show, User) }
+      it { is_expected.to_not be_able_to(:crud, User) }
     end
   end
 end
