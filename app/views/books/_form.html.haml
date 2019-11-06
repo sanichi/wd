@@ -1,0 +1,12 @@
+:ruby
+  inputs = [
+    [:title,     t("book.title"),     :text,      autofocus: true],
+    [:author,    t("book.author"),    :text],
+    [:category,  t("book.category"),  :select,    menu: book_category_menu(book.category)],
+    [:medium,    t("book.medium"),    :select,    menu: book_medium_menu(book.medium)],
+    [:year,      t("book.year"),      :text],
+    [:copies,    t("book.copies"),    :text],
+    [:borrowers, t("book.borrowers"), :text],
+    [:note,      t("book.note"),      :text],
+  ]
+= render "utils/crud/form", object: book, index: books_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)

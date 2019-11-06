@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_181146) do
+ActiveRecord::Schema.define(version: 2019_11_06_135451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 2019_11_01_181146) do
     t.string "tag", limit: 25
     t.boolean "pin", default: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "author", limit: 60
+    t.string "borrowers", limit: 200
+    t.string "category", limit: 10
+    t.integer "copies", limit: 2, default: 1
+    t.string "medium", limit: 10, default: "book"
+    t.string "note", limit: 100
+    t.string "title", limit: 100
+    t.integer "year", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "games", force: :cascade do |t|

@@ -1,0 +1,11 @@
+- @books.matches.each do |book|
+  %tr
+    %td
+      = link_to book.title, book
+      - if book.note.present?
+        = t("book.note_symbol")
+    %td= book.author
+    %td= t("book.categories.#{book.category}")
+    %td= t("book.media.#{book.medium}")
+    %td.text-center= book.year
+= render "utils/pagination/links", pager: @books, columns: 5

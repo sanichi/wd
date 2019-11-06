@@ -1,0 +1,31 @@
+en:
+  book:
+    author: Authors
+    books: Books
+    borrowers: Borrowers
+    category: Category
+    copies: Copies
+    description: The Wandering Dragons chess book library, bequeathed by Eoin Campbell.
+    edit: Edit Book
+    keywords: book, chess, library, Eoin, Campbell
+    medium: Medium
+    new: New Book
+    note: Note
+    note_symbol: 📖
+    thing: 'Book «%{title}»'
+    title: Title
+    year: Year
+    categories:
+      biography: Biography
+      ending: Endings
+      game: Games
+      match: Matches
+      middle: Middlegames
+      opening: Openings
+      other: Other
+      puzzle: Puzzles
+      tournament: Tournaments
+      training: Training
+    media:
+      book: Book
+      cd: CD

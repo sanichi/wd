@@ -1,0 +1,35 @@
+- set_meta_tags title: @book.title
+
+.row
+  %div{class: center(xl: 6, lg: 8, md:10)}
+    %section
+      .header.text-center
+        %h5.d-inline= @book.title
+      .body
+        %table{class: "table table-bordered mt-3"}
+          %tbody
+            %tr
+              %th= t("book.author")
+              %td= @book.author
+            %tr
+              %th= t("book.category")
+              %td= t("book.categories.#{@book.category}")
+            %tr
+              %th= t("book.medium")
+              %td= t("book.media.#{@book.medium}")
+            %tr
+              %th= t("book.year")
+              %td= @book.year
+            %tr
+              %th= t("book.copies")
+              %td= @book.copies
+            %tr
+              %th= t("book.borrowers")
+              %td= @book.borrowers
+            %tr
+              %th= t("book.note")
+              %td= @book.note
+      - if can?(:edit, @game)
+        .footer
+          .small
+            = link_to t("edit"), edit_book_path(@book), class: "btn btn-info btn-sm"

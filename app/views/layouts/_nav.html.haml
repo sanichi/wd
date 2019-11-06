@@ -13,6 +13,7 @@
         = link_to t("other"), "#", class: "dropdown-toggle", id: "history-dropdown", "data-toggle" => "dropdown"
         .dropdown-menu
           = link_to t("blog.blogs"), blogs_path
+          = link_to t("book.books"), books_path
           - if can?(:index, User)
             = link_to t("user.users"), users_path
           - if can?(:index, Journal)

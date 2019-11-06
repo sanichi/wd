@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     get page => "pages##{page}"
   end
 
-  resource :session, only: [:new, :create, :destroy]
-
   resources :blogs
+  resources :books
   resources :games
   resources :players
   resources :users
 
+  resource :session, only: [:new, :create, :destroy]
   resources :journals, only: [:index]
 end

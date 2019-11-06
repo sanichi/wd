@@ -10,12 +10,17 @@ class Ability
     end
 
     can :read, Blog, draft: false
+    can :read, Book
     can :read, Game
     can :read, Player
 
     if user.blogger?
       can :crud, Blog, user_id: user.id
       can :crud, Game, user_id: user.id
+    end
+
+    if user.librarian?
+      can :crud, Book
     end
 
     if !user.guest?
