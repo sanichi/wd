@@ -32,14 +32,24 @@ Blog.where(draft: false).where(tag: nil).each do |b|
   urls("blogs/#{b.id}", b.updated_at.to_date, 0.8)
 end
 
+# Games
+urls("games", Game.pluck(:updated_at).max.to_date, 0.8, "weekly")
+Game.all.each do |g|
+  urls("games/#{g.id}", g.updated_at.to_date, 0.4)
+end
+
 # Players
-urls("players", Player.pluck(:updated_at).max.to_date, 0.9, "monthly")
+last_player = Player.pluck(:updated_at).max.to_date
+urls("players", last_player, 0.9, "monthly")
 Player.all.each do |p|
   urls("players/#{p.id}", p.updated_at.to_date, 0.8)
 end
 
+# Contacts
+urls("contacts", last_player, 0.9, "monthly")
+
 # Help
-urls("help", "2019-11-04", 0.5)
+urls("help", "2019-11-04", 0.7)
 
 # Sign in
 urls("signin", "2019-10-26", 0.2)
