@@ -45,6 +45,12 @@ Player.all.each do |p|
   urls("players/#{p.id}", p.updated_at.to_date, 0.8)
 end
 
+# Books
+urls("books", Book.pluck(:updated_at).max.to_date, 0.7, "monthly")
+Book.all.each do |b|
+  urls("books/#{b.id}", b.updated_at.to_date, 0.3)
+end
+
 # Contacts
 urls("contacts", last_player, 0.9, "monthly")
 
