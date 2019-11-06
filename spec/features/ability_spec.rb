@@ -8,6 +8,9 @@ describe Ability do
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
+    click_link t("book.books")
+    expect(page).to_not have_css "a", text: t("book.new")
+
     click_link t("game.games")
     expect(page).to_not have_css "a", text: t("game.new")
 
@@ -22,6 +25,28 @@ describe Ability do
 
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
+
+    click_link t("book.books")
+    expect(page).to_not have_css "a", text: t("book.new")
+
+    click_link t("game.games")
+    expect(page).to_not have_css "a", text: t("game.new")
+
+    click_link t("player.players")
+    expect(page).to_not have_css "a", text: t("players.new")
+
+    click_link t("user.users")
+    expect(page).to_not have_css "a", text: t("user.new")
+  end
+
+  it "librarian" do
+    login create(:user, roles: ["librarian"])
+
+    click_link t("blog.blogs")
+    expect(page).to_not have_css "a", text: t("blog.new")
+
+    click_link t("book.books")
+    click_link t("book.new")
 
     click_link t("game.games")
     expect(page).to_not have_css "a", text: t("game.new")
@@ -39,6 +64,9 @@ describe Ability do
     click_link t("blog.blogs")
     click_link t("blog.new")
 
+    click_link t("book.books")
+    expect(page).to_not have_css "a", text: t("book.new")
+
     click_link t("game.games")
     click_link t("game.new")
 
@@ -54,6 +82,9 @@ describe Ability do
 
     click_link t("blog.blogs")
     click_link t("blog.new")
+
+    click_link t("book.books")
+    click_link t("book.new")
 
     click_link t("game.games")
     click_link t("game.new")
