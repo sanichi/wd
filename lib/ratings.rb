@@ -1,7 +1,5 @@
 require 'mechanize'
 
-# Utilities.
-
 def update?(type, old, new, count=1)
   if old == new
     puts "  #{type} #{old} (no change)"
@@ -57,10 +55,6 @@ def sca_rating(id)
 end
 
 @agent = Mechanize.new
-
-#
-# Main program.
-#
 
 Player.by_rating.all.each do |p|
   puts p.name
