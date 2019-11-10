@@ -1,6 +1,7 @@
 module HelpHelper
   SECTIONS = {
     game_controls: "Game Controls",
+    book_search:   "Book Search",
     get_login:     "Register as a User",
     create_news:   "Create a News Item",
     create_game:   "Create a Game",

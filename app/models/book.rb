@@ -37,12 +37,14 @@ class Book < ApplicationRecord
     if sql = cross_constraint(params[:query], [:author, :title, :note])
       matches = matches.where(sql)
     end
+    if sql = numerical_constraint(params[:year], :year)
+      matches = matches.where(sql)
+    end
     if params[:borrowers]&.match?(/\A\s*ALL\s*\z/)
       matches = matches.where.not(borrowers: nil)
     elsif sql = cross_constraint(params[:borrowers], [:borrowers])
       matches = matches.where(sql)
     end
-    matches = matches.where(year: params[:year].to_i) if params[:year]&.match(/\A[12]\d{3}\z/)
     matches = matches.where(medium: params[:medium]) if params[:medium].present?
     matches = matches.where(category: params[:category]) if params[:category].present?
     paginate(matches, params, path, opt)

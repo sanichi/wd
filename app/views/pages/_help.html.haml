@@ -2,6 +2,7 @@
 
 %ul
   %li= help_content :game_controls
+  %li= help_content :book_search
   %li= help_content :get_login
   %li= help_content :create_news
   %li= help_content :create_game
@@ -33,6 +34,21 @@
     button or o-key
   %li
     go to any position by clicking in the list of moves
+
+= help_section :book_search
+
+%p
+  The search controls are fairly self-explanatory with the exception of:
+%ul
+  %li
+    %b= t("book.year")
+    As well as specifying an exact publication year (e.g. "2019") it is also possible to
+    specify ranges (e.g. "2000-2010"), or limits (e.g. ">2015" or "<=1996").
+  %li
+    %b= t("book.borrowers")
+    If the word "ALL" is entered here, then instead of searching for specific book
+    borrowers by name, this will match all borrowers (i.e. the result will be all
+    borrowed books).
 
 = help_section :get_login
 
@@ -202,4 +218,3 @@
   %li Create an image collection and allow images to be added to blogs.
   %li Allow game variations to be displayed.
   %li Allow a game to be included in a blog.
-  %li Automatically update player ratings.
