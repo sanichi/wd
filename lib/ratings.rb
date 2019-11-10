@@ -42,7 +42,7 @@ def fide_rating(id)
   be_nice
   begin
     page = @agent.get("https://ratings.fide.com/profile/#{id}")
-    rating = page.xpath('.//div[contains(@class,"profile-top-rating-dataCont")]/div[contains(@class,"profile-top-rating-data") and span="std"]/text()')[1].text.squish.to_i
+    rating = page.xpath('//div[contains(@class,"profile-top-rating-dataCont")]/div[contains(@class,"profile-top-rating-data") and span="std"]/text()')[1].text.squish.to_i
     raise "invalid rating #{rating}" unless rating > 0 && rating <= Player::MAX_RATING
     rating
   rescue StandardError => e
@@ -54,7 +54,7 @@ def sca_rating(id)
   be_nice
   begin
     page = @agent.get("https://www.chessscotland.com/players/#{id}/")
-    rating = page.xpath('(.//tr[td/p[text()="Published:"]])[1]/td[2]/center/p/text()')[0].text.squish.to_i
+    rating = page.xpath('(//tr[td/p[text()="Published:"]])[1]/td[2]/center/p/text()')[0].text.squish.to_i
     raise "invalid rating #{rating}" unless rating > 0 && rating <= Player::MAX_RATING
     rating
   rescue StandardError => e
