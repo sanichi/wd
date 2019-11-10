@@ -39,8 +39,8 @@ def be_nice
 end
 
 def fide_rating(id)
+  be_nice
   begin
-    be_nice
     page = @agent.get("https://ratings.fide.com/profile/#{id}")
     rating = page.xpath('.//div[contains(@class,"profile-top-rating-dataCont")]/div[contains(@class,"profile-top-rating-data") and span="std"]/text()')[1].text.squish.to_i
     raise "invalid rating #{rating}" unless rating > 0 && rating <= Player::MAX_RATING
@@ -51,10 +51,29 @@ def fide_rating(id)
 end
 
 def sca_rating(id)
-  rand(4000)
+  be_nice
+  begin
+    page = @agent.get("https://www.chessscotland.com/players/#{id}/")
+    rating = page.xpath('(.//tr[td/p[text()="Published:"]])[1]/td[2]/center/p/text()')[0].text.squish.to_i
+    raise "invalid rating #{rating}" unless rating > 0 && rating <= Player::MAX_RATING
+    rating
+  rescue StandardError => e
+    abort("SCA rating (ID #{id})", e.message)
+  end
 end
 
 @agent = Mechanize.new
+@agent.get("https://www.chessscotland.com/") do |page|
+  page.form_with(id: "login-form") do |f|
+    f.login_name = Rails.application.credentials.sca[:username]
+    f.login_password = Rails.application.credentials.sca[:password]
+  end.click_button
+  if @agent.cookies.any? { |c| c.name.match?(/\Awordpress_logged_in_/) }
+    puts "logged into Chess Scotland"
+  else
+    puts "** may not be logged into Chess Scotland **"
+  end
+end
 
 Player.by_rating.all.each do |p|
   puts p.name
@@ -65,7 +84,7 @@ Player.by_rating.all.each do |p|
     p.update_column(:fide_rating, new) if update?("FIDE", old, new)
   end
 
-  if p.sca_id.present? && p.sca_rating.present? && false
+  if p.sca_id.present? && p.sca_rating.present?
     old = p.sca_rating
     new = sca_rating(p.sca_id)
     p.update_column(:sca_rating, new) if update?("SCA", old, new)
