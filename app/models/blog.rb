@@ -5,17 +5,17 @@ class Blog < ApplicationRecord
 
   belongs_to :user, inverse_of: :blogs, optional: true
 
-  MAX_TAG = 25
+  MAX_SLUG = 25
   MAX_TITLE = 50
-  VALID_TAG = /\A[a-z][a-z0-9_]+\z/
+  VALID_SLUG = /\A[a-z][a-z0-9_]+\z/
 
   before_validation :normalize_attributes
 
   validates :summary, presence: true
   validates :title, presence: true, length: { maximum: MAX_TITLE }
-  validates :tag,
-    length: { maximum: MAX_TAG },
-    format: { with: VALID_TAG },
+  validates :slug,
+    length: { maximum: MAX_SLUG },
+    format: { with: VALID_SLUG },
     uniqueness: true,
     allow_nil: true
 
@@ -61,7 +61,7 @@ class Blog < ApplicationRecord
   private
 
   def normalize_attributes
-    self.tag = nil if tag.blank?
+    self.slug = nil if slug.blank?
     title&.squish!
     self.summary = clean(summary)
     self.story = clean(story)

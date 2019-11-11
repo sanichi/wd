@@ -8,8 +8,8 @@ class BlogsController < ApplicationController
   end
 
   def show
-    if params[:id].match(Blog::VALID_TAG)
-      @blog = Blog.find_by!(tag: params[:id])
+    if params[:id].match(Blog::VALID_SLUG)
+      @blog = Blog.find_by!(slug: params[:id])
     else
       @blog = Blog.find(params[:id])
     end
@@ -48,7 +48,7 @@ class BlogsController < ApplicationController
 
   def resource_params
     permitted = [:draft, :story, :summary, :title]
-    permitted.concat [:pin, :tag] if current_user.admin?
+    permitted.concat [:pin, :slug] if current_user.admin?
     params.require(:blog).permit(*permitted)
   end
 

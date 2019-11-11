@@ -18,9 +18,9 @@
             = link_to t("user.users"), users_path
           - if can?(:index, Journal)
             = link_to t("journal.journal"), journals_path
-          = render "blogs/blog_link", tag: "early_history"
-          = render "blogs/blog_link", tag: "club_championships"
-          = render "blogs/blog_link", tag: "team_titles"
+          = render "blogs/blog_link", slug: "early_history"
+          = render "blogs/blog_link", slug: "club_championships"
+          = render "blogs/blog_link", slug: "team_titles"
           = link_to t("help.help"), help_path
     %ul.right
       - unless controller_name == "sessions"

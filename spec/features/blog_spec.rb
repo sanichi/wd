@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Blog do
   let!(:blog) { create(:blog, draft: false, user: blogger, pin: false) }
 
-  let(:data)    { build(:blog, tag: "my_tag") }
+  let(:data)    { build(:blog, slug: "my_slug") }
   let(:blogger) { create(:user, roles: ["blogger"]) }
 
   before(:each) do
@@ -29,7 +29,7 @@ describe Blog do
       expect(b.story).to eq data.story
       expect(b.draft?).to eq data.draft
       expect(b.user).to eq blogger
-      expect(b.tag).to be_nil
+      expect(b.slug).to be_nil
       expect(b.pin).to eq false
     end
 
@@ -64,7 +64,7 @@ describe Blog do
       expect(blog.title).to eq data.title
     end
 
-    it "tag and pin (admin)" do
+    it "slug and pin (admin)" do
       click_link t("session.sign_out")
       login create(:user, roles: ["admin"])
       visit blogs_path
@@ -73,7 +73,7 @@ describe Blog do
 
       expect(page).to have_title t("blog.edit")
 
-      fill_in t("blog.tag"), with: data.tag
+      fill_in t("blog.slug"), with: data.slug
       check t("blog.pin")
       click_button t("save")
 
@@ -81,10 +81,10 @@ describe Blog do
 
       expect(Blog.count).to eq 1
       blog.reload
-      expect(blog.tag).to eq data.tag
+      expect(blog.slug).to eq data.slug
       expect(blog.pin).to eq true
 
-      visit blog_path(data.tag)
+      visit blog_path(data.slug)
       expect(page).to have_title blog.title
     end
 

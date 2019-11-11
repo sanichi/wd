@@ -14,7 +14,7 @@ en:
     pin: Pin
     story: Story
     summary: Summary
-    tag: Tag
+    slug: Slug
     thing: 'Blog «%{title}»'
     title: Title
     order:
