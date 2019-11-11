@@ -38,12 +38,17 @@ nav
       &.right
         @extend .ml-auto
 
-      li
+      &>li
         @extend .nav-item
 
-      a
-        @extend .nav-link
+        &>a
+          @extend .nav-link
 
+        .dropdown-menu
+          @extend .p-1
+
+          &>a
+            @extend .nav-link, .dropdown-item
 
 // Crud forms - adpated from Pragmatic Studio prepared files for Rails 6 course.
 
