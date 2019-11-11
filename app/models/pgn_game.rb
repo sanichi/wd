@@ -37,14 +37,16 @@ class PgnGame
     html = moves.each_with_index.map do |move, i|
       position = positions[i]
       white = position.player == :white
-      label = "#{position.fullmove}.#{white ? '' : '..'}" if show_label
+      number = position.fullmove
+      label = "#{number}.#{white ? '' : '..'}" if show_label
       show_label = !white
       notation = move.notation
       annotation = decode(move.annotation)
       comment = comment(move.comment)
+      variations = variations(move, number, white)
       sep = white ? " " : "\n"
-      %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s} %
-        [label, i + 1, notation, annotation, comment, sep]
+      %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s%s} %
+        [label, i + 1, notation, annotation, comment, variations, sep]
     end.join("")
     ("\n" + html.rstrip + "\n" + result + "\n").html_safe
   end
@@ -79,6 +81,19 @@ class PgnGame
     raw_comment = text.squish.sub(/\A\{\s*/, "").sub(/\s*\}\z/, "")
     safe_comment = Loofah.fragment(raw_comment).scrub!(:prune).to_s
     %Q[ <span class="comment">{ #{safe_comment} }</span>]
+  end
+
+  def variations(move, number, white)
+    return unless move.variations.is_a?(Array) && move.variations.length > 0
+    %Q[ <span class="comment">#{_variations(move.variations, number, white)}</span>]
+  end
+
+  def _variations(variations, number, white)
+    "( #{variations.map { |variation| _moves(variation, number, white, true) }.join('; ')} )"
+  end
+
+  def _moves(variation, number, white, show_label)
+    variation.class
   end
 
   def result
