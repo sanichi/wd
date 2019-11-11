@@ -30,8 +30,8 @@ en:
       captain_el1: A Team Captain
       captain_el2: B Team Captain
       captain_el3: C Team Captain
-      captain_nl1: SNCL 1 Captain
-      captain_nl2: SNCL 2 Captain
+      captain_nl1: SNCL A Captain
+      captain_nl2: SNCL B Captain
       captain_r: Richardson Captain
       captain_s: Spens Captain
       honorary: Honorary Member
@@ -41,8 +41,8 @@ en:
       player_el1: A Team
       player_el2: B Team
       player_el3: C Team
-      player_nl1: SNCL 1
-      player_nl2: SNCL 2
+      player_nl1: SNCL A
+      player_nl2: SNCL B
       player_r: Richardson
       player_s: Spens
       president: President
