@@ -1,4 +1,9 @@
-- set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
+:ruby
+  inputs = [
+    [:query, t("query"), :text_field, size: 16],
+    [:order, t("order"), :select,     menu: blog_order_menu(params[:order])],
+  ]
+  set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
 
 %section
   .header
@@ -6,12 +11,7 @@
     - if can?(:create, Blog)
       .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
   .body
-    = form_tag blogs_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
-      = label_tag :query, t("query"), class: "sr-only"
-      = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
-      = label_tag :order, t("order"), class: "sr-only"
-      = select_tag :order, blog_order_menu(params[:order]), class: "form-control mr-1 mb-1 auto-submit"
-      = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
+    = render "utils/search/form", index: blogs_path, inputs: inputs
     %table{class: "table table-bordered table-striped table-sm mt-3"}
       %thead
         %tr

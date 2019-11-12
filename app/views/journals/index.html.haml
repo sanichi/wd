@@ -1,4 +1,8 @@
-- set_meta_tags title: t("journal.journal")
+:ruby
+  inputs = [
+    [:query, t("query"), :text_field, size: 16],
+  ]
+  set_meta_tags title: t("journal.journal")
 
 .row
   %div{class: center(xl: 8, lg: 10, md: 12)}
@@ -6,10 +10,7 @@
       .header
         %h3.d-inline= t("journal.journal")
       .body
-        = form_tag journals_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
-          = label_tag :query, t("query"), class: "sr-only"
-          = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
-          = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
+        = render "utils/search/form", index: journals_path, inputs: inputs
         %table{class: "table table-bordered table-striped table-sm mt-3"}
           %thead
             %tr

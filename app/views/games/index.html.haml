@@ -1,4 +1,9 @@
-- set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
+:ruby
+  inputs = [
+    [:query,      t("query"),           :text_field, size: 16],
+    [:difficulty, t("game.difficulty"), :select,     menu: game_difficulty_menu(params[:difficulty], search: true)],
+  ]
+  set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
 
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
@@ -8,12 +13,7 @@
         - if can?(:create, Game)
           .float-right.small= link_to t("game.new"), new_game_path, class: "btn btn-info"
       .body
-        = form_tag games_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
-          = label_tag :query, t("query"), class: "sr-only"
-          = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: t("query"), size: 16
-          = label_tag :difficulty, t("game.difficulty"), class: "sr-only"
-          = select_tag :difficulty, game_difficulty_menu(params[:difficulty], search: true), class: "form-control mr-1 mb-1 auto-submit"
-          = button_tag t("search"), type: "submit", class: "btn btn-success mb-1"
+        = render "utils/search/form", index: games_path, inputs: inputs
         %table{class: "table table-bordered table-striped table-sm mt-3"}
           %thead
             %tr

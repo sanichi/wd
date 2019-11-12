@@ -1,4 +1,13 @@
-- set_meta_tags title: t("book.books"), description: t("book.description"), keywords: t("book.keywords")
+:ruby
+  inputs = [
+    [:query,     t("query"),          :text_field, size: 16, placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/")],
+    [:year,      t("book.year"),      :text_field, size: 6],
+    [:borrowers, t("book.borrowers"), :text_field, size: 10],
+    [:category,  t("book.category"),  :select,     menu: book_category_menu(params[:category], search: true)],
+    [:medium,    t("book.medium"),    :select,     menu: book_medium_menu(params[:medium], search: true)],
+    [:order,     t("order"),          :select,     menu: book_order_menu(params[:order])],
+  ]
+  set_meta_tags title: t("book.books"), description: t("book.description"), keywords: t("book.keywords")
 
 %section
   .header
@@ -6,20 +15,7 @@
     - if can?(:create, Book)
       .float-right.small= link_to t("book.new"), new_book_path, class: "btn btn-info"
   .body
-    = form_tag books_path, method: :get, remote: true, class: "form-inline justify-content-center mt-3" do
-      = label_tag :query, t("query"), class: "sr-only"
-      = text_field_tag :query, params[:query], class: "form-control mr-1 mb-1", placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/"), size: 16
-      = label_tag :year, t("book.year"), class: "sr-only"
-      = text_field_tag :year, params[:year], class: "form-control mr-1 mb-1", placeholder: t("book.year"), size: 5
-      = label_tag :borrowers, t("book.borrowers"), class: "sr-only"
-      = text_field_tag :borrowers, params[:borrowers], class: "form-control mr-1 mb-1", placeholder: t("book.borrowers"), size: 10
-      = label_tag :category, t("book.category"), class: "sr-only"
-      = select_tag :category, book_category_menu(params[:category], search: true), class: "form-control mr-1 mb-1 auto-submit"
-      = label_tag :medium, t("book.medium"), class: "sr-only"
-      = select_tag :medium, book_medium_menu(params[:medium], search: true), class: "form-control mr-1 mb-1 auto-submit"
-      = label_tag :order, t("order"), class: "sr-only"
-      = select_tag :order, book_order_menu(params[:order]), class: "form-control mr-1 mb-1 auto-submit"
-      = button_tag t("search"), type: "submit", class: "btn btn-success mr-1 mb-1"
+    = render "utils/search/form", index: books_path, inputs: inputs
     %table{class: "table table-bordered table-striped table-sm mt-3"}
       %thead
         %tr
