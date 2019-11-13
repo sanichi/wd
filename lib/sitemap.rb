@@ -23,12 +23,12 @@ puts %Q(<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">)
 last_blog = Blog.pluck(:updated_at).max.to_date
 urls("", last_blog, 1.0, "weekly")
 
-# Blogs, first those with tags and then the others.
+# Blogs, first those with slugs and then the others.
 urls("blogs", last_blog, 0.9, "weekly")
-Blog.where(draft: false).where.not(tag: nil).each do |b|
-  urls("blogs/#{b.tag}", b.updated_at.to_date, 0.9)
+Blog.where(draft: false).where.not(slug: nil).each do |b|
+  urls("blogs/#{b.slug}", b.updated_at.to_date, 0.9)
 end
-Blog.where(draft: false).where(tag: nil).each do |b|
+Blog.where(draft: false).where(slug: nil).each do |b|
   urls("blogs/#{b.id}", b.updated_at.to_date, 0.8)
 end
 
