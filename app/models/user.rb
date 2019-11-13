@@ -6,6 +6,7 @@ class User < ApplicationRecord
   MAX_ROLE = 20
   MIN_HANDLE = 2
   MIN_PASSWORD = 10
+  VALID_HANDLE = /\A[A-Z]+\z/
   ROLES = %w/guest member blogger librarian admin/.each do |role|
     define_method "#{role}?" do
       roles.include?(role)
@@ -19,7 +20,7 @@ class User < ApplicationRecord
   before_validation :normalize_attributes
 
   validates :handle,
-    format: { with: /\A[A-Z]+\z/, message: "is invalid (all caps)"},
+    format: { with: VALID_HANDLE, message: "is invalid (all caps)"},
     length: { minimum: MIN_HANDLE, maximum: MAX_HANDLE },
     uniqueness: true
   validates :first_name, format: { with: /\A[A-Z][a-z]+\z/ }

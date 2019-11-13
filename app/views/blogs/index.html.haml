@@ -3,6 +3,9 @@
     [:query, t("query"), :text_field, size: 16],
     [:order, t("order"), :select,     menu: blog_order_menu(params[:order])],
   ]
+  unless current_user.guest?
+    inputs.insert 1, [:user_id, t("blog.author"), :select, menu: blog_user_menu(params[:user_id])]
+  end
   set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
 
 %section

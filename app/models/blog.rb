@@ -37,6 +37,9 @@ class Blog < ApplicationRecord
     if sql = cross_constraint(params[:query], %w{title summary story})
       matches = matches.where(sql)
     end
+    if (user_id = params[:user_id].to_i) > 0
+      matches = matches.where(user_id: user_id)
+    end
     paginate(matches, params, path, opt)
   end
 
