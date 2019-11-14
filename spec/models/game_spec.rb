@@ -10,6 +10,7 @@ describe Game do
         b_h_wood:          "White to play and mate in 4",
         e_allen:           "White to play and win",
         kasas_debarnot:    "Black to play and win",
+        atakhan_gholami:   "White to play and mate in 2",
       }.each do | name, title |
         expect(Game.create!(pgn: pgn_file("#{name}.pgn")).title).to eq title
       end

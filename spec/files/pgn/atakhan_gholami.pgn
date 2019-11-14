@@ -1,0 +1,13 @@
+[Event "Iranian Ch"]
+[Site "?"]
+[Date "2019.??.??"]
+[Round "?"]
+[White "Atakhan"]
+[Black "Gholami Orimi"]
+[Result "1-0"]
+[FEN "r2q4/1p3pk1/p2n1n1p/2pP2p1/P7/5QN1/1P3PPP/1B2R1K1 w - - 0 22"]
+[SetUp "1"]
+[WhiteElo "2314"]
+[BlackElo "2437"]
+
+22.Qxf6+ Kxf6 ( 1...Qxf6 2.Nh5+ ) 23.Nh5# 1-0
