@@ -7,6 +7,7 @@ describe Game do
         lee_orr:           "Lee, C. - Orr, M., Largs Open, 1998, 0-1",
         zaitsev_karpov:    "Igor Zaitsev - Anatoly Karpov, Masters-Candidate Masters, 196...",
         vaganian_pogonina: "Vaganian,R - Pogonina,N, Snowdrops vs Oldhands, 2011, 1-0",
+        jansa_marovic:     "White to play and win",
         b_h_wood:          "White to play and mate in 4",
         e_allen:           "White to play and win",
         kasas_debarnot:    "Black to play and win",
