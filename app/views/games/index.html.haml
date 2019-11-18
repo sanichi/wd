@@ -22,9 +22,7 @@
             - @games.matches.each do |game|
               %tr
                 %td.p-2
+                  = link_to title_and_difficulty(game), game
                   - if game.difficulty
-                    %p.mt-1.text-center= link_to title_and_difficulty(game), game
-                    %div{id: "board_#{game.id}"}
-                  - else
-                    = link_to title_and_difficulty(game), game
+                    %div.mt-2{id: "board_#{game.id}"}
             = render "utils/pagination/links", pager: @games, columns: 1
