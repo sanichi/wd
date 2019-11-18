@@ -24,7 +24,7 @@ describe Game do
         expect(page).to have_title data.title
 
         expect(Game.count).to eq 2
-        g = Game.order(:created_at).last
+        g = Game.first
         expect(g.pgn).to eq data.pgn
         expect(g.title).to eq data.title
         expect(g.difficulty).to be_nil
@@ -37,7 +37,7 @@ describe Game do
         click_button t("save")
 
         expect(Game.count).to eq 2
-        g = Game.order(:created_at).last
+        g = Game.first
         expect(g.pgn).to eq data.pgn
         expect(g.title).to be_present
         expect(g.difficulty).to be_nil
@@ -50,7 +50,7 @@ describe Game do
         click_button t("save")
 
         expect(Game.count).to eq 2
-        g = Game.order(:created_at).last
+        g = Game.first
         expect(g.pgn).to eq prob.pgn
         expect(g.title).to be_present
         expect(g.difficulty).to eq prob.difficulty
@@ -62,7 +62,7 @@ describe Game do
         click_button t("save")
 
         expect(Game.count).to eq 2
-        g = Game.order(:created_at).last
+        g = Game.first
         expect(g.pgn).to eq prob.pgn
         expect(g.title).to be_present
         expect(g.difficulty).to eq "easy"
