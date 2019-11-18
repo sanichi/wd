@@ -5,6 +5,9 @@
   ]
   set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
 
+= content_for :javascript do
+  = render "boards.js"
+
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
     %section
@@ -13,10 +16,15 @@
         - if can?(:create, Game)
           .float-right.small= link_to t("game.new"), new_game_path, class: "btn btn-info"
       .body
-        = render "utils/search/form", index: games_path, inputs: inputs
-        %table{class: "table table-bordered table-striped table-sm mt-3"}
-          %thead
-            %tr
-              %th= t("game.title")
-          %tbody#results
-            = render "results", games: @games
+        = render "utils/search/form", index: games_path, inputs: inputs, remote: false
+        %table.table-bordered.mt-3.ml-auto.mr-auto
+          %tbody
+            - @games.matches.each do |game|
+              %tr
+                %td.p-2
+                  - if game.difficulty
+                    %p.mt-1.text-center= link_to title_and_difficulty(game), game
+                    %div{id: "board_#{game.id}"}
+                  - else
+                    = link_to title_and_difficulty(game), game
+            = render "utils/pagination/links", pager: @games, columns: 1

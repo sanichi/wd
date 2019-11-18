@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @games = Game.search(@games, params, games_path, remote: true, per_page: 10)
+    @games = Game.search(@games, params, games_path, per_page: 10)
   end
 
   def create

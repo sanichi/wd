@@ -1,0 +1,23 @@
+$(function() {
+
+  var boards = [];
+
+<% @games.matches.select{ |g| g.fen.present? && g.fen != PGN::FEN::INITIAL }.each do |game| %>
+  boards.push(Chessboard("board_<%= game.id %>", {
+    showNotation: false,
+    position: "<%= game.fen %>",
+    orientation: '<%= game.to_play %>',
+  }));
+
+  $("#board_<%= game.id %>").click(function() {
+    window.location.href = "/games/<%= game.id %>";
+  });
+
+<% end %>
+  $(window).resize(function() {
+    $.each(boards, function(i, board) {
+      board.resize();
+    });
+  });
+
+});

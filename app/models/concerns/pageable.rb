@@ -76,14 +76,14 @@ module Pageable
       "_" + ids.join("_") + "_"
     end
 
-    def page_path(extra={})
-      @path + "?" + merge_params(extra)
+    def page_path(opts={})
+      @path + "?" + merge_params(opts)
     end
 
     private
 
-    def merge_params(extra)
-      params = @params.merge(extra)
+    def merge_params(opts)
+      params = @params.merge(opts)
       params[:page] ||= @page
       params.to_unsafe_h.to_query
     end

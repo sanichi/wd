@@ -16,6 +16,8 @@ class Game < ApplicationRecord
   validates :title, presence: { message: "could not be guessed" }, length: { maximum: MAX_TITLE }
   validate :check_pgn
 
+  default_scope { order(updated_at: :desc) }
+
   def self.search(matches, params, path, opt={})
     matches = matches.includes(:user)
     if params[:difficulty] == "games"
@@ -33,6 +35,18 @@ class Game < ApplicationRecord
 
   def study?
     difficulty.present?
+  end
+
+  def fen
+    @fen ||= pgn.match(/\[FEN\s+"([^"]+)"\s*\]/) ? $1 : ""
+  end
+
+  def to_play
+    if fen.present?
+      fen.match?(/ w /) ? "white" : "black"
+    else
+      "white"
+    end
   end
 
   def to_s # for rspec tests
