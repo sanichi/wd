@@ -29,7 +29,7 @@ class PgnGame
     !@game.nil?
   end
 
-  def html(id)
+  def html
     return unless okay?
     moves = @game.moves
     positions= @game.positions
@@ -41,8 +41,8 @@ class PgnGame
       label = "#{number}.#{white ? '' : '..'}" if show_label
       notation = move.notation
       annotation = decode(move.annotation)
-      comment = comment(move.comment, span: true)
-      variations = variations(move, number, white)
+      comment = comment(move.comment, top_level: true)
+      variations = variations(move, number, white, top_level: true)
       show_label = !white || comment || variations
       sep = white ? " " : "\n"
       %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s%s} %
@@ -53,20 +53,30 @@ class PgnGame
 
   private
 
-  def variations(move, number, white)
-    return unless check?(move.variations)
-    %Q[ <span class="comment">#{reduce(move.variations, number, white, start: true)}</span>]
+  def comment(text, top_level: false)
+    return if text.blank?
+    raw_comment = text.squish.sub(/\A\{\s*/, "").sub(/\s*\}\z/, "")
+    safe_comment = Loofah.fragment(raw_comment).scrub!(:prune).to_s
+    return " #{safe_comment}" unless top_level
+    ' <span class="comment">{ %s }</span>' % safe_comment
   end
 
-  def reduce(variations, number, white, start: false)
-    move = variations[0].pop
-    variations.shift if move.nil?
-    finish = variations.empty?
-    parts = []
-    parts.push start ? "( " : ""
-    parts.push move ? text(move, number, white, start || white) : (finish ? "" : "; ")
-    parts.push finish ? ") " : reduce(variations, number + (white ? 0 : 1), !white)
-    parts.join("")
+  def variations(move, number, white, top_level: false)
+    return unless check?(move.variations)
+    vars = combine(move.variations, number, white)
+    return " #{vars}" unless top_level
+    ' <span class="comment">%s</span>' % vars
+  end
+
+  def combine(variations, number, white)
+    "( #{variations.map { |v| reduce(v, number, white, start: true) }.reverse.join('; ')})"
+  end
+
+  def reduce(variation, number, white, start: false)
+    return "" if variation.empty?
+    move, restart = text(variation.pop, number, white, start || white)
+    rest = reduce(variation, number + (white ? 0 : 1), !white, start: restart)
+    move + rest
   end
 
   def text(move, number, white, show_label)
@@ -74,7 +84,9 @@ class PgnGame
     notation = move.notation
     annotation = decode(move.annotation)
     comment = comment(move.comment)
-    "#{label}#{notation}#{annotation}#{comment} "
+    variations = variations(move, number, white)
+    restart = comment.present? || variations.present?
+    ["#{label}#{notation}#{annotation}#{comment}#{variations} ", restart]
   end
 
   def decode(nag)
@@ -100,17 +112,6 @@ class PgnGame
     end
   end
 
-  def comment(text, span: false)
-    return nil if text.blank?
-    raw_comment = text.squish.sub(/\A\{\s*/, "").sub(/\s*\}\z/, "")
-    safe_comment = Loofah.fragment(raw_comment).scrub!(:prune).to_s
-    if span
-      %Q[ <span class="comment">{ #{safe_comment} }</span>]
-    else
-      " " + safe_comment
-    end
-  end
-
   def result
     val = @game.result
     val = "½-½" if val == "1/2-1/2"
@@ -122,7 +123,8 @@ class PgnGame
     return false if variations.empty?
     variations.each do |variation|
       return false unless variation.is_a?(Array)
-      variation.each { |m| return false unless m.is_a?(PGN::MoveText) }
+      return false if variation.empty?
+      variation.each { |move| return false unless move.is_a?(PGN::MoveText) }
     end
     return true
   end

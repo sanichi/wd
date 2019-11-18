@@ -40,7 +40,7 @@ class Game < ApplicationRecord
   end
 
   def moves
-    PgnGame.new(pgn).html(id)
+    PgnGame.new(pgn).html
   end
 
   private

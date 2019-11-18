@@ -1,0 +1,15 @@
+[Event "Halle"]
+[Site "?"]
+[Date "1967.??.??"]
+[Round "?"]
+[White "Zinn"]
+[Black "Minev"]
+[Result "0-1"]
+[FEN "6rk/5p1p/p4P2/1pbn2r1/3P3R/1PB4Q/PKP2R1P/6q1 b - - 0 1"]
+[SetUp "1"]
+
+1...Ba3+ 2.Kxa3 b4+ $1 ( 2...Qc1+ $2 3.Bb2 b4+ 4.Ka4 Nb6+ 5.Kxb4 Rb5+ (
+5...Qe1+ 6.c3 ) 6.Kc3 $1 ( 6.Ka3 $2 Nc4+ ) ) 3.Ka4 ( 3.Kb2 bxc3+ 4.Ka3 Qc1+
+5.Ka4 Nb6+ 6.Kb4 a5+ 7.Kxc3 Rg3+ $3 8.hxg3 Qe3+ 9.Kb2 Nc4+ 10.bxc4 Rb8+
+11.Ka1 Qc1# ) ( 3.Bxb4 Qc1+ 4.Ka4 Nb6# ) 3...Nb6+ 4.Kxb4 Rb5+ 5.Ka3 Qc1+
+6.Bb2 Nc4+ 0-1
