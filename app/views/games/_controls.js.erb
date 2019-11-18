@@ -51,7 +51,9 @@ $(function() {
         break;
       case 79: // 'o' meaning rotate board
         game.flip();
-        highlight_current();
+        break;
+      case 77: // 'm' meaning show moves
+        if (study) $('#show_moves').trigger('click');
         break;
     }
   });
