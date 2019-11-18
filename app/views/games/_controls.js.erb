@@ -1,7 +1,7 @@
 $(function() {
 
   // for displaying the game
-  var game = new Game("<%= j @game.pgn.html_safe %>", 'board');
+  var game = new Game("<%= j @game.pgn.html_safe %>", '<%= @game.orientation %>', 'board')
   var study = <%= @game.study? ? 'true' : 'false' %>;
 
   // button controls

@@ -1,4 +1,4 @@
-var Game = function(pgn, id) {
+var Game = function(pgn, orientation, id) {
 
   var moves = [];
   var current_move = 0;
@@ -12,7 +12,7 @@ var Game = function(pgn, id) {
   var board = Chessboard(id, {
     showNotation: false,
     position: chess.fen(),
-    orientation: chess.turn() == 'w' ? 'white' : 'black',
+    orientation: orientation,
   });
 
   function get_moves()

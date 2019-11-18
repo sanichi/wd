@@ -41,11 +41,27 @@ class Game < ApplicationRecord
     @fen ||= pgn.match(/\[FEN\s+"([^"]+)"\s*\]/) ? $1 : ""
   end
 
+  def result
+    @result ||= pgn.match(/\[Result\s+"([^"]+)"\s*\]/) ? $1 : ""
+  end
+
   def to_play
     if fen.present?
       fen.match?(/ w /) ? "white" : "black"
     else
       "white"
+    end
+  end
+
+  def orientation
+    if difficulty
+      to_play
+    else
+      if result == "0-1"
+        "black"
+      else
+        "white"
+      end
     end
   end
 
@@ -70,7 +86,7 @@ class Game < ApplicationRecord
     elsif @game
       title = nil
       if problem?
-        r = result
+        r = pgn_result
         if player == :white
           if r == "1-0" && mate?
             title = "White to play and mate in #{number_of_moves}"
@@ -85,7 +101,7 @@ class Game < ApplicationRecord
           end
         end
       else
-        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), result
+        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), pgn_result
         if w && b
           title = "#{w} - #{b}"
           title+= ", #{e}" if e
@@ -119,7 +135,7 @@ class Game < ApplicationRecord
     $1
   end
 
-  def result
+  def pgn_result
     val = @game.result
     return unless val.present?
     val = "½-½" if val == "1/2-1/2"

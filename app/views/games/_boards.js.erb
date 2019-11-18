@@ -6,7 +6,7 @@ $(function() {
   boards.push(Chessboard("board_<%= game.id %>", {
     showNotation: false,
     position: "<%= game.fen %>",
-    orientation: '<%= game.to_play %>',
+    orientation: '<%= game.orientation %>',
   }));
 
   $("#board_<%= game.id %>").click(function() {
