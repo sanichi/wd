@@ -10,7 +10,7 @@
         %h5.d-inline= title_and_difficulty(@game)
       .body.pb-0
         .row
-          %div{class: center(sm: 6, xs: 8)}
+          %div{class: center(md: 6, sm: 8, xs: 10)}
             #board.mb-3
             = render "controls.html.haml"
       - if @game.study?
