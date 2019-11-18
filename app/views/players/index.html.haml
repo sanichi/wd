@@ -1,6 +1,6 @@
 :ruby
   inputs = [
-    [:name,  t("player.name"),  :text_field, size: 10],
+    [:name,  t("player.name"),  :text_field, size: 10, value: params[:name]],
     [:role,  t("player.roles"), :select,     menu: player_role_menu(params[:role], search: true)],
     [:order, t("order"),        :select,     menu: player_order_menu(params[:order])],
   ]

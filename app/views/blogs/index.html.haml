@@ -1,6 +1,6 @@
 :ruby
   inputs = [
-    [:query, t("query"), :text_field, size: 16],
+    [:query, t("query"), :text_field, size: 16, value: params[:query]],
     [:order, t("order"), :select,     menu: blog_order_menu(params[:order])],
   ]
   unless current_user.guest?

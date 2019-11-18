@@ -6,6 +6,7 @@ en:
   created_by: 'Created by %{name}'
   delete: Delete
   edit: Edit
+  no_matches: No matches
   none: None
   order: Order
   other: Other
