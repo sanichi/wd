@@ -16,7 +16,7 @@ class Game < ApplicationRecord
   validates :title, presence: { message: "could not be guessed" }, length: { maximum: MAX_TITLE }
   validate :check_pgn
 
-  default_scope { order(updated_at: :desc) }
+  default_scope { order(created_at: :desc) }
 
   def self.search(matches, params, path, opt={})
     matches = matches.includes(:user)
