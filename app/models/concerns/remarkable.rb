@@ -9,6 +9,20 @@ module Remarkable
       html += %Q(>#{content}</a>)
       html
     end
+
+    def image(link, title, alt)
+      link.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
+      width = title&.match(/([1-9]\d*(?:px|%)?)/) ? $1 : "200px"
+      klass = "rounded "
+      if title&.match?(/R/)
+        klass += "float-right"
+      elsif title&.match?(/L/)
+        klass += " float-left"
+      else
+        klass += "mx-auto d-block mt-3 mb-3"
+      end
+      %Q(<img src="#{link}" alt="#{alt}" class="#{klass}" width="#{width}">)
+    end
   end
 
   def to_html(text, filter_html: true)
