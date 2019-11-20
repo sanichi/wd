@@ -101,9 +101,9 @@ class Game < ApplicationRecord
           end
         end
       else
-        w, b, e, y, r = tag("White"), tag("Black"), tag("Event"), year("Date"), pgn_result
+        w, b, e, y, r = surname("White"), surname("Black"), tag("Event"), year("Date"), pgn_result
         if w && b
-          title = "#{w} - #{b}"
+          title = "#{w}-#{b}"
           title+= ", #{e}" if e
           title+= ", #{y}" if y
           title+= ", #{r}" if r
@@ -126,6 +126,19 @@ class Game < ApplicationRecord
     return unless val.present?
     return unless val.match(/[a-z]/i)
     val.squish
+  end
+
+  def surname(colour)
+    name = tag(colour)
+    if name.nil? || name.match?(/\A\s*\??\s*\z/)
+      "Unknown"
+    elsif name.match(/\A([^,]+),[^,]+\z/)
+      $1.squish
+    elsif name.match(/\A[^,]+\s([^,\s]+)\z/)
+      $1.squish
+    else
+      name.squish
+    end
   end
 
   def year(name)
