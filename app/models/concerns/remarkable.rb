@@ -16,9 +16,9 @@ module Remarkable
       width = title&.match(/([1-9]\d*(?:px|%)?)/) ? $1 : "200px"
       klass = "rounded "
       if title&.match?(/R/)
-        klass += "float-right"
+        klass += "float-right ml-3"
       elsif title&.match?(/L/)
-        klass += " float-left"
+        klass += " float-left mr-3"
       else
         klass += "mx-auto d-block mt-3 mb-3"
       end
