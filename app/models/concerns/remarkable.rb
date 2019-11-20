@@ -12,6 +12,7 @@ module Remarkable
 
     def image(link, title, alt)
       link.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
+      link = "/img/photos/#{link}" unless link.match?(/\//)
       width = title&.match(/([1-9]\d*(?:px|%)?)/) ? $1 : "200px"
       klass = "rounded "
       if title&.match?(/R/)
