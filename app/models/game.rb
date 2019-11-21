@@ -4,7 +4,7 @@ class Game < ApplicationRecord
 
   belongs_to :user, inverse_of: :games, optional: true
 
-  DIFFICULTIES = %w/easy medium hard/;
+  DIFFICULTIES = %w/easy medium hard/
   MAX_DIFFICULTY = 10
   MAX_TITLE = 64
   MAX_PGN = 10000

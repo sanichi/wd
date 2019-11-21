@@ -11,13 +11,19 @@ module Remarkable
     end
 
     def image(link, title, alt)
-      link.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
-      link = "/img/photos/#{link}" unless link.match?(/\//)
-      width = title&.match(/([1-9]\d*(?:px|%)?)/) ? $1 : "200px"
+      link&.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
+      link = "/img/photos/#{link}" unless link&.match?(/\//)
+      if title&.match(/([1-9]\d*)%/) && $1.to_i <= 100 && $1.to_i >= 10
+        width = "#{$1}%"
+      elsif title&.match(/([1-9]\d*)/) && $1.to_i <= 300 && $1.to_i >= 100
+        width = "#{$1}px"
+      else
+        width = "200px"
+      end
       klass = "rounded "
-      if title&.match?(/R/)
+      if title&.match?(/R/i)
         klass += "float-right ml-3"
-      elsif title&.match?(/L/)
+      elsif title&.match?(/L/i)
         klass += " float-left mr-3"
       else
         klass += "mx-auto d-block mt-3 mb-3"

@@ -4,12 +4,13 @@ module HelpHelper
     book_search:   "Book Search",
     get_login:     "Register as a User",
     create_news:   "Create a News Item",
+    add_image:     "Add an Image",
     create_game:   "Create a Game",
     house_style:   "House Style",
     todo:          "Todo",
   }
 
-  def help_content(id)
+  def help_link(id)
     _check(id)
     %Q{<a href="##{id}">#{SECTIONS[id]}</a>}.html_safe
   end
