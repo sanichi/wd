@@ -1,5 +1,6 @@
 - defined?(updated) || updated = true
-- if object.user.present?
+
+- if object.user.present? && !current_user.guest?
   = t("created_by", name: object.user.handle)
 - else
   = t("created")
