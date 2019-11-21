@@ -20,7 +20,7 @@ module Remarkable
       else
         width = "200px"
       end
-      klass = "rounded "
+      klass = "styled "
       if title&.match?(/R/i)
         klass += "float-right ml-3"
       elsif title&.match?(/L/i)
