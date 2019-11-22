@@ -1,13 +1,8 @@
 # Helpers
-def urls(path, date, priority, freq="yearly")
-  url("", path, date, priority, freq)
-  url("www.", path, date, priority, freq)
-end
-
-def url(dom, path, date, priority, freq)
+def url(path, date, priority, freq="yearly")
   puts <<-EOL
   <url>
-    <loc>https://#{dom}wanderingdragonschess.club/#{path}</loc>
+    <loc>https://wanderingdragonschess.club/#{path}</loc>
     <lastmod>#{date}</lastmod>
     <changefreq>#{freq}</changefreq>
     <priority>#{priority}</priority>
@@ -21,44 +16,44 @@ puts %Q(<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">)
 
 # Home page
 last_blog = Blog.pluck(:updated_at).max.to_date
-urls("", last_blog, 1.0, "weekly")
+url("", last_blog, 1.0, "weekly")
 
 # Blogs, first those with slugs and then the others.
-urls("blogs", last_blog, 0.9, "weekly")
+url("blogs", last_blog, 0.9, "weekly")
 Blog.where(draft: false).where.not(slug: nil).each do |b|
-  urls("blogs/#{b.slug}", b.updated_at.to_date, 0.9)
+  url("blogs/#{b.slug}", b.updated_at.to_date, 0.9)
 end
 Blog.where(draft: false).where(slug: nil).each do |b|
-  urls("blogs/#{b.id}", b.updated_at.to_date, 0.8)
+  url("blogs/#{b.id}", b.updated_at.to_date, 0.8)
 end
 
 # Games
-urls("games", Game.pluck(:updated_at).max.to_date, 0.8, "weekly")
+url("games", Game.pluck(:updated_at).max.to_date, 0.8, "weekly")
 Game.all.each do |g|
-  urls("games/#{g.id}", g.updated_at.to_date, 0.4)
+  url("games/#{g.id}", g.updated_at.to_date, 0.4)
 end
 
 # Players
 last_player = Player.pluck(:updated_at).max.to_date
-urls("players", last_player, 0.9, "monthly")
+url("players", last_player, 0.9, "monthly")
 Player.all.each do |p|
-  urls("players/#{p.id}", p.updated_at.to_date, 0.8)
+  url("players/#{p.id}", p.updated_at.to_date, 0.8)
 end
 
 # Books
-urls("books", Book.pluck(:updated_at).max.to_date, 0.7, "monthly")
+url("books", Book.pluck(:updated_at).max.to_date, 0.7, "monthly")
 Book.all.each do |b|
-  urls("books/#{b.id}", b.updated_at.to_date, 0.3)
+  url("books/#{b.id}", b.updated_at.to_date, 0.3)
 end
 
 # Contacts
-urls("contacts", last_player, 0.9, "monthly")
+url("contacts", last_player, 0.9, "monthly")
 
 # Help
-urls("help", "2019-11-04", 0.7)
+url("help", "2019-11-04", 0.7)
 
 # Sign in
-urls("signin", "2019-10-26", 0.2)
+url("signin", "2019-10-26", 0.2)
 
 # Finish XML
 puts %Q(</urlset>)
