@@ -7,7 +7,6 @@ module HelpHelper
     add_image:     "Add an Image",
     create_game:   "Create a Game",
     house_style:   "House Style",
-    todo:          "Todo",
   }
 
   def help_link(id)
