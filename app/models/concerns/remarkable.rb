@@ -14,7 +14,7 @@ module Remarkable
       link&.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
       link = "/img/photos/#{link}" unless link&.match?(/\//)
       width = get_width(title)
-      klass = get_placement(title)
+      klass = get_klass(title)
       %Q(<img src="#{link}" alt="#{alt}" class="styled #{klass}" width="#{width}">)
     end
 
@@ -30,7 +30,7 @@ module Remarkable
       end
     end
 
-    def get_placement(inst)
+    def get_klass(inst)
       if inst&.match?(/R/i)
         "float-right ml-3"
       elsif inst&.match?(/L/i)
