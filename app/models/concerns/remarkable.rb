@@ -13,22 +13,31 @@ module Remarkable
     def image(link, title, alt)
       link&.sub!(/\Ahttps?:\/\/(www\.)?wanderingdragonschess.club/, "")
       link = "/img/photos/#{link}" unless link&.match?(/\//)
-      if title&.match(/([1-9]\d*)%/) && $1.to_i <= 100 && $1.to_i >= 10
-        width = "#{$1}%"
-      elsif title&.match(/([1-9]\d*)/) && $1.to_i <= 300 && $1.to_i >= 100
-        width = "#{$1}px"
+      width = get_width(title)
+      klass = get_placement(title)
+      %Q(<img src="#{link}" alt="#{alt}" class="styled #{klass}" width="#{width}">)
+    end
+
+    private
+
+    def get_width(inst)
+      if inst&.match(/([1-9]\d*)%/) && $1.to_i <= 100 && $1.to_i >= 10
+        "#{$1}%"
+      elsif inst&.match(/([1-9]\d*)/) && $1.to_i <= 300 && $1.to_i >= 100
+        "#{$1}px"
       else
-        width = "200px"
+        "200px"
       end
-      klass = "styled "
-      if title&.match?(/R/i)
-        klass += "float-right ml-3"
-      elsif title&.match?(/L/i)
-        klass += " float-left mr-3"
+    end
+
+    def get_placement(inst)
+      if inst&.match?(/R/i)
+        "float-right ml-3"
+      elsif inst&.match?(/L/i)
+        "float-left mr-3"
       else
-        klass += "mx-auto d-block mt-3 mb-3"
+        "mx-auto d-block mt-3 mb-3"
       end
-      %Q(<img src="#{link}" alt="#{alt}" class="#{klass}" width="#{width}">)
     end
   end
 
