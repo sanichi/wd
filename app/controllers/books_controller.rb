@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   load_and_authorize_resource
 
   def index
+    remember_last_path(:books)
     @books = Book.search(@books, params, books_path, remote: true, per_page: 20)
   end
 

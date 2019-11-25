@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    remember_last_path(:players)
     @players = Player.search(@players, params)
   end
 

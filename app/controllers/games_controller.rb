@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    remember_last_path(:games)
     @games = Game.search(@games, params, games_path, per_page: 10)
   end
 

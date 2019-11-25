@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
     session[:last_guest_path] = request.fullpath
   end
 
+  def remember_last_path(name)
+    session["last_#{name}_path".to_sym] = request.fullpath
+  end
+
   def failure(object)
     flash.now[:alert] = object.errors.full_messages.join(", ")
   end

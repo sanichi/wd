@@ -19,7 +19,7 @@
       .body#moves
         .moves= @game.moves
       .footer
-        = link_to t("game.games"), games_path, class: "btn btn-success btn-sm"
+        = link_to t("game.games"), last_path(:games), class: "btn btn-success btn-sm"
         = link_to t("game.pgn"), "#", id: "toggle_pgn", class: "btn btn-success btn-sm"
         - if can?(:edit, @game)
           = link_to t("edit"), edit_game_path(@game), class: "btn btn-info btn-sm"

@@ -33,4 +33,8 @@ module ApplicationHelper
     return unless email.present?
     mail_to(email, nil, encode: "javascript")
   end
+
+  def last_path(name)
+    session["last_#{name}_path"] || "/#{name}"
+  end
 end

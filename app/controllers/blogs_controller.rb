@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   skip_load_and_authorize_resource only: :show
 
   def index
+    remember_last_path(:blogs)
     @blogs = Blog.search(@blogs, params, blogs_path, remote: true, per_page: 10)
   end
 
