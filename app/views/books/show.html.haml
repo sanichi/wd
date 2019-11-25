@@ -30,7 +30,6 @@
               %th= t("book.note")
               %td= @book.note
       .footer
-        .small
-          - if can?(:edit, @book)
-            = link_to t("edit"), edit_book_path(@book), class: "btn btn-info btn-sm"
-          = link_to t("book.books"), books_path, class: "btn btn-success btn-sm"
+        = link_to t("book.books"), books_path, class: "btn btn-success btn-sm"
+        - if can?(:edit, @book)
+          = link_to t("edit"), edit_book_path(@book), class: "btn btn-info btn-sm"

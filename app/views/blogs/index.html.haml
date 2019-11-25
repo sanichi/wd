@@ -9,10 +9,8 @@
   set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
 
 %section
-  .header
+  .header.text-center
     %h3.d-inline= t("blog.blogs")
-    - if can?(:create, Blog)
-      .float-right.small= link_to t("blog.new"), new_blog_path, class: "btn btn-info"
   .body
     = render "utils/search/form", index: blogs_path, inputs: inputs
     %table{class: "table table-bordered table-striped table-sm mt-3"}
@@ -26,3 +24,6 @@
           %th.d-none.d-md-table-cell.text-center= t("updated")
       %tbody#results
         = render "results", blogs: @blogs
+  - if can?(:create, Blog)
+    .footer
+      = link_to t("blog.new"), new_blog_path, class: "btn btn-info btn-sm"

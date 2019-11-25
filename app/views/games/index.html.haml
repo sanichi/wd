@@ -11,10 +11,8 @@
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
     %section
-      .header
+      .header.text-center
         %h3.d-inline= t("game.games")
-        - if can?(:create, Game)
-          .float-right.small= link_to t("game.new"), new_game_path, class: "btn btn-info"
       .body
         = render "utils/search/form", index: games_path, inputs: inputs, remote: false
         %table.table-bordered.mt-3.ml-auto.mr-auto
@@ -30,3 +28,6 @@
                     = link_to title_and_difficulty(game), game
                     - if game.difficulty
                       %div.mt-2{id: "board_#{game.id}"}
+      - if can?(:create, Game)
+        .footer
+          = link_to t("game.new"), new_game_path, class: "btn btn-info btn-sm"

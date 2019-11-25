@@ -10,19 +10,16 @@
       = @blog.title
       = render "title_icons", blog: @blog
     .float-right.mt-1
-      - if can?(:edit, @blog)
-        = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info"
       = @blog.created_at.strftime('%b %e %Y')
   .body
     ~ @blog.story_html
   .footer
-    .small
-      - if can?(:edit, Blog)
-        = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
-        .float-right.mt-1
-          = render "utils/misc/user_stamp", object: @blog
-      - else
-        = render "utils/misc/user_stamp", object: @blog
+    = link_to t("blog.blogs"), blogs_path, class: "btn btn-success btn-sm"
+    - if can?(:edit, Blog)
+      = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
+      = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info btn-sm"
+    .float-right.small.mt-1
+      = render "utils/misc/user_stamp", object: @blog
 
 - if can?(:edit, Blog)
   %pre.markdown= @blog.summary

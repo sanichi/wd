@@ -3,10 +3,8 @@
 .row
   %div{class: center(xl: 6, lg: 8, md:10)}
     %section
-      .header
+      .header.text-center
         %h3.d-inline= @player.name
-        - if can?(:edit, @player)
-          .float-right.small= link_to t("edit"), edit_player_path(@player), class: "btn btn-info"
       .body
         %table{class: "table table-bordered mt-3"}
           %tbody
@@ -42,3 +40,8 @@
             %tr
               %th= t("player.fide_id")
               %td= player_fide_profile(@player.fide_id)
+      .footer
+        = link_to t("player.players"), players_path, class: "btn btn-success btn-sm"
+        = link_to t("contact.contacts"), contacts_path, class: "btn btn-success btn-sm"
+        - if can?(:edit, @player)
+          = link_to t("edit"), edit_player_path(@player), class: "btn btn-info btn-sm"

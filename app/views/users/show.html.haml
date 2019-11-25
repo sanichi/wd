@@ -4,11 +4,8 @@
 .row
   %div{class: center(xl: 4, lg: 6, md:8, sm: 10)}
     %section
-      .header
-        %h3
-          = title
-          - if can?(:edit, @user)
-            .float-right.small= link_to t("edit"), edit_user_path(@user), class: "btn btn-info"
+      .header.text-center
+        %h3.d-inline= title
       .body
         %table{class: "table table-bordered mt-3"}
           %tbody
@@ -28,3 +25,7 @@
               %td
                 = time_ago_in_words(@user.updated_at)
                 = t("ago")
+      .footer
+        = link_to t("user.users"), users_path, class: "btn btn-success btn-sm"
+        - if can?(:edit, @user)
+          = link_to t("edit"), edit_user_path(@user), class: "btn btn-info btn-sm"

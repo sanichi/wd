@@ -10,10 +10,8 @@
   set_meta_tags title: t("book.books"), description: t("book.description"), keywords: t("book.keywords")
 
 %section
-  .header
+  .header.text-center
     %h3.d-inline= t("book.books")
-    - if can?(:create, Book)
-      .float-right.small= link_to t("book.new"), new_book_path, class: "btn btn-info"
   .body
     = render "utils/search/form", index: books_path, inputs: inputs
     %table{class: "table table-bordered table-striped table-sm mt-3"}
@@ -27,3 +25,6 @@
           %th.d-none.d-lg-table-cell= t("book.borrowers")
       %tbody#results
         = render "results", books: @books
+  - if can?(:create, Book)
+    .footer
+      = link_to t("book.new"), new_book_path, class: "btn btn-info btn-sm"
