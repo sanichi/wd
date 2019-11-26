@@ -3,8 +3,10 @@
 .row
   %div{class: center(xl: 4, lg: 6, md: 8, sm: 10)}
     %section
-      .header.text-center
+      .header{class: "#{can?(:create, User) ? '' : 'text-center'}"}
         %h3.d-inline= t("user.users")
+        - if can?(:create, User)
+          .float-right.mt-1= link_to t("user.new"), new_user_path, class: "btn btn-info btn-sm"
       .body
         %table{class: "table table-bordered table-striped table-sm mt-3"}
           %thead
@@ -18,6 +20,3 @@
                 %td= link_to_if can?(:show, User), user.handle, user
                 %td= user.name
                 %td= user_roles(user)
-      - if can?(:create, User)
-        .footer
-          = link_to t("user.new"), new_user_path, class: "btn btn-info btn-sm"
