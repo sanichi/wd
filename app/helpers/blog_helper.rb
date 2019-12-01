@@ -9,4 +9,10 @@ module BlogHelper
     opts.unshift [t("any"), ""]
     options_for_select(opts, selected)
   end
+
+  def link_slug(slug)
+    blog = Blog.find_by(slug: slug, draft: false)
+    return nil unless blog
+    link_to blog.title, blog_path(slug)
+  end
 end
