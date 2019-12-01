@@ -8,7 +8,7 @@
   .header
     %h3.d-inline
       = @blog.title
-      = render "title_icons", blog: @blog
+      = title_icons(@blog)
     .float-right.mt-1
       = @blog.created_at.strftime('%b %e %Y')
   .body

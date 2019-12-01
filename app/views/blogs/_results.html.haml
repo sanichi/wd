@@ -2,7 +2,7 @@
   %tr
     %td
       = link_to blog.title, blog
-      = render "blogs/title_icons", blog: blog
+      = title_icons(blog)
     %td.d-none.d-lg-table-cell= blog.summary.truncate(50)
     - unless current_user.guest?
       %td.d-none.d-sm-table-cell.text-center= blog.user&.handle

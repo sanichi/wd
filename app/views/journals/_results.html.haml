@@ -3,7 +3,7 @@
     %td= journal.handle
     %td.d-none.d-sm-table-cell= journal.remote_ip
     %td= journal.resource
-    %td.text-center= render "link", journal: journal
+    %td.text-center= resource_link(journal)
     %td= journal.action
     %td= journal.created_at.strftime("%y-%m-%d %H:%M")
 = render "utils/pagination/links", pager: @journals, columns: 6

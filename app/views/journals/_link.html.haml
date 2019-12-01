@@ -1,4 +1,0 @@
-- if !journal.resource_id.nil? && journal.resource.match?(/\A(Blog|Book|Game|Player|User)\z/)
-  = link_to journal.resource_id, "/#{journal.resource.downcase.pluralize}/#{journal.resource_id}"
-- else
-  = journal.resource_id
