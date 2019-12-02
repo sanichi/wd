@@ -46,13 +46,13 @@
 %ul
   %li
     %b= t("book.year")
-    As well as specifying an exact publication year (e.g. "2019") it is also possible to
-    specify ranges (e.g. "2000-2010"), or limits (e.g. ">2015" or "<=1996").
+    as well as specifying an exact publication year (e.g. "2019") it is also possible to
+    specify ranges (e.g. "2000-2010"), or limits (e.g. ">2015" or "<=1996")
   %li
     %b= t("book.borrowers")
-    If the word "ALL" is entered here, then instead of searching for specific book
+    if the word "ALL" is entered here, then instead of searching for specific book
     borrowers by name, this will match all borrowers (i.e. the result will be all
-    borrowed books).
+    borrowed books)
 
 = help_section :get_login
 
@@ -64,19 +64,19 @@
 %ul
   %li
     %b= t("user.roles.member")
-    Can view the contact details of all players (whereas ordinary visitors to the
+    can view the contact details of all players (whereas ordinary visitors to the
     site can only see the contact details of the principals - president, treasurer,
-    team captains etc).
+    team captains etc)
   %li
     %b= t("user.roles.blogger")
-    Can create news items and games and edit those they have previously created themselves.
+    can create news items and games and edit those they have previously created themselves
   %li
     %b= t("user.roles.librarian")
-    Manages the information we keep on our book collection.
+    manages the information we keep on our book collection
   %li
     %b Administrator
-    Manages everything else (players, contacts, users, images) and
-    can modify anything the other users create.
+    manages everything else (players, contacts, users, images) and
+    can modify anything the other users create
 
 = help_section :create_news
 
@@ -93,16 +93,16 @@
     %ul
       %li
         %b= t("blog.title")
-        Keep this short and snappy.
+        keep this short and snappy
       %li
         %b= t("blog.summary")
-        Keep this fairly short. It's for the home page when the item is still recent.
+        keep this fairly short so it will fit on the home page
       %li
         %b= t("blog.story")
-        Optional. This is where you put the bulk of your news item unless it's very short.
+        (optional) this is where you put the bulk of your news item unless it's very short
       %li
         %b= t("blog.draft")
-        Leave this checked to begin with to prevent the item being published before it's ready.
+        leave this checked at first to keep the item off the home page until it's ready
   %li
     if you need to make any corrections, then
     %ul
@@ -165,21 +165,25 @@
   to add it for you or (b) request a unique filename for the image so you can add it yourself.
   In the latter case, insert something like the following example into your markdown:
 %pre
-  ![this is a great photo](photo1.jpg "180R")
+  ![this is a great photo](photo1.jpg "250R")
 %p
   The text inside the square brackets is alternative text and doesn't normally display.
-  Put the image filename after the opening parenthesis. The text in quotes in regular
-  markdown would be the image title but, in this application, is used instead to place
-  and resize the image according to the following rules:
+  The image filename (supplied to you by the webmaster) goes after the opening parenthesis.
+  The text in quotes is optional and in regular markdown would be used to give the image a
+  title but, in this application, is used instead to place and resize the image according
+  to the following rules:
 %ul
   %li
-    by default, the image will be centered but if the letter R (or L) appears,
-    it will instead be floated to the right (or left);
+    By default, the image will be centered but if the letter R (or L) appears,
+    it will instead be floated to the right (or left).
   %li
-    by default, the image width will be resized to 200 pixels, but if a number
+    By default, the image width will be resized to 200 pixels, but if a number
     between 100 and 300 appears then this will be the width, or if a number between
     10 and 100 appears followed by a percent sign, then the width will be this
     fraction of the news item width.
+%p
+  When deciding how wide to make your image, remember that it has to display on
+  both very large screens (1000's of pixels) and very small ones (a few 100 pixels).
 
 = help_section :create_game
 
@@ -200,13 +204,13 @@
     %ul
       %li
         %b= t("game.title")
-        You can leave this blank and let the system guess it from information in the PGN.
+        you can leave this blank and let the system guess it from information in the PGN
       %li
         %b= t("game.pgn")
-        Copy and paste from your file.
+        copy and paste from your file
       %li
         %b= t("game.difficulty")
-        Only for problems and studies (PGN files with a non-initial
+        only for problems and studies (PGN files with a non-initial
         = succeed(").") do
           = link_to "FEN", "https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation", target: "external"
   %li
