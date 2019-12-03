@@ -27,9 +27,9 @@ en:
       captain: Captain
       captain_al1: Allegro A Captain
       captain_al2: Allegro B Captain
-      captain_el1: A Team Captain
-      captain_el2: B Team Captain
-      captain_el3: C Team Captain
+      captain_el1: A-Team Captain
+      captain_el2: B-Team Captain
+      captain_el3: C-Team Captain
       captain_nl1: SNCL A Captain
       captain_nl2: SNCL B Captain
       captain_r: Richardson Captain
@@ -38,9 +38,9 @@ en:
       member: Member
       player_al1: Allegro A
       player_al2: Allegro B
-      player_el1: A Team
-      player_el2: B Team
-      player_el3: C Team
+      player_el1: A-Team
+      player_el2: B-Team
+      player_el3: C-Team
       player_nl1: SNCL A
       player_nl2: SNCL B
       player_r: Richardson
