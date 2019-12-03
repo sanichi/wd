@@ -19,7 +19,7 @@
       = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
       = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info btn-sm"
     .float-right.small.mt-1
-      = render "utils/misc/user_stamp", object: @blog
+      = render "utils/misc/user_stamp", object: @blog, show_author: true
 
 - if can?(:edit, Blog)
   %pre.markdown= @blog.summary
