@@ -25,7 +25,7 @@ gem "mechanize", '~> 2.7', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.8'
   gem "capybara", "~> 3.28"
   gem 'factory_bot_rails', '~> 5.0'
