@@ -18,6 +18,13 @@ describe PagesController do
     end
   end
 
+  context "dragons" do
+    it "show" do
+      click_link t("dragon.dragons")
+      expect(page).to have_title t("dragon.dragons")
+    end
+  end
+
   context "help" do
     it "show" do
       click_link t("help.help")

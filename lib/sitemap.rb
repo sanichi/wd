@@ -46,6 +46,9 @@ Book.all.each do |b|
   url("books/#{b.id}", b.updated_at.to_date, 0.3)
 end
 
+# Dragons
+url("dragons", Dragon.pluck(:updated_at).max.to_date, 0.7, "yearly")
+
 # Contacts
 url("contacts", last_player, 0.9, "monthly")
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_083158) do
+ActiveRecord::Schema.define(version: 2019_12_06_201822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 2019_11_11_083158) do
     t.string "note", limit: 100
     t.string "title", limit: 100
     t.integer "year", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "dragons", force: :cascade do |t|
+    t.string "first_name", limit: 15
+    t.string "last_name", limit: 20
+    t.boolean "male", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

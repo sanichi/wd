@@ -1,0 +1,4 @@
+- dragons.matches.each do |dragon|
+  %tr
+    %td= dragon.name(params[:order] != "first")
+= render "utils/pagination/links", pager: dragons, columns: 1

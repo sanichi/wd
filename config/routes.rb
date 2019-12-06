@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   resources :users
 
   resource :session, only: [:new, :create, :destroy]
+
+  resources :dragons, only: [:index]
   resources :journals, only: [:index]
 end

@@ -11,6 +11,7 @@ class Ability
 
     can :read, Blog, draft: false
     can :read, Book
+    can :read, Dragon
     can :read, Game
     can :read, Player
 
