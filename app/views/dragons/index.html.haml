@@ -1,30 +1,5 @@
 - set_meta_tags title: t("dragon.dragons"), description: t("dragon.description"), keywords: t("dragon.keywords")
 
--# = form_tag dragons_path, method: :get, remote: true, class: "form-inline justify-content-center" do
--#   = label_tag :q, t("query"), class: "sr-only"
--#   = text_field_tag :q, params[:q], class: "form-control mr-1 mb-1", size: 16, placeholder: t("name")
--#   = label_tag :order, t("order"), class: "sr-only"
--#   = select_tag :order, dragon_search_order_menu(params[:order]), class: "form-control mr-1 mb-1 auto-submit"
--#   = label_tag :gender, t("person.gender"), class: "sr-only"
--#   = select_tag :gender, dragon_search_gender_menu(params[:gender]), class: "form-control mr-1 mb-1 auto-submit"
--#   = button_tag t("search"), type: "submit", class: "btn btn-success mr-1 mb-1"
--#
--# .row.mt-3
--#   .col-8.offset-2.col-lg-6.offset-lg-3.col-xl-4.offset-xl-4
--#     %table{class: "table table-bordered table-striped table-sm"}
--#       %thead
--#         %tr
--#           %th= t("name")
--#       %tbody{id: "results"}
--#         = render "results", dragons: @dragons
--#
--# - if can?(:create, Dragon) || can?(:tribute, Page)
--#   .text-center
--#     - if can?(:create, Dragon)
--#       = link_to t("dragon.new"), new_dragon_path, class: "btn btn-info"
--#     - if can?(:tribute, Page)
--#       = link_to t("dragon.tribute"), tribute_path, class: "btn btn-primary"
-
 :ruby
   inputs = [
     [:name,   t("dragon.name"),   :text_field, size: 16, value: params[:name], placeholder: t("dragon.name")],
@@ -39,6 +14,7 @@
         %h3.d-inline= t("dragon.dragons")
       .body
         .small.text-center= t("dragon.description")
+        .small.text-center= t("dragon.explanation")
         %hr
         = render "utils/search/form", index: dragons_path, inputs: inputs
         .row
