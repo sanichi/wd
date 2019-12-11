@@ -6,7 +6,11 @@ $(function() {
 
   // if start move is not the first
   var start = <%= move %>;
-  if (start > 0) game.seek(start);
+  if (start > 0)
+  {
+    game.seek(start);
+    highlight_current();
+  }
 
   // button controls
   $('.controls .control').click(function(e) {
