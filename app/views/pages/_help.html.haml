@@ -157,6 +157,14 @@
   first find out its ID and then insert something like:
 %pre
   [this great game](/games/3)
+%p
+  If you want the game to start in a position other than the one before the first move,
+  then add a move number like this:
+%pre
+  [this great move](/games/3?move=42)
+%p
+  This should be the half-move number and when the game is displayed the position will be the
+  one just after this move.
 
 = help_section :add_image
 
