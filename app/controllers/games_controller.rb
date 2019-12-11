@@ -28,6 +28,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def show
+    @move = params[:move].to_i
+  end
+
   def destroy
     @game.destroy
     redirect_to games_path, alert: success("deleted")

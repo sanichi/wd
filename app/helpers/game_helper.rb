@@ -17,4 +17,8 @@ module GameHelper
       game.title
     end
   end
+
+  def html_moves(game)
+    PgnGame.new(game.pgn).html
+  end
 end

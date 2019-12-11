@@ -1,7 +1,7 @@
 - set_meta_tags title: @game.title
 
 = content_for :javascript do
-  = render "controls.js"
+  = render "controls.js", game: @game, move: @move
 
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
@@ -17,7 +17,7 @@
         .body.text-center
           = link_to t("game.show_moves"), "#", id: "show_moves", class: "btn btn-dark btn-sm"
       .body#moves
-        .moves= @game.moves
+        .moves= html_moves(@game)
       .footer
         = link_to t("game.games"), last_path(:games), class: "btn btn-success btn-sm"
         = link_to t("game.pgn"), "#", id: "toggle_pgn", class: "btn btn-success btn-sm"

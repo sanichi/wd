@@ -69,10 +69,6 @@ class Game < ApplicationRecord
     "game"
   end
 
-  def moves
-    PgnGame.new(pgn).html
-  end
-
   private
 
   def clean_and_parse_pgn

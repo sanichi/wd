@@ -1,8 +1,12 @@
 $(function() {
 
   // for displaying the game
-  var game = new Game("<%= j @game.pgn.html_safe %>", '<%= @game.orientation %>', 'board')
-  var study = <%= @game.study? ? 'true' : 'false' %>;
+  var game = new Game("<%= j game.pgn.html_safe %>", '<%= game.orientation %>', 'board');
+  var study = <%= game.study? ? 'true' : 'false' %>;
+
+  // if start move is not the first
+  var start = <%= move %>;
+  if (start > 0) game.seek(start);
 
   // button controls
   $('.controls .control').click(function(e) {
