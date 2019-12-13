@@ -1,20 +1,12 @@
 class BlogsController < ApplicationController
   # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
+  # and https://github.com/CanCanCommunity/cancancan/wiki/Authorizing-controller-actions
+  before_action :find_by_slug, only: [:edit, :update, :show, :destroy]
   load_and_authorize_resource
-  skip_load_and_authorize_resource only: :show
 
   def index
     remember_last_path(:blogs)
     @blogs = Blog.search(@blogs, params, blogs_path, remote: true, per_page: 10)
-  end
-
-  def show
-    if params[:id].match(Blog::VALID_SLUG)
-      @blog = Blog.find_by!(slug: params[:id])
-    else
-      @blog = Blog.find(params[:id])
-    end
-    authorize! :show, @blog
   end
 
   def create
@@ -46,6 +38,10 @@ class BlogsController < ApplicationController
   end
 
   private
+
+  def find_by_slug
+    @blog = Blog.find_by!(slug: params[:id]) if params[:id].match(Blog::VALID_SLUG)
+  end
 
   def resource_params
     permitted = [:draft, :story, :summary, :title]

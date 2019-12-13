@@ -57,6 +57,10 @@ class Blog < ApplicationRecord
     to_html(summary)
   end
 
+  def to_param
+    slug || id.to_s
+  end
+
   def to_s # for rspec tests
     "blog"
   end

@@ -10,7 +10,7 @@ module BlogHelper
     options_for_select(opts, selected)
   end
 
-  def link_slug(slug)
+  def blog_link(slug)
     blog = Blog.find_by(slug: slug, draft: false)
     return nil unless blog
     link_to blog.title, blog_path(slug)
