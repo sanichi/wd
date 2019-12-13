@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+  # see https://github.com/CanCanCommunity/cancancan/wiki/Controller-Authorization-Example
+  # and https://github.com/CanCanCommunity/cancancan/wiki/Authorizing-controller-actions
+  before_action :find_by_slug, only: [:edit, :update, :show, :destroy]
   load_and_authorize_resource
 
   def index
@@ -33,6 +36,10 @@ class PlayersController < ApplicationController
   end
 
   private
+
+  def find_by_slug
+    @player = Player.find_by!(slug: params[:id])
+  end
 
   def resource_params
     params.require(:player).permit(:contact, :email, :federation, :fide_id, :fide_rating, :first_name, :last_name, :phone, :sca_id, :sca_rating, :title, roles: [])

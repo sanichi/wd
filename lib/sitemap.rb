@@ -37,7 +37,7 @@ end
 last_player = Player.pluck(:updated_at).max.to_date
 url("players", last_player, 0.9, "monthly")
 Player.all.each do |p|
-  url("players/#{p.id}", p.updated_at.to_date, 0.8)
+  url("players/#{p.slug}", p.updated_at.to_date, 0.8)
 end
 
 # Books

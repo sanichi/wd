@@ -8,6 +8,7 @@ class Player < ApplicationRecord
   MAX_RATING = 3000
   MAX_RANK = 127
   MAX_ROLE = 20
+  MAX_SLUG = 2 * MAX_NAME
   MAX_TITLE = 3
   MIN_ID = 1
   MIN_RATING = 0
@@ -29,6 +30,7 @@ class Player < ApplicationRecord
   RANK = ROLES.each_with_object({}).each_with_index{ |(r, h), i| h[r] = i }
 
   before_validation :normalize_attributes
+  before_save :set_slug
 
   validates :email, format: { with: /\A[^\s@]+@[^\s@]+\z/ }, length: { maximum: MAX_EMAIL }, uniqueness: true, allow_nil: true
   validates :federation, format: { with: /[A-Z]{3}\z/ }
@@ -79,6 +81,10 @@ class Player < ApplicationRecord
     "player"
   end
 
+  def to_param
+    slug
+  end
+
   private
 
   def normalize_attributes
@@ -105,5 +111,9 @@ class Player < ApplicationRecord
     self.roles.sort_by! { |role| RANK[role] }
     self.roles.reject! { |role| role == "member" } if roles.include?("member") && roles.length > 1
     self.rank = RANK[roles.first]
+  end
+
+  def set_slug
+    self.slug = name.parameterize
   end
 end
