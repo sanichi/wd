@@ -10,7 +10,7 @@
       = @blog.title
       = title_icons(@blog)
     .float-right.mt-1
-      = @blog.created_at.strftime('%b %e %Y')
+      = @blog.created_at.strftime("%b %e %Y")
   .body
     ~ @blog.story_html
   .footer
