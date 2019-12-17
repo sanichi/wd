@@ -80,6 +80,7 @@ class Blog < ApplicationRecord
     markdown.gsub!(/\r\n/, "\n")
     markdown.gsub!(/([^\S\n]*\n){2,}[^\S\n]*/, "\n\n")
     markdown.gsub!(/\[([^\[]+)\]\(https?:\/\/(?:www\.)?wanderingdragonschess.club\/?(.*)\)/, "[\\1](/\\2)")
+    markdown = markdown.use_halves
     markdown
   end
 end
