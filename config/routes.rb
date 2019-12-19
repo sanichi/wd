@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :blogs
   resources :books
   resources :games
-  resources :players
+  resources :players do
+    get :registration, on: :collection
+  end
+
   resources :users
 
   resource :session, only: [:new, :create, :destroy]

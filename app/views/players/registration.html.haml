@@ -1,0 +1,38 @@
+- set_meta_tags title: t("player.registration.spens")
+
+.row
+  %div{class: center(xl: 8, lg: 10)}
+    %section
+      .header.text-center
+        %h3.d-inline= t("player.registration.spens")
+      .body
+        %table{class: "table table-bordered table-striped table-sm mt-3"}
+          %thead
+            %tr
+              %th
+              %th.text-center Name of player
+              %th.text-center CS Grade
+              %th.text-center CS Pnum
+              %th.text-center FIDE Reg.
+          %tbody
+            - @players.each_with_index do |player, i|
+              %tr
+                %td.text-center= i + 1
+                %td= player.name
+                %td.text-center= player.sca_rating
+                %td.text-center= player.sca_id
+                %td.text-center= player.fide_id.present? ? "Yes" : "No"
+      .body
+        %p
+          %u Team contact details
+        %p
+          Club:
+          = render "registration_contact", player: @president
+        %p
+          Secretary:
+          = render "registration_contact", player: @secretary
+        %p
+          Team captain Spens:
+          = render "registration_contact", player: @captain
+        %p
+          Date of submission: 20 Dec 2019

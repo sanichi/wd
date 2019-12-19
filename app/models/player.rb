@@ -42,9 +42,10 @@ class Player < ApplicationRecord
   validates :title, inclusion: { in: TITLES }, allow_nil: true
   validate :roles_rules
 
-  scope :by_name,   -> { order(:first_name, :last_name) }
-  scope :by_rank,   -> { order(:rank) }
-  scope :by_rating, -> { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
+  scope :by_name,   ->    { order(:first_name, :last_name) }
+  scope :by_rank,   ->    { order(:rank) }
+  scope :by_rating, ->    { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
+  scope :in_team,   ->(t) { where("'player_#{t}' = ANY (roles) OR 'captain_#{t}' = ANY (roles)") }
 
   def self.search(players, params)
     if params[:order] == "name"
@@ -60,7 +61,7 @@ class Player < ApplicationRecord
       sql = ROLES.select { |r| r.match?(/\Acaptain/) }.map { |r| "'#{r}' = ANY (roles)" }.join(" OR ")
       players = players.where(sql)
     elsif role.match(/\Aplayer_(\w+)\z/)
-      players = players.where("'player_#{$1}' = ANY (roles) OR 'captain_#{$1}' = ANY (roles)")
+      players = players.in_team($1)
     elsif ROLES.include?(role) && role != "member"
       players = players.where("'#{role}' = ANY (roles)")
     end

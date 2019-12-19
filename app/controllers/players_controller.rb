@@ -9,6 +9,13 @@ class PlayersController < ApplicationController
     @players = Player.search(@players, params)
   end
 
+  def registration
+    @players = @players.in_team("s").by_rating
+    @president = Player.find_by(first_name: "Donald", last_name: "Heron")
+    @secretary = Player.find_by(first_name: "Jim", last_name: "O'Neil")
+    @captain = Player.find_by(first_name: "Mark", last_name: "Orr")
+  end
+
   def create
     if @player.save
       redirect_to @player, notice: success("created")

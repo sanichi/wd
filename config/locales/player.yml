@@ -23,6 +23,9 @@ en:
     order:
       rating: rating ↓
       name: name ↓
+    registration:
+      registration: Registration
+      spens: Spens Registration
     roles:
       captain: Captain
       captain_al1: Allegro A Captain

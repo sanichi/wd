@@ -26,6 +26,7 @@ class Ability
 
     if !user.guest?
       can :index, User
+      can :registration, Player
     end
   end
 end
