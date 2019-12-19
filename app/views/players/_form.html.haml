@@ -1,16 +1,16 @@
 :ruby
   inputs = [
-    [:first_name,  t("player.first_name"),  :text],
-    [:last_name,   t("player.last_name"),   :text],
-    [:roles,       t("player.roles.roles"), :select, menu: player_role_menu(player.roles), multiple: true, size: 5],
-    [:sca_id,      t("player.sca_id"),      :text],
-    [:sca_rating,  t("player.sca_rating"),  :text],
-    [:fide_id,     t("player.fide_id"),     :text],
-    [:fide_rating, t("player.fide_rating"), :text],
-    [:federation,  t("player.federation"),  :text],
-    [:title,       t("player.title"),       :select, menu: player_title_menu(player.title)],
-    [:email,       t("player.email"),       :text],
-    [:phone,       t("player.phone"),       :text],
-    [:contact,     t("player.contact"),     :check_box],
+    [:first_name,  t("player.first_name"),      :text],
+    [:last_name,   t("player.last_name"),       :text],
+    [:roles,       t("player.roles.roles"),     :select, menu: player_role_menu(player.roles), multiple: true, size: 5],
+    [:sca_id,      t("player.sca_id"),          :text],
+    [:sca_rating,  t("player.sca_rating"),      :text],
+    [:fide_id,     t("player.fide_id"),         :text],
+    [:fide_rating, t("player.fide_rating"),     :text],
+    [:federation,  t("player.federation"),      :text],
+    [:title,       t("player.title"),           :select, menu: player_title_menu(player.title)],
+    [:email,       t("player.email"),           :text],
+    [:phone,       t("player.phone"),           :text],
+    [:contact,     t("player.contact.contact"), :check_box],
   ]
 = render "utils/crud/form", object: player, index: players_path, inputs: inputs, title: title, center: center(xl: 4, lg: 6, md:8, sm: 10)

@@ -1,6 +1,5 @@
 en:
   player:
-    contact: Contact
     edit: Edit Player
     email: Email
     description: Members of the Wandering Dragons Chess Club.
@@ -20,10 +19,18 @@ en:
     ratings: SCA, FIDE Rating
     sca_id: SCA Id
     sca_rating: SCA Rating
+    contact:
+      contact: Contact
+      contacts: Contacts
+      description: Contact email addresses and phone nuumbers for Wandering Dragon club officials and members.
+      keywords: contact, email, phone, wandering, dragons, club, members, captains, officers, officials, members, organisers
+      position: Role(s)
     order:
       rating: rating ↓
       name: name ↓
     registration:
+      description: Wandering Dragon Spens Cup squad.
+      keywords: wandering, dragons, registration, spens, cup, team, squad
       registration: Registration
       spens: Spens Registration
     roles:

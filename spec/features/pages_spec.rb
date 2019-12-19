@@ -13,8 +13,8 @@ describe PagesController do
 
   context "contacts" do
     it "show" do
-      click_link t("contact.contacts")
-      expect(page).to have_title t("contact.contacts")
+      click_link t("player.contact.contacts")
+      expect(page).to have_title t("player.contact.contacts")
     end
   end
 

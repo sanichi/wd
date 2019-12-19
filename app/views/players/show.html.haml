@@ -42,6 +42,6 @@
               %td= player_fide_profile(@player.fide_id)
       .footer
         = link_to t("player.players"), last_path(:players), class: "btn btn-success btn-sm"
-        = link_to t("contact.contacts"), contacts_path, class: "btn btn-success btn-sm"
+        = link_to t("player.contact.contacts"), contacts_players_path, class: "btn btn-success btn-sm"
         - if can?(:edit, @player)
           = link_to t("edit"), edit_player_path(@player), class: "btn btn-info btn-sm"

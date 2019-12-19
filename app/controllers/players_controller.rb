@@ -9,6 +9,14 @@ class PlayersController < ApplicationController
     @players = Player.search(@players, params)
   end
 
+  def contacts
+    if current_user.guest?
+      @players = @players.where(contact: true).by_rank
+    else
+      @players = @players.by_name
+    end
+  end
+
   def registration
     @players = @players.in_team("s").by_rating
     @president = Player.find_by(first_name: "Donald", last_name: "Heron")

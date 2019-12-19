@@ -1,6 +1,8 @@
+- set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")
+
 %section
   .header{class: "#{can?(:create, Player) ? '' : 'text-center'}"}
-    %h3.d-inline= t("contact.contacts")
+    %h3.d-inline= t("player.contact.contacts")
     - if can?(:create, Player)
       .float-right.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-info btn-sm"
   .body
@@ -10,9 +12,9 @@
           %th= t("player.name")
           %th= t("player.email")
           %th.d-none.d-sm-table-cell= t("player.phone")
-          %th.d-none.d-md-table-cell= t("contact.position")
+          %th.d-none.d-md-table-cell= t("player.contact.position")
       %tbody
-        - players.each do |player|
+        - @players.each do |player|
           %tr
             %td= link_to_if !current_user.guest?, player.name, player
             %td= encrypted_mail_to(player.email)

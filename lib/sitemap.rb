@@ -50,7 +50,7 @@ end
 url("dragons", Dragon.pluck(:updated_at).max.to_date, 0.7, "yearly")
 
 # Contacts
-url("contacts", last_player, 0.9, "monthly")
+url("players/contacts", last_player, 0.9, "monthly")
 
 # Help
 url("help", "2019-11-04", 0.7)

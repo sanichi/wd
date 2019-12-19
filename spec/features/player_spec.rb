@@ -25,7 +25,7 @@ describe Player do
       select (data.title || t("none")), from: t("player.title")
       fill_in t("player.email"), with: data.email
       fill_in t("player.phone"), with: data.phone
-      data.contact? ? check(t("player.contact")) : uncheck(t("player.contact"))
+      data.contact? ? check(t("player.contact.contact")) : uncheck(t("player.contact.contact"))
       click_button t("save")
 
       expect(page).to have_title data.name
@@ -55,7 +55,7 @@ describe Player do
       select (data.title || t("none")), from: t("player.title")
       fill_in t("player.email"), with: data.email
       fill_in t("player.phone"), with: data.phone
-      data.contact? ? check(t("player.contact")) : uncheck(t("player.contact"))
+      data.contact? ? check(t("player.contact.contact")) : uncheck(t("player.contact.contact"))
       click_button t("save")
 
       expect(page).to have_title t("player.new")

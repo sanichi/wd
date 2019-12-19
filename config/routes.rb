@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "signin" => "sessions#new"
 
-  %w[help home contacts].each do |page|
+  %w[help home].each do |page|
     get page => "pages##{page}"
   end
 
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :games
   resources :journals, only: [:index]
   resources :players do
+    get :contacts, on: :collection
     get :registration, on: :collection
   end
   resources :users
