@@ -9,11 +9,12 @@ class Ability
       return
     end
 
+    can [:home, :contacts, :help], Page
     can :read, Blog, draft: false
     can :read, Book
     can :read, Dragon
     can :read, Game
-    can :read, Player
+    can [:read, :registration], Player
 
     if user.blogger?
       can :crud, Blog, user_id: user.id
@@ -26,7 +27,7 @@ class Ability
 
     if !user.guest?
       can :index, User
-      can :registration, Player
+      can :non_public, Page
     end
   end
 end

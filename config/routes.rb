@@ -8,15 +8,13 @@ Rails.application.routes.draw do
 
   resources :blogs
   resources :books
+  resources :dragons, only: [:index]
   resources :games
+  resources :journals, only: [:index]
   resources :players do
     get :registration, on: :collection
   end
-
   resources :users
 
   resource :session, only: [:new, :create, :destroy]
-
-  resources :dragons, only: [:index]
-  resources :journals, only: [:index]
 end
