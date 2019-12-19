@@ -18,12 +18,12 @@
           = blog_link "club_championships"
           = blog_link "team_titles"
           = link_to t("dragon.dragons"), dragons_path
+          - if can?(:registration, Player)
+            = link_to t("player.registration.registration"), registration_players_path
           - if can?(:index, User)
             = link_to t("user.users"), users_path
           - if can?(:index, Journal)
             = link_to t("journal.journal"), journals_path
-          - if can?(:non_public, Page)
-            = link_to t("player.registration.registration"), registration_players_path
           = link_to t("help.help"), help_path
     %ul.right
       - unless controller_name == "sessions"

@@ -27,7 +27,6 @@ class Ability
 
     if !user.guest?
       can :index, User
-      can :non_public, Page
     end
   end
 end
