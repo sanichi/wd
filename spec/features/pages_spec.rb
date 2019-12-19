@@ -11,6 +11,13 @@ describe PagesController do
     end
   end
 
+  context "help" do
+    it "show" do
+      click_link t("help.help")
+      expect(page).to have_title t("help.help")
+    end
+  end
+
   context "contacts" do
     it "show" do
       click_link t("player.contact.contacts")
@@ -18,17 +25,17 @@ describe PagesController do
     end
   end
 
+  context "registration" do
+    it "show" do
+      click_link t("player.registration.registration")
+      expect(page).to have_title t("player.registration.registration")
+    end
+  end
+
   context "dragons" do
     it "show" do
       click_link t("dragon.dragons")
       expect(page).to have_title t("dragon.dragons")
-    end
-  end
-
-  context "help" do
-    it "show" do
-      click_link t("help.help")
-      expect(page).to have_title t("help.help")
     end
   end
 end
