@@ -18,7 +18,8 @@
           = blog_link "club_championships"
           = blog_link "team_titles"
           = link_to t("dragon.dragons"), dragons_path
-          - if can?(:registration, Player)
+          -# currently we don't advertise this page, it's meant for SCA admins
+          - if can?(:registration, Player) && !current_user.guest?
             = link_to t("player.registration.registration"), registration_players_path
           - if can?(:index, User)
             = link_to t("user.users"), users_path

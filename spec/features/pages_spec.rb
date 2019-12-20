@@ -25,17 +25,17 @@ describe PagesController do
     end
   end
 
-  context "registration" do
-    it "show" do
-      click_link t("player.registration.registration")
-      expect(page).to have_title t("player.registration.registration")
-    end
-  end
-
   context "dragons" do
     it "show" do
       click_link t("dragon.dragons")
       expect(page).to have_title t("dragon.dragons")
+    end
+  end
+
+  context "registration" do
+    it "show" do
+      visit registration_players_path # currently we don't advertise this page, it's meant for SCA admins
+      expect(page).to have_title t("player.registration.registration")
     end
   end
 end
