@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  authorize_resource
+  # see https://github.com/CanCanCommunity/cancancan/wiki/Non-RESTful-Controllers
 
   def home
     @blogs = Blog.where(draft: false, pin: true).updated_des
