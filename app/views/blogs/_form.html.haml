@@ -1,12 +1,12 @@
 :ruby
   inputs = [
-    [:title,   t("blog.title"),   :text,      autofocus: true],
-    [:summary, t("blog.summary"), :text_area, rows: 8],
-    [:story,   t("blog.story"),   :text_area, rows: 24],
-    [:draft,   t("blog.draft"),   :check_box],
+    [:title,   t("blog.title"),   :text, autofocus: true],
+    [:summary, t("blog.summary"), :area, rows: 8],
+    [:story,   t("blog.story"),   :area, rows: 24],
+    [:draft,   t("blog.draft"),   :check],
   ]
   if current_user.admin?
-    inputs.push [:pin,  t("blog.pin"),  :check_box]
+    inputs.push [:pin,  t("blog.pin"),  :check]
     inputs.push [:slug, t("blog.slug"), :text]
   end
 = render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)
