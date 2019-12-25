@@ -1,6 +1,6 @@
 :ruby
   inputs = [
-    [:query,      t("query"),           :text_field, size: 16, value: params[:query]],
+    [:query,      t("query"),           :text_field, size: 16],
     [:difficulty, t("game.difficulty"), :select,     menu: game_difficulty_menu(params[:difficulty], search: true)],
   ]
   set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
