@@ -1,8 +1,8 @@
 :ruby
   inputs = [
-    [:name,  t("player.name"),  :text_field, size: 10],
-    [:role,  t("player.roles"), :select,     menu: player_role_menu(params[:role], search: true)],
-    [:order, t("order"),        :select,     menu: player_order_menu(params[:order])],
+    [:name,  t("player.name"),  :text,   size: 10],
+    [:role,  t("player.roles"), :select, menu: player_role_menu(params[:role], search: true)],
+    [:order, t("order"),        :select, menu: player_order_menu(params[:order])],
   ]
   set_meta_tags title: t("player.players"), description: t("player.description"), keywords: t("player.keywords")
 

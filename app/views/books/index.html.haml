@@ -1,11 +1,11 @@
 :ruby
   inputs = [
-    [:query,     t("query"),          :text_field, size: 16, placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/")],
-    [:year,      t("book.year"),      :text_field, size: 6],
-    [:borrowers, t("book.borrowers"), :text_field, size: 10],
-    [:category,  t("book.category"),  :select,     menu: book_category_menu(params[:category], search: true)],
-    [:medium,    t("book.medium"),    :select,     menu: book_medium_menu(params[:medium], search: true)],
-    [:order,     t("order"),          :select,     menu: book_order_menu(params[:order])],
+    [:query,     t("query"),          :text,   size: 16, placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/")],
+    [:year,      t("book.year"),      :text,   size: 6],
+    [:borrowers, t("book.borrowers"), :text,   size: 10],
+    [:category,  t("book.category"),  :select, menu: book_category_menu(params[:category], search: true)],
+    [:medium,    t("book.medium"),    :select, menu: book_medium_menu(params[:medium], search: true)],
+    [:order,     t("order"),          :select, menu: book_order_menu(params[:order])],
   ]
   set_meta_tags title: t("book.books"), description: t("book.description"), keywords: t("book.keywords")
 

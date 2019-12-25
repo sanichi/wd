@@ -1,7 +1,7 @@
 :ruby
   inputs = [
-    [:query, t("query"), :text_field, size: 16],
-    [:order, t("order"), :select,     menu: blog_order_menu(params[:order])],
+    [:query, t("query"), :text,   size: 16],
+    [:order, t("order"), :select, menu: blog_order_menu(params[:order])],
   ]
   unless current_user.guest?
     inputs.insert 1, [:user_id, t("blog.author"), :select, menu: blog_user_menu(params[:user_id])]

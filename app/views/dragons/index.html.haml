@@ -2,9 +2,9 @@
 
 :ruby
   inputs = [
-    [:name,   t("dragon.name"),   :text_field, size: 16, placeholder: t("dragon.name")],
-    [:gender, t("dragon.gender"), :select,     menu: dragon_gender_menu(params[:gender])],
-    [:order,  t("order"),         :select,     menu: dragon_order_menu(params[:order])],
+    [:name,   t("dragon.name"),   :text,   size: 16, placeholder: t("dragon.name")],
+    [:gender, t("dragon.gender"), :select, menu: dragon_gender_menu(params[:gender])],
+    [:order,  t("order"),         :select, menu: dragon_order_menu(params[:order])],
   ]
 
 .row
