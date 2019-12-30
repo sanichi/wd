@@ -81,8 +81,14 @@ form.crud
     input[type="text"], textarea, select
       background: lighten($pink, 40%)
 
-// Flash notices. Note that, for dismissal, the class "alert" needs to be
-// explicitly present in the HTML, so we can't just extend .flash with .alert.
+// For the form-less text-area on the contacts page.
+
+textarea#emails_to_copy
+  @extend .p-1, .text-monospace, .rounded
+  font-size: 0.9rem
+  width: 100%
+
+// Flash notices. Note that, for dismissal, the class "alert" needs to be explicitly present in the HTML.
 
 .flash
   text-align: center
