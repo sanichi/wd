@@ -1,4 +1,8 @@
-- set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")
+:ruby
+  inputs = [
+    [:role,  t("player.roles"), :select, menu: player_role_menu(params[:role], search: true)],
+  ]
+  set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")
 
 %section
   .header{class: "#{can?(:create, Player) ? '' : 'text-center'}"}
@@ -6,17 +10,29 @@
     - if can?(:create, Player)
       .float-right.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-info btn-sm"
   .body
+    - unless current_user.guest?
+      = render "utils/search/form", index: contacts_players_path, inputs: inputs, remote: false
     %table{class: "table table-bordered table-striped table-sm mt-3"}
       %thead
         %tr
           %th= t("player.name")
           %th= t("player.email")
           %th.d-none.d-sm-table-cell= t("player.phone")
-          %th.d-none.d-md-table-cell= t("player.contact.position")
+          %th.d-none.d-md-table-cell
+            - if current_user.guest?
+              = t("player.contact.position")
+            - else
+              = t("player.roles.roles")
       %tbody
         - @players.each do |player|
           %tr
             %td= link_to_if !current_user.guest?, player.name, player
             %td= encrypted_mail_to(player.email)
             %td.d-none.d-sm-table-cell= player.phone
-            %td.d-none.d-md-table-cell= player_roles(player.principle_roles)
+            %td.d-none.d-md-table-cell
+              - if current_user.guest?
+                = player_roles(player.principle_roles)
+              - else
+                = player_roles(player.roles).truncate(50)
+- if @emails
+  %pre= @emails

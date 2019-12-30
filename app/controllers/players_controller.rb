@@ -13,7 +13,8 @@ class PlayersController < ApplicationController
     if current_user.guest?
       @players = @players.where(contact: true).by_rank
     else
-      @players = @players.by_name
+      @players = Player.search_contacts(@players, params)
+      @emails = @players.map(&:long_email).compact.join(", ")
     end
   end
 

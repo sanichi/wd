@@ -56,16 +56,28 @@ class Player < ApplicationRecord
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end
-    role = params[:role].to_s
+    search_role(players, params[:role].to_s)
+  end
+
+  def self.search_contacts(players, params)
+    players = players.by_name
+    if sql = cross_constraint(params[:name], %w{first_name last_name})
+      players = players.where(sql)
+    end
+    search_role(players, params[:role].to_s)
+  end
+
+  def self.search_role(players, role)
     if role == "captain"
       sql = ROLES.select { |r| r.match?(/\Acaptain/) }.map { |r| "'#{r}' = ANY (roles)" }.join(" OR ")
-      players = players.where(sql)
+      players.where(sql)
     elsif role.match(/\Aplayer_(\w+)\z/)
-      players = players.in_team($1)
+      players.in_team($1)
     elsif ROLES.include?(role) && role != "member"
-      players = players.where("'#{role}' = ANY (roles)")
+      players.where("'#{role}' = ANY (roles)")
+    else
+      players
     end
-    players
   end
 
   def principle_roles
@@ -76,6 +88,11 @@ class Player < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def long_email
+    return nil unless email.present?
+    "#{name} <#{email}>"
   end
 
   def to_s # for rspec tests
