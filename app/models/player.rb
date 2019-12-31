@@ -73,7 +73,7 @@ class Player < ApplicationRecord
       players.where(sql)
     elsif role.match(/\Aplayer_(\w+)\z/)
       players.in_team($1)
-    elsif ROLES.include?(role) && role != "member"
+    elsif ROLES.include?(role)
       players.where("'#{role}' = ANY (roles)")
     else
       players
