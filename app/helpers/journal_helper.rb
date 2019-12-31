@@ -1,7 +1,11 @@
 module JournalHelper
   def resource_link(journal)
-    return nil unless journal.resource_id.present?
-    return journal.resource_id unless journal.resource.match?(/\A(Blog|Book|Game|Player|User)\z/)
-    link_to journal.resource_id, "/#{journal.resource.downcase.pluralize}/#{journal.resource_id}"
+    id = journal.resource_id
+    return nil unless id.present?
+    resource = journal.resource
+    return id unless resource.match?(/\A(Blog|Book|Game|Player|User)\z/)
+    object = resource.constantize.find_by(id: id)
+    return id unless object
+    link_to id, object
   end
 end
