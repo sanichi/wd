@@ -75,7 +75,7 @@ end
   end
 end
 
-Player.by_rating.all.each do |p|
+Player.by_sca.all.each do |p|
   puts p.name
 
   if p.fide_id.present? && p.fide_rating.present?

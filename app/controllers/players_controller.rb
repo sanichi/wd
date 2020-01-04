@@ -19,10 +19,10 @@ class PlayersController < ApplicationController
   end
 
   def registration
-    @players = @players.in_team("s").by_rating
-    @president = Player.find_by(first_name: "Donald", last_name: "Heron")
-    @secretary = Player.find_by(first_name: "Jim", last_name: "O'Neil")
-    @captain = Player.find_by(first_name: "Mark", last_name: "Orr")
+    @players = @players.in_team("s").by_fide
+    @president = Player.find_by("'president' = ANY (roles)")
+    @secretary = Player.find_by("'treasurer' = ANY (roles)")
+    @captain = Player.find_by("'captain_s' = ANY (roles)")
   end
 
   def create

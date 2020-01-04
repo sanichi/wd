@@ -42,16 +42,20 @@ class Player < ApplicationRecord
   validates :title, inclusion: { in: TITLES }, allow_nil: true
   validate :roles_rules
 
-  scope :by_name,   ->    { order(:first_name, :last_name) }
-  scope :by_rank,   ->    { order(:rank) }
-  scope :by_rating, ->    { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
-  scope :in_team,   ->(t) { where("'player_#{t}' = ANY (roles) OR 'captain_#{t}' = ANY (roles)") }
+  scope :by_fide, ->    { order(Arel.sql("COALESCE(fide_rating, sca_rating) DESC NULLS LAST, first_name, last_name")) }
+  scope :by_name, ->    { order(:first_name, :last_name) }
+  scope :by_rank, ->    { order(:rank) }
+  scope :by_sca,  ->    { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
+  scope :in_team, ->(t) { where("'player_#{t}' = ANY (roles) OR 'captain_#{t}' = ANY (roles)") }
 
   def self.search(players, params)
-    if params[:order] == "name"
+    case params[:order]
+    when "name"
       players = players.by_name
+    when "fide"
+      players = players.by_fide
     else
-      players = players.by_rating
+      players = players.by_sca
     end
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)

@@ -11,9 +11,8 @@
             %tr
               %th
               %th.text-center Name of player
-              %th.text-center CS Grade
-              %th.text-center CS Pnum
-              %th.text-center FIDE Reg.
+              %th.text-center{colspan: 2} CS
+              %th.text-center{colspan: 2} FIDE
           %tbody
             - @players.each_with_index do |player, i|
               %tr
@@ -21,7 +20,8 @@
                 %td= player.name
                 %td.text-center= player.sca_rating
                 %td.text-center= player.sca_id
-                %td.text-center= player.fide_id.present? ? "Yes" : "No"
+                %td.text-center= player.fide_rating
+                %td.text-center= player.fide_id
       .body
         %p
           %u Team contact details

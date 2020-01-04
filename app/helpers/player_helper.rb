@@ -16,7 +16,7 @@ module PlayerHelper
   end
 
   def player_order_menu(selected)
-    opts = ["rating", "name"].map { |order| [t("player.order.#{order}"), order] }
+    opts = ["sca", "fide", "name"].map { |order| [t("player.order.#{order}"), order] }
     options_for_select(opts, selected)
   end
 
