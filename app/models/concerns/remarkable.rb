@@ -32,9 +32,9 @@ module Remarkable
 
     def get_klass(inst)
       if inst&.match?(/R/i)
-        "float-right ml-3"
+        "float-right ml-3 mt-1 mb-1"
       elsif inst&.match?(/L/i)
-        "float-left mr-3"
+        "float-left mr-3 mt-1 mb-1"
       else
         "mx-auto d-block mt-3 mb-3"
       end
