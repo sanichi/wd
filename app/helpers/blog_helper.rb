@@ -10,6 +10,12 @@ module BlogHelper
     options_for_select(opts, selected)
   end
 
+  def blog_tag_menu(selected)
+    opts = Blog::TAGS.map { |t| [t("blog.tags.#{t}"), t] }
+    opts.unshift [t("none"), ""]
+    options_for_select(opts, selected)
+  end
+
   def blog_link(slug)
     blog = Blog.find_by(slug: slug, draft: false)
     return nil unless blog

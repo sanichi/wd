@@ -17,6 +17,7 @@ describe Blog do
       fill_in t("blog.title"), with: data.title
       fill_in t("blog.summary"), with: data.summary
       fill_in t("blog.story"), with: data.story
+      select data.tag ? t("blog.tags.#{data.tag}") : t("none"), from: t("blog.tag")
       data.draft? ? check(t("blog.draft")) : uncheck(t("blog.draft"))
       click_button t("save")
 
@@ -27,6 +28,7 @@ describe Blog do
       expect(b.title).to eq data.title
       expect(b.summary).to eq data.summary
       expect(b.story).to eq data.story
+      expect(b.tag).to eq data.tag
       expect(b.draft?).to eq data.draft
       expect(b.user).to eq blogger
       expect(b.slug).to be_nil

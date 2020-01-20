@@ -5,6 +5,7 @@ FactoryBot.define do
     story           { Faker::Lorem.paragraphs(number: 3) }
     summary         { Faker::Lorem.paragraph }
     sequence(:slug) { |n| ["slug#{n}", nil, nil].sample }
+    tag             { [Blog::TAGS.sample, nil].sample }
     title           { Faker::Lorem.sentence(word_count: 5).truncate(Blog::MAX_TITLE) }
     user            { nil }
   end

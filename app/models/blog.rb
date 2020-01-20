@@ -7,11 +7,14 @@ class Blog < ApplicationRecord
 
   MAX_SLUG = 25
   MAX_TITLE = 50
+  MAX_TAG = 12
+  TAGS = %w/ateam bteam cteam spens/
   VALID_SLUG = /\A[a-z][a-z0-9_]+\z/
 
   before_validation :normalize_attributes
 
   validates :summary, presence: true
+  validates :tag, inclusion: { in: TAGS }, allow_nil: true
   validates :title, presence: true, length: { maximum: MAX_TITLE }
   validates :slug,
     length: { maximum: MAX_SLUG },
@@ -19,6 +22,7 @@ class Blog < ApplicationRecord
     uniqueness: true,
     allow_nil: true
 
+  scope :by_id,       -> { order(:id) }
   scope :created_des, -> { order(created_at: :desc) }
   scope :created_asc, -> { order(created_at: :asc) }
   scope :updated_des, -> { order(updated_at: :desc) }
@@ -72,6 +76,7 @@ class Blog < ApplicationRecord
     title&.squish!
     self.summary = clean(summary)
     self.story = clean(story)
+    self.tag = nil if tag.blank?
   end
 
   def clean(markdown)

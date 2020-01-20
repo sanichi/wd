@@ -19,8 +19,8 @@ describe Book do
       fill_in t("book.year"), with: data.year
       fill_in t("book.copies"), with: data.copies
       fill_in t("book.borrowers"), with: data.borrowers
-      select I18n.t("book.categories.#{data.category}"), from: t("book.category")
-      select I18n.t("book.media.#{data.medium}"), from: t("book.medium")
+      select t("book.categories.#{data.category}"), from: t("book.category")
+      select t("book.media.#{data.medium}"), from: t("book.medium")
       fill_in t("book.note"), with: data.note
       click_button t(:save)
 
@@ -44,8 +44,8 @@ describe Book do
       fill_in t("book.year"), with: data.year
       fill_in t("book.copies"), with: data.copies
       fill_in t("book.borrowers"), with: data.borrowers
-      select I18n.t("book.categories.#{data.category}"), from: t("book.category")
-      select I18n.t("book.media.#{data.medium}"), from: t("book.medium")
+      select t("book.categories.#{data.category}"), from: t("book.category")
+      select t("book.media.#{data.medium}"), from: t("book.medium")
       fill_in t("book.note"), with: data.note
       click_button t(:save)
 

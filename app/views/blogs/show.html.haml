@@ -4,6 +4,13 @@
   = content_for :javascript do
     = render "markdown_button.js"
 
+- if @blog.tag
+  %p.text-center
+    %button.btn-success.btn-sm
+      = link_to t("blog.prev"), @prev, class: "badge badge-light" if @prev
+      = t("blog.tags.#{@blog.tag}")
+      = link_to t("blog.next"), @next, class: "badge badge-light" if @next
+
 %article
   .header
     %h3.d-inline

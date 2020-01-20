@@ -10,18 +10,26 @@ en:
     markdown: M↓
     more: Read more …
     new: New Blog
+    next: ▶︎
     older: Older news …
     pin: Pin
+    prev: ◀︎
     story: Story
     summary: Summary
     slug: Slug
+    tag: Tag
     thing: 'Blog «%{title}»'
     title: Title
+    icon:
+      draft: ✏️
+      pin: 📌
     order:
       created_des: created ↓
       created_asc: created ↑
       updated_des: updated ↓
       updated_asc: updated ↑
-    icon:
-      draft: ✏️
-      pin: 📌
+    tags:
+      ateam: A-Team
+      bteam: B-Team
+      cteam: C-Team
+      spens: Spens

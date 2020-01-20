@@ -31,6 +31,13 @@ class BlogsController < ApplicationController
     end
   end
 
+  def show
+    if @blog.tag.present?
+      @prev = Blog.by_id.where(tag: @blog.tag).where("id < #{@blog.id}").last
+      @next = Blog.by_id.where(tag: @blog.tag).where("id > #{@blog.id}").first
+    end
+  end
+
   def destroy
     @blog.destroy
     redirect_to blogs_path, alert: success("deleted")
@@ -44,7 +51,7 @@ class BlogsController < ApplicationController
   end
 
   def resource_params
-    permitted = [:draft, :story, :summary, :title]
+    permitted = [:draft, :story, :summary, :tag, :title]
     permitted.concat [:pin, :slug] if current_user.admin?
     params.require(:blog).permit(*permitted)
   end

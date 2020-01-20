@@ -1,8 +1,9 @@
 :ruby
   inputs = [
-    [:title,   t("blog.title"),   :text, autofocus: true],
-    [:summary, t("blog.summary"), :area, rows: 8],
-    [:story,   t("blog.story"),   :area, rows: 24],
+    [:title,   t("blog.title"),   :text,   autofocus: true],
+    [:summary, t("blog.summary"), :area,   rows: 8],
+    [:story,   t("blog.story"),   :area,   rows: 24],
+    [:tag,     t("blog.tag"),     :select, menu: blog_tag_menu(blog.tag)],
     [:draft,   t("blog.draft"),   :check],
   ]
   if current_user.admin?
