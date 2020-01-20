@@ -8,7 +8,7 @@ class Blog < ApplicationRecord
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
-  TAGS = %w/ateam bteam cteam spens/
+  TAGS = %w/ateam bteam cteam sncl spens/
   VALID_SLUG = /\A[a-z][a-z0-9_]+\z/
 
   before_validation :normalize_attributes
