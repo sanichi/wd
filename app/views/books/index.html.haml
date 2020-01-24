@@ -15,7 +15,7 @@
     - if can?(:create, Book)
       .float-right.mt-1= link_to t("book.new"), new_book_path, class: "btn btn-info btn-sm"
   .body
-    = render "utils/search/form", index: books_path, inputs: inputs
+    = render "utils/search/form", index: books_path, inputs: inputs, button: true
     %table{class: "table table-bordered table-striped table-sm mt-3"}
       %thead
         %tr

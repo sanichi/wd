@@ -1,5 +1,6 @@
 - defined?(remote) || remote = true
 - defined?(button) || button = false
+-# see https://www.tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/
 
 = form_tag index, method: :get, remote: remote, class: "form-inline justify-content-center mt-3" do
   - inputs.each do | param, label, type, options |
