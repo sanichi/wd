@@ -1,0 +1,5 @@
+- html.each do |part|
+  - if part.match(/\AFEN__(\d+)\z/)
+    = render "board", id: $1
+  - else
+    ~ part

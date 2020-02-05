@@ -1,0 +1,19 @@
+$(function() {
+
+  var boards = [];
+
+<% fens.each do |id, fen| %>
+  boards.push(Chessboard("board_<%= id %>", {
+    showNotation: <%= fen.match?(/(W|B|N)\Z/) ? 'true' : 'false' %>,
+    position: "<%= fen %>",
+    orientation: "<%= fen.match?(/b\Z/i) ? 'black' : 'white' %>",
+  }));
+<% end %>
+
+  $(window).resize(function() {
+    $.each(boards, function(i, board) {
+      board.resize();
+    });
+  });
+
+});

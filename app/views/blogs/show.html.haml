@@ -1,8 +1,11 @@
 - set_meta_tags title: @blog.title
 
+- html, fens = @blog.story_html
+
 - if can?(:edit, Blog)
   = content_for :javascript do
     = render "markdown_button.js"
+    = render "boards.js", fens: fens
 
 - if @blog.tag
   %p.text-center
@@ -19,7 +22,7 @@
     .float-right.mt-1
       = @blog.created_at.strftime("%b %e %Y")
   .body
-    ~ @blog.story_html
+    = render "story", html: html
   .footer
     = link_to t("blog.blogs"), last_path(:blogs), class: "btn btn-success btn-sm"
     - if can?(:edit, Blog)

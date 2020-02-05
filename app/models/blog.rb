@@ -5,6 +5,8 @@ class Blog < ApplicationRecord
 
   belongs_to :user, inverse_of: :blogs, optional: true
 
+  FEN1 = /\n*\s*(FEN\s*"[^"]*")\s*\n*/
+  FEN2 = /\AFEN\s*"([^"]*)"\z/
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
@@ -47,18 +49,29 @@ class Blog < ApplicationRecord
     paginate(matches, params, path, opt)
   end
 
-  def story_html
-    if story.present?
-      fst_half = summary.rstrip
-      snd_half = story.lstrip
-      to_html("#{fst_half}\n\n#{snd_half}")
-    else
-      summary_html
-    end
-  end
-
   def summary_html
     to_html(summary)
+  end
+
+  def story_html
+    html = []
+    fens = {}
+    html.push summary_html
+    return [html, fens] unless story.present?
+    fen_id = 0
+    parts = story.split(FEN1)
+    parts.each do |p|
+      if p.present?
+        if p.match(FEN2)
+          fens[fen_id] = $1
+          html.push "FEN__#{fen_id}"
+          fen_id += 1
+        else
+          html.push to_html(p)
+        end
+      end
+    end
+    [html, fens]
   end
 
   def to_param
