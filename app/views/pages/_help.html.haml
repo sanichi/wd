@@ -5,6 +5,7 @@
   %li= help_link :book_search
   %li= help_link :get_login
   %li= help_link :create_news
+  %li= help_link :add_position
   %li= help_link :add_image
   %li= help_link :create_game
   %li= help_link :house_style
@@ -166,6 +167,50 @@
   This should be the half-move number and when the game is displayed the position will be the
   one just after this move.
 
+= help_section :add_position
+
+%p
+  To add a chess position to a news item, include something like the following in your markdown on a
+  single line on it's own:
+%pre
+  FEN "8/6k1/4KpPp/5P2/8/8/8/8 w - - 0 1"
+%p
+  This isn't actually markdown, it's a special notation which is dealt with separately.
+  As you can see, it's a
+  = link_to "FEN", "https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation", target: "external"
+  string, a bit like one of the tag pairs in a
+  = link_to "PGN", "https://en.wikipedia.org/wiki/Portable_Game_Notation", target: "external"
+  game but without the square brackets.
+%p
+  You can have as many positions as you like but they must all go in the
+  %b= t("blog.story")
+  section and not the
+  %b= t("blog.summary")
+  section (where they would be ignored), as the latter needs to be kept short.
+%p
+  By default the rendered boards are oriented with respect to white and have no rank or file markings.
+  If you want to reverse the orientation or add markings (perhaps because the position is such that
+  it's difficult to determine which side is playing up the board) add a single character to the FEN
+  string as follows:
+%ul
+  %li
+    %b w
+    white orientation, no markings (same as default)
+  %li
+    %b b
+    black orientation, no markings
+  %li
+    %b W
+    white orientation, with markings
+  %li
+    %b B
+    black orientation, with markings
+%p
+  For example, here's how the above example position would be modified to reverse the orientation
+  and add markings:
+%pre
+  FEN "8/6k1/4KpPp/5P2/8/8/8/8 w - - 0 1 B"
+
 = help_section :add_image
 
 %p
@@ -175,7 +220,7 @@
 %pre
   ![this is a great photo](photo1.jpg "250R")
 %p
-  The text inside the square brackets is alternative text and doesn't normally display.
+  The text inside the square brackets is for assitive technologies and doesn't normally display.
   The image filename (supplied to you by the webmaster) goes after the opening parenthesis.
   The text in quotes is optional and in regular markdown would be used to give the image a
   title but, in this application, is used instead to place and resize the image according

@@ -5,6 +5,7 @@ module HelpHelper
     get_login:     "Register as a User",
     create_news:   "Create a News Item",
     add_image:     "Add an Image",
+    add_position:  "Add a Position",
     create_game:   "Create a Game",
     house_style:   "House Style",
   }
