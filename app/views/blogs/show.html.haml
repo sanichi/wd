@@ -2,10 +2,10 @@
 
 - html, fens = @blog.story_html
 
-- if can?(:edit, Blog)
-  = content_for :javascript do
+= content_for :javascript do
+  = render "boards.js", fens: fens
+  - if can?(:edit, Blog)
     = render "markdown_button.js"
-    = render "boards.js", fens: fens
 
 - if @blog.tag
   %p.text-center
