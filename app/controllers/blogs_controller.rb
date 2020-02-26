@@ -34,7 +34,9 @@ class BlogsController < ApplicationController
   def show
     if @blog.tag.present?
       @prev = Blog.by_id.where(tag: @blog.tag).where("id < #{@blog.id}").last
+      @prev = nil if @prev && !can?(:read, @prev)
       @next = Blog.by_id.where(tag: @blog.tag).where("id > #{@blog.id}").first
+      @next = nil if @next && !can?(:read, @next)
     end
   end
 
