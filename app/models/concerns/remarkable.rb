@@ -26,7 +26,7 @@ module Remarkable
       elsif inst&.match(/([1-9]\d*)/) && $1.to_i <= 300 && $1.to_i >= 100
         "#{$1}px"
       else
-        "200px"
+        "300px"
       end
     end
 
