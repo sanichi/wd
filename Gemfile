@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-
-ruby '2.6.2'
 
 gem 'rails', '~> 6.0.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -18,10 +15,7 @@ gem 'cancancan', '~> 3.0'
 gem 'actionview-encoded_mail_to', '~> 1.0'
 gem 'pgn', '~> 0.3'
 gem "mechanize", '~> 2.7', require: false
-
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.2', require: false # required in config/boot.rb
 
 group :development, :test do
   gem 'byebug', platform: :mri

@@ -1,5 +1,5 @@
-# config valid for current version and patch releases of Capistrano
-lock "~> 3.11.2"
+# config valid for specified versions of Capistrano
+# lock "~> 3.11.2"
 
 set :application, "sni_wd_app"
 set :repo_url, "git@bitbucket.org:sanichi/sni_wd_app.git"
