@@ -55,6 +55,7 @@ module Remarkable
       space_after_headers: true,
     }
     markdown = Redcarpet::Markdown.new(renderer, options)
+    text.gsub!(/([\d½])-([\d½])/, '\1&#8209;\2') # prevent narrow tables line-breaking scores
     markdown.render(text).html_safe
   end
 end
