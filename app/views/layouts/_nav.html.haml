@@ -10,14 +10,18 @@
       %li= link_to t("player.players"), players_path
       %li= link_to t("game.games"), games_path
       %li.dropdown
-        = link_to t("other"), "#", class: "dropdown-toggle", id: "history-dropdown", "data-toggle" => "dropdown"
+        = link_to t("history"), "#", class: "dropdown-toggle", "data-toggle" => "dropdown"
+        .dropdown-menu
+          = blog_link "early_history"
+          = blog_link "team_titles"
+          = blog_link "club_championships"
+          = blog_link "honved89"
+          = link_to t("dragon.dragons"), dragons_path
+      %li.dropdown
+        = link_to t("other"), "#", class: "dropdown-toggle", "data-toggle" => "dropdown"
         .dropdown-menu
           = link_to t("blog.blogs"), blogs_path
           = link_to t("book.books"), books_path
-          = blog_link "early_history"
-          = blog_link "club_championships"
-          = blog_link "team_titles"
-          = link_to t("dragon.dragons"), dragons_path
           -# currently we don't advertise this page, it's meant for SCA admins
           - if can?(:registration, Player) && !current_user.guest?
             = link_to t("player.registration.registration"), registration_players_path
