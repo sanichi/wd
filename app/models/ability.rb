@@ -10,7 +10,6 @@ class Ability
     end
 
     can :read, Blog, draft: false
-    can :read, Blog, id: 40 # TEMPORARY
     can :read, Book
     can :read, Dragon
     can :read, Game
