@@ -41,9 +41,9 @@ module Remarkable
     end
   end
 
-  def to_html(text, filter_html: true)
+  def to_html(text, filter_html: true, with_toc_data: true)
     return "" unless text.present?
-    renderer = CustomRenderer.new(filter_html: filter_html)
+    renderer = CustomRenderer.new(filter_html: filter_html, with_toc_data: with_toc_data)
     options =
     {
       autolink: false,
