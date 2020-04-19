@@ -7,7 +7,10 @@ set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
-before 'deploy:restart', 'deploy:turn_off_ssl'
+namespace :deploy do
+  before :restart, :turn_off_ssl
+  before :restart, :deny_robots
+end
 
 # server-based syntax
 # ======================
