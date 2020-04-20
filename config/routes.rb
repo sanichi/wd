@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "signin" => "sessions#new"
 
-  %w[help home].each do |page|
+  %w[env help home].each do |page|
     get page => "pages##{page}"
   end
 

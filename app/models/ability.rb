@@ -9,6 +9,7 @@ class Ability
       return
     end
 
+    can [:home, :help], :page
     can :read, Blog, draft: false
     can :read, Book
     can :read, Dragon

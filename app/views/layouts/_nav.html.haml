@@ -30,7 +30,10 @@
             = link_to t("user.users"), users_path
           - if can?(:index, Journal)
             = link_to t("journal.journal"), journals_path
-          = link_to t("help.help"), help_path
+          - if can?(:help, :page)
+            = link_to t("help.help"), help_path
+          - if can?(:env, :page)
+            = link_to t("misc.env"), env_path
     %ul.right
       - unless controller_name == "sessions"
         %li
