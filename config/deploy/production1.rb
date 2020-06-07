@@ -1,27 +1,16 @@
-server "thessaloniki.markorr.net", user: "sanichi", roles: %w{web app db}
-
-set :deploy_to, '/var/www/wanderingdragonschess.club'
-set :rails_env, 'production'
-
-set :rbenv_type, :user
-set :rbenv_ruby, File.read('.ruby-version').strip
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-
-namespace :deploy do
-  before :restart, :turn_off_ssl
-  before :restart, :deny_robots
-end
+server "tsukuba.markorr.net", user: "sanichi", roles: %w{web app db}
+set :deploy_to, "/var/www/wd"
 
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
+
+
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-
-
 
 
 
