@@ -3,7 +3,7 @@
 
 set :application, "sni_wd_app"
 set :repo_url, "git@bitbucket.org:sanichi/sni_wd_app.git"
-append :linked_files, "config/database.yml", "config/master.key", "public/sitemap.xml"
+append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 set :log_level, :info
 
