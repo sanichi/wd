@@ -1,10 +1,10 @@
 server "thessaloniki.sanichi.me", user: "sanichi", roles: %w{web app db}
 
-set :deploy_to, '/var/www/wd'
-set :rails_env, 'production'
+set :deploy_to, "/var/www/wd"
+set :rails_env, "production"
 
 set :rbenv_type, :user
-set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_ruby, File.read(".ruby-version").strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
 # server-based syntax

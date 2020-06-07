@@ -1,5 +1,7 @@
 server "tsukuba.markorr.net", user: "sanichi", roles: %w{web app db}
+
 set :deploy_to, "/var/www/wd"
+set :rails_env, "production"
 
 # server-based syntax
 # ======================
