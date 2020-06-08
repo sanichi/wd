@@ -3,6 +3,10 @@ server "tsukuba.markorr.net", user: "sanichi", roles: %w{web app db}
 set :deploy_to, "/var/www/wd"
 set :rails_env, "production"
 
+namespace :deploy do
+  before :restart, :deny_robots
+end
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
