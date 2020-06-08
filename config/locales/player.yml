@@ -25,7 +25,7 @@ en:
       copy: Copy Emails
       description: Contact email addresses and phone nuumbers for Wandering Dragon club officials and members.
       keywords: contact, email, phone, wandering, dragons, club, members, captains, officers, officials, members, organisers
-      position: Role(s)
+      position: Roles
     order:
       fide: FIDE rating ↓
       name: name ↓
@@ -57,6 +57,6 @@ en:
       player_r: Richardson
       player_s: Spens
       president: President
-      roles: Role(s) and Teams
+      roles: Roles and Teams
       treasurer: Treasurer
       webmaster: Webmaster
