@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.3.1'
+gem 'rails', '6.0.3.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'haml-rails', '~> 2.0'
 gem 'sassc-rails', '~> 2.1'
