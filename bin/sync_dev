@@ -2,15 +2,10 @@
 use strict;
 
 # Setup.
-my $tsu_app = '/var/www/wd/current';
-my $tsu_db  = 'sni_wd_app_production';
+my $tsu_db  = 'wd_production';
+my $loc_db  = 'wd_development';
 my $tmp_sql = '/tmp/wd.sql';
-my $loc_app = '/Users/mjo/Projects/sni_wd_app';
-my $loc_db  = 'sni_wd_app_development';
-my $ssh_usr = 'sanichi@tsukuba.markorr.net';
-
-# Sanity check.
-&check(-d $loc_app, "directory $loc_app does not exist");
+my $ssh_usr = 'sanichi@thessaloniki.sanichi.me';
 
 # Generate data on server.
 &run("ssh $ssh_usr 'pg_dump $tsu_db --no-owner --no-privileges --clean --file $tmp_sql'", "couldn't export DB on server");
