@@ -1,8 +1,5 @@
-# config valid for specified versions of Capistrano
-# lock "~> 3.11.2"
-
-set :application, "sni_wd_app"
-set :repo_url, "git@bitbucket.org:sanichi/sni_wd_app.git"
+set :application, "wd"
+set :repo_url, "git@bitbucket.org:sanichi/wd.git"
 append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 set :log_level, :info
