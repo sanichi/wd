@@ -21,7 +21,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 4.0'
   gem "capybara", "~> 3.28"
-  gem 'factory_bot_rails', '~> 5.0'
+  gem 'factory_bot_rails', '~> 6.1'
   gem 'faker', '~> 2.1'
   gem 'launchy', '~> 2.4'
   gem 'awesome_print', require: "ap"
@@ -35,7 +35,5 @@ group :development do
   gem 'puma', '~> 4.3'
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-passenger', '~> 0.2', require: false
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'listen', '~> 3.2'
 end
