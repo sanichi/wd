@@ -8,27 +8,27 @@ gem 'jbuilder', '~> 2.7'
 gem 'uglifier', '~> 4.2'
 gem 'jquery-rails', '~> 4.3'
 gem 'meta-tags', '~> 2.12'
-gem "redcarpet", '~> 3.5'
+gem 'redcarpet', '~> 3.5'
 # start: until problems solved
-# gem "bootstrap", '~> 4.5'
-gem "autoprefixer-rails", "9.8.5"
-gem "bootstrap", "4.5.0"
+# gem 'bootstrap', '~> 4.5'
+gem 'autoprefixer-rails', '9.8.5'
+gem 'bootstrap', '4.5.0'
 # end: until problems solved
 gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 3.0'
 gem 'actionview-encoded_mail_to', '~> 1.0'
 gem 'pgn', '~> 0.3'
-gem "mechanize", '~> 2.7', require: false
+gem 'mechanize', '~> 2.7', require: false
 gem 'bootsnap', '>= 1.4.2', require: false # required in config/boot.rb
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 4.0'
-  gem "capybara", "~> 3.28"
+  gem 'capybara', '~> 3.28'
   gem 'factory_bot_rails', '~> 6.1'
   gem 'faker', '~> 2.1'
   gem 'launchy', '~> 2.4'
-  gem 'awesome_print', require: "ap"
+  gem 'awesome_print', require: 'ap'
 end
 
 group :test do
