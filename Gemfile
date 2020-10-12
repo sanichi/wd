@@ -9,11 +9,8 @@ gem 'uglifier', '~> 4.2'
 gem 'jquery-rails', '~> 4.3'
 gem 'meta-tags', '~> 2.12'
 gem 'redcarpet', '~> 3.5'
-# start: until problems solved
-# gem 'bootstrap', '~> 4.5'
-gem 'autoprefixer-rails', '9.8.5'
-gem 'bootstrap', '4.5.0'
-# end: until problems solved
+gem 'autoprefixer-rails', '~> 10.0'
+gem 'bootstrap', '~> 4.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 3.0'
 gem 'actionview-encoded_mail_to', '~> 1.0'
