@@ -1,7 +1,7 @@
 - set_meta_tags title: @game.title
 
 = content_for :javascript do
-  = render "controls.js", game: @game, move: @move
+  = render partial: "controls", formats: :js, locals: { game: @game, move: @move }
 
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}
@@ -12,7 +12,7 @@
         .row
           %div{class: center(sm: 8, xs: 10)}
             #board.mb-3
-            = render "controls.html.haml"
+            = render "controls"
       - if @game.study?
         .body.text-center
           = link_to t("game.show_moves"), "#", id: "show_moves", class: "btn btn-dark btn-sm"

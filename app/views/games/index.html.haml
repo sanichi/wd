@@ -6,7 +6,7 @@
   set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
 
 = content_for :javascript do
-  = render "boards.js"
+  = render partial: "boards", formats: :js
 
 .row
   %div{class: center(xl: 6, lg: 8, md: 10, sm: 12)}

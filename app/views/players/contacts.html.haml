@@ -6,7 +6,7 @@
 
 - if @emails
   = content_for :javascript do
-    = render "copy_emails.js"
+    = render partial: "copy_emails", formats: :js
 
 %section
   .header{class: "#{can?(:create, Player) ? '' : 'text-center'}"}

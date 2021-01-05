@@ -1,0 +1,3 @@
+#!/bin/sh
+# temporary solution to https://github.com/rails/rails/issues/40795
+exit 0

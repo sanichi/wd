@@ -3,9 +3,9 @@
 - html, fens = @blog.story_html
 
 = content_for :javascript do
-  = render "boards.js", fens: fens
+  = render partial: "boards", formats: :js, locals: { fens: fens }
   - if can?(:edit, Blog)
-    = render "markdown_button.js"
+    = render partial: "markdown_button", formats: :js
 
 - if @blog.tag
   %p.text-center
