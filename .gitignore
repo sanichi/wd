@@ -15,9 +15,6 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-/storage/*
-!/storage/.keep
-
 /public/assets
 .byebug_history
 
