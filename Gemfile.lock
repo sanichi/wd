@@ -298,7 +298,7 @@ DEPENDENCIES
   capistrano-passenger (~> 0.2)
   capistrano-rails (~> 1.4)
   capybara (~> 3.28)
-  database_cleaner-active_record
+  database_cleaner-active_record (~> 1.8)
   factory_bot_rails (~> 6.0)
   faker (~> 2.10)
   haml-rails (~> 2.0)
