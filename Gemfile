@@ -27,7 +27,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner-active_record', '~> 1.8'
+  gem 'database_cleaner-active_record', '~> 2.0'
 end
 
 group :development do
