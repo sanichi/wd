@@ -35,7 +35,6 @@ class Table
       white.squish!
       black.sub!(/\(.*\)/, "")
       black.squish!
-      Rails.logger.debug("#{white}-#{black}-#{result}") if white == "Donkin, A." || black == "Donkin, A."
       if white.present? && black.present? && white != black
         @rhash[white][black] += (result == '1-0' ? 2 : (result == '0-1' ? 0 : 1))
         @rhash[black][white] += (result == '0-1' ? 2 : (result == '1-0' ? 0 : 1))
