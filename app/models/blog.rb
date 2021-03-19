@@ -7,6 +7,7 @@ class Blog < ApplicationRecord
 
   FEN1 = /\n*\s*(FEN\s*"[^"]*")\s*\n*/
   FEN2 = /\AFEN\s*"([^"]*)"\z/
+  TABLE = /(?:\A|\n)_TABLE_(\z|\n)/
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
@@ -50,7 +51,7 @@ class Blog < ApplicationRecord
   end
 
   def summary_html
-    to_html(summary)
+    to_html(with_table(summary))
   end
 
   def story_html
@@ -59,7 +60,7 @@ class Blog < ApplicationRecord
     html.push summary_html
     return [html, fens] unless story.present?
     fen_id = 0
-    parts = story.split(FEN1)
+    parts = with_table(story).split(FEN1)
     parts.each do |p|
       if p.present?
         if p.match(FEN2)
@@ -100,5 +101,14 @@ class Blog < ApplicationRecord
     markdown.gsub!(/\[([^\[]+)\]\(https?:\/\/(?:www\.)?wanderingdragonschess.club\/?(.*)\)/, "[\\1](/\\2)")
     markdown = markdown.use_halves
     markdown
+  end
+
+  def with_table(text)
+    if text.match?(TABLE)
+      table = Table.new(self)
+      text.sub(TABLE, table.markdown)
+    else
+      text
+    end
   end
 end

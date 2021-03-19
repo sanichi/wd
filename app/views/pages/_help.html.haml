@@ -7,6 +7,7 @@
   %li= help_link :create_news
   %li= help_link :add_position
   %li= help_link :add_image
+  %li= help_link :add_table
   %li= help_link :create_game
   %li= help_link :house_style
 
@@ -237,6 +238,27 @@
 %p
   When deciding how wide to make your image, remember that it has to display on
   both very large screens (1000's of pixels) and very small ones (a few 100 pixels).
+
+= help_section :add_table
+
+%p
+  Suppose your news item is about a tournament and round results are recorded
+  using markdowm tables with rows like these:
+%pre
+  |Kasparov, G.|1-0|Karpov, A.|
+  |Korchnoi, V.|½-½|Kramnik, V.|
+%p
+  In this case you can save yourself the trouble of constructing a tournament table
+  by including the following macro somewhere in either the summary or story:
+%pre
+  _TABLE_
+%p
+  This macro should be on it's own on one line. As you add results the table will automatically update.
+  The tie breaker rule used for ranking is Sonneborn–Berger. Be careful to spell players' names consistently
+  in results tables. Names such as "Kasparov, G.", "Kasparov, Garry" and "Garry Kasparov" will look like
+  3 different players to the algorithm that constructs the table.
+%p
+  Please note that only one such table should be included per news item.
 
 = help_section :create_game
 
