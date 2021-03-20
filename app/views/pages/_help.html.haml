@@ -246,15 +246,18 @@
   using markdowm tables with rows like these:
 %pre
   |Donkin, C.|1-0|Donkin, A.|
-  |Poots, D.|½-½|Nimmo, H.|
+  |Poots, D.|[½-½](/games/123)|Nimmo, H.|
+  |Ferguson, A.|?-?|Crorie, I.|
 %p
   In this case a tournament table can be inserted automatically by
   including the following macro somewhere in either the summary or story:
 %pre
   _TABLE_
 %p
-  This macro should be on it's own on one line. As results are added, the table automatically updates.
-  The tie breaker rule used for ranking is Sonneborn–Berger.
+  This macro should be on it's own on one line. As results are added, the table
+  automatically updates. The tie breaker rule used for ranking is Sonneborn–Berger.
+  For the results of games that have not yet finished use "?-?".
+  It's okay to link results (as illustrated above) but not player names.
 %p
   Be careful to spell players' names consistently in results tables.
   Names such as "Donkin, C.", "Donkin, Chris" and "Chris Donkin" will
@@ -263,7 +266,7 @@
   will be stripped out. For example, the names extracted from "Donkin, C. (2000)" and
   "Donkin, C. (2½)", "Donkin, C. (SCO)" and "Donkin, C. (WD)" will all be "Donkin, C.".
 %p
-  Please note that only one such table should be included per news item.
+  Please note that only one such table macro should be included per news item.
 
 = help_section :create_game
 

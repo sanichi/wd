@@ -1,11 +1,17 @@
 class Table
-  RESULT = /\|([^|]+)\|[^|]*(1-0|0-1|½-½)[^|]*\|([^|]+)\|\s*(?:\n|\z)/
+  RESULT = /\|([^|]+)\|[^|]*(1-0|0-1|½-½|\?-\?)[^|]*\|([^|]+)\|\s*(?:\n|\z)/
+
   Player = Struct.new(:name, :games, :points, :tb) do
-    def score
-      "#{points/2}#{points%2 == 1 ? '½' : ''}"
+    def pt_score
+      frac = points % 2 == 1 ? "½" : ""
+      if points < 2 && frac.present?
+        frac
+      else
+        "#{points/2}#{frac}"
+      end
     end
 
-    def tbf
+    def tb_score
       frac =
         case tb % 4
         when 1 then "¼"
@@ -13,7 +19,11 @@ class Table
         when 3 then "¾"
         else ""
         end
-      "#{tb/4}#{frac}"
+      if tb < 4 && frac.present?
+        frac
+      else
+        "#{tb/4}#{frac}"
+      end
     end
   end
 
@@ -31,7 +41,7 @@ class Table
     lines.push ""
     lines.push "|#|Player|P|G|TB|"
     lines.push "|:-:|---|:-:|:-:|:-:|"
-    @players.each_with_index { |p, i| lines.push "|#{i+1}|#{p.name}|__#{p.score}__|#{p.games}|#{p.tbf}|" }
+    @players.each_with_index { |p, i| lines.push "|#{i+1}|#{p.name}|__#{p.pt_score}__|#{p.games}|#{p.tb_score}|" }
     lines.push ""
     lines.push ""
     lines.join "\n"
@@ -47,8 +57,20 @@ class Table
       black.sub!(/\(.*\)/, "")
       black.squish!
       if white.present? && black.present? && white != black
-        @rhash[white][black] += (result == '1-0' ? 2 : (result == '0-1' ? 0 : 1))
-        @rhash[black][white] += (result == '0-1' ? 2 : (result == '1-0' ? 0 : 1))
+        case result
+        when "1-0"
+          @rhash[white][black] += 2
+          @rhash[black][white] += 0
+        when "0-1"
+          @rhash[white][black] += 0
+          @rhash[black][white] += 2
+        when "½-½"
+          @rhash[white][black] += 1
+          @rhash[black][white] += 1
+        else
+          @rhash[white] = Hash.new(0) if @rhash[white].empty?
+          @rhash[black] = Hash.new(0) if @rhash[black].empty?
+        end
       end
     end
   end
