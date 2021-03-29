@@ -27,8 +27,9 @@ class Table
     end
   end
 
-  def initialize(blog)
+  def initialize(blog, options)
     @text = blog.summary + blog.story
+    @games = !options.include?("g")
     result_hash
     player_hash
     tie_breakers
@@ -39,9 +40,26 @@ class Table
     lines = []
     lines.push ""
     lines.push ""
-    lines.push "|#|Player|P|G|TB|"
-    lines.push "|:-:|---|:-:|:-:|:-:|"
-    @players.each_with_index { |p, i| lines.push "|#{i+1}|#{p.name}|__#{p.pt_score}__|#{p.games}|#{p.tb_score}|" }
+
+    headers = []
+    headers.push ["#", ":-:"]
+    headers.push ["Player", "---"]
+    headers.push ["P", ":-:"]
+    headers.push ["G", ":-:"] if @games
+    headers.push ["TB", ":-:"]
+    lines.push "|" + headers.map(&:first).join("|") + "|"
+    lines.push "|" + headers.map(&:last).join("|") + "|"
+
+    @players.each_with_index do |p, i|
+      line = []
+      line.push i + 1
+      line.push p.name
+      line.push "__#{p.pt_score}__"
+      line.push p.games if @games
+      line.push p.tb_score
+      lines.push "|" + line.join("|") + "|"
+    end
+
     lines.push ""
     lines.push ""
     lines.join "\n"

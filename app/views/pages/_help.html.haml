@@ -267,6 +267,20 @@
   "Donkin, C. (2½)", "Donkin, C. (SCO)" and "Donkin, C. (WD)" will all be "Donkin, C.".
 %p
   Please note that only one such table macro should be included per news item.
+%p
+  By adding lower case letters or numbers to the end of the macro
+  (between the letter E and the final underscore) you can control
+  details of the table display. For example:
+%pre
+  _TABLEg_
+%p
+  Currently the available options are:
+%dl
+  %ul
+    %li
+      <b>g</b>: Suppress displaying the number of games played for each player.
+      Once a tournament is over, it can be superfluous to repeat the same number
+      for each player. However, until it's finished, this information can be useful.
 
 = help_section :create_game
 

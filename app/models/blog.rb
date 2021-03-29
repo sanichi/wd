@@ -7,7 +7,7 @@ class Blog < ApplicationRecord
 
   FEN1 = /\n*\s*(FEN\s*"[^"]*")\s*\n*/
   FEN2 = /\AFEN\s*"([^"]*)"\z/
-  TABLE = /(?:\A|\n)_TABLE_(\z|\n)/
+  TABLE = /(?:\A|\n)_TABLE([a-z0-9]*)_(\z|\n)/
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
@@ -104,8 +104,8 @@ class Blog < ApplicationRecord
   end
 
   def with_table(text)
-    if text.match?(TABLE)
-      table = Table.new(self)
+    if m = text.match(TABLE)
+      table = Table.new(self, m[1])
       text.sub(TABLE, table.markdown)
     else
       text
