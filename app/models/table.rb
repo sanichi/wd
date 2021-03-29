@@ -2,12 +2,12 @@ class Table
   RESULT = /\|([^|]+)\|[^|]*(1-0|0-1|½-½|\?-\?)[^|]*\|([^|]+)\|\s*(?:\n|\z)/
 
   Player = Struct.new(:name, :games, :points, :tb) do
-    def pt_score
-      frac = points % 2 == 1 ? "½" : ""
-      if points < 2 && frac.present?
+    def pt_score(pts=points)
+      frac = pts % 2 == 1 ? "½" : ""
+      if pts < 2 && frac.present?
         frac
       else
-        "#{points/2}#{frac}"
+        "#{pts/2}#{frac}"
       end
     end
 
@@ -30,6 +30,8 @@ class Table
   def initialize(blog, options)
     @text = blog.summary + blog.story
     @games = !options.include?("g")
+    @break = !options.include?("t")
+    @cross = options.include?("x")
     result_hash
     player_hash
     tie_breakers
@@ -44,9 +46,10 @@ class Table
     headers = []
     headers.push ["#", ":-:"]
     headers.push ["Player", "---"]
+    @players.each_with_index { |p, i| headers.push [i + 1, ":-:"] } if @cross
     headers.push ["P", ":-:"]
+    headers.push ["TB", ":-:"] if @break
     headers.push ["G", ":-:"] if @games
-    headers.push ["TB", ":-:"]
     lines.push "|" + headers.map(&:first).join("|") + "|"
     lines.push "|" + headers.map(&:last).join("|") + "|"
 
@@ -54,9 +57,19 @@ class Table
       line = []
       line.push i + 1
       line.push p.name
+      if @cross
+        @players.each do |q|
+          scores = @rhash[p.name][q.name]
+          if scores && !scores.empty?
+            line.push q.pt_score(scores.sum)
+          else
+            line.push " "
+          end
+        end
+      end
       line.push "__#{p.pt_score}__"
+      line.push p.tb_score if @break
       line.push p.games if @games
-      line.push p.tb_score
       lines.push "|" + line.join("|") + "|"
     end
 
@@ -68,26 +81,27 @@ class Table
   private
 
   def result_hash
-    @rhash = Hash.new { |h,k| h[k] = Hash.new(0) }
+    @rhash = {}
     @text.scan(RESULT) do |white, result, black|
       white.sub!(/\(.*\)/, "")
       white.squish!
       black.sub!(/\(.*\)/, "")
       black.squish!
       if white.present? && black.present? && white != black
+        @rhash[white] ||= {}
+        @rhash[black] ||= {}
+        @rhash[white][black] ||= []
+        @rhash[black][white] ||= []
         case result
         when "1-0"
-          @rhash[white][black] += 2
-          @rhash[black][white] += 0
+          @rhash[white][black].push 2
+          @rhash[black][white].push 0
         when "0-1"
-          @rhash[white][black] += 0
-          @rhash[black][white] += 2
+          @rhash[white][black].push 0
+          @rhash[black][white].push 2
         when "½-½"
-          @rhash[white][black] += 1
-          @rhash[black][white] += 1
-        else
-          @rhash[white] = Hash.new(0) if @rhash[white].empty?
-          @rhash[black] = Hash.new(0) if @rhash[black].empty?
+          @rhash[white][black].push 1
+          @rhash[black][white].push 1
         end
       end
     end
@@ -95,8 +109,8 @@ class Table
 
   def player_hash
     @phash = @rhash.each_with_object({}) do |(name, scores), hash|
-      games = scores.values.length
-      points = scores.values.sum
+      games = scores.values.map(&:length).sum
+      points = scores.values.map(&:sum).sum
       hash[name] = Player.new(name, games, points, 0)
     end
   end
@@ -104,15 +118,8 @@ class Table
   def tie_breakers
     @phash.keys.each do |name|
       @phash[name].tb =
-        @rhash[name].reduce(0) do |sum, (opponent, score)|
-          case score
-          when 2
-            sum += @phash[opponent].points * 2
-          when 1
-            sum += @phash[opponent].points
-          else
-            sum
-          end
+        @rhash[name].reduce(0) do |sum, (opponent, scores)|
+          sum += scores.sum * @phash[opponent].points
         end
     end
   end
