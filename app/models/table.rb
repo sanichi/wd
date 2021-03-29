@@ -46,10 +46,10 @@ class Table
     headers = []
     headers.push ["#", ":-:"]
     headers.push ["Player", "---"]
-    @players.each_with_index { |p, i| headers.push [i + 1, ":-:"] } if @cross
     headers.push ["P", ":-:"]
     headers.push ["TB", ":-:"] if @break
     headers.push ["G", ":-:"] if @games
+    @players.each_with_index { |p, i| headers.push [i + 1, ":-:"] } if @cross
     lines.push "|" + headers.map(&:first).join("|") + "|"
     lines.push "|" + headers.map(&:last).join("|") + "|"
 
@@ -57,6 +57,9 @@ class Table
       line = []
       line.push i + 1
       line.push p.name
+      line.push "__#{p.pt_score}__"
+      line.push p.tb_score if @break
+      line.push p.games if @games
       if @cross
         @players.each do |q|
           scores = @rhash[p.name][q.name]
@@ -67,9 +70,6 @@ class Table
           end
         end
       end
-      line.push "__#{p.pt_score}__"
-      line.push p.tb_score if @break
-      line.push p.games if @games
       lines.push "|" + line.join("|") + "|"
     end
 
