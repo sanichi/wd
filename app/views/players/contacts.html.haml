@@ -1,5 +1,6 @@
 :ruby
   inputs = [
+    [:name,  t("player.name"),  :text,   size: 10],
     [:role,  t("player.roles"), :select, menu: player_role_menu(params[:role], search: true)],
   ]
   set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")

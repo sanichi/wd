@@ -48,30 +48,23 @@ class Player < ApplicationRecord
   scope :by_sca,  ->    { order(Arel.sql("COALESCE(sca_rating, fide_rating) DESC NULLS LAST, first_name, last_name")) }
   scope :in_team, ->(t) { where("'player_#{t}' = ANY (roles) OR 'captain_#{t}' = ANY (roles)") }
 
-  def self.search(players, params)
-    case params[:order]
-    when "name"
+  def self.search(players, params, contacts: false)
+    if contacts
       players = players.by_name
-    when "fide"
-      players = players.by_fide
     else
-      players = players.by_sca
+      case params[:order]
+      when "name"
+        players = players.by_name
+      when "fide"
+        players = players.by_fide
+      else
+        players = players.by_sca
+      end
     end
     if sql = cross_constraint(params[:name], %w{first_name last_name})
       players = players.where(sql)
     end
-    search_role(players, params[:role].to_s)
-  end
-
-  def self.search_contacts(players, params)
-    players = players.by_name
-    if sql = cross_constraint(params[:name], %w{first_name last_name})
-      players = players.where(sql)
-    end
-    search_role(players, params[:role].to_s)
-  end
-
-  def self.search_role(players, role)
+    role = params[:role].to_s
     if role == "captain"
       sql = ROLES.select { |r| r.match?(/\Acaptain/) }.map { |r| "'#{r}' = ANY (roles)" }.join(" OR ")
       players.where(sql)
