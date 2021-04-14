@@ -1,4 +1,4 @@
-# just run with ruby lib/check_routes.rb from route directory
+# run with ruby lib/check_routes.rb from root directory
 
 require_relative "../config/environment"
 

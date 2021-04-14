@@ -1,3 +1,9 @@
+# development:
+#   bin/rails r lib/ratings.rb
+#
+# production:
+#   RAILS_ENV=production bin/rails r lib/ratings.rb
+
 require 'mechanize'
 
 def update?(type, old, new, count=1)
