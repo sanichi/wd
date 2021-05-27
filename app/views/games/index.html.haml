@@ -1,7 +1,8 @@
 :ruby
+  lo = Layout.new({xxl: [3,3], lg: [4,4], sm: [5,5], xs: [6,6]}).to_a
   inputs = [
-    [:query,      t("query"),           :text,   size: 16],
-    [:difficulty, t("game.difficulty"), :select, menu: game_difficulty_menu(params[:difficulty], search: true)],
+    [:query,      t("query"),           :text,   lo[0], size: 16],
+    [:difficulty, t("game.difficulty"), :select, lo[1], menu: game_difficulty_menu(params[:difficulty], search: true)],
   ]
   set_meta_tags title: t("game.games"), description: t("game.description"), keywords: t("game.keywords")
 
@@ -14,16 +15,16 @@
       .header{class: "#{can?(:create, Game) ? '' : 'text-center'}"}
         %h3.d-inline= t("game.games")
         - if can?(:create, Game)
-          .float-right.mt-1= link_to t("game.new"), new_game_path, class: "btn btn-info btn-sm"
+          .float-end.mt-1= link_to t("game.new"), new_game_path, class: "btn btn-primary btn-sm"
       .body
         = render "utils/search/form", index: games_path, inputs: inputs, remote: false
-        %table.table-bordered.mt-3.ml-auto.mr-auto
+        %table.table-bordered.mt-3.ms-auto.me-auto
           %tbody
             - if @games.count == 0
               %tr
                 %td.p-2= t("no_matches")
             - else
-              = render "utils/pagination/links", pager: @games, columns: 1
+              = render "utils/pagination/links", pager: @games, columns: 1, padding: 2
               - @games.matches.each do |game|
                 %tr
                   %td.p-2

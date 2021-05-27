@@ -6,7 +6,7 @@
       .header{class: "#{can?(:create, User) ? '' : 'text-center'}"}
         %h3.d-inline= t("user.users")
         - if can?(:create, User)
-          .float-right.mt-1= link_to t("user.new"), new_user_path, class: "btn btn-info btn-sm"
+          .float-end.mt-1= link_to t("user.new"), new_user_path, class: "btn btn-primary btn-sm"
       .body
         %table{class: "table table-bordered table-striped table-sm mt-3"}
           %thead

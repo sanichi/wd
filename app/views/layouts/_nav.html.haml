@@ -1,43 +1,44 @@
 %nav
-  = link_to root_path do
-    = t("brand.wd")
-    %span= t("brand.cc")
-  %button{type: "button", "data-toggle" => "collapse", "data-target" => "#navbar"}
-    %span
-  #navbar.collapse.navbar-collapse
-    %ul.left
-      %li= link_to t("player.contact.contacts"), contacts_players_path
-      %li= link_to t("player.players"), players_path
-      %li= link_to t("game.games"), games_path
-      %li.dropdown
-        = link_to t("history"), "#", class: "dropdown-toggle", "data-toggle" => "dropdown"
-        .dropdown-menu
-          = blog_link "early_history"
-          = blog_link "team_titles"
-          = blog_link "club_championships"
-          = blog_link "pictures"
-          = blog_link "honved89"
-          = link_to t("dragon.dragons"), dragons_path
-      %li.dropdown
-        = link_to t("other"), "#", class: "dropdown-toggle", "data-toggle" => "dropdown"
-        .dropdown-menu
-          = link_to t("blog.blogs"), blogs_path
-          = link_to t("book.books"), books_path
-          -# currently we don't advertise this page, it's meant for SCA admins
-          - if can?(:registration, Player) && !current_user.guest?
-            = link_to t("player.registration.registration"), registration_players_path
-          - if can?(:index, User)
-            = link_to t("user.users"), users_path
-          - if can?(:index, Journal)
-            = link_to t("journal.journal"), journals_path
-          - if can?(:help, :page)
-            = link_to t("help.help"), help_path
-          - if can?(:env, :page)
-            = link_to t("misc.env"), env_path
-    %ul.right
-      - unless controller_name == "sessions"
-        %li
-          - if current_user.guest?
-            = link_to t("session.sign_in"), signin_path
-          - else
-            = link_to t("session.sign_out"), session_path, method: "delete"
+  .container-fluid
+    = link_to root_path, class: "navbar-brand" do
+      = t("brand.wd")
+      %span= t("brand.cc")
+    %button{type: "button", "data-bs-toggle" => "collapse", "data-bs-target" => "#navbar"}
+      %span
+    #navbar.collapse.navbar-collapse
+      %ul.me-auto
+        %li= link_to t("player.contact.contacts"), contacts_players_path
+        %li= link_to t("player.players"), players_path
+        %li= link_to t("game.games"), games_path
+        %li.dropdown
+          = link_to t("history"), "#", class: "dropdown-toggle", "data-bs-toggle" => "dropdown", role: "button"
+          %ul.dropdown-menu
+            %li= blog_link "early_history"
+            %li= blog_link "team_titles"
+            %li= blog_link "club_championships"
+            %li= blog_link "pictures"
+            %li= blog_link "honved89"
+            %li= link_to t("dragon.dragons"), dragons_path
+        %li.dropdown
+          = link_to t("other"), "#", class: "dropdown-toggle", "data-bs-toggle" => "dropdown", role: "button"
+          %ul.dropdown-menu
+            %li= link_to t("blog.blogs"), blogs_path
+            %li= link_to t("book.books"), books_path
+            - if can?(:registration, Player) && !current_user.guest?
+              -# currently we don't advertise this page, it's meant for SCA admins
+              %li= link_to t("player.registration.registration"), registration_players_path
+            - if can?(:index, User)
+              %li= link_to t("user.users"), users_path
+            - if can?(:index, Journal)
+              %li= link_to t("journal.journal"), journals_path
+            - if can?(:help, :page)
+              %li= link_to t("help.help"), help_path
+            - if can?(:env, :page)
+              %li= link_to t("misc.env"), env_path
+      %ul.ms-auto
+        - unless controller_name == "sessions"
+          %li
+            - if current_user.guest?
+              %li= link_to t("session.sign_in"), signin_path
+            - else
+              %li= link_to t("session.sign_out"), session_path, method: "delete"

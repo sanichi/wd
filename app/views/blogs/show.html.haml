@@ -19,7 +19,7 @@
     %h3.d-inline
       = @blog.title
       = title_icons(@blog)
-    .float-right.mt-1
+    .float-end.mt-1
       = @blog.created_at.strftime("%b %e %Y")
   .body
     = render "story", html: html
@@ -28,8 +28,8 @@
     - if can?(:edit, Blog)
       = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
     - if can?(:edit, @blog)
-      = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-info btn-sm"
-    .float-right.small.mt-1
+      = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-primary btn-sm"
+    .float-end.small.mt-1
       = render "utils/misc/user_stamp", object: @blog, show_author: true
 
 - if can?(:edit, Blog)

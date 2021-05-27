@@ -1,7 +1,7 @@
 %article
   .header
     %h3.d-inline= blog.title
-    .float-right.mt-1
+    .float-end.mt-1
       = blog.created_at.strftime("%b %e %Y")
   .body
     ~ blog.summary_html
@@ -10,5 +10,5 @@
       - if blog.story.present?
         = link_to t("blog.more"), blog
       - if blog.user.present?
-        .float-right.small.mt-1
+        .float-end.small.mt-1
           = blog.user.handle

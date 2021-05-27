@@ -1,7 +1,8 @@
 :ruby
+  lo = Layout.new({xl: [2,2], lg: [3,3], md: [4,4], sm: [5,5], xs: [6,6]}).to_a
   inputs = [
-    [:name,  t("player.name"),  :text,   size: 10],
-    [:role,  t("player.roles"), :select, menu: player_role_menu(params[:role], search: true)],
+    [:name,  t("player.name"),  :text,   lo[0], size: 10],
+    [:role,  t("player.roles"), :select, lo[1], menu: player_role_menu(params[:role], search: true)],
   ]
   set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")
 
@@ -13,7 +14,7 @@
   .header{class: "#{can?(:create, Player) ? '' : 'text-center'}"}
     %h3.d-inline= t("player.contact.contacts")
     - if can?(:create, Player)
-      .float-right.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-info btn-sm"
+      .float-end.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-primary btn-sm"
   .body
     - unless current_user.guest?
       = render "utils/search/form", index: contacts_players_path, inputs: inputs, remote: false

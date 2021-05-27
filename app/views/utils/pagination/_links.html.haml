@@ -1,3 +1,5 @@
+- defined?(padding) || padding = 0
+
 - if pager.multi_page?
   %tr
-    %td{colspan: columns, class: "text-center"}= pagination_links(pager)
+    %td{colspan: columns, class: "text-center p-#{padding}"}= pagination_links(pager)

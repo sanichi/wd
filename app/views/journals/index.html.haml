@@ -1,8 +1,8 @@
 :ruby
-  inputs = [
-    [:query, t("query"), :text, size: 16],
-  ]
   set_meta_tags title: t("journal.journal")
+  inputs = [
+    [:query, t("query"), :text, Layout.new({xs: [6], md: [4]}).to_a.first],
+  ]
 
 .row
   %div{class: center(xl: 8, lg: 10, md: 12)}

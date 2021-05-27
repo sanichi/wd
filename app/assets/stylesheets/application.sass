@@ -1,26 +1,18 @@
 // Bootstrap overides.
-
 $link-hover-color: #07f
 $navbar-dark-color: white
 $navbar-dark-hover-color: #ddd
 $navbar-dark-active-color: #ddd
-$dropdown-bg: #333940
-$dropdown-link-hover-color: #07f
-$dropdown-link-hover-bg: #333940
+// $dropdown-bg: #333940
+// $dropdown-link-hover-color: #07f
+// $dropdown-link-hover-bg: #333940
 
 // Bootstrap
-
 @import "bootstrap"
 
 // Navbar
 nav
-  @extend .navbar, .navbar-expand-md, .navbar-dark, .bg-dark, .mb-3
-
-  &>a
-    @extend .navbar-brand
-
-    span
-      @extend .d-lg-inline, .d-none
+  @extend .navbar, .navbar-expand-md, .navbar-dark, .bg-dark, .mb-3, .rounded
 
   button
     @extend .navbar-toggler
@@ -29,14 +21,8 @@ nav
       @extend .navbar-toggler-icon
 
   #navbar
-    ul
+    &>ul
       @extend .navbar-nav
-
-      &.left
-        @extend .mr-auto
-
-      &.right
-        @extend .ml-auto
 
       &>li
         @extend .nav-item
@@ -44,53 +30,34 @@ nav
         &>a
           @extend .nav-link
 
-        .dropdown-menu
-          @extend .p-2, .p-md-0
-
-          &>a
-            @extend .nav-link, .dropdown-item
+      &>li.dropdown
+        &>ul
+          &>li
+            &>a
+              @extend .dropdown-item
 
 // Crud forms - adpated from Pragmatic Studio prepared files for Rails 6 course.
-
 form.crud
-  margin-top: 1.5rem
-
-  label
-    font-size: 1.1rem
-    font-weight: 600
-    display: block
-
-  input:not([type="checkbox"]):not([type="submit"]), textarea, select:not(.datetime)
-    @extend .form-control
-    margin-bottom: 0.75rem
-    width: 100%
 
   textarea
-    @extend .text-monospace
+    @extend .font-monospace
     font-size: 0.9rem
     height: 100%
-
-  input[type="checkbox"]
-    // @extend .form-check-input   // this is causing problems
-    width: 20px
-    height: 20px
 
   div.field_with_errors
     display: inline
     label
       color: $red
-    input[type="text"], textarea, select
+    input[type="text"], input[type="password"], textarea, select
       background: lighten($pink, 40%)
 
 // For the form-less text-area on the contacts page.
-
 textarea#emails_to_copy
-  @extend .p-1, .text-monospace, .rounded
+  @extend .p-1, .font-monospace, .rounded
   font-size: 0.9rem
   width: 100%
 
 // Flash notices. Note that, for dismissal, the class "alert" needs to be explicitly present in the HTML.
-
 .flash
   text-align: center
   margin-top: -1rem
@@ -103,7 +70,6 @@ textarea#emails_to_copy
     @extend .alert-danger
 
 // Blogs, sections
-
 article, section
   @extend .card, .border-dark, .mb-3
   overflow: hidden
@@ -113,6 +79,7 @@ article, section
 
   .body
     @extend .card-body
+    overflow: hidden
 
   .footer
     @extend .card-footer
@@ -131,7 +98,6 @@ article
       @extend .p-1, .table-info
 
 // For game moves and controls
-
 div.moves
 
   .comment
@@ -144,7 +110,7 @@ div.moves
 div.controls
 
   span
-    @extend .badge, .badge-dark
+    @extend .badge, .bg-dark
     font-size: 1.0rem
 
   .control
@@ -154,14 +120,16 @@ div.controls
     -ms-user-select: none
 
 // Images
-
 img.styled
   @extend .border, .border-dark, .rounded
 
 // Pre's
-
 pre
   @extend .border, .border-dark, .p-2
+
+// Links
+a
+  @extend .text-decoration-none
 
 // Other imports
 @import "chessboard"

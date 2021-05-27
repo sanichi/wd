@@ -1,0 +1,9 @@
+- defined?(maxlength) || maxlength = nil
+- defined?(placeholder) || placeholder = nil
+- list_id = "#{param}-list"
+
+= form.label param, label, class: "form-label"
+= form.text_field param, list: list_id, placeholder: placeholder, maxlength: maxlength, class: "form-control"
+%datalist{id: list_id}
+  - data.each do |option|
+    %option{value: option}

@@ -1,10 +1,10 @@
-- set_meta_tags title: t("dragon.dragons"), description: t("dragon.description"), keywords: t("dragon.keywords")
-
 :ruby
+  set_meta_tags title: t("dragon.dragons"), description: t("dragon.description"), keywords: t("dragon.keywords")
+  lo = Layout.new({xs: [4,4,4]}).to_a
   inputs = [
-    [:name,   t("dragon.name"),   :text,   size: 16, placeholder: t("dragon.name")],
-    [:gender, t("dragon.gender"), :select, menu: dragon_gender_menu(params[:gender])],
-    [:order,  t("order"),         :select, menu: dragon_order_menu(params[:order])],
+    [:name,   t("dragon.name"),   :text,   lo[0], size: 16, placeholder: t("dragon.name")],
+    [:gender, t("dragon.gender"), :select, lo[1], menu: dragon_gender_menu(params[:gender])],
+    [:order,  t("order"),         :select, lo[2], menu: dragon_order_menu(params[:order])],
   ]
 
 .row

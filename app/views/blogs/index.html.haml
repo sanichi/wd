@@ -1,18 +1,25 @@
 :ruby
+  set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
+  co =
+    if current_user.guest?
+      {xs: [4,4], sm: [4,3], lg: [2,2]}
+    else
+      {xs: [5,4,3], sm: [4,3,3], lg: [2,2,2]}
+    end
+  lo = Layout.new(co).to_a
   inputs = [
-    [:query, t("query"), :text,   size: 16],
-    [:order, t("order"), :select, menu: blog_order_menu(params[:order])],
+    [:query, t("query"), :text,   lo[0], size: 16],
+    [:order, t("order"), :select, lo[1], menu: blog_order_menu(params[:order])],
   ]
   unless current_user.guest?
-    inputs.insert 1, [:user_id, t("blog.author"), :select, menu: blog_user_menu(params[:user_id])]
+    inputs.insert 1, [:user_id, t("blog.author"), :select, lo[2], menu: blog_user_menu(params[:user_id])]
   end
-  set_meta_tags title: t("blog.blogs"), description: t("blog.description"), keywords: t("blog.keywords")
 
 %section
   .header{class: "#{can?(:create, Blog) ? '' : 'text-center'}"}
     %h3.d-inline= t("blog.blogs")
     - if can?(:create, Blog)
-      .float-right.mt-1= link_to t("blog.new"), new_blog_path, class: "btn btn-info btn-sm"
+      .float-end.mt-1= link_to t("blog.new"), new_blog_path, class: "btn btn-primary btn-sm"
   .body
     = render "utils/search/form", index: blogs_path, inputs: inputs
     %table{class: "table table-bordered table-striped table-sm mt-3"}
