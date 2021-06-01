@@ -1,0 +1,11 @@
+en:
+  layout:
+    error:
+      empty: no items
+      index: invalid index
+      input: invalid input
+      keys: no valid breakpoint keys
+      number: inconsistent number of items
+      row: invalid row
+      total: excessive sum of widths
+      width: invalid width

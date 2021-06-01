@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Layout do
   describe "valid" do
     it "one row, two breakpoints" do
-      lo = Layout.new(sm: [2, 3, 3], xxl: [1, 2, 3]).to_a
+      lo = Layout.new(sm: [2, 3, 3], xx: [1, 2, 3]).to_a
       expect(lo[0]).to eq "col-sm-2 offset-sm-2 col-xxl-1 offset-xxl-3"
       expect(lo[1]).to eq "col-sm-3 offset-sm-0 col-xxl-2 offset-xxl-0"
       expect(lo[2]).to eq "col-sm-3 offset-sm-0 col-xxl-3 offset-xxl-0"
@@ -25,6 +25,15 @@ describe Layout do
       expect(lo[1]).to eq "col-sm-6 offset-sm-0 col-xl-3 offset-xl-0"
       expect(lo[2]).to eq "col-sm-6 offset-sm-0 col-xl-3 offset-xl-0"
       expect(lo[3]).to eq "col-sm-6 offset-sm-0 col-xl-3 offset-xl-0"
+    end
+
+    it "xxl and xx are equivalent" do
+      lo1 = Layout.new(xx: [3, 3, 3, 3]).to_a
+      lo2 = Layout.new(xxl: [3, 3, 3, 3]).to_a
+      expect(lo1[0]).to eq lo2[0]
+      expect(lo1[1]).to eq lo2[1]
+      expect(lo1[2]).to eq lo2[2]
+      expect(lo1[3]).to eq lo2[3]
     end
   end
 

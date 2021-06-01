@@ -1,9 +1,10 @@
 class Layout
-  BP = %w/xs sm md lg xl xxl/.map(&:to_sym)
+  BP = %w/xs sm md lg xl xx xxl/.map(&:to_sym)
 
   def initialize(args)
     raise I18n.t("layout.error.input") unless args.is_a?(Hash)
     @bps = BP.each_with_object({}){ |bp, h| h[bp] = args[bp] if args[bp].is_a?(Array) }
+    @bps[:xxl] = @bps.delete(:xx) if @bps.has_key?(:xx)
     check!
     @col = @bps.map{ |bp, arrays_or_numbers| @rmg = 0; transform(arrays_or_numbers, bp) }
   end
