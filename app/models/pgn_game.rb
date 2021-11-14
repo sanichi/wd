@@ -3,7 +3,7 @@ class PgnGame
 
   def initialize(pgn)
     begin
-      @game = PGN.parse(pgn).first
+      @game = PGN.parse(pgn, Encoding::UTF_8).first
     rescue Whittle::ParseError => e
       Rails.logger.error "PGN parse error (#{e.message})"
     rescue StandardError => e
