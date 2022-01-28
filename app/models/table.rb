@@ -11,7 +11,7 @@ class Table
     \s*(?=\n|\z)                                       # ends with new line or string end
   /x
 
-  Player = Struct.new(:name, :games, :points, :tb) do
+  Player = Struct.new(:name, :games, :points, :tb, :info) do
     def pt_score(pts=points)
       frac = pts % 2 == 1 ? "½" : ""
       if pts < 2 && frac.present?
@@ -35,13 +35,18 @@ class Table
         "#{tb/4}#{frac}"
       end
     end
+
+    def name_with_info
+      info.present? ? "#{name} (#{info})" : name
+    end
   end
 
-  def initialize(blog, options)
+  def initialize(blog, options, info)
     @text = blog.summary + blog.story
     @games = !options.include?("g")
     @break = !options.include?("t")
     @cross = options.include?("x")
+    parse(info)
     result_hash
     player_hash
     tie_breakers
@@ -66,7 +71,7 @@ class Table
     @players.each_with_index do |p, i|
       line = []
       line.push i + 1
-      line.push p.name
+      line.push p.name_with_info
       line.push "__#{p.pt_score}__"
       line.push p.tb_score if @break
       line.push p.games if @games
@@ -90,8 +95,16 @@ class Table
 
   private
 
+  def parse(info)
+    @ihash = {}
+    info.scan(/([^=\|\n]+)=([^=\|\n]*)/) do |name, value|
+      @ihash[name.squish] = value.squish
+    end
+  end
+
   def result_hash
     @rhash = {}
+    @ihash.keys.each{|name| @rhash[name] = {}}
     @text.scan(RESULT) do |white, result, black|
       white.sub!(/\(.*\)/, "")
       white.squish!
@@ -121,7 +134,7 @@ class Table
     @phash = @rhash.each_with_object({}) do |(name, scores), hash|
       games = scores.values.map(&:length).sum
       points = scores.values.map(&:sum).sum
-      hash[name] = Player.new(name, games, points, 0)
+      hash[name] = Player.new(name, games, points, 0, @ihash[name])
     end
   end
 
