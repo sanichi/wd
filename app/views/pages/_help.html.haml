@@ -245,9 +245,16 @@
   Suppose a news item is about a tournament and round results are recorded
   using markdowm tables with rows like these:
 %pre
+  |White|:-:|Black|
   |Donkin, C.|1-0|Donkin, A.|
   |Poots, D.|[½-½](/games/123)|Nimmo, H.|
   |Ferguson, A.|?-?|Crorie, I.|
+%p
+  or using lists with items like these (note the mandatory commas before and after each result):
+%pre
+  * Donkin, C., 1-0, Donkin, A.
+  * Poots, D., [½-½](/games/123), Nimmo, H.
+  * Ferguson, A., ?-?, Crorie, I.
 %p
   In this case a tournament table can be inserted automatically by
   including the following macro somewhere in either the summary or story:
@@ -282,11 +289,12 @@
       hidden on devices with a small screen width (e.g. an iPhone).
     %li
       <b>g</b>: Suppress displaying the number of games played for each player.
-      Once a tournament is over, it can be superfluous to repeat the same number
-      for each player. However, until it's finished, this information may be useful.
+      Once a tournament is over (and assuming each player has played the same number
+      of games) it would be redundant to include it, but until the tournament is
+      finished, this information could be useful.
     %li
       <b>t</b>: Suppress displaying the tie break score for each player.
-      If no players have the same score, this information is arguably not needed.
+      If no players have the same score, this information is not needed.
 
 = help_section :create_game
 

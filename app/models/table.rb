@@ -1,5 +1,15 @@
 class Table
-  RESULT = /\|([^|]+)\|[^|]*(1-0|0-1|½-½|\?-\?)[^|]*\|([^|]+)\|\s*(?:\n|\z)/
+  RESULT = /
+    (?<=\n|\A)\s*                                      # starts with a new line or string start
+    (?:\||\*)                                          # start of table row or list item
+    ([^|\n]+)                                          # white player, possibly with extra white space
+    (?:\||,)\s*                                        # separates first name from result
+    \[?(1-0|0-1|½-½|\?-\?)(?:\]\(\/games\/\d+\))?      # result, possibly linked to game
+    \s*(?:\||,)                                        # separates result from black player
+    ([^|\n]+)                                          # black player, possibly with extra white space
+    \|?                                                # signifies end of table row
+    \s*(?=\n|\z)                                       # ends with new line or string end
+  /x
 
   Player = Struct.new(:name, :games, :points, :tb) do
     def pt_score(pts=points)
