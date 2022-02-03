@@ -64,12 +64,20 @@ def login(user)
   click_button t("session.sign_in")
 end
 
+def otp_attempt
+  ROTP::TOTP.new(User::OTP_TEST_SECRET, issuer: User::OTP_ISSUER).now
+end
+
 def t(key, **opts)
   I18n.t(key, **opts)
 end
 
 def expect_error(page, text)
   expect(page).to have_css("div.rails-alert", text: text)
+end
+
+def expect_notice(page, text)
+  expect(page).to have_css("div.notice", text: text)
 end
 
 def files

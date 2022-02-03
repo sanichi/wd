@@ -4,6 +4,7 @@
   %li= help_link :game_controls
   %li= help_link :book_search
   %li= help_link :get_login
+  %li= help_link :otp
   %li= help_link :create_news
   %li= help_link :add_position
   %li= help_link :add_image
@@ -79,6 +80,24 @@
     %b Administrator
     manages everything else (players, contacts, users, images) and
     can modify anything the other users create
+
+= help_section :otp
+
+%p
+  Starting in early 2022, some login accounts for this website will
+  require a one-time password (OTP) in addition to a handle and
+  regular password in order to sign in. On their first login attempt
+  such users will be prompted to setup a secret key using Google
+  Authenticator (or some other compatible application) by scanning
+  a QR code and verifying a OTP from the app. Then, on subsequent
+  login attempts, a new OTP from the same app will need to be entered.
+%p
+  If you lose your secret key (e.g. the phone where you have the
+  authenticator app is lost or stolen) then ask the webmaster to
+  reset your account so you can go through the setup process again.
+%p
+  For convenience you can also setup your secret key in the browser
+  you normally use and/or in a password manager.
 
 = help_section :create_news
 

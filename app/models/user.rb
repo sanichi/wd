@@ -13,11 +13,14 @@ class User < ApplicationRecord
     end
   end
   ALLOWED_ROLES = ROLES.reject { |role| role == "guest" }
+  OTP_ISSUER = "wanderingdragonschess.club"
+  OTP_TEST_SECRET = "YAJY2UMNXQE4JFTWH4AFZGBE7YOQX3XY"
 
   has_many :blogs, dependent: :nullify, inverse_of: :user
   has_many :games, dependent: :nullify, inverse_of: :user
 
   before_validation :normalize_attributes
+  after_update :reset_otp
 
   validates :handle,
     format: { with: VALID_HANDLE, message: "is invalid (all caps)"},
@@ -30,13 +33,8 @@ class User < ApplicationRecord
 
   default_scope { order(:handle) }
 
-  def name
-    "#{first_name} #{last_name}"
-  end
-
-  def to_s # for rspec tests
-    "user"
-  end
+  def name  = "#{first_name} #{last_name}"
+  def to_s  = "user" # for rspec tests
 
   private
 
@@ -54,5 +52,11 @@ class User < ApplicationRecord
     self.roles.sort!
     self.roles.reject! { |role| role != "admin"  } if roles.include?("admin")
     self.roles.reject! { |role| role == "member" } if roles.include?("member") && roles.length > 1
+  end
+
+  def reset_otp
+    if !otp_required
+      update_columns(otp_secret: nil, last_otp_at: nil)
+    end
   end
 end

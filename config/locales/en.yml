@@ -29,7 +29,8 @@ en:
     last: last
     of: of
   symbol:
-     cross: ✘
+    cross: ✘
+    tick: ✔︎
   thing:
     deleted: '%{thing} deleted!'
     created: '%{thing} created!'

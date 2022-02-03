@@ -16,6 +16,11 @@
               %th= t("user.roles.roles")
               %td= user_roles(@user)
             %tr
+              %th= t("otp.otp")
+              %td
+                = otp_required(@user)
+                = otp_active(@user)
+            %tr
               %th= t("created")
               %td
                 = time_ago_in_words(@user.created_at)

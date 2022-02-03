@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
     return unless request.request_method == "GET"
     return unless current_user.guest?
     return if request.fullpath == signin_path
+    return if request.fullpath == new_otp_secret_path
     session[:last_guest_path] = request.fullpath
   end
 

@@ -1,9 +1,10 @@
 :ruby
   inputs = [
-    [:handle,     t("user.handle"),      :text],
-    [:password,   t("user.password"),    :password],
-    [:roles,      t("user.roles.roles"), :select, menu: user_role_menu(user.roles), multiple: true, size: User::ALLOWED_ROLES.size],
-    [:first_name, t("user.first_name"),  :text],
-    [:last_name,  t("user.last_name"),   :text],
+    [:handle,       t("user.handle"),      :text],
+    [:password,     t("user.password"),    :password],
+    [:roles,        t("user.roles.roles"), :select, menu: user_role_menu(user.roles), multiple: true, size: User::ALLOWED_ROLES.size],
+    [:first_name,   t("user.first_name"),  :text],
+    [:last_name,    t("user.last_name"),   :text],
+    [:otp_required, t("otp.required"),     :check],
   ]
 = render "utils/crud/form", object: user, index: users_path, inputs: inputs, title: title, center: center(xl: 4, lg: 6, md: 8, sm: 10)

@@ -3,6 +3,7 @@ module HelpHelper
     game_controls: "Game Controls",
     book_search:   "Book Search",
     get_login:     "Register as a User",
+    otp:           "One Time Passwords",
     create_news:   "Create a News Item",
     add_image:     "Add an Image",
     add_table:     "Add a Tournament Table",

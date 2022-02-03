@@ -3,10 +3,15 @@ class SessionsController < ApplicationController
     user = User.find_by(handle: params[:handle])
     user = user&.authenticate(params[:password]) unless current_user.admin?
     if user
-      session[:user_id] = user.id
-      redirect_to (session[:last_guest_path] || root_path), notice: t("session.success", name: user.first_name)
-      session[:last_guest_path] = nil
-      journal "Session", "signin", handle: user.handle
+      if user.otp_required?
+        session[:otp_user_id] = user.id
+        redirect_to new_otp_secret_path
+      else
+        session[:user_id] = user.id
+        redirect_to (session[:last_guest_path] || root_path), notice: t("session.success", name: user.first_name)
+        session[:last_guest_path] = nil
+        journal "Session", "signin", handle: user.handle
+      end
     else
       flash.now[:alert] = t("session.invalid")
       render :new

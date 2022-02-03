@@ -1,0 +1,19 @@
+- set_meta_tags title: t("otp.#{@qr_code ? 'new' : 'challenge'}")
+
+.row
+  %div{class: center(xx: 3, xl: 4, lg: 5, md: 6, sm: 7, xs: 8)}
+    = form_with url: otp_secret_path, local: true, html: { class: "crud" } do |f|
+      %section
+        .body
+          - if @qr_code
+            %p.small
+              You need to setup a OTP for your account.
+              Please scan the QR code into an authenticator app
+              then enter the code it generates into the box below
+              and click Submit. Subsequently, when signing in, you
+              will be asked to provide an authentication code in
+              addition to your handle and passord.
+            .mb-3.text-center= image_tag @qr_code
+          .mb-3= render "utils/crud/text", form: f, label: t("otp.otp"), param: :otp_attempt
+        .footer
+          .text-center= f.submit t("otp.submit"), class: "btn btn-primary"
