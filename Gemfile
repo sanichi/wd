@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.1'
+gem 'rails', '7.0.2.2'
 gem 'haml-rails', '~> 2.0'
 gem 'jquery-rails', '~> 4.3'
 gem 'sassc-rails', '~> 2.1'
@@ -38,4 +38,8 @@ group :development do
   gem 'capistrano-passenger', '~> 0.2', require: false
   gem 'listen', '~> 3.2'
   gem 'awesome_print', '~> 1.9'
+end
+
+group :production do
+  gem 'terser', '~> 1.1'
 end
