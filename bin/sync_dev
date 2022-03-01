@@ -5,7 +5,7 @@ use strict;
 my $tsu_db  = 'wd_production';
 my $loc_db  = 'wd_development';
 my $tmp_sql = '/tmp/wd.sql';
-my $ssh_usr = 'sanichi@thessaloniki.sanichi.me';
+my $ssh_usr = 'sanichi@nihon.sanichi.me';
 
 # Generate data on server.
 &run("ssh $ssh_usr 'pg_dump $tsu_db --no-owner --no-privileges --clean --file $tmp_sql'", "couldn't export DB on server");
