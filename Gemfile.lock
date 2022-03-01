@@ -308,8 +308,6 @@ GEM
     timeout (0.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
@@ -357,7 +355,6 @@ DEPENDENCIES
   sassc-rails (~> 2.1)
   sprockets-rails (~> 3.4)
   terser (~> 1.1)
-  uglifier (~> 4.2)
 
 BUNDLED WITH
    2.3.7
