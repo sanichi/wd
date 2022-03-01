@@ -1,4 +1,4 @@
-server "thessaloniki.sanichi.me", user: "sanichi", roles: %w{web app db}
+server "nihon.sanichi.me", user: "sanichi", roles: %w{web app db}
 
 set :deploy_to, "/var/www/wd"
 set :rails_env, "production"
