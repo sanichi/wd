@@ -12,7 +12,15 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) || Guest.new
+    return @current_user if @current_user
+    @current_user = User.find_by(id: session[:user_id])
+    if @current_user && (!session[:expires] || Time.now.to_i >= session[:expires])
+      session[:user_id] = nil
+      session[:expires] = nil
+      journal("Session", "expires", handle: @current_user.handle)
+      @current_user = nil
+    end
+    @current_user ||= Guest.new
   end
 
   helper_method :current_user

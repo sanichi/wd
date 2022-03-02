@@ -19,10 +19,11 @@ class OtpSecretsController < ApplicationController
       if last_otp_at
         user.update_column(:last_otp_at, last_otp_at)
         user.update_column(:otp_secret, otp_secret) if user.otp_secret.nil?
+        redirect_to (session[:last_guest_path] || root_path), notice: t("session.success", name: user.first_name)
         session[:otp_user_id] = nil
         session[:otp_secret] = nil
         session[:user_id] = user.id
-        redirect_to (session[:last_guest_path] || root_path), notice: t("session.success", name: user.first_name)
+        session[:expires] = User::EXPIRES.weeks.from_now.to_i
         session[:last_guest_path] = nil
         journal "Session", "otp signin", handle: user.handle
       else

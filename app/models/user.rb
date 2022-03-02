@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
+  EXPIRES = 4 # weeks for cookie with user_id
   MAX_NAME = 20
   MAX_HANDLE = 4
   MAX_ROLE = 20
