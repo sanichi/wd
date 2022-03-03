@@ -24,5 +24,6 @@ class SessionsController < ApplicationController
     redirect_to root_path, notice: t("session.goodbye", name: current_user.first_name)
     journal "Session", "signout", handle: current_user.handle
     session[:user_id] = nil
+    session[:expires] = nil
   end
 end
