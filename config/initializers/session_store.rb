@@ -3,5 +3,5 @@
 #   create in sessions_controller.rb
 #   create in otp_secrets_controller.rb
 Rails.application.config.session_store :cookie_store,
-  key: "_wd_app_session",
+  key: "__Secure-Wd-Session",
   expire_after: 10.years
