@@ -1,5 +1,5 @@
 
 = javascript_include_tag "application"
 - if content_for? :javascript
-  = javascript_tag do
+  = javascript_tag nonce: true do
     = yield :javascript
