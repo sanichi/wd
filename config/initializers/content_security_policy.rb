@@ -12,15 +12,15 @@ Rails.application.configure do
     policy.img_src         :self
 #   policy.object_src      :none
     policy.script_src      :self
-    policy.style_src       :self
+    policy.style_src       :none
     policy.form_action     :none
     policy.frame_ancestors :none
     policy.report_uri      "https://sanichi.report-uri.com/r/d/csp/wizard"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src)
+  # config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  # config.content_security_policy_nonce_directives = %w(script-src)
 
   # Just report CSP violations to a specified URI. See:
   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
