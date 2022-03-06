@@ -4,7 +4,6 @@
 # For further information see the following documentation
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 
-# Header set Content-Security-Policy-Report-Only "default-src 'none'; form-action 'none'; frame-ancestors 'none'; report-uri https://{subdomain}.report-uri.com/r/d/csp/wizard"
 Rails.application.configure do
   config.content_security_policy do |policy|
     policy.default_src     :none
@@ -12,17 +11,16 @@ Rails.application.configure do
     policy.img_src         :self
 #   policy.object_src      :none
     policy.script_src      :self
-    policy.style_src       :none
-    policy.form_action     :none
+    policy.style_src       :self
     policy.frame_ancestors :none
+    policy.form_action     :self
     policy.report_uri      "https://sanichi.report-uri.com/r/d/csp/wizard"
   end
 
-  # Generate session nonces for permitted importmap and inline scripts
-  # config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  # config.content_security_policy_nonce_directives = %w(script-src)
+  # Generate session nonces for permitted importmap and inline scripts.
+  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  config.content_security_policy_nonce_directives = %w(script-src)
 
-  # Just report CSP violations to a specified URI. See:
-  # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
+  # Just report for now.
   config.content_security_policy_report_only = true
 end
