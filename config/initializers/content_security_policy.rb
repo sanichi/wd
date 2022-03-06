@@ -11,7 +11,7 @@ Rails.application.configure do
     policy.img_src         :self
 #   policy.object_src      :none
     policy.script_src      :self
-    policy.style_src       :self
+    policy.style_src       :self, "unsafe-inline"
     policy.frame_ancestors :none
     policy.form_action     :self
     policy.report_uri      "https://sanichi.report-uri.com/r/d/csp/wizard"
