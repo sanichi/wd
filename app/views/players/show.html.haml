@@ -27,7 +27,7 @@
             - unless current_user.guest?
               %tr
                 %th= t("player.email")
-                %td= encrypted_mail_to(@player.email)
+                %td= mail_to(@player.email)
               %tr
                 %th= t("player.phone")
                 %td= @player.phone

@@ -64,11 +64,6 @@ module ApplicationHelper
     end
   end
 
-  def encrypted_mail_to(email)
-    return unless email.present?
-    mail_to(email, nil, encode: "javascript")
-  end
-
   def last_path(name)
     session["last_#{name}_path"] || "/#{name}"
   end

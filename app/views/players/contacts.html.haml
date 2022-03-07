@@ -33,7 +33,7 @@
         - @players.each do |player|
           %tr
             %td= link_to_if !current_user.guest?, player.name, player
-            %td= encrypted_mail_to(player.email)
+            %td= mail_to(player.email)
             %td.d-none.d-sm-table-cell= player.phone
             %td.d-none.d-md-table-cell
               - if current_user.guest?

@@ -10,7 +10,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 3.0'
 gem 'meta-tags', '~> 2.12'
 gem 'redcarpet', '~> 3.5'
-gem 'actionview-encoded_mail_to', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
 gem 'mechanize', '~> 2.7', require: false
 gem 'pgn', '~> 0.3'
