@@ -8,7 +8,7 @@ Rails.application.configure do
   config.content_security_policy do |policy|
     policy.base_uri        :self
     policy.default_src     :none
-    policy.img_src         :self
+    policy.img_src         :self, :data
     policy.script_src      :self
     policy.style_src       :self, :unsafe_inline # redcarpet
     policy.frame_ancestors :none
