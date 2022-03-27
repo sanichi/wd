@@ -22,10 +22,17 @@ en:
     contact:
       contact: Contact
       contacts: Contacts
-      copy: Copy Emails
       description: Contact email addresses and phone nuumbers for Wandering Dragon club officials and members.
       keywords: contact, email, phone, wandering, dragons, club, members, captains, officers, officials, members, organisers
       position: Roles
+      copied:
+        none: 'Error, sorry: no emails copied'
+        one: '1 email copied'
+        other: '%{count} emails copied'
+      copy:
+        none: 'Copy no emails'
+        one: 'Copy this email'
+        other: 'Copy these %{count} emails'
     order:
       fide: FIDE rating ↓
       name: name ↓
