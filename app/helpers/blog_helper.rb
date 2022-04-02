@@ -23,7 +23,6 @@ module BlogHelper
   end
 
   def title_icons(blog)
-    return nil if current_user.guest?
     icons = []
     icons.push t("blog.icon.draft") if blog.draft?
     icons.push t("blog.icon.pin") if blog.pin?
