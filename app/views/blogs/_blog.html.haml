@@ -11,4 +11,5 @@
         = link_to t("blog.more"), blog
       - if blog.user.present?
         .float-end.small.mt-1
+          = t("blog.icon.pin") if blog.pin?
           = blog.user.handle
