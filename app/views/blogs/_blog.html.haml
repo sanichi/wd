@@ -2,7 +2,10 @@
   .header
     %h3.d-inline= blog.title
     .float-end.mt-1
-      = blog.created_at.strftime("%b %e %Y")
+      - if blog.pin?
+        = t("blog.icon.pin")
+      - else
+        = blog.created_at.strftime("%b %e %Y")
   .body
     ~ blog.summary_html
   - if blog.story.present? || blog.user.present?
@@ -11,5 +14,4 @@
         = link_to t("blog.more"), blog
       - if blog.user.present?
         .float-end.small.mt-1
-          = t("blog.icon.pin") if blog.pin?
           = blog.user.handle
