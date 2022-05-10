@@ -295,7 +295,7 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    strscan (3.0.1)
+    strscan (3.0.2)
     temple (0.8.2)
     terser (1.1.9)
       execjs (>= 0.3.0, < 3)
@@ -349,7 +349,6 @@ DEPENDENCIES
   rspec-rails (~> 5.0)
   sassc-rails (~> 2.1)
   sprockets-rails (~> 3.4)
-  strscan (= 3.0.1)
   terser (~> 1.1)
 
 BUNDLED WITH
