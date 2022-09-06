@@ -11,10 +11,9 @@ class Ability
 
     can [:home, :help], :page
     can :read, Blog, draft: false
-    can :read, Book
     can :read, Dragon
     can :read, Game
-    can [:read, :contacts, :registration], Player
+    can [:contacts, :registration], Player
 
     if user.blogger?
       can :crud, Blog, user_id: user.id

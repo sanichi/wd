@@ -95,7 +95,7 @@ describe Ability do
       context role do
         let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
 
-        it { is_expected.to be_able_to(:read, book) }
+        it { is_expected.to_not be_able_to(:read, book) }
         it { is_expected.to_not be_able_to(:crud, book) }
       end
     end
@@ -107,7 +107,7 @@ describe Ability do
       context role do
         let(:user) { role == "guest" ? Guest.new : create(:user, roles: [role]) }
 
-        it { is_expected.to be_able_to(:read, Player) }
+        it { is_expected.to_not be_able_to(:read, Player) }
         it { is_expected.to_not be_able_to(:crud, Player) }
       end
     end
