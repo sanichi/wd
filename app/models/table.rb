@@ -4,7 +4,7 @@ class Table
     (?:\||\*)                                          # start of table row or list item
     ([^|\n]+)                                          # white player, possibly with extra white space
     (?:\||,)\s*                                        # separates first name from result
-    \[?(1-0|0-1|½-½|\?-\?)(?:\]\(\/games\/\d+\))?      # result, possibly linked to game
+    \[?(1-0|0-1|½-½|\?-\?)(?:\]\(\/games\/(\d+)\))?    # result, possibly linked to game
     \s*(?:\||,)                                        # separates result from black player
     ([^|\n]+)                                          # black player, possibly with extra white space
     \|?                                                # signifies end of table row
@@ -79,7 +79,13 @@ class Table
         @players.each do |q|
           scores = @rhash[p.name][q.name]
           if scores && !scores.empty?
-            line.push q.pt_score(scores.sum)
+            score = q.pt_score(scores.sum)
+            game_id = @ghash[p.name][q.name] if @ghash[p.name]
+            if game_id
+              line.push "[#{score}](/games/#{game_id})"
+            else
+              line.push score
+            end
           else
             line.push " "
           end
@@ -104,8 +110,9 @@ class Table
 
   def result_hash
     @rhash = {}
+    @ghash = {}
     @ihash.keys.each{|name| @rhash[name] = {}}
-    @text.scan(RESULT) do |white, result, black|
+    @text.scan(RESULT) do |white, result, game_id, black|
       white.sub!(/\(.*\)/, "")
       white.squish!
       black.sub!(/\(.*\)/, "")
@@ -125,6 +132,12 @@ class Table
         when "½-½"
           @rhash[white][black].push 1
           @rhash[black][white].push 1
+        end
+        if game_id.present?
+          @ghash[white] ||= {}
+          @ghash[black] ||= {}
+          @ghash[white][black] = game_id
+          @ghash[black][white] = game_id
         end
       end
     end
