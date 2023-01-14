@@ -109,19 +109,14 @@ class Table
   end
 
   def result_hash
-    @rhash = {}
-    @ghash = {}
-    @ihash.keys.each{|name| @rhash[name] = {}}
+    @rhash = Hash.new{|h,k| h[k] = Hash.new{|g,l| g[l] = []}}
+    @ghash = Hash.new{|h,k| h[k] = {}}
     @text.scan(RESULT) do |white, result, game_id, black|
       white.sub!(/\(.*\)/, "")
       white.squish!
       black.sub!(/\(.*\)/, "")
       black.squish!
       if white.present? && black.present? && white != black
-        @rhash[white] ||= {}
-        @rhash[black] ||= {}
-        @rhash[white][black] ||= []
-        @rhash[black][white] ||= []
         case result
         when "1-0"
           @rhash[white][black].push 2
@@ -134,8 +129,6 @@ class Table
           @rhash[black][white].push 1
         end
         if game_id.present?
-          @ghash[white] ||= {}
-          @ghash[black] ||= {}
           @ghash[white][black] = game_id
           @ghash[black][white] = game_id
         end
@@ -148,6 +141,11 @@ class Table
       games = scores.values.map(&:length).sum
       points = scores.values.map(&:sum).sum
       hash[name] = Player.new(name, games, points, 0, @ihash[name])
+    end
+    @ihash.each_pair do |name, info|
+      unless @phash.has_key?(name)
+        @phash[name] = Player.new(name, 0, 0, 0, info)
+      end
     end
   end
 
