@@ -1,6 +1,6 @@
 class Table
   RESULT = /
-    (?<=\n|\A)\s*                                      # starts with a new line or string start
+    (?<=\n|\A)\s*                                      # starts with a new line or string
     (?:\||\*)                                          # start of table row or list item
     ([^|\n]+)                                          # white player, possibly with extra white space
     (?:\||,)\s*                                        # separates first name from result
@@ -87,7 +87,8 @@ class Table
               line.push score
             end
           else
-            line.push " "
+            # katakana middle dot works well here because of it‘s width
+            line.push (q.name == p.name ? "・" : " ")
           end
         end
       end
