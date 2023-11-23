@@ -1,6 +1,7 @@
 en:
   dragon:
     description: Everyone who played for the Dragons, 1980-2018.
+    duplicate: Duplicate name
     explanation: Compiled to honour co-founder Chris Donkin's retirement.
     dragons: Former Dragons
     female: Female

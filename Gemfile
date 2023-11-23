@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '7.0.8'
+gem 'rails', '7.1.2'
 gem 'haml-rails', '~> 2.0'
 gem 'jquery-rails', '~> 4.3'
 gem 'sassc-rails', '~> 2.1'
@@ -22,7 +22,7 @@ group :development, :test do
   gem 'capybara', '~> 3.28'
   gem 'byebug', platforms: :mri
   gem 'launchy', '~> 2.5'
-  gem 'factory_bot_rails', '~> 6.0'
+  gem 'factory_bot_rails', '< 6.3'
   gem 'faker', '< 4'
 end
 

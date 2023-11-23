@@ -1,8 +1,8 @@
 # development:
-#   bin/rails r lib/ratings.rb
+#   bin/rails r lib/misc/ratings.rb
 #
 # production:
-#   RAILS_ENV=production bin/rails r lib/ratings.rb
+#   RAILS_ENV=production bin/rails r lib/misc/ratings.rb
 
 require 'mechanize'
 
