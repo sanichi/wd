@@ -6,6 +6,7 @@
   %li= help_link :get_login
   %li= help_link :otp
   %li= help_link :create_news
+  %li= help_link :update_news
   %li= help_link :add_position
   %li= help_link :add_image
   %li= help_link :add_table
@@ -186,6 +187,37 @@
 %p
   This should be the half-move number and when the game is displayed the position will be the
   one just after this move.
+
+= help_section :update_news
+
+%ul
+  %li= t("session.sign_in").downcase
+  %li
+    click
+    %b= t("blog.blogs")
+  %li
+    click the name of an item belonging to you that you want to edit
+  %li
+    click
+    %b= t("edit")
+  %li make updates
+  %li
+    click
+    %b= t("save")
+%p
+  The home page lists all items not yet marked as
+  %b= t("blog.pin")
+  in last-updated order. So, when you make a change to such an item it
+  will automatically appear at the top of the home page, since it will
+  now be the most recently updated one.
+%p
+  When you mark an item as
+  %b= t("blog.pin")
+  then, irrespective of whether it has recently been edited, it will
+  normally no longer appear on the home page at all. The exception is
+  when there are only a small number of non-old items remaining.
+  In that case, the last few items on the home page will be old ones
+  in last-created order, so your updated item may still appear.
 
 = help_section :add_position
 

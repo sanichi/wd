@@ -5,6 +5,7 @@ module HelpHelper
     get_login:     "Register as a User",
     otp:           "One Time Passwords",
     create_news:   "Create a News Item",
+    update_news:   "Update a News Item",
     add_image:     "Add an Image",
     add_table:     "Add a Tournament Table",
     add_position:  "Add a Position",

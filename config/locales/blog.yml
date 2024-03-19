@@ -12,7 +12,7 @@ en:
     new: New Blog
     next: ▶︎
     older: Older news …
-    pin: Pin
+    pin: Old
     prev: ◀︎
     story: Story
     summary: Summary
@@ -22,7 +22,7 @@ en:
     title: Title
     icon:
       draft: ✏️
-      pin: 📌
+      pin: ⌛️
     order:
       created_des: created ↓
       created_asc: created ↑

@@ -28,6 +28,8 @@
           %th= t("blog.title")
           %th.d-none.d-lg-table-cell= t("blog.summary")
           - unless current_user.guest?
+            %th.d-none.d-sm-table-cell.text-center= t("blog.pin")
+            %th.d-none.d-sm-table-cell.text-center= t("blog.draft")
             %th.d-none.d-sm-table-cell.text-center= t("blog.author")
           %th.text-center= t("created")
           %th.d-none.d-md-table-cell.text-center= t("updated")

@@ -1,11 +1,11 @@
 - @blogs.matches.each do |blog|
   %tr
-    %td
-      = link_to blog.title, blog
-      = title_icons(blog)
+    %td= link_to blog.title, blog
     %td.d-none.d-lg-table-cell= blog.summary.truncate(50)
     - unless current_user.guest?
+      %td.d-none.d-sm-table-cell.text-center= t("symbol.#{blog.pin ? 'tick' : 'cross'}")
+      %td.d-none.d-sm-table-cell.text-center= t("symbol.#{blog.draft ? 'tick' : 'cross'}")
       %td.d-none.d-sm-table-cell.text-center= blog.user&.handle
-    %td.text-center= blog.created_at.strftime("%Y-%m-%d")
-    %td.d-none.d-md-table-cell.text-center= blog.updated_at.strftime("%Y-%m-%d")
-= render "utils/pagination/links", pager: @blogs, columns: (current_user.guest?? 4 : 5)
+    %td.text-center= blog.created_at.strftime("%y-%m-%d")
+    %td.d-none.d-md-table-cell.text-center= blog.updated_at.strftime("%y-%m-%d")
+= render "utils/pagination/links", pager: @blogs, columns: (current_user.guest?? 4 : 7)
