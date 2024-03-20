@@ -51,6 +51,7 @@ describe Blog do
 
   context "edit" do
     it "title" do
+      last_updated_at = blog.updated_at
       click_link blog.title
       click_link t("edit")
 
@@ -64,9 +65,29 @@ describe Blog do
       expect(Blog.count).to eq 1
       blog.reload
       expect(blog.title).to eq data.title
+      expect(blog.updated_at).to eq last_updated_at
+    end
+
+    it "summary" do
+      last_updated_at = blog.updated_at
+      click_link blog.title
+      click_link t("edit")
+
+      expect(page).to have_title t("blog.edit")
+
+      fill_in t("blog.summary"), with: data.summary
+      click_button t("save")
+
+      expect(page).to have_title blog.title
+
+      expect(Blog.count).to eq 1
+      blog.reload
+      expect(blog.summary).to eq data.summary
+      expect(blog.updated_at).to be > last_updated_at
     end
 
     it "slug and pin (admin)" do
+      last_updated_at = blog.updated_at
       click_link t("session.sign_out")
       login create(:user, roles: ["admin"])
       visit blogs_path
@@ -85,6 +106,7 @@ describe Blog do
       blog.reload
       expect(blog.slug).to eq data.slug
       expect(blog.pin).to eq true
+      expect(blog.updated_at).to eq last_updated_at
 
       visit blog_path(data.slug)
       expect(page).to have_title blog.title

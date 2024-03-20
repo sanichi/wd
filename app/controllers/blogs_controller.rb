@@ -22,7 +22,15 @@ class BlogsController < ApplicationController
 
   def update
     assign_to_admin_if_no_user(@blog)
+    significant = %w/summary story/
+    before = @blog.attributes.slice(*significant)
+    last_updated_at = @blog.updated_at
     if @blog.update(resource_params)
+      after = @blog.attributes.slice(*significant)
+      # Revert updated_at (which determines order display order) if change is insignificant.
+      if @blog.updated_at > last_updated_at && before == after
+        @blog.update_column(:updated_at, last_updated_at)
+      end
       redirect_to @blog, notice: success("updated")
       journal "Blog", "update", @blog.id
     else
