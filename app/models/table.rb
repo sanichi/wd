@@ -1,14 +1,14 @@
 class Table
   RESULT = /
-    (?<=\n|\A)\s*                                      # starts with a new line or string
-    (?:\||\*)                                          # start of table row or list item
-    ([^|\n]+)                                          # white player, possibly with extra white space
-    (?:\||,)\s*                                        # separates first name from result
-    \[?(1-0|0-1|½-½|\?-\?)(?:\]\(\/games\/(\d+)\))?    # result, possibly linked to game
-    \s*(?:\||,)                                        # separates result from black player
-    ([^|\n]+)                                          # black player, possibly with extra white space
-    \|?                                                # signifies end of table row
-    \s*(?=\n|\z)                                       # ends with new line or string end
+    (?<=\n|\A)\s*                                            # starts with a new line or string
+    (?:\||\*)                                                # start of table row or list item
+    ([^|\n]+)                                                # white player, possibly with extra white space
+    (?:\||,)\s*                                              # separates first name from result
+    \[?(1[-*]0|0[-*]1|½[-*]½|\?-\?)(?:\]\(\/games\/(\d+)\))? # result, possibly linked to game
+    \s*(?:\||,)                                              # separates result from black player
+    ([^|\n]+)                                                # black player, possibly with extra white space
+    \|?                                                      # signifies end of table row
+    \s*(?=\n|\z)                                             # ends with new line or string end
   /x
 
   Player = Struct.new(:name, :games, :points, :tb, :info) do
@@ -119,13 +119,13 @@ class Table
       black.squish!
       if white.present? && black.present? && white != black
         case result
-        when "1-0"
+        when "1-0", "1*0"
           @rhash[white][black].push 2
           @rhash[black][white].push 0
-        when "0-1"
+        when "0-1", "0*1"
           @rhash[white][black].push 0
           @rhash[black][white].push 2
-        when "½-½"
+        when "½-½", "½*½"
           @rhash[white][black].push 1
           @rhash[black][white].push 1
         end
