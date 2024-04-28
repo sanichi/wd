@@ -19,10 +19,10 @@ gem 'rqrcode', '~> 2.1'
 
 group :development, :test do
   gem 'rspec-rails', '< 7'
-  gem 'capybara', '~> 3.28'
+  gem 'capybara', '< 4'
   gem 'byebug', platforms: :mri
-  gem 'launchy', '~> 2.5'
-  gem 'factory_bot_rails', '~> 6.0'
+  gem 'launchy', '< 4'
+  gem 'factory_bot_rails', '< 7'
   gem 'faker', '< 4'
 end
 
