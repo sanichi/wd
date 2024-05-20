@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails app is the Wandering Dragons Chess Club website, https://wanderingdragonschess.club/.
 
-Things you may want to cover:
+To run/test locally:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Install the version of ruby in `.ruby-version`.
+* Run `bin/bundle install`.
+* Make sure you have postgres running locally.
+* Create the file config/databases.yml something like this:
+```
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: blah
+  password: blah
+development:
+  <<: *default
+  database: wd_development
+test:
+  <<: *default
+  database: wd_test
+```
+* Run `bin/rails db:create`.
+* Sync the development database with the live database if you can.
+* If you can't sync then at least create one admin user with `bin/rails c`:
+```
+User.create!(first_name: "Blah", last_name: "Blah", handle: "BB", roles: ["admin"], password: "blah")
+```
+* Run the app locally on port 3000 with `bin/rails s`.
+* Test by running `bin/rake`.
