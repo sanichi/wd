@@ -1,13 +1,13 @@
 # README
 
-This rails app is the Wandering Dragons Chess Club website, https://wanderingdragonschess.club/.
+This rails app is the [Wandering Dragons Chess Club](https://wanderingdragonschess.club/) website.
 
 To run/test locally:
 
 * Install the version of ruby in `.ruby-version`.
 * Run `bin/bundle install`.
-* Make sure you have postgres running locally.
-* Create the file config/databases.yml something like this:
+* Make sure you have `postgres` running locally.
+* Create the unversioned file `config/database.yml` something like this:
 ```
 default: &default
   adapter: postgresql
@@ -23,7 +23,7 @@ test:
   database: wd_test
 ```
 * Run `bin/rails db:create`.
-* Sync the development database with the live database if you can.
+* Sync the development database with the production database if you can.
 * If you can't sync then at least create one admin user with `bin/rails c`:
 ```
 User.create!(first_name: "Blah", last_name: "Blah", handle: "BB", roles: ["admin"], password: "blah")
