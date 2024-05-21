@@ -36,7 +36,7 @@ def update?(type, old, new, count=1)
 end
 
 def abort(ctx, msg)
-  puts "abort in context: #{ctx} with error: #{msg}"
+  puts "abort\n  context: #{ctx}\n  error:   #{msg}"
   exit
 end
 
@@ -66,6 +66,10 @@ def sca_rating(id)
   rescue StandardError => e
     abort("SCA rating (ID #{id})", e.message)
   end
+end
+
+unless Rails.application.credentials.sca.present?
+  abort("prerequisites", "no SCA credentials")
 end
 
 @agent = Mechanize.new
