@@ -1,6 +1,6 @@
 # README
 
-This rails app is the [Wandering Dragons Chess Club](https://wanderingdragonschess.club/) website.
+This rails app is the [website](https://wanderingdragonschess.club/) of the Wandering Dragons Chess Club.
 
 To run/test locally:
 
