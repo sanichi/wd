@@ -8,13 +8,15 @@
           - if @qr_code
             %p.small
               You must setup one-time passwords for this account.
-              Please scan the QR code into Google Authenticator
-              (or a compatible application) then enter the code
-              it generates into the box below and click Submit.
+              Please scan the QR image or enter the setup code
+              into Google Authenticator (or a compatible application)
+              then enter the 6-digit code it generates into the box
+              below and click Submit.
               Subsequently, when signing in, you will be required
               to provide an authentication code from the app in
               addition to your username and passord.
             .mb-3.text-center= image_tag @qr_code
+            %p.small.fw-bold.text-center#su_code= @su_code
           .mb-3= render "utils/crud/text", form: f, label: t("otp.otp"), param: :otp_attempt
         .footer
           .text-center= f.submit t("otp.submit"), class: "btn btn-primary"

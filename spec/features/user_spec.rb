@@ -79,6 +79,7 @@ describe User do
         click_button t("session.sign_in")
 
         expect(page).to have_title t("otp.new")
+        expect(page).to have_css "p#su_code", text: User::OTP_TEST_SECRET
 
         fill_in t("otp.otp"), with: otp_attempt
         click_button t("otp.submit")
