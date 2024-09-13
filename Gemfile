@@ -18,7 +18,7 @@ gem 'rotp', '~> 6.2'
 gem 'rqrcode', '~> 2.1'
 
 group :development, :test do
-  gem 'rspec-rails', '< 7'
+  gem 'rspec-rails', '< 8'
   gem 'capybara', '< 4'
   gem 'byebug', platforms: :mri
   gem 'launchy', '< 4'
