@@ -11,7 +11,6 @@ gem 'cancancan', '~> 3.0'
 gem 'meta-tags', '~> 2.12'
 gem 'redcarpet', '~> 3.5'
 gem 'jbuilder', '~> 2.7'
-gem 'mechanize', '~> 2.7', require: false
 gem 'pgn', '~> 0.3'
 gem 'sprockets-rails', '~> 3.4'
 gem 'rotp', '~> 6.2'
@@ -36,8 +35,4 @@ group :development do
   gem 'capistrano-passenger', '~> 0.2', require: false
   gem 'listen', '~> 3.2'
   gem 'awesome_print', '~> 1.9', require: false
-end
-
-group :production do
-  gem 'terser', '~> 1.1'
 end
