@@ -10,9 +10,15 @@
 - if @blog.tag
   %p.text-center
     %button.btn-success.btn-sm
-      = link_to t("blog.prev"), @prev, class: "badge badge-light" if @prev
+      - if @prev
+        = link_to t("blog.prev"), @prev, class: "badge badge-light"
+      - else
+        .badge.badge-light= t("blog.none")
       = t("blog.tags.#{@blog.tag}")
-      = link_to t("blog.next"), @next, class: "badge badge-light" if @next
+      - if @next
+        = link_to t("blog.next"), @next, class: "badge badge-light"
+      - else
+        .badge.badge-light= t("blog.none")
 
 %article
   .header
