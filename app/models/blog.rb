@@ -99,6 +99,11 @@ class Blog < ApplicationRecord
     markdown.gsub!(/\r\n/, "\n")
     markdown.gsub!(/([^\S\n]*\n){2,}[^\S\n]*/, "\n\n")
     markdown.gsub!(/\[([^\[]+)\]\(https?:\/\/(?:www\.)?wanderingdragonschess.club\/?(.*)\)/, "[\\1](/\\2)")
+
+    # See lib/misc/corrections.rb
+    markdown.gsub!(/(\w)(\(\d{4}\))/, '\1 \2') # Orr, Mark(2100) => Orr, Mark (2100)
+    markdown.gsub!(/\s+,/, ',')                # Jorge , Blanko  => Jorge, Blanco
+
     markdown = markdown.use_halves
     markdown
   end
