@@ -9,7 +9,7 @@
 
 - if @blog.tag
   %p.text-center
-    %button.btn.btn-light
+    %button.btn.btn-light.btn-sm
       - if @prev
         = link_to t("blog.prev"), @prev, class: "badge text-bg-light"
       - else
