@@ -2,7 +2,6 @@
 
 %ul
   %li= help_link :game_controls
-  %li= help_link :book_search
   %li= help_link :get_login
   %li= help_link :otp
   %li= help_link :create_news
@@ -11,7 +10,6 @@
   %li= help_link :add_image
   %li= help_link :add_table
   %li= help_link :create_game
-  %li= help_link :house_style
 
 = help_section :game_controls
 
@@ -43,21 +41,6 @@
   %li
     go to any position by clicking in the list of moves
 
-= help_section :book_search
-
-%p
-  The search controls are fairly self-explanatory with the exception of:
-%ul
-  %li
-    %b= t("book.year")
-    as well as specifying an exact publication year (e.g. "2019") it is also possible to
-    specify ranges (e.g. "2000-2010"), or limits (e.g. ">2015" or "<=1996")
-  %li
-    %b= t("book.borrowers")
-    if the word "ALL" is entered here, then instead of searching for specific book
-    borrowers by name, this will match all borrowers (i.e. the result will be all
-    borrowed books)
-
 = help_section :get_login
 
 %p
@@ -66,21 +49,16 @@
   = link_to t("player.contact.contacts"), contacts_players_path
   page). The different types of users are as follows:
 %ul
-  %li
-    %b= t("user.roles.member")
-    can view the contact details of all players (whereas ordinary visitors to the
-    site can only see the contact details of the principals - president, treasurer,
-    team captains etc)
+  -# %li
+  -#   %b= t("user.roles.member")
+  -#   can view the contact details of all players (ordinary visitors can only
+  -#   see those of the principals: president, treasurer, team captains, etc)
   %li
     %b= t("user.roles.blogger")
-    can create news items and games and edit those they have previously created themselves
+    can create and edit news items and games
   %li
-    %b= t("user.roles.librarian")
-    manages the information we keep on our book collection
-  %li
-    %b Administrator
-    manages everything else (players, contacts, users, images) and
-    can modify anything the other users create
+    %b= t("user.roles.admin")
+    in addition manages users, contacts and images
 
 = help_section :otp
 
@@ -367,7 +345,7 @@
 = help_section :create_game
 
 %p
-  For this you need to have a
+  For this you need a
   = link_to "PGN", "https://en.wikipedia.org/wiki/Portable_Game_Notation", target: "external"
   file of the game.
 %ul
@@ -404,12 +382,3 @@
         %b= t("save")
 %p
   If your PGN is rejected as invalid and you can't figure out why, please contact the webmaster.
-
-= help_section :house_style
-
-%p
-  To maintain a consistent look to news items and games, bloggers are encouraged to:
-%ul
-  %li capitalize words in news item titles (except for "a", "the", "is", "at" etc)
-  %li keep game titles short with template: "surname-surname, event or site, year, result"
-  %li use ½ for draws and match scores (e.g. ½-½, 3½-2½)
