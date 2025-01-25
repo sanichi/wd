@@ -24,8 +24,6 @@
           = link_to t("other"), "#", class: "dropdown-toggle", "data-bs-toggle" => "dropdown", role: "button"
           %ul.dropdown-menu
             %li= link_to t("blog.blogs"), blogs_path
-            - if can?(:read, Book)
-              %li= link_to t("book.books"), books_path
             - if can?(:registration, Player) && !current_user.guest?
               -# currently we don't advertise this page, it's meant for SCA admins
               %li= link_to t("player.registration.registration"), registration_players_path
@@ -33,6 +31,8 @@
               %li= link_to t("user.users"), users_path
             - if can?(:index, Journal)
               %li= link_to t("journal.journal"), journals_path
+            - if can?(:read, Book)
+              %li= link_to t("book.books"), books_path
             - if can?(:help, :page)
               %li= link_to t("help.help"), help_path
             - if can?(:env, :page)
