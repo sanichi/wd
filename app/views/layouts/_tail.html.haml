@@ -1,5 +1,3 @@
-
-= javascript_include_tag "application"
 - if content_for? :javascript
-  = javascript_tag nonce: true do
+  %script{type: "module", nonce: content_security_policy_nonce}
     = yield :javascript

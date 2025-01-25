@@ -12,9 +12,10 @@ gem 'meta-tags', '~> 2.12'
 gem 'redcarpet', '~> 3.5'
 gem 'jbuilder', '~> 2.7'
 gem 'pgn', '~> 0.3'
-gem 'sprockets-rails', '~> 3.4'
 gem 'rotp', '~> 6.2'
 gem 'rqrcode', '~> 2.1'
+gem 'sprockets-rails', '~> 3.4'
+gem "importmap-rails", "~> 2.1"
 
 # Temporary to silence warnings about gem no longer being standard library
 gem "ostruct", "~> 0.6.1"

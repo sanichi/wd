@@ -1,15 +1,23 @@
-var Game = function(pgn, orientation, id) {
+import { Chess } from "chess"
+import "chessboard"
 
-  var moves = [];
-  var current_move = 0;
-  var first_move = 0;
-  var last_move = 0;
+export const Game = function(pgn, orientation, id) {
 
-  var chess = new Chess();
-  var ok = chess.load_pgn(pgn, { sloppy: true });
-  ok ? get_moves() : chess.clear();
+  let moves = [];
+  let current_move = 0;
+  let first_move = 0;
+  let last_move = 0;
 
-  var board = Chessboard(id, {
+  const chess = new Chess();
+  try {
+    chess.loadPgn(pgn);
+    get_moves();
+  } catch (error) {
+    console.error(error);
+    chess.clear();
+  }
+
+  const board = Chessboard(id, {
     showNotation: false,
     position: chess.fen(),
     orientation: orientation,
