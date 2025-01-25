@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '8.0.0'
+gem 'rails', '8.0.1'
 gem 'haml-rails', '~> 2.0'
 gem 'jquery-rails', '~> 4.3'
 gem 'sassc-rails', '~> 2.1'
@@ -15,6 +15,12 @@ gem 'pgn', '~> 0.3'
 gem 'sprockets-rails', '~> 3.4'
 gem 'rotp', '~> 6.2'
 gem 'rqrcode', '~> 2.1'
+
+# Temporary to silence warnings about gem no longer being standard library
+gem "ostruct", "~> 0.6.1"
+
+# Temporary fix because of glibc version on Alma Linux 8
+gem "nokogiri", force_ruby_platform: true
 
 group :development, :test do
   gem 'rspec-rails', '< 8'
