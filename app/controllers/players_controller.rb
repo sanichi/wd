@@ -22,13 +22,6 @@ class PlayersController < ApplicationController
     end
   end
 
-  def registration
-    @players = @players.in_team("s").by_fide
-    @president = Player.find_by("'president' = ANY (roles)")
-    @secretary = Player.find_by("'treasurer' = ANY (roles)")
-    @captain = Player.find_by("'captain_s' = ANY (roles)")
-  end
-
   def create
     if @player.save
       redirect_to @player, notice: success("created")

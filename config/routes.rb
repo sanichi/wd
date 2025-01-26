@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :journals, only: [:index]
   resources :players do
     get :contacts, on: :collection
-    get :registration, on: :collection
   end
   resources :users
 

@@ -37,10 +37,6 @@ en:
       fide: FIDE rating ↓
       name: name ↓
       sca: SCA rating ↓
-    registration:
-      description: Wandering Dragon Spens Cup squad.
-      keywords: wandering, dragons, registration, spens, cup, team, squad
-      registration: Spens Registration
     roles:
       captain: Captain
       captain_al1: Allegro A Captain

@@ -13,7 +13,7 @@ class Ability
     can :read, Blog, draft: false
     can :read, Dragon
     can :read, Game
-    can [:contacts, :registration], Player
+    can :contacts, Player
 
     if user.blogger?
       can :crud, Blog, user_id: user.id

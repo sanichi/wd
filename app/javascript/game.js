@@ -13,7 +13,7 @@ export const Game = function(pgn, orientation, id) {
     chess.loadPgn(pgn);
     get_moves();
   } catch (error) {
-    console.error(error);
+    alert(error);
     chess.clear();
   }
 
