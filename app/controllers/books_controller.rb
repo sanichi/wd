@@ -13,7 +13,7 @@ class BooksController < ApplicationController
       journal "Book", "create", @book.id
     else
       failure @book
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -23,7 +23,7 @@ class BooksController < ApplicationController
       journal "Book", "update", @book.id
     else
       failure @book
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

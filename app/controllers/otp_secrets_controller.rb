@@ -30,7 +30,7 @@ class OtpSecretsController < ApplicationController
       else
         flash.now[:alert] = t("otp.invalid")
         @qr_code = qr_code(totp, user.handle) if user.otp_secret.nil?
-        render :new
+        render :new, status: :unprocessable_entity
         journal "Session", "otp bounce", handle: user.handle
       end
     else
