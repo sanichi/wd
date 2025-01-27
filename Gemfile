@@ -45,3 +45,5 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'awesome_print', '~> 1.9', require: false
 end
+
+gem "stimulus-rails", "~> 1.3"

@@ -1,3 +1,3 @@
 .row.mt-3.mb-3
   %div{class: center(lg: 4, md: 6, sm: 8, xs: 10)}
-    %div{id: "board_#{id}"}
+    %div{"data-controller" => "board", "data-board-fen-value" => fen, "data-board-note-value" => note, "data-board-side-value" => side}

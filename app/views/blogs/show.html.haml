@@ -1,9 +1,8 @@
 - set_meta_tags title: @blog.title
 
-- html, fens = @blog.story_html
+- html = @blog.story_html
 
 = content_for :javascript do
-  = render partial: "boards", formats: :js, locals: { fens: fens }
   - if can?(:edit, Blog)
     = render partial: "markdown_button", formats: :js
 

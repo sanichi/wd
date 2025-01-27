@@ -56,23 +56,22 @@ class Blog < ApplicationRecord
 
   def story_html
     html = []
-    fens = {}
     html.push summary_html
-    return [html, fens] unless story.present?
-    fen_id = 0
+    return html unless story.present?
     parts = with_table(story).split(FEN1)
     parts.each do |p|
       if p.present?
         if p.match(FEN2)
-          fens[fen_id] = $1
-          html.push "FEN__#{fen_id}"
-          fen_id += 1
+          fen = $1
+          note = fen.match?(/(W|B|N)\Z/) ? "T" : "F"
+          side = fen.match?(/b\Z/i) ? "black" : "white"
+          html.push "FEN__#{fen}__#{note}__#{side}"
         else
           html.push to_html(p)
         end
       end
     end
-    [html, fens]
+    html
   end
 
   def to_param
