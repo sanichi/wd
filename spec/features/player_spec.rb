@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Player do
+describe Player, js: true do
   let!(:player) { create(:player) }
 
   let(:admin) { create(:user, roles: ["admin"]) }
@@ -90,7 +90,9 @@ describe Player do
 
       click_link player.name
       click_link t("edit")
-      click_link t("delete")
+      accept_confirm do
+        click_link t("delete")
+      end
 
       expect(page).to have_title t("player.players")
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Book do
+describe Book, js: true do
   let!(:book) { create(:book) }
 
   let(:data)  { build(:book) }
@@ -91,7 +91,9 @@ describe Book do
 
       click_link book.title
       click_link t(:edit)
-      click_link t(:delete)
+      accept_confirm do
+        click_link t(:delete)
+      end
 
       expect(page).to have_title t("book.books")
 

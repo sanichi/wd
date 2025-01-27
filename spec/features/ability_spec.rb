@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-describe Ability do
+describe Ability, js: true do
 
   it "guest" do
     visit home_path
 
+    click_link t("other")
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
@@ -15,10 +16,12 @@ describe Ability do
     visit players_path
     expect_error(page, "not authorized")
 
+    click_link t("other")
     expect(page).to_not have_css "a", text: t("book.books")
     visit books_path
     expect_error(page, "not authorized")
 
+    click_link t("other")
     expect(page).to_not have_css "a", text: t("user.users")
     visit users_path
     expect_error(page, "not authorized")
@@ -27,12 +30,14 @@ describe Ability do
   it "member" do
     login create(:user, roles: ["member"])
 
+    click_link t("other")
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
     click_link t("game.games")
     expect(page).to_not have_css "a", text: t("game.new")
 
+    click_link t("other")
     click_link t("user.users")
     expect(page).to_not have_css "a", text: t("user.new")
 
@@ -40,6 +45,7 @@ describe Ability do
     visit players_path
     expect_error(page, "not authorized")
 
+    click_link t("other")
     expect(page).to_not have_css "a", text: t("book.books")
     visit books_path
     expect_error(page, "not authorized")
@@ -48,15 +54,18 @@ describe Ability do
   it "librarian" do
     login create(:user, roles: ["librarian"])
 
+    click_link t("other")
     click_link t("blog.blogs")
     expect(page).to_not have_css "a", text: t("blog.new")
 
+    click_link t("other")
     click_link t("book.books")
     click_link t("book.new")
 
     click_link t("game.games")
     expect(page).to_not have_css "a", text: t("game.new")
 
+    click_link t("other")
     click_link t("user.users")
     expect(page).to_not have_css "a", text: t("user.new")
 
@@ -68,12 +77,14 @@ describe Ability do
   it "blogger" do
     login create(:user, roles: ["blogger"])
 
+    click_link t("other")
     click_link t("blog.blogs")
     click_link t("blog.new")
 
     click_link t("game.games")
     click_link t("game.new")
 
+    click_link t("other")
     click_link t("user.users")
     expect(page).to_not have_css "a", text: t("user.new")
 
@@ -81,6 +92,7 @@ describe Ability do
     visit players_path
     expect_error(page, "not authorized")
 
+    click_link t("other")
     expect(page).to_not have_css "a", text: t("book.books")
     visit books_path
     expect_error(page, "not authorized")
@@ -89,9 +101,11 @@ describe Ability do
   it "admin" do
     login create(:user, roles: ["admin"])
 
+    click_link t("other")
     click_link t("blog.blogs")
     click_link t("blog.new")
 
+    click_link t("other")
     click_link t("book.books")
     click_link t("book.new")
 
@@ -101,6 +115,7 @@ describe Ability do
     click_link t("player.players")
     click_link t("player.new")
 
+    click_link t("other")
     click_link t("user.users")
     click_link t("user.new")
   end

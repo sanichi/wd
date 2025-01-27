@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Game do
+describe Game, js: true do
   let!(:game) { create(:game, user: admin, pgn: pgn_file("vaganian_pogonina.pgn")) }
 
   let(:data)  { build(:game, pgn: pgn_file("lee_orr.pgn")) }
@@ -117,7 +117,9 @@ describe Game do
 
       click_link game.title
       click_link t("edit")
-      click_link t("delete")
+      accept_confirm do
+        click_link t("delete")
+      end
 
       expect(page).to have_title t("game.games")
 

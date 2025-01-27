@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Blog do
+describe Blog, js: true do
   let!(:blog) { create(:blog, draft: false, user: blogger, pin: false) }
 
   let(:data)    { build(:blog, slug: "my_slug") }
@@ -130,7 +130,9 @@ describe Blog do
 
       click_link blog.title
       click_link t("edit")
-      click_link t("delete")
+      accept_confirm do
+        click_link t("delete")
+      end
 
       expect(page).to have_title t("blog.blogs")
 
