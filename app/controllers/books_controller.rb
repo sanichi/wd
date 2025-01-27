@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   def index
     remember_last_path(:books)
-    @books = Book.search(@books, params, books_path, remote: true, per_page: 20)
+    @books = Book.search(@books, params, books_path, per_page: 20)
   end
 
   def create

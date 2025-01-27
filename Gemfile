@@ -15,13 +15,14 @@ gem 'pgn', '~> 0.3'
 gem 'rotp', '~> 6.2'
 gem 'rqrcode', '~> 2.1'
 gem 'sprockets-rails', '~> 3.4'
-gem "importmap-rails", "~> 2.1"
+gem 'importmap-rails', '~> 2.1'
+gem 'turbo-rails', '~> 2.0'
 
 # Temporary to silence warnings about gem no longer being standard library
-gem "ostruct", "~> 0.6.1"
+gem 'ostruct', '~> 0.6.1'
 
 # Temporary fix because of glibc version on Alma Linux 8
-gem "nokogiri", force_ruby_platform: true
+gem 'nokogiri', force_ruby_platform: true
 
 group :development, :test do
   gem 'rspec-rails', '< 8'

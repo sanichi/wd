@@ -15,16 +15,17 @@
     %h3.d-inline= t("book.books")
     - if can?(:create, Book)
       .float-end.mt-1= link_to t("book.new"), new_book_path, class: "btn btn-primary btn-sm"
-  .body
-    = render "utils/search/form", index: books_path, inputs: inputs, button: true
-    %table{class: "table table-bordered table-striped table-sm mt-3"}
-      %thead
-        %tr
-          %th= t("book.title")
-          %th.d-none.d-md-table-cell= t("book.author")
-          %th.d-none.d-sm-table-cell= t("book.category")
-          %th.d-none.d-sm-table-cell= t("book.medium")
-          %th.text-center= t("book.year")
-          %th.d-none.d-lg-table-cell= t("book.borrowers")
-      %tbody#results
-        = render "results", books: @books
+  .body{"data-turbo" => "true"}
+    = render "utils/search/form", index: books_path, inputs: inputs
+    = turbo_frame_tag :results, "data-turbo-action" => "advance" do
+      %table{class: "table table-bordered table-striped table-sm mt-3"}
+        %thead
+          %tr
+            %th= t("book.title")
+            %th.d-none.d-md-table-cell= t("book.author")
+            %th.d-none.d-sm-table-cell= t("book.category")
+            %th.d-none.d-sm-table-cell= t("book.medium")
+            %th.text-center= t("book.year")
+            %th.d-none.d-lg-table-cell= t("book.borrowers")
+        %tbody
+          = render "results", books: @books

@@ -9,16 +9,17 @@
     %section
       .header.text-center
         %h3.d-inline= t("journal.journal")
-      .body
+      .body{"data-turbo" => "true"}
         = render "utils/search/form", index: journals_path, inputs: inputs
-        %table{class: "table table-bordered table-striped table-sm mt-3"}
-          %thead
-            %tr
-              %th= t("journal.handle")
-              %th.d-none.d-sm-table-cell= t("journal.remote_ip")
-              %th= t("journal.resource")
-              %th.text-center= t("journal.resource_id")
-              %th= t("journal.action")
-              %th= t("created")
-          %tbody#results
-            = render "results", journals: @journals
+        = turbo_frame_tag :results, "data-turbo-action" => "advance" do
+          %table{class: "table table-bordered table-striped table-sm mt-3"}
+            %thead
+              %tr
+                %th= t("journal.handle")
+                %th.d-none.d-sm-table-cell= t("journal.remote_ip")
+                %th= t("journal.resource")
+                %th.text-center= t("journal.resource_id")
+                %th= t("journal.action")
+                %th= t("created")
+            %tbody
+              = render "results", journals: @journals

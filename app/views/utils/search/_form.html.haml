@@ -1,10 +1,7 @@
-- defined?(remote) || remote = true
 - defined?(button) || button = nil
--# see:
--# https://www.tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/
--# https://stackoverflow.com/questions/27807853/html5-how-to-make-a-form-submit-after-pressing-enter-at-any-of-the-text-inputs
+- defined?(frame)  || frame = "results"
 
-= form_tag index, method: :get, remote: remote, class: "row g-3" do
+= form_tag index, method: :get, "data-turbo-frame" => frame, class: "row g-3" do
   - inputs.each do | param, label, type, cols, options |
     %div{class: col(cols)}
       = label_tag param, label, class: "visually-hidden"

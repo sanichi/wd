@@ -6,6 +6,6 @@ module JournalHelper
     return id unless resource.match?(/\A(Blog|Book|Game|Player|User)\z/)
     object = resource.constantize.find_by(id: id)
     return id unless object
-    link_to id, object
+    link_to id, object, "data-turbo" => "false"
   end
 end

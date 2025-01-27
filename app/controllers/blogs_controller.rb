@@ -6,7 +6,7 @@ class BlogsController < ApplicationController
 
   def index
     remember_last_path(:blogs)
-    @blogs = Blog.search(@blogs, params, blogs_path, remote: true, per_page: 10)
+    @blogs = Blog.search(@blogs, params, blogs_path, per_page: 10)
   end
 
   def create

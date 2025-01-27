@@ -17,7 +17,7 @@
         - if can?(:create, Game)
           .float-end.mt-1= link_to t("game.new"), new_game_path, class: "btn btn-primary btn-sm"
       .body
-        = render "utils/search/form", index: games_path, inputs: inputs, remote: false
+        = render "utils/search/form", index: games_path, inputs: inputs
         %table.table-bordered.mt-3.ms-auto.me-auto
           %tbody
             - if @games.count == 0

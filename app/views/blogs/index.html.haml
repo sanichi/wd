@@ -20,18 +20,19 @@
     %h3.d-inline= t("blog.blogs")
     - if can?(:create, Blog)
       .float-end.mt-1= link_to t("blog.new"), new_blog_path, class: "btn btn-primary btn-sm"
-  .body
+  .body{"data-turbo" => "true"}
     = render "utils/search/form", index: blogs_path, inputs: inputs
-    %table{class: "table table-bordered table-striped table-sm mt-3"}
-      %thead
-        %tr
-          %th= t("blog.title")
-          %th.d-none.d-lg-table-cell= t("blog.summary")
-          - unless current_user.guest?
-            %th.d-none.d-sm-table-cell.text-center= t("blog.pin")
-            %th.d-none.d-sm-table-cell.text-center= t("blog.draft")
-            %th.d-none.d-sm-table-cell.text-center= t("blog.author")
-          %th.text-center= t("created")
-          %th.d-none.d-md-table-cell.text-center= t("updated")
-      %tbody#results
-        = render "results", blogs: @blogs
+    = turbo_frame_tag :results, "data-turbo-action" => "advance" do
+      %table{class: "table table-bordered table-striped table-sm mt-3"}
+        %thead
+          %tr
+            %th= t("blog.title")
+            %th.d-none.d-lg-table-cell= t("blog.summary")
+            - unless current_user.guest?
+              %th.d-none.d-sm-table-cell.text-center= t("blog.pin")
+              %th.d-none.d-sm-table-cell.text-center= t("blog.draft")
+              %th.d-none.d-sm-table-cell.text-center= t("blog.author")
+            %th.text-center= t("created")
+            %th.d-none.d-md-table-cell.text-center= t("updated")
+        %tbody
+          = render "results", blogs: @blogs

@@ -15,31 +15,32 @@
     %h3.d-inline= t("player.contact.contacts")
     - if can?(:create, Player)
       .float-end.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-primary btn-sm"
-  .body
+  .body{"data-turbo" => "true"}
     - unless current_user.guest?
-      = render "utils/search/form", index: contacts_players_path, inputs: inputs, remote: false
-    %table{class: "table table-bordered table-striped table-sm mt-3"}
-      %thead
-        %tr
-          %th= t("player.name")
-          %th= t("player.email")
-          %th.d-none.d-sm-table-cell= t("player.phone")
-          %th.d-none.d-md-table-cell
-            - if current_user.guest?
-              = t("player.contact.position")
-            - else
-              = t("player.roles.roles")
-      %tbody
-        - @players.each do |player|
+      = render "utils/search/form", index: contacts_players_path, inputs: inputs
+    = turbo_frame_tag :results, "data-turbo-action" => "advance" do
+      %table{class: "table table-bordered table-striped table-sm mt-3"}
+        %thead
           %tr
-            %td= link_to_if !current_user.guest?, player.name, player
-            %td= mail_to(player.email)
-            %td.d-none.d-sm-table-cell= player.phone
-            %td.d-none.d-md-table-cell
+            %th= t("player.name")
+            %th= t("player.email")
+            %th.d-none.d-sm-table-cell= t("player.phone")
+            %th.d-none.d-md-table-cell
               - if current_user.guest?
-                = player_roles(player.principle_roles)
+                = t("player.contact.position")
               - else
-                = player_roles(player.roles).truncate(50)
+                = t("player.roles.roles")
+        %tbody
+          - @players.each do |player|
+            %tr
+              %td= link_to_if !current_user.guest?, player.name, player, "data-turbo" => "false"
+              %td= mail_to(player.email)
+              %td.d-none.d-sm-table-cell= player.phone
+              %td.d-none.d-md-table-cell
+                - if current_user.guest?
+                  = player_roles(player.principle_roles)
+                - else
+                  = player_roles(player.roles).truncate(50)
   - if @count > 0
     .footer
       = link_to t("player.contact.copy", count: @count), "#", id: "copy_emails", class: "btn btn-success btn-sm"
