@@ -5,14 +5,14 @@ export default class extends Controller {
   static values = {
     fen: String,
     url: String,
-    note: { type: String, default: "F" },
+    note: { type: Boolean, default: false },
     side: { type: String, default: "white" },
   }
 
   connect() {
     Chessboard(this.element, {
       position: this.fenValue,
-      showNotation: this.noteValue == "T",
+      showNotation: this.noteValue,
       orientation: this.sideValue,
     });
   }

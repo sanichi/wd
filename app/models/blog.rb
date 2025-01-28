@@ -63,7 +63,7 @@ class Blog < ApplicationRecord
       if p.present?
         if p.match(FEN2)
           fen = $1
-          note = fen.match?(/(W|B|N)\Z/) ? "T" : "F"
+          note = fen.match?(/(W|B|N)\Z/) ? "true" : "false"
           side = fen.match?(/b\Z/i) ? "black" : "white"
           html.push "FEN__#{fen}__#{note}__#{side}"
         else

@@ -1,5 +1,5 @@
 - html.each do |part|
-  - if part.match(/\AFEN__(.+)__(T|F)__(white|black)\z/)
+  - if part.match(/\AFEN__(.+)__(true|false)__(white|black)\z/)
     = render "board", fen: $1, note: $2, side: $3
   - else
     ~ part
