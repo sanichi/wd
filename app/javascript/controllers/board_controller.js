@@ -4,15 +4,22 @@ import "chessboard"
 export default class extends Controller {
   static values = {
     fen: String,
-    note: String,
-    side: String
+    url: String,
+    note: { type: String, default: "F" },
+    side: { type: String, default: "white" },
   }
 
   connect() {
     Chessboard(this.element, {
-      showNotation: this.noteValue == "T",
       position: this.fenValue,
+      showNotation: this.noteValue == "T",
       orientation: this.sideValue,
     });
+  }
+
+  visit() {
+    if (this.hasUrlValue) {
+      Turbo.visit(this.urlValue);
+    }
   }
 }
