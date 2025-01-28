@@ -2,10 +2,6 @@
 
 - html = @blog.story_html
 
-= content_for :javascript do
-  - if can?(:edit, Blog)
-    = render partial: "markdown_button", formats: :js
-
 - if @blog.tag
   %p.text-center
     %button.btn.btn-light.btn-sm
@@ -31,7 +27,8 @@
   .footer
     = link_to t("blog.blogs"), last_path(:blogs), class: "btn btn-success btn-sm"
     - if can?(:edit, Blog)
-      = link_to t("blog.markdown"), "#", id: "toggle_markdown", class: "btn btn-success btn-sm"
+      = link_to t("blog.markdown"), "#", class: "btn btn-success btn-sm",
+        "data-controller" => "reveal", "data-reveal-class-value" => "markdown", "data-action" => "reveal#toggle:prevent"
     - if can?(:edit, @blog)
       = link_to t("edit"), edit_blog_path(@blog), class: "btn btn-primary btn-sm"
     .float-end.small.mt-1
