@@ -10,10 +10,13 @@ export default class extends Controller {
   }
 
   connect() {
-    Chessboard(this.element, {
+    const board = Chessboard(this.element, {
       position: this.fenValue,
       showNotation: this.noteValue,
       orientation: this.sideValue,
+    });
+    window.addEventListener("resize", () => {
+      board.resize();
     });
   }
 
