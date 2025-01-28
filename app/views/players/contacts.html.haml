@@ -6,10 +6,6 @@
   ]
   set_meta_tags title: t("player.contact.contacts"), description: t("player.contact.description"), keywords: t("player.contact.keywords")
 
-- if @count > 0
-  = content_for :javascript do
-    = render partial: "copy_emails", formats: :js, locals: { count: @count }
-
 %section
   .header{class: "#{can?(:create, Player) ? '' : 'text-center'}"}
     %h3.d-inline= t("player.contact.contacts")
@@ -41,9 +37,3 @@
                   = player_roles(player.principle_roles)
                 - else
                   = player_roles(player.roles).truncate(50)
-  - if @count > 0
-    .footer
-      = link_to t("player.contact.copy", count: @count), "#", id: "copy_emails", class: "btn btn-success btn-sm"
-
-- if @count > 0
-  = text_area_tag "emails_to_copy", @emails, rows: 2

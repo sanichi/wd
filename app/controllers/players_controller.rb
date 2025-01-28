@@ -12,13 +12,8 @@ class PlayersController < ApplicationController
   def contacts
     if current_user.guest?
       @players = @players.where(contact: true).by_rank
-      @emails = ""
-      @count = 0
     else
       @players = Player.search(@players, params, contacts: true)
-      emails = @players.map(&:long_email).compact
-      @emails = emails.join(", ")
-      @count = emails.size
     end
   end
 
