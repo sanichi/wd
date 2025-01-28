@@ -20,7 +20,8 @@
         .moves= html_moves(@game)
       .footer
         = link_to t("game.games"), last_path(:games), class: "btn btn-success btn-sm"
-        = link_to t("game.pgn"), "#", id: "toggle_pgn", class: "btn btn-success btn-sm"
+        = link_to t("game.pgn"), "#", class: "btn btn-success btn-sm",
+          "data-controller" => "reveal", "data-reveal-class-value" => "pgn", "data-action" => "reveal#toggle:prevent"
         - if can?(:edit, @game)
           = link_to t("edit"), edit_game_path(@game), class: "btn btn-primary btn-sm"
         .float-end.small.mt-1
