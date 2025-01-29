@@ -46,7 +46,7 @@ class PgnGame
       variations = variations(move, number, white, top_level: true)
       show_label = !white || comment || variations
       sep = white ? " " : "\n"
-      %Q{%s<span class="move" data-i="%d">%s%s</span>%s%s%s} %
+      %Q{%s<span class="move" data-action="click->game#seek", data-game-n-param="%d">%s%s</span>%s%s%s} %
         [label, i + 1, notation, annotation, comment, variations, sep]
     end.join("")
     ("\n" + html.rstrip + "\n" + result + "\n").html_safe

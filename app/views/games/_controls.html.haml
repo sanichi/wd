@@ -2,12 +2,12 @@
   .row
     .offset-1
     .col-2.text-center
-      %span.control{"data-direction" => "<<"}= t("game.controls.start")
+      %span.control{"data-action" => "click->game#start"}= t("game.controls.start")
     .col-2.text-center
-      %span.control{"data-direction" => "<"}= "&nbsp;#{t('game.controls.undo')}&nbsp;".html_safe
+      %span.control{"data-action" => "click->game#undo"}= "&nbsp;#{t('game.controls.undo')}&nbsp;".html_safe
     .col-2.text-center
-      %span.control{"data-direction" => ">"}= "&nbsp;#{t('game.controls.move')}&nbsp;".html_safe
+      %span.control{"data-action" => "click->game#move"}= "&nbsp;#{t('game.controls.move')}&nbsp;".html_safe
     .col-2.text-center
-      %span.control{"data-direction" => ">>"}= t("game.controls.end")
+      %span.control{"data-action" => "click->game#end"}= t("game.controls.end")
     .col-2.text-center
-      %span.control{"data-direction" => "o"}= t("game.controls.flip")
+      %span.control{"data-action" => "click->game#flip"}= t("game.controls.flip")
