@@ -1,3 +1,0 @@
-- if content_for? :javascript
-  %script{type: "module", nonce: content_security_policy_nonce}
-    = yield :javascript
