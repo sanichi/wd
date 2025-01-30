@@ -1,6 +1,7 @@
+import "jquery"
 import "popper"
 import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
 
-Turbo.session.drive = false
+Turbo.config.drive.progressBarDelay = 100;

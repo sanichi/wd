@@ -40,4 +40,4 @@
             - if current_user.guest?
               %li= link_to t("session.sign_in"), signin_path
             - else
-              %li{"data-turbo" => "true"}= link_to t("session.sign_out"), session_path, "data-turbo-method" => "delete"
+              %li= link_to t("session.sign_out"), session_path, "data-turbo-method" => "delete"

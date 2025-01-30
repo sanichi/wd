@@ -11,7 +11,7 @@
     %section
       .header.text-center
         %h3.d-inline= t("journal.journal")
-      .body{"data-turbo" => "true"}
+      .body
         = render "utils/search/form", index: journals_path, inputs: inputs
         = turbo_frame_tag :results, "data-turbo-action" => "advance" do
           %table{class: "table table-bordered table-striped table-sm mt-3"}

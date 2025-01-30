@@ -1,6 +1,6 @@
 - players.each do |player|
   %tr
-    %td= link_to player.name, player, "data-turbo" => "false"
+    %td= link_to player.name, player, "data-turbo-frame" => "_top"
     %td.text-center= player.sca_rating
     %td.text-center= player.fide_rating
     %td.text-center= player.federation

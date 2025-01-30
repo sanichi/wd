@@ -1,6 +1,6 @@
 - @blogs.matches.each do |blog|
   %tr
-    %td= link_to blog.title, blog, "data-turbo" => "false"
+    %td= link_to blog.title, blog, "data-turbo-frame" => "_top"
     %td.d-none.d-lg-table-cell= blog.summary.truncate(50)
     - unless current_user.guest?
       %td.d-none.d-sm-table-cell.text-center= t("symbol.#{blog.pin ? 'tick' : 'cross'}")

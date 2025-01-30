@@ -12,7 +12,7 @@
     %h3.d-inline= t("player.players")
     - if can?(:create, Player)
       .float-end.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-primary btn-sm"
-  .body{"data-turbo" => "true"}
+  .body
     = render "utils/search/form", index: players_path, inputs: inputs
     = turbo_frame_tag :results, "data-turbo-action" => "advance" do
       %table{class: "table table-bordered table-striped table-sm mt-3"}

@@ -13,7 +13,7 @@
         %h3.d-inline= t("game.games")
         - if can?(:create, Game)
           .float-end.mt-1= link_to t("game.new"), new_game_path, class: "btn btn-primary btn-sm"
-      .body{"data-turbo" => "true"}
+      .body
         = render "utils/search/form", index: games_path, inputs: inputs
         = turbo_frame_tag :results, "data-turbo-action" => "advance" do
           %table.table-bordered.mt-3.ms-auto.me-auto
@@ -26,7 +26,7 @@
                 - @games.matches.each do |game|
                   %tr
                     %td.p-2
-                      = link_to title_and_difficulty(game), game, "data-turbo" => "false"
+                      = link_to title_and_difficulty(game), game, "data-turbo-frame" => "_top"
                       - if game.difficulty
                         %div.mt-2{"data-controller" => "board",
                           "data-board-url-value" => game_path(game),

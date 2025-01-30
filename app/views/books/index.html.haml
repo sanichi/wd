@@ -15,7 +15,7 @@
     %h3.d-inline= t("book.books")
     - if can?(:create, Book)
       .float-end.mt-1= link_to t("book.new"), new_book_path, class: "btn btn-primary btn-sm"
-  .body{"data-turbo" => "true"}
+  .body
     = render "utils/search/form", index: books_path, inputs: inputs
     = turbo_frame_tag :results, "data-turbo-action" => "advance" do
       %table{class: "table table-bordered table-striped table-sm mt-3"}

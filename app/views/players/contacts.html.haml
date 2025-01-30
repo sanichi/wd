@@ -11,7 +11,7 @@
     %h3.d-inline= t("player.contact.contacts")
     - if can?(:create, Player)
       .float-end.mt-1= link_to t("player.new"), new_player_path, class: "btn btn-primary btn-sm"
-  .body{"data-turbo" => "true"}
+  .body
     - unless current_user.guest?
       = render "utils/search/form", index: contacts_players_path, inputs: inputs
     = turbo_frame_tag :results, "data-turbo-action" => "advance" do
@@ -29,7 +29,7 @@
         %tbody
           - @players.each do |player|
             %tr
-              %td= link_to_if !current_user.guest?, player.name, player, "data-turbo" => "false"
+              %td= link_to_if !current_user.guest?, player.name, player, "data-turbo-frame" => "_top"
               %td= mail_to(player.email)
               %td.d-none.d-sm-table-cell= player.phone
               %td.d-none.d-md-table-cell
