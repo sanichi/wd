@@ -16,6 +16,14 @@ class Journal < ApplicationRecord
     if sql = cross_constraint(params[:query], %w{action handle remote_ip resource}.push("to_char(created_at, 'YYYY-MM-DD HH24-MI-SS')"))
       matches = matches.where(sql)
     end
+    handle = params[:handle]
+    case handle
+    when User::VALID_HANDLE
+      matches = matches.where(handle: handle)
+    when "other"
+      handles = User.all.pluck(:handle)
+      matches = matches.where.not(handle: handles)
+    end
     paginate(matches, params, path, opt)
   end
 

@@ -1,7 +1,9 @@
 :ruby
   set_meta_tags title: t("journal.journal")
+  lo = Layout.new({xs: [6,4], md: [4,2]}).to_a
   inputs = [
-    [:query, t("query"), :text, Layout.new({xs: [6], md: [4]}).to_a.first],
+    [:query,  t("query"),       :text,   lo[0]],
+    [:handle, t("user.handle"), :select, lo[1], menu: handle_menu(params[:handle])],
   ]
 
 .row
