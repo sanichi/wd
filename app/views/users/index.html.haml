@@ -8,7 +8,7 @@
         - if can?(:create, User)
           .float-end.mt-1= link_to t("user.new"), new_user_path, class: "btn btn-primary btn-sm"
       .body
-        %table{class: "table table-bordered table-striped table-sm mt-3"}
+        %table{class: "table table-bordered table-sm mt-3"}
           %thead
             %tr
               %th= t("user.handle")
