@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     vers = dirs.scan(/\d*\.\d*\.\d*/)
     @passenger_version = vers.any? ? vers.last : "not found"
     vers = ActiveRecord::Base.connection.execute('select version();').values[0][0] rescue "oops"
-    @postgres_version = vers.match(/(1[4-6]\.\d+)/)? $1 : "not found"
+    @postgres_version = vers.match(/PostgreSQL (1[4-7]\.\d+)/)? $1 : "not found"
     @host = ENV["HOSTNAME"] || `hostname`.chop.sub(".local", "")
   end
 
