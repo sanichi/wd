@@ -21,9 +21,6 @@ gem 'turbo-rails', '~> 2.0'
 # Temporary to silence warnings about gem no longer being standard library
 gem 'ostruct', '~> 0.6.1'
 
-# Temporary fix because of glibc version on Alma Linux 8
-gem 'nokogiri', force_ruby_platform: true
-
 group :development, :test do
   gem 'rspec-rails', '< 8'
   gem 'capybara', '< 4'
