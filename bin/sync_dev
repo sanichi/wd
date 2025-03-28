@@ -1,2 +1,2 @@
 #!/bin/sh
-sd -d wd -s nhn $1
+sd -d wd -s mor $1
