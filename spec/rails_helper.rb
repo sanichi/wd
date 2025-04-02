@@ -57,7 +57,7 @@ Capybara.configure do |config|
 end
 
 # Temporary solution to selenium deprecation messages.
-Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)
+# Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)
 
 def login(user)
   visit home_path
