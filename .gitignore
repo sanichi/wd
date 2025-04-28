@@ -20,3 +20,5 @@
 
 /config/master.key
 /config/database.yml
+
+/spec/examples.txt
