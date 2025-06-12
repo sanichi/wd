@@ -365,7 +365,6 @@ DEPENDENCIES
   launchy (< 4)
   listen (~> 3.2)
   meta-tags (~> 2.12)
-  ostruct (~> 0.6.1)
   pg (>= 0.18, < 2.0)
   pgn (~> 0.3)
   puma (< 7)
