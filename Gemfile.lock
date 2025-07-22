@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/sanichi/pgn
+  revision: 857a6940df544dfa59d5ccf86a3725ffb28e66fc
+  specs:
+    pgn (1.0.3)
+      whittle
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -144,7 +151,7 @@ GEM
       railties (>= 5.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.1.0)
+    importmap-rails (2.2.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -197,14 +204,12 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.4)
-    nokogiri (1.18.8-arm64-darwin)
+    nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-linux-gnu)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
     pg (1.5.9)
-    pgn (0.3.0)
-      whittle
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -262,7 +267,7 @@ GEM
       psych (>= 4.0.0)
     redcarpet (3.6.1)
     regexp_parser (2.10.0)
-    reline (0.6.1)
+    reline (0.6.2)
       io-console (~> 0.5)
     rexml (3.4.1)
     rotp (6.3.0)
@@ -366,7 +371,7 @@ DEPENDENCIES
   listen (~> 3.2)
   meta-tags (~> 2.12)
   pg (>= 0.18, < 2.0)
-  pgn (~> 0.3)
+  pgn!
   puma (< 7)
   rails (= 8.0.2)
   redcarpet (~> 3.5)
