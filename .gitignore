@@ -16,6 +16,7 @@
 !/tmp/pids/.keep
 
 /public/assets
+/public/img/photos
 .byebug_history
 
 /config/master.key

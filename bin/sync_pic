@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#
+# Sync pictures in public/img/photos with the live server.
+# These images used to be in git, but they hardly ever change,
+# so for the sake of adding new ones, this setup is easier.
+#
+
+# Local stuff.
+home="/Users/mjo/Projects/app/wd"             # local project
+source="$home/public/img/photos"              # local images directory
+tmp1=$(mktemp)                                # temporary file
+tmp2=$(mktemp)                                # temporary file
+
+# Remote stuff.
+server="mor"                                  # remote machine (sanichi@morioka.sanichi.me)
+target="/var/www/wd/shared/public/img/photos" # remote images directory
+
+# Other stuff.
+awkp='{ if (NF == 9) printf "%-30s %s\n", $9, $5 }' # awk program to filter ls output
+
+# Prepare for options and arguments.                                                      #
+sync=false
+
+# Parse options.
+while getopts ":hs" opt; do
+  case $opt in
+    s) sync=true;;
+    h)
+      echo "Check and optionally perform sync for public/img/photos"
+      echo "Usage: $0 [-s]"
+      echo "Options:"
+      echo "  -s        synchronize"
+      echo "Examples:"
+      echo "  $0        # check only"
+      echo "  $0 -s     # synchronize first and then check"
+      exit 0
+      ;;
+    \?)
+      echo "invalid option $OPTARG"
+      exit 1
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
+# Deal with remaining arguments.
+if [[ $# > 0 ]]; then
+  echo "too many arguments ($#)"
+  exit 1
+fi
+
+# Sanity checks.                                                                      #
+if ! [[ $PWD = $home ]]; then
+  echo "please run me from $home"
+  exit 1;
+fi
+if ! [[ -d $source ]]; then
+  echo "$isource doesn't exist"
+  exit 1;
+fi
+
+# Optionally sync images.
+if [[ $sync = true ]]; then
+  rsync -rt "$source"/ "$server:$target"
+fi
+
+# Compare listings of local and remote photos directory.
+ls -l $source | gawk "$awkp" | sort > $tmp1
+ssh $server "ls -l $target" | gawk "$awkp" | sort > $tmp2
+echo "checking photos ..."
+diff $tmp1 $tmp2 || true # don't let our use of "set -e" exit here
