@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       journal "User", "create", @user.id
     else
       failure @user
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       journal "User", "update", @user.id
     else
       failure @user
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

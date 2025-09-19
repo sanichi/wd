@@ -13,7 +13,7 @@ class GamesController < ApplicationController
       journal "Game", "create", @game.id
     else
       failure @game
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -24,7 +24,7 @@ class GamesController < ApplicationController
       journal "Game", "update", @game.id
     else
       failure @game
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

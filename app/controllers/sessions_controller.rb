@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       end
     else
       flash.now[:alert] = t("session.invalid")
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
       journal "Session", "bounce", handle: params[:handle]
     end
   end

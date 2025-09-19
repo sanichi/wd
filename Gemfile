@@ -33,7 +33,7 @@ group :test do
 end
 
 group :development do
-  gem 'puma', '< 7'
+  gem 'puma', '< 8'
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-passenger', '~> 0.2', require: false
   gem 'listen', '~> 3.2'

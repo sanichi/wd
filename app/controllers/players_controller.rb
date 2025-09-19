@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
       journal "Player", "create", @player.id
     else
       failure @player
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -33,7 +33,7 @@ class PlayersController < ApplicationController
       journal "Player", "update", @player.id
     else
       failure @player
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

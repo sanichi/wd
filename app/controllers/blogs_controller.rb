@@ -16,7 +16,7 @@ class BlogsController < ApplicationController
       journal "Blog", "create", @blog.id
     else
       failure @blog
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -35,7 +35,7 @@ class BlogsController < ApplicationController
       journal "Blog", "update", @blog.id
     else
       failure @blog
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
