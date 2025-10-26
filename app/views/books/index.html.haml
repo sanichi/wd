@@ -1,5 +1,5 @@
 :ruby
-  lo = Layout.new({ xs: [[3,3,3], [3,3,3]], md: [2,2,2,2,2,2] }).to_a
+  lo = Sni::Layout.call({xs: [[3,3,3], [3,3,3]], md: [2,2,2,2,2,2]})
   inputs = [
     [:query,     t("query"),          :text,   lo[0], size: 16, placeholder: %w/title author note/.map{|i| t("book.#{i}")}.join("/")],
     [:year,      t("book.year"),      :text,   lo[1], size: 6],

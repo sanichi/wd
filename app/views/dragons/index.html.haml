@@ -1,6 +1,6 @@
 :ruby
   set_meta_tags title: t("dragon.dragons"), description: t("dragon.description"), keywords: t("dragon.keywords")
-  lo = Layout.new({xs: [4,4,4]}).to_a
+  lo = Sni::Layout.call({xs: [4,4,4]})
   inputs = [
     [:name,   t("dragon.name"),   :text,   lo[0], size: 16, placeholder: t("dragon.name")],
     [:gender, t("dragon.gender"), :select, lo[1], menu: dragon_gender_menu(params[:gender])],

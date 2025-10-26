@@ -1,6 +1,6 @@
 :ruby
   set_meta_tags title: t("journal.journal")
-  lo = Layout.new({xs: [6,4], md: [4,2]}).to_a
+  lo = Sni::Layout.call({xs: [6,4], md: [4,2]})
   inputs = [
     [:query,  t("query"),       :text,   lo[0]],
     [:handle, t("user.handle"), :select, lo[1], menu: handle_menu(params[:handle])],

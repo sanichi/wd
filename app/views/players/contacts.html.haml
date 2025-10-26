@@ -1,5 +1,5 @@
 :ruby
-  lo = Layout.new({xl: [2,2], lg: [3,3], md: [4,4], sm: [5,5], xs: [6,6]}).to_a
+  lo = Sni::Layout.call({xl: [2,2], lg: [3,3], md: [4,4], sm: [5,5], xs: [6,6]})
   inputs = [
     [:name,  t("player.name"),  :text,   lo[0], size: 10],
     [:role,  t("player.roles"), :select, lo[1], menu: player_role_menu(params[:role], search: true)],

@@ -1,5 +1,5 @@
 :ruby
-  lo = Layout.new({xxl: [3,3], lg: [4,4], sm: [5,5], xs: [6,6]}).to_a
+  lo = Sni::Layout.call({xxl: [3,3], lg: [4,4], sm: [5,5], xs: [6,6]})
   inputs = [
     [:query,      t("query"),           :text,   lo[0], size: 16],
     [:difficulty, t("game.difficulty"), :select, lo[1], menu: game_difficulty_menu(params[:difficulty], search: true)],
