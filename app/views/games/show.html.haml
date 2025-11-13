@@ -1,7 +1,7 @@
 - set_meta_tags title: @game.title
 
 .row
-  %div{class: center(xl: 6, lg: 8, md: 10, sm: 12),
+  %div{class: Sni::Center.call(xl: 6, lg: 8, md: 10, sm: 12),
     "data-controller"       => "game",
     "data-game-move-value"  => @move,
     "data-game-side-value"  => @game.orientation,
@@ -12,7 +12,7 @@
         %h5.d-inline= title_and_difficulty(@game)
       .body.pb-0
         .row
-          %div{class: center(sm: 8, xs: 10)}
+          %div{class: Sni::Center.call(sm: 8, xs: 10)}
             %div.mb-3{"data-game-target" => "board"}
             = render "controls"
       - if @game.study?

@@ -10,4 +10,4 @@
     inputs.push [:pin,  t("blog.pin"),  :check]
     inputs.push [:slug, t("blog.slug"), :text]
   end
-= render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)
+= render "utils/crud/form", object: blog, index: blogs_path, inputs: inputs, title: title, center: Sni::Center.call(xl: 8, lg: 10)

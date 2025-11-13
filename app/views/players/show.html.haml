@@ -1,7 +1,7 @@
 - set_meta_tags title: @player.name, description: t("player.description"), keywords: t("player.keywords")
 
 .row
-  %div{class: center(xl: 6, lg: 8, md:10)}
+  %div{class: Sni::Center.call(xl: 6, lg: 8, md:10)}
     %section
       .header.text-center
         %h3.d-inline= @player.name

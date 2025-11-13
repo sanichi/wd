@@ -9,4 +9,4 @@
     [:borrowers, t("book.borrowers"), :text],
     [:note,      t("book.note"),      :text],
   ]
-= render "utils/crud/form", object: book, index: books_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)
+= render "utils/crud/form", object: book, index: books_path, inputs: inputs, title: title, center: Sni::Center.call(xl: 8, lg: 10)

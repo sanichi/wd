@@ -8,7 +8,7 @@
   ]
 
 .row
-  %div{class: center(xl: 6, lg: 8, md: 8, sm: 10)}
+  %div{class: Sni::Center.call(xl: 6, lg: 8, md: 8, sm: 10)}
     %section
       .header.text-center
         %h3.d-inline= t("dragon.dragons")
@@ -18,7 +18,7 @@
         %hr
         = render "utils/search/form", index: dragons_path, inputs: inputs
         .row
-          %div{class: center(lg: 6, md: 8, sm: 10)}
+          %div{class: Sni::Center.call(lg: 6, md: 8, sm: 10)}
             = turbo_frame_tag :results, "data-turbo-action" => "advance" do
               %table{class: "table table-bordered table-sm mt-3"}
                 %thead

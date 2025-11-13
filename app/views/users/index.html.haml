@@ -1,7 +1,7 @@
 - set_meta_tags title: t("user.users")
 
 .row
-  %div{class: center(xl: 4, lg: 6, md: 8, sm: 10)}
+  %div{class: Sni::Center.call(xl: 4, lg: 6, md: 8, sm: 10)}
     %section
       .header{class: "#{can?(:create, User) ? '' : 'text-center'}"}
         %h3.d-inline= t("user.users")

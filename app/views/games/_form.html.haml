@@ -4,4 +4,4 @@
     [:difficulty, t("game.difficulty"), :select, menu: game_difficulty_menu(game.difficulty)],
     [:pgn,        t("game.pgn"),        :area,   placeholder: t("game.placeholders.pgn"),   maxlength: Game::MAX_PGN, rows: 30, autofocus: true],
   ]
-= render "utils/crud/form", object: game, index: games_path, inputs: inputs, title: title, center: center(xl: 8, lg: 10)
+= render "utils/crud/form", object: game, index: games_path, inputs: inputs, title: title, center: Sni::Center.call(xl: 8, lg: 10)
