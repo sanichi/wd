@@ -8,6 +8,7 @@ class Blog < ApplicationRecord
   FEN1 = /\n*\s*(FEN\s*"[^"]*")\s*\n*/
   FEN2 = /\AFEN\s*"([^"]*)"\z/
   TABLE = /(?:\A|\n)_TABLE([a-z0-9]*)_([^\n]*)(?:\z|\n)/
+  LMS = /\s*\{LMS:(\d+)\}\s*/
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
@@ -90,6 +91,12 @@ class Blog < ApplicationRecord
     self.summary = clean(summary)
     self.story = clean(story)
     self.tag = nil if tag.blank?
+    process_match_data
+  end
+
+  def process_match_data
+    self.summary = with_match(summary) if summary
+    self.story = with_match(story) if story
   end
 
   def clean(markdown)
@@ -113,6 +120,64 @@ class Blog < ApplicationRecord
       text.sub(TABLE, table.markdown)
     else
       text
+    end
+  end
+
+  def with_match(text)
+    return text unless text
+    require_relative '../../lib/misc/chess_match_scraper'
+
+    text.gsub(LMS) do
+      fixture_id = $1
+      scraper = ChessMatchScraper.new(fixture_id)
+      match_data = scraper.scrape
+      "\n\n#{match_to_markdown(match_data)}\n\n"
+    end
+  end
+
+  def match_to_markdown(data)
+    rows = []
+
+    # Build game rows first to calculate column widths
+    game_rows = data[:games].map do |game|
+      home = format_player(game[:home_player], game[:home_rating])
+      result = game[:result].gsub(/\s+/, '')
+      away = format_player(game[:away_player], game[:away_rating])
+      [home, result, away]
+    end
+
+    # Calculate max widths for each column
+    max_home = ([data[:home_team]] + game_rows.map(&:first)).map(&:length).max
+    max_away = ([data[:away_team]] + game_rows.map(&:last)).map(&:length).max
+
+    # Format score for header
+    score = "#{format_score(data[:home_score])}-#{format_score(data[:away_score])}"
+
+    # Header row
+    rows << "|#{data[:home_team].ljust(max_home)}|#{score.center(3)}|#{data[:away_team].ljust(max_away)}|"
+
+    # Separator row
+    rows << "|#{'-' * max_home}|:-:|#{'-' * max_away}|"
+
+    # Game rows
+    game_rows.each do |home, result, away|
+      rows << "|#{home.ljust(max_home)}|#{result.center(3)}|#{away.ljust(max_away)}|"
+    end
+
+    rows.join("\n")
+  end
+
+  def format_player(name, rating)
+    return '' if name.to_s.strip.empty?
+    rating_str = rating ? " (#{rating})" : ''
+    "#{name}#{rating_str}"
+  end
+
+  def format_score(score)
+    if score % 1 == 0
+      score.to_i.to_s
+    else
+      "#{score.to_i}½"
     end
   end
 end

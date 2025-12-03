@@ -22,4 +22,6 @@
 /config/master.key
 /config/database.yml
 
+/.claude
+
 /spec/examples.txt
