@@ -553,5 +553,28 @@ RSpec.describe ChessMatchScraper do
         expect(result[:away_score]).to eq(0.5)
       end
     end
+
+    context 'live test against real LMS website' do
+      it 'successfully scrapes fixture 1539 from the live website' do
+        live_scraper = ChessMatchScraper.new(1539)
+        result = live_scraper.scrape
+
+        # Verify the structure and data we got when the test was created (2025-12-03)
+        expect(result[:home_team]).to eq('Civil Service 1')
+        expect(result[:away_team]).to eq('Wandering Dragons 1')
+        expect(result[:home_score]).to eq(1.0)
+        expect(result[:away_score]).to eq(5.0)
+        expect(result[:games].length).to eq(6)
+
+        # Verify the first game to ensure detailed parsing still works
+        first_game = result[:games].first
+        expect(first_game[:board]).to eq(1)
+        expect(first_game[:home_player]).to eq('Van Oijen, Marcel')
+        expect(first_game[:home_rating]).to eq(1936)
+        expect(first_game[:result]).to eq('0 - 1')
+        expect(first_game[:away_player]).to eq('Orr, Mark J L')
+        expect(first_game[:away_rating]).to eq(2116)
+      end
+    end
   end
 end
