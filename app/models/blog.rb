@@ -137,6 +137,7 @@ class Blog < ApplicationRecord
     require_relative '../../lib/misc/chess_match_scraper'
 
     text.gsub(LMS) do
+      matched_string = $&
       fixture_id = $1
       begin
         scraper = ChessMatchScraper.new(fixture_id)
@@ -144,7 +145,7 @@ class Blog < ApplicationRecord
         "\n\n#{match_to_markdown(match_data)}\n\n"
       rescue ChessMatchScraper::ScraperError => e
         @scraping_errors << "LMS fixture #{fixture_id}: #{e.message}"
-        "{LMS:#{fixture_id}}"
+        matched_string
       end
     end
   end
