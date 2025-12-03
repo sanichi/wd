@@ -80,14 +80,50 @@ describe Blog do
       allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::MatchNotPlayedError, "Match not played")
 
       blog = Blog.new(title: "Test", summary: "{LMS:1539}")
-      expect { blog.save! }.to raise_error(ChessMatchScraper::MatchNotPlayedError)
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("LMS fixture 1539: Match not played")
+      expect(blog.summary).to eq("{LMS:1539}")
     end
 
     it "fails validation when scraper raises NetworkError" do
       allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Network error")
 
       blog = Blog.new(title: "Test", summary: "{LMS:1539}")
-      expect { blog.save! }.to raise_error(ChessMatchScraper::NetworkError)
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("LMS fixture 1539: Network error")
+      expect(blog.summary).to eq("{LMS:1539}")
+    end
+
+    it "fails validation when scraper raises ParseError" do
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::ParseError, "Parse error")
+
+      blog = Blog.new(title: "Test", summary: "{LMS:1539}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("LMS fixture 1539: Parse error")
+      expect(blog.summary).to eq("{LMS:1539}")
+    end
+
+    it "fails validation when scraper error occurs in story field" do
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Network error")
+
+      blog = Blog.new(title: "Test", summary: "Summary", story: "{LMS:1539}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("LMS fixture 1539: Network error")
+      expect(blog.story).to eq("{LMS:1539}")
+    end
+
+    it "handles multiple LMS patterns with mixed success and failure" do
+      working_scraper = instance_double(ChessMatchScraper)
+      allow(working_scraper).to receive(:scrape).and_return(match_data)
+      allow(ChessMatchScraper).to receive(:new).with("1539").and_return(working_scraper)
+      allow(ChessMatchScraper).to receive(:new).with("9999").and_return(mock_scraper)
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Not found")
+
+      blog = Blog.new(title: "Test", summary: "{LMS:1539} and {LMS:9999}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("LMS fixture 9999: Not found")
+      expect(blog.summary).to include("|Civil Service 1")
+      expect(blog.summary).to include("{LMS:9999}")
     end
 
     it "does not modify summary if no {LMS:nnnn} pattern" do

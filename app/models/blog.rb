@@ -16,6 +16,7 @@ class Blog < ApplicationRecord
   VALID_SLUG = /\A[a-z][a-z0-9_]+\z/
 
   before_validation :normalize_attributes
+  validate :check_for_scraping_errors
 
   validates :summary, presence: true
   validates :tag, inclusion: { in: TAGS }, allow_nil: true
@@ -91,12 +92,20 @@ class Blog < ApplicationRecord
     self.summary = clean(summary)
     self.story = clean(story)
     self.tag = nil if tag.blank?
+    @scraping_errors = []
     process_match_data
   end
 
   def process_match_data
     self.summary = with_match(summary) if summary
     self.story = with_match(story) if story
+  end
+
+  def check_for_scraping_errors
+    return unless @scraping_errors
+    @scraping_errors.each do |error_message|
+      errors.add(:base, error_message)
+    end
   end
 
   def clean(markdown)
@@ -129,9 +138,14 @@ class Blog < ApplicationRecord
 
     text.gsub(LMS) do
       fixture_id = $1
-      scraper = ChessMatchScraper.new(fixture_id)
-      match_data = scraper.scrape
-      "\n\n#{match_to_markdown(match_data)}\n\n"
+      begin
+        scraper = ChessMatchScraper.new(fixture_id)
+        match_data = scraper.scrape
+        "\n\n#{match_to_markdown(match_data)}\n\n"
+      rescue ChessMatchScraper::ScraperError => e
+        @scraping_errors << "LMS fixture #{fixture_id}: #{e.message}"
+        "{LMS:#{fixture_id}}"
+      end
     end
   end
 
