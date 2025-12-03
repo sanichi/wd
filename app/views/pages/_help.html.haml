@@ -9,6 +9,7 @@
   %li= help_link :add_position
   %li= help_link :add_image
   %li= help_link :add_table
+  %li= help_link :add_match
   %li= help_link :create_game
 
 = help_section :game_controls
@@ -267,6 +268,36 @@
 %p
   When deciding how wide to make your image, remember that it has to display on
   both very large screens (1000's of pixels) and very small ones (a few 100 pixels).
+
+= help_section :add_match
+
+%p
+  This only works for match results from the LMS site, for example:
+  = succeed(".") { link_to "www.lms.playchess.org.uk/fixture/1539", "https://www.lms.playchess.org.uk/fixture/1539", target: "external" }
+%p
+  Suppose you want to enter the match result as a markdown table, like this:
+%pre
+  |Civil Service 1             |1-5|Wandering Dragons 1|
+  |----------------------------|:-:|-------------------|
+  |Van Oijen, Marcel (1936)    |0-1|Orr, Mark J L (2116)|
+  |Rounds, Matt (1875)         |0-1|Leah, Tom (2061)|
+  |Gunn-Russell, Charles (1789)|0-1|Fleming, Neil (1950)|
+  |Scott, Richard (1702)       |0-1|Kynoch, Richard J P (1882)|
+  |McDiarmid, Allan (1664)     |0-1|Sloan, Elliot S (1850)|
+  |Grey, Tom (1635)            |1-0|O'Neil, Jim (1797)|
+%p
+  That's a lot copying and typing by hand. Let's make it easier. Instead, just insert this:
+%pre
+  {LMS:1539}
+%p
+  The data will be obtained from the LMS site, formatted into a markdown table,
+  substituted for the curly bracket expression, and finally saved to the database
+  as if you'd typed it in yoursef.
+%p
+  Obviously you need to obtain the right fixture ID from the LMS site first and use that in the curley brackets.
+  If you make a mistake, just delete the table and try again with the correct fixture ID.
+%p
+  This feature works by web scraping and may fail if the LMS site changes. Please report any problems to this website's admin.
 
 = help_section :add_table
 

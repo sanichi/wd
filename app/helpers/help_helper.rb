@@ -8,6 +8,7 @@ module HelpHelper
     update_news:   "Update a News Item",
     add_image:     "Add an Image",
     add_table:     "Add a Tournament Table",
+    add_match:     "Add a Match Table",
     add_position:  "Add a Position",
     create_game:   "Create a Game",
     house_style:   "House Style",
