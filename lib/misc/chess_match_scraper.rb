@@ -18,6 +18,18 @@ class ChessMatchScraper
   def scrape
     page = fetch_page
     parse_match_data(page)
+  rescue Mechanize::ResponseCodeError => e
+    # Handle HTTP errors (404, 500, etc) with a clean message
+    response_code = e.response_code.to_i
+    response_text = case response_code
+                    when 404 then 'Not Found'
+                    when 403 then 'Forbidden'
+                    when 500 then 'Internal Server Error'
+                    when 502 then 'Bad Gateway'
+                    when 503 then 'Service Unavailable'
+                    else 'Error'
+                    end
+    raise NetworkError, "Failed to fetch fixture #{fixture_id}: #{response_code} #{response_text}"
   rescue Mechanize::Error, SocketError, Timeout::Error => e
     raise NetworkError, "Failed to fetch fixture #{fixture_id}: #{e.message}"
   rescue ScraperError
