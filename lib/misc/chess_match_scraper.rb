@@ -29,13 +29,13 @@ class ChessMatchScraper
                     when 503 then 'Service Unavailable'
                     else 'Error'
                     end
-    raise NetworkError, "Failed to fetch fixture #{fixture_id}: #{response_code} #{response_text}"
+    raise NetworkError, "Failed to fetch: #{response_code} #{response_text}"
   rescue Mechanize::Error, SocketError, Timeout::Error => e
-    raise NetworkError, "Failed to fetch fixture #{fixture_id}: #{e.message}"
+    raise NetworkError, "Failed to fetch: #{e.message}"
   rescue ScraperError
     raise
   rescue StandardError => e
-    raise ParseError, "Failed to parse fixture #{fixture_id}: #{e.message}"
+    raise ParseError, "Failed to parse: #{e.message}"
   end
 
   private
@@ -131,7 +131,7 @@ class ChessMatchScraper
     all_results_n = games.all? { |game| game[:result] == 'N' }
 
     if all_results_n
-      raise MatchNotPlayedError, "Match #{fixture_id} has not been played yet"
+      raise MatchNotPlayedError, "Match has not been played yet"
     end
   end
 

@@ -458,7 +458,7 @@ RSpec.describe ChessMatchScraper do
         end
 
         it 'raises NetworkError' do
-          expect { scraper.scrape }.to raise_error(ChessMatchScraper::NetworkError, /Failed to fetch fixture/)
+          expect { scraper.scrape }.to raise_error(ChessMatchScraper::NetworkError, /Failed to fetch/)
         end
       end
 
