@@ -80,11 +80,18 @@ class ChessMatchScraper
   end
 
   def parse_game_row(cells)
+    # Handle the result, including defaults: convert "1 - 0(def)" to "1 * 0", etc.
+    result = cells[3].text.strip
+    if result.end_with?('(def)')
+      result = result.sub(/\(def\)\z/, '').strip  # Remove (def)
+      result = result.sub(/-/, '*')               # Replace dash with asterisk (preserving spaces)
+    end
+
     {
       board: cells[0].text.strip.to_i,
       home_rating: extract_rating(cells[1]),
       home_player: extract_player_name(cells[2]),
-      result: cells[3].text.strip,
+      result: result,
       away_player: extract_player_name(cells[4]),
       away_rating: extract_rating(cells[5])
     }
@@ -139,13 +146,13 @@ class ChessMatchScraper
     games.sum do |game|
       result = game[:result]
 
-      # Handle results that may have annotations like "(def)"
+      # Handle results: both normal (1-0) and defaults (1*0)
       # Check if result starts with the score pattern
-      if result =~ /^1\s*-\s*0/
+      if result =~ /^1\s*[-*]\s*0/
         side == :home ? 1.0 : 0.0
-      elsif result =~ /^0\s*-\s*1/
+      elsif result =~ /^0\s*[-*]\s*1/
         side == :away ? 1.0 : 0.0
-      elsif result =~ /^(½\s*-\s*½|0\.5\s*-\s*0\.5)/
+      elsif result =~ /^(½\s*[-*]\s*½|0\.5\s*[-*]\s*0\.5)/
         0.5
       else
         0.0

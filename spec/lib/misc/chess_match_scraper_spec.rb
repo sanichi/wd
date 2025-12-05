@@ -381,14 +381,14 @@ RSpec.describe ChessMatchScraper do
         result = scraper.scrape
         expect(result[:games].length).to eq(5)
         expect(result[:games][2][:away_player]).to eq('Default')
-        expect(result[:games][2][:result]).to eq('1 - 0(def)')
+        expect(result[:games][2][:result]).to eq('1 * 0')
         expect(result[:games][4][:home_player]).to eq('Default')
-        expect(result[:games][4][:result]).to eq('0 - 1(def)')
+        expect(result[:games][4][:result]).to eq('0 * 1')
       end
 
       it 'calculates scores correctly with default wins' do
         result = scraper.scrape
-        # Home: 3 wins (1-0) + 1 default win (1-0(def)) - 1 default loss (0-1(def)) = 4-1
+        # Home: 3 wins (1-0) + 1 default win (1 * 0) - 1 default loss (0 * 1) = 4-1
         expect(result[:home_score]).to eq(4.0)
         expect(result[:away_score]).to eq(1.0)
       end
@@ -397,6 +397,64 @@ RSpec.describe ChessMatchScraper do
         result = scraper.scrape
         expect(result[:games][2][:home_rating]).to be_nil
         expect(result[:games][2][:away_rating]).to be_nil
+      end
+    end
+
+    context 'with default draws marked with (def)' do
+      let(:mock_page) do
+        html = <<~HTML
+          <html>
+            <body>
+              <h1>Team X V Team Y</h1>
+              <table class="team-match-table">
+                <thead>
+                  <tr>
+                    <th>Board</th>
+                    <th>Rating</th>
+                    <th>Team X</th>
+                    <th>V</th>
+                    <th>Team Y</th>
+                    <th>Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>1500</td>
+                    <td>Player A</td>
+                    <td>½ - ½(def)</td>
+                    <td>Player B</td>
+                    <td>1550</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>1400</td>
+                    <td>Player C</td>
+                    <td>1 - 0</td>
+                    <td>Player D</td>
+                    <td>1450</td>
+                  </tr>
+                </tbody>
+              </table>
+            </body>
+          </html>
+        HTML
+        Nokogiri::HTML(html)
+      end
+
+      before do
+        allow(agent).to receive(:get).and_return(mock_page)
+      end
+
+      it 'converts default draws from ½ - ½(def) to ½ * ½' do
+        result = scraper.scrape
+        expect(result[:games][0][:result]).to eq('½ * ½')
+      end
+
+      it 'calculates scores correctly with default draws' do
+        result = scraper.scrape
+        expect(result[:home_score]).to eq(1.5)
+        expect(result[:away_score]).to eq(0.5)
       end
     end
 
@@ -574,6 +632,23 @@ RSpec.describe ChessMatchScraper do
         expect(first_game[:result]).to eq('0 - 1')
         expect(first_game[:away_player]).to eq('Orr, Mark J L')
         expect(first_game[:away_rating]).to eq(2116)
+      end
+
+      it 'successfully scrapes fixture 1588 and converts default results' do
+        live_scraper = ChessMatchScraper.new(1588)
+        result = live_scraper.scrape
+
+        # Verify the structure and data we got when the test was created (2025-12-05)
+        expect(result[:home_team]).to eq('Wandering Dragons 2')
+        expect(result[:away_team]).to eq('Corstorphine 1')
+        expect(result[:home_score]).to eq(4.0)
+        expect(result[:away_score]).to eq(2.0)
+        expect(result[:games].length).to eq(6)
+
+        # Verify the last game has a default result converted to asterisk format
+        last_game = result[:games].last
+        expect(last_game[:board]).to eq(6)
+        expect(last_game[:result]).to eq('1 * 0')
       end
     end
   end
