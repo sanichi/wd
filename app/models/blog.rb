@@ -191,6 +191,8 @@ class Blog < ApplicationRecord
   def format_score(score)
     if score % 1 == 0
       score.to_i.to_s
+    elsif score == 0.5
+      "½"
     else
       "#{score.to_i}½"
     end

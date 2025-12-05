@@ -170,7 +170,7 @@ describe Blog do
 
     it "formats half-point scores with ½ symbol" do
       expect(blog.send(:format_score, 3.5)).to eq("3½")
-      expect(blog.send(:format_score, 0.5)).to eq("0½")
+      expect(blog.send(:format_score, 0.5)).to eq("½")
       expect(blog.send(:format_score, 2.5)).to eq("2½")
     end
   end
