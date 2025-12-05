@@ -320,8 +320,14 @@
 %p
   This macro should be on it's own on one line. As results are added, the table
   automatically updates. The tie breaker rule used for ranking is Sonneborn–Berger.
-  For the results of games that have not yet finished use "?-?".
   It's okay to link results (as illustrated above) but not player names.
+%p
+  For the results of games that have not yet been played use "?-?" or "0-0".
+  For players who have not played any games or been mentioned in the extra
+  information (see below), this causes them to be added to the list of players.
+%p
+  For defaults, use "1*0", "0*1" or "½*½". This doesn't change the table,
+  it's just a way to indicate a default for the benefit of the reader.
 %p
   Be careful to spell players' names consistently in results tables.
   Names such as "Donkin, C.", "Donkin, Chris" and "Chris Donkin" will
@@ -363,7 +369,8 @@
   Once again, it‘s important to spell names precisley for this to work.
 %p
   The equals signs must be included, even if there is no extra information for the players.
-  This permits an easy way to indicate players who have yet to play any games. For example:
+  This is an alternative (to "0-0" or "?-?", see above) way to indicate players who have
+  yet to play any games. For example:
 %pre
   _TABLE_Crorie, I.=|Ferguson, A.=
 %p

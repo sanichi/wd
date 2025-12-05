@@ -4,7 +4,7 @@ class Table
     (?:\||\*)                                                # start of table row or list item
     ([^|\n]+)                                                # white player, possibly with extra white space
     (?:\||,)\s*                                              # separates first name from result
-    \[?(1[-*]0|0[-*]1|½[-*]½|\?-\?)(?:\]\(\/games\/(\d+)\))? # result, possibly linked to game
+    \[?(1[-*]0|0[-*]1|½[-*]½|0-0|\?-\?)(?:\]\(\/games\/(\d+)\))? # result, possibly linked to game
     \s*(?:\||,)                                              # separates result from black player
     ([^|\n]+)                                                # black player, possibly with extra white space
     \|?                                                      # signifies end of table row
@@ -42,7 +42,7 @@ class Table
   end
 
   def initialize(blog, options, info)
-    @text = blog.summary + blog.story
+    @text = blog.summary.to_s + blog.story.to_s
     @games = !options.include?("g")
     @break = !options.include?("t")
     @cross = options.include?("x")
@@ -128,6 +128,11 @@ class Table
         when "½-½", "½*½"
           @rhash[white][black].push 1
           @rhash[black][white].push 1
+        when "0-0", "?-?"
+          # alternative method to specify players who have not played yet (see parse for the other one)
+          # but unlike parse this method doesn't allow one to specify extra info such as a rating
+          @ihash[white] = '' unless @ihash.has_key?(white)
+          @ihash[black] = '' unless @ihash.has_key?(black)
         end
         if game_id.present?
           @ghash[white][black] = game_id
