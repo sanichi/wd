@@ -140,7 +140,7 @@ class Blog < ApplicationRecord
       matched_string = $&
       fixture_id = $1
       begin
-        scraper = ChessMatchScraper.new(fixture_id)
+        scraper = LmsMatchScraper.new(fixture_id)
         match_data = scraper.scrape
         "\n\n#{match_to_markdown(match_data)}\n\n"
       rescue ChessMatchScraper::ScraperError => e

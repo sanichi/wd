@@ -18,7 +18,7 @@ describe Blog do
   end
 
   describe "match data persistence" do
-    let(:mock_scraper) { double('ChessMatchScraper') }
+    let(:mock_scraper) { double('LmsMatchScraper') }
     let(:match_data) do
       {
         home_team: "Civil Service 1",
@@ -34,7 +34,7 @@ describe Blog do
     end
 
     before do
-      allow(ChessMatchScraper).to receive(:new).with("1539").and_return(mock_scraper)
+      allow(LmsMatchScraper).to receive(:new).with("1539").and_return(mock_scraper)
       allow(mock_scraper).to receive(:scrape).and_return(match_data)
     end
 
@@ -68,7 +68,7 @@ describe Blog do
     end
 
     it "handles multiple {LMS:nnnn} patterns" do
-      allow(ChessMatchScraper).to receive(:new).with("1234").and_return(mock_scraper)
+      allow(LmsMatchScraper).to receive(:new).with("1234").and_return(mock_scraper)
 
       blog = Blog.new(title: "Test", summary: "{LMS:1539} and {LMS:1234}")
       blog.save
@@ -113,10 +113,10 @@ describe Blog do
     end
 
     it "handles multiple LMS patterns with mixed success and failure" do
-      working_scraper = instance_double(ChessMatchScraper)
+      working_scraper = instance_double(LmsMatchScraper)
       allow(working_scraper).to receive(:scrape).and_return(match_data)
-      allow(ChessMatchScraper).to receive(:new).with("1539").and_return(working_scraper)
-      allow(ChessMatchScraper).to receive(:new).with("9999").and_return(mock_scraper)
+      allow(LmsMatchScraper).to receive(:new).with("1539").and_return(working_scraper)
+      allow(LmsMatchScraper).to receive(:new).with("9999").and_return(mock_scraper)
       allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Not found")
 
       blog = Blog.new(title: "Test", summary: "{LMS:1539} and {LMS:9999}")
@@ -176,7 +176,7 @@ describe Blog do
   end
 
   describe "match with draws" do
-    let(:mock_scraper) { double('ChessMatchScraper') }
+    let(:mock_scraper) { double('LmsMatchScraper') }
     let(:match_data_with_draws) do
       {
         home_team: "Team A",
@@ -195,7 +195,7 @@ describe Blog do
     end
 
     before do
-      allow(ChessMatchScraper).to receive(:new).with("1555").and_return(mock_scraper)
+      allow(LmsMatchScraper).to receive(:new).with("1555").and_return(mock_scraper)
       allow(mock_scraper).to receive(:scrape).and_return(match_data_with_draws)
     end
 

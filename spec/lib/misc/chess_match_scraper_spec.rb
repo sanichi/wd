@@ -1,7 +1,7 @@
 require 'rails_helper'
 require './lib/misc/chess_match_scraper'
 
-RSpec.describe ChessMatchScraper do
+RSpec.describe LmsMatchScraper do
   let(:fixture_id) { 1539 }
   let(:agent) { double('Mechanize Agent') }
   let(:scraper) { described_class.new(fixture_id, agent: agent) }
@@ -91,7 +91,7 @@ RSpec.describe ChessMatchScraper do
       end
 
       before do
-        allow(agent).to receive(:get).with("#{ChessMatchScraper::BASE_URL}/#{fixture_id}").and_return(mock_page)
+        allow(agent).to receive(:get).with("#{LmsMatchScraper::BASE_URL}/#{fixture_id}").and_return(mock_page)
       end
 
       it 'extracts the home team name' do
@@ -614,7 +614,7 @@ RSpec.describe ChessMatchScraper do
 
     context 'live test against real LMS website' do
       it 'successfully scrapes fixture 1539 from the live website' do
-        live_scraper = ChessMatchScraper.new(1539)
+        live_scraper = LmsMatchScraper.new(1539)
         result = live_scraper.scrape
 
         # Verify the structure and data we got when the test was created (2025-12-03)
@@ -635,7 +635,7 @@ RSpec.describe ChessMatchScraper do
       end
 
       it 'successfully scrapes fixture 1588 and converts default results' do
-        live_scraper = ChessMatchScraper.new(1588)
+        live_scraper = LmsMatchScraper.new(1588)
         result = live_scraper.scrape
 
         # Verify the structure and data we got when the test was created (2025-12-05)

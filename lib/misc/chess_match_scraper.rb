@@ -1,17 +1,14 @@
 require 'mechanize'
 
 class ChessMatchScraper
-  BASE_URL = 'https://www.lms.playchess.org.uk/fixture'
-
   class ScraperError < StandardError; end
   class NetworkError < ScraperError; end
   class ParseError < ScraperError; end
   class MatchNotPlayedError < ScraperError; end
 
-  attr_reader :fixture_id, :agent
+  attr_reader :agent
 
-  def initialize(fixture_id, agent: nil)
-    @fixture_id = fixture_id
+  def initialize(agent: nil)
     @agent = agent || Mechanize.new
   end
 
@@ -41,15 +38,36 @@ class ChessMatchScraper
   private
 
   def fetch_page
+    raise NotImplementedError, "Subclasses must implement fetch_page"
+  end
+
+  def parse_match_data(page)
+    raise NotImplementedError, "Subclasses must implement parse_match_data"
+  end
+end
+
+class LmsMatchScraper < ChessMatchScraper
+  BASE_URL = 'https://www.lms.playchess.org.uk/fixture'
+
+  attr_reader :fixture_id
+
+  def initialize(fixture_id, agent: nil)
+    super(agent: agent)
+    @fixture_id = fixture_id
+  end
+
+  private
+
+  def fetch_page
     @agent.get("#{BASE_URL}/#{fixture_id}")
   end
 
   def parse_match_data(page)
     table = page.at('table.team-match-table')
-    raise ParseError, "Match table not found" unless table
+    raise ChessMatchScraper::ParseError, "Match table not found" unless table
 
     rows = table.css('tbody tr')
-    raise ParseError, "No match data found" if rows.empty?
+    raise ChessMatchScraper::ParseError, "No match data found" if rows.empty?
 
     games = []
     rows.each do |row|
@@ -138,7 +156,7 @@ class ChessMatchScraper
     all_results_n = games.all? { |game| game[:result] == 'N' }
 
     if all_results_n
-      raise MatchNotPlayedError, "Match has not been played yet"
+      raise ChessMatchScraper::MatchNotPlayedError, "Match has not been played yet"
     end
   end
 
