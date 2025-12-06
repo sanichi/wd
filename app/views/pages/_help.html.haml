@@ -202,7 +202,7 @@
 
 %p
   To add a chess position to a news item, include something like the following in your markdown on a
-  single line on it's own:
+  single line on its own:
 %pre
   FEN "8/6k1/4KpPp/5P2/8/8/8/8 w - - 0 1"
 %p
@@ -251,7 +251,7 @@
 %pre
   ![this is a great photo](photo1.jpg "250R")
 %p
-  The text inside the square brackets is for assitive technologies and doesn't normally display.
+  The text inside the square brackets is for assistive technologies and doesn't normally display.
   The image filename (supplied to you by the webmaster) goes after the opening parenthesis.
   The text in quotes is optional and in regular markdown would be used to give the image a
   title but, in this application, is used instead to place and resize the image according
@@ -272,7 +272,12 @@
 = help_section :add_match
 
 %p
-  This only works for match results from the LMS site, for example:
+  This only works for Edinburgh League matches and SNCL matches which have been reported on their respective web sites.
+  If the sites change, our data retrieval may fail. Please report any problems to the WD admin.
+
+%h5 Edinburgh League
+%p
+  Local league results are available from the LMS site on pages such as:
   = succeed(".") { link_to "www.lms.playchess.org.uk/fixture/1588", "https://www.lms.playchess.org.uk/fixture/1588", target: "external" }
 %p
   Suppose you want to enter a match result as a markdown table, like this:
@@ -295,14 +300,35 @@
 %p
   Obviously, you need to identify and use the right fixture ID from the LMS site.
   If you make a mistake and insert the wrong match, delete the table and try again with the correct ID.
+
+%h5 SNCL
 %p
-  This feature works by web scraping and may fail if the LMS site changes. Please report any problems to this website's admin.
+  National league results are available from the chess-results server on pages such as:
+  = succeed(".") { link_to "s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", "https://s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", target: "external" }
+%p
+  This is from the section entitled <b>Board Pairings</b>
+  where the link labels are round numbers such as <b>Rd.1</b>, <b>Rd.2</b>, etc.
+  This URL is more complicated than the above LMS case where just single ID is needed.
+  While some of the parameters could be omitted and it would still work,
+  the easiest thing to do is enter the whole thing like this:
+%pre
+  {SNCL:s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0}
+%p
+  If you put that in a blog post, it will be substituted by:
+%pre
+  |Wandering Dragons      |3-2|Dundee City A|
+  |-----------------------|:-:|-----------------------------|
+  |Leah, Tom (2054)       |1-0|Ophoff, Jacques (2264 CM)|
+  |Minnican, Alan W (2042)|½-½|Wright, Andrew G (2124)|
+  |Sloan, Elliot S (1955) |0-1|Vayanos, George Marwan (2095)|
+  |Burnett, Walter (1900) |½-½|Findlay, David J (2110)|
+  |Fleming, Neil (1856)   |1-0|Spencer, Edwin A (2110)|
 
 = help_section :add_table
 
 %p
   Suppose a news item is about a tournament and round results are recorded
-  using markdowm tables with rows like these:
+  using markdown tables with rows like these:
 %pre
   |White|:-:|Black|
   |Donkin, C.|1-0|Donkin, A.|
@@ -318,7 +344,7 @@
 %pre
   _TABLE_
 %p
-  This macro should be on it's own on one line. As results are added, the table
+  This macro should be on its own on one line. As results are added, the table
   automatically updates. The tie breaker rule used for ranking is Sonneborn–Berger.
   It's okay to link results (as illustrated above) but not player names.
 %p
@@ -365,8 +391,8 @@
 %pre
   _TABLE_Donkin, A.=1600|Donkin, C.=2000|Nimmo, H.=1500|Poots, D.=1500
 %p
-  In this example, the given ratings would appear in brackets after each player‘s name.
-  Once again, it‘s important to spell names precisley for this to work.
+  In this example, the given ratings would appear in brackets after each player's name.
+  Once again, it's important to spell names precisely for this to work.
 %p
   The equals signs must be included, even if there is no extra information for the players.
   This is an alternative (to "0-0" or "?-?", see above) way to indicate players who have
@@ -377,7 +403,7 @@
   would add two extra players with the given names to the table who have yet to play any games
   and, in this case, with no extra information in brackets after their names (since there is
   nothing after the equals signs). Once such players have one or more results recorded, you
-  could delete thier names from this list.
+  could delete their names from this list.
 
 = help_section :create_game
 
