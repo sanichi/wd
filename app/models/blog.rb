@@ -9,6 +9,7 @@ class Blog < ApplicationRecord
   FEN2 = /\AFEN\s*"([^"]*)"\z/
   TABLE = /(?:\A|\n)_TABLE([a-z0-9]*)_([^\n]*)(?:\z|\n)/
   LMS = /\s*\{LMS:(\d+)\}\s*/
+  SNCL = /\s*\{SNCL:([^}]+)\}\s*/
   MAX_SLUG = 25
   MAX_TITLE = 50
   MAX_TAG = 12
@@ -136,7 +137,8 @@ class Blog < ApplicationRecord
     return text unless text
     require_relative '../../lib/misc/chess_match_scraper'
 
-    text.gsub(LMS) do
+    # Process LMS patterns
+    text = text.gsub(LMS) do
       matched_string = $&
       fixture_id = $1
       begin
@@ -145,6 +147,20 @@ class Blog < ApplicationRecord
         "\n\n#{match_to_markdown(match_data)}\n\n"
       rescue ChessMatchScraper::ScraperError => e
         @scraping_errors << "LMS fixture #{fixture_id}: #{e.message}"
+        matched_string
+      end
+    end
+
+    # Process SNCL patterns
+    text.gsub(SNCL) do
+      matched_string = $&
+      url_fragment = $1
+      begin
+        scraper = SnclMatchScraper.new(url_fragment)
+        match_data = scraper.scrape
+        "\n\n#{match_to_markdown(match_data)}\n\n"
+      rescue ChessMatchScraper::ScraperError => e
+        @scraping_errors << "SNCL match: #{e.message}"
         matched_string
       end
     end

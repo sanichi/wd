@@ -209,4 +209,184 @@ describe Blog do
       expect(blog.summary).not_to include("|3-2|")
     end
   end
+
+  describe "SNCL match data persistence" do
+    let(:mock_scraper) { double('SnclMatchScraper') }
+    let(:match_data) do
+      {
+        home_team: "Wandering Dragons",
+        away_team: "Dundee City A",
+        home_score: 3.0,
+        away_score: 2.0,
+        games: [
+          { board: 1, home_player: "Leah, Tom", home_rating: "2054", result: "1 - 0", away_player: "Ophoff, Jacques", away_rating: "2264 CM" },
+          { board: 2, home_player: "Minnican, Alan W", home_rating: "2042", result: "½ - ½", away_player: "Wright, Andrew G", away_rating: "2124" },
+          { board: 3, home_player: "Sloan, Elliot S", home_rating: "1955", result: "0 - 1", away_player: "Vayanos, George", away_rating: "2095" }
+        ]
+      }
+    end
+
+    before do
+      allow(SnclMatchScraper).to receive(:new).with("s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0").and_return(mock_scraper)
+      allow(mock_scraper).to receive(:scrape).and_return(match_data)
+    end
+
+    it "persists markdown table in summary when saving blog with {SNCL:...}" do
+      blog = Blog.new(title: "SNCL Match Report", summary: "Here is the match:\n\n{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be true
+
+      blog.reload
+      expect(blog.summary).not_to include("{SNCL:")
+      expect(blog.summary).to include("|Wandering Dragons")
+      expect(blog.summary).to include("Dundee City A")
+      expect(blog.summary).to include("Leah, Tom (2054)")
+      expect(blog.summary).to include("|1-0|")
+    end
+
+    it "persists markdown table in story when saving blog with {SNCL:...}" do
+      blog = Blog.new(title: "SNCL Match Report", summary: "Summary", story: "Story:\n\n{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be true
+
+      blog.reload
+      expect(blog.story).not_to include("{SNCL:")
+      expect(blog.story).to include("|Wandering Dragons")
+      expect(blog.story).to include("|1-0|")
+    end
+
+    it "strips whitespace around {SNCL:...} and replaces with exactly 2 newlines" do
+      blog = Blog.new(title: "Test", summary: "Before   \n  {SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}  \n   After")
+      blog.save
+
+      expect(blog.summary).to match(/Before\n\n.*\n\nAfter/m)
+    end
+
+    it "handles multiple {SNCL:...} patterns" do
+      allow(SnclMatchScraper).to receive(:new).with("s3.chess-results.com/tnr243676.aspx?lan=1&art=3&rd=2&Snode=S0").and_return(mock_scraper)
+
+      blog = Blog.new(title: "Test", summary: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0} and {SNCL:s3.chess-results.com/tnr243676.aspx?lan=1&art=3&rd=2&Snode=S0}")
+      blog.save
+
+      expect(blog.summary.scan(/Wandering Dragons/).length).to eq(2)
+    end
+
+    it "fails validation when scraper raises NetworkError" do
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Network error")
+
+      blog = Blog.new(title: "Test", summary: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("SNCL match: Network error")
+      expect(blog.summary).to eq("{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+    end
+
+    it "fails validation when scraper raises ParseError" do
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::ParseError, "Parse error")
+
+      blog = Blog.new(title: "Test", summary: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("SNCL match: Parse error")
+      expect(blog.summary).to eq("{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+    end
+
+    it "fails validation when scraper error occurs in story field" do
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Network error")
+
+      blog = Blog.new(title: "Test", summary: "Summary", story: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("SNCL match: Network error")
+      expect(blog.story).to eq("{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+    end
+
+    it "handles multiple SNCL patterns with mixed success and failure" do
+      working_scraper = instance_double(SnclMatchScraper)
+      allow(working_scraper).to receive(:scrape).and_return(match_data)
+      allow(SnclMatchScraper).to receive(:new).with("s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0").and_return(working_scraper)
+      allow(SnclMatchScraper).to receive(:new).with("s1.chess-results.com/tnr9999999.aspx?lan=1&art=3&rd=1&Snode=S0").and_return(mock_scraper)
+      allow(mock_scraper).to receive(:scrape).and_raise(ChessMatchScraper::NetworkError, "Not found")
+
+      blog = Blog.new(title: "Test", summary: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0} and {SNCL:s1.chess-results.com/tnr9999999.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      expect(blog.save).to be false
+      expect(blog.errors[:base]).to include("SNCL match: Not found")
+      expect(blog.summary).to include("|Wandering Dragons")
+      expect(blog.summary).to include("{SNCL:s1.chess-results.com/tnr9999999.aspx?lan=1&art=3&rd=1&Snode=S0}")
+    end
+
+    it "handles SNCL matches with default wins (+ - - notation)" do
+      match_data_with_defaults = {
+        home_team: "Wandering Dragons A",
+        away_team: "Test Team",
+        home_score: 3.0,
+        away_score: 2.0,
+        games: [
+          { board: 1, home_player: "Player A", home_rating: "2000", result: "1 * 0", away_player: "Player B", away_rating: "1950" },
+          { board: 2, home_player: "Player C", home_rating: "1900", result: "0 * 1", away_player: "Player D", away_rating: "1850" },
+          { board: 3, home_player: "Player E", home_rating: "1800", result: "1 - 0", away_player: "Player F", away_rating: "1750" }
+        ]
+      }
+
+      allow(mock_scraper).to receive(:scrape).and_return(match_data_with_defaults)
+
+      blog = Blog.new(title: "Test", summary: "{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}")
+      blog.save
+
+      expect(blog.summary).to include("|1*0|")
+      expect(blog.summary).to include("|0*1|")
+      expect(blog.summary).to include("|Wandering Dragons A")
+    end
+
+    it "does not modify summary if no {SNCL:...} pattern" do
+      original_summary = "Just a regular blog post"
+      blog = Blog.new(title: "Test", summary: original_summary)
+      blog.save
+
+      expect(blog.summary).to eq(original_summary)
+    end
+  end
+
+  describe "LMS live test" do
+    it "successfully scrapes and persists a real LMS match from the live website" do
+      blog = Blog.new(
+        title: "LMS Live Test",
+        summary: "Match result:\n\n{LMS:1539}"
+      )
+
+      expect(blog.save).to be true
+
+      blog.reload
+      # Verify the match data was scraped and persisted
+      expect(blog.summary).not_to include("{LMS:1539}")
+      expect(blog.summary).to include("|Civil Service 1")
+      expect(blog.summary).to include("|Wandering Dragons 1")
+      expect(blog.summary).to include("|1-5|")
+      expect(blog.summary).to include("Van Oijen, Marcel")
+      expect(blog.summary).to include("Orr, Mark J L")
+
+      # Verify proper markdown table structure
+      expect(blog.summary).to match(/\|Civil Service 1.*\|1-5\|.*Wandering Dragons 1.*\|/)
+      expect(blog.summary).to match(/\|[-]+\|:-:\|[-]+\|/)
+    end
+  end
+
+  describe "SNCL live test" do
+    it "successfully scrapes and persists a real SNCL match from the live website" do
+      blog = Blog.new(
+        title: "SNCL Round 1 Live Test",
+        summary: "Round 1 result:\n\n{SNCL:s1.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&Snode=S0}"
+      )
+
+      expect(blog.save).to be true
+
+      blog.reload
+      # Verify the match data was scraped and persisted
+      expect(blog.summary).not_to include("{SNCL:")
+      expect(blog.summary).to include("|Wandering Dragons")
+      expect(blog.summary).to include("|Dundee City A")
+      expect(blog.summary).to include("|3-2|")
+      expect(blog.summary).to include("Leah, Tom")
+      expect(blog.summary).to include("Ophoff, Jacques")
+
+      # Verify proper markdown table structure
+      expect(blog.summary).to match(/\|Wandering Dragons.*\|3-2\|.*Dundee City A.*\|/)
+      expect(blog.summary).to match(/\|[-]+\|:-:\|[-]+\|/)
+    end
+  end
 end
