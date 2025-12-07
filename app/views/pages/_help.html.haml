@@ -350,19 +350,20 @@
 %p
   For the results of games that have not yet been played use "?-?" or "0-0".
   For players who have not played any games or been mentioned in the extra
-  information (see below), this causes them to be added to the list of players.
+  information (see below), this causes them to be added to the list of players
+  in the tournament.
 %p
   For defaults, use "1*0", "0*1" or "½*½". This doesn't change the table,
   it's just a way to indicate a default for the benefit of the reader.
 %p
-  Be careful to spell players' names consistently in results tables.
+  Be careful to spell players' names consistently in results tables or lists.
   Names such as "Donkin, C.", "Donkin, Chris" and "Chris Donkin" will
   look like 3 different players to the algorithm that constructs the table.
   Anything in brackets, such as a rating, current score, federation or club,
   will be stripped out. For example, the names extracted from "Donkin, C. (2000)" and
   "Donkin, C. (2½)", "Donkin, C. (SCO)" and "Donkin, C. (WD)" will all be "Donkin, C.".
 %p
-  Please note that only one such table macro should be included per news item.
+  Please note that only one such table macro can be included per news item.
 %p
   By adding lower case letters to the end of the macro (between the letter E and the
   final underscore) you can control some details of the table display. For example:
@@ -375,7 +376,7 @@
     %li
       <b>x</b>: Display individual scores between players (i.e. a cross table).
       As this may make the table quite wide, be aware that it may be partially
-      hidden on devices with a small screen width (e.g. an iPhone).
+      hidden on devices with a small screen width (e.g. mobile phones).
     %li
       <b>g</b>: Suppress displaying the number of games played for each player.
       Once a tournament is over (and assuming each player has played the same number
@@ -383,7 +384,7 @@
       finished, this information could be useful.
     %li
       <b>t</b>: Suppress displaying the tie break score for each player.
-      If no players have the same score, this information is not needed.
+      If no players have the same score, this is not needed.
 %p
   To display extra information about any or all players in the final table, such
   as rating or federation, supply a pipe-separated list of equal-separated name-value
@@ -402,8 +403,8 @@
 %p
   would add two extra players with the given names to the table who have yet to play any games
   and, in this case, with no extra information in brackets after their names (since there is
-  nothing after the equals signs). Once such players have one or more results recorded, you
-  could delete their names from this list.
+  nothing after the equals signs). Once such players have one or more results recorded they
+  can be removed from this list.
 
 = help_section :create_game
 
