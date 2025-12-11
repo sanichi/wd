@@ -278,7 +278,8 @@
 %h5 Edinburgh League
 %p
   Local league results are available from the LMS site on pages such as:
-  = succeed(".") { link_to "www.lms.playchess.org.uk/fixture/1588", "https://www.lms.playchess.org.uk/fixture/1588", target: "external" }
+%pre
+  = link_to "https://www.lms.playchess.org.uk/fixture/1588", "https://www.lms.playchess.org.uk/fixture/1588", target: "external"
 %p
   Suppose you want to enter a match result as a markdown table, like this:
 %pre
@@ -299,18 +300,19 @@
   curly bracket expression and saved with the rest of the blog as if you'd typed it in yourself.
 %p
   Obviously, you need to identify and use the right fixture ID from the LMS site.
-  If you make a mistake and insert the wrong match, delete the table and try again with the correct ID.
+  If you make a mistake and insert the wrong match, delete the table and repeat the process with the correct ID.
 
 %h5 SNCL
 %p
   National league results are available from the chess-results server on pages such as:
-  = succeed(".") { link_to "s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", "https://s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", target: "external" }
+%pre
+  = link_to "https://s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", "https://s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0", target: "external"
 %p
-  This is from the section entitled <b>Board Pairings</b>
+  Such URLs are from the section entitled <b>Board Pairings</b>
   where the link labels are round numbers such as <b>Rd.1</b>, <b>Rd.2</b>, etc.
-  This URL is more complicated than the above LMS case where just single ID is needed.
-  While some of the parameters could be omitted and it would still work,
-  the easiest thing to do is enter the whole thing like this:
+  The parameters are more numerous than the previous LMS case where only a single number is required.
+  While some could be omitted and the retrieval would still work,
+  it is easiest to just enter most of the URL verbatim as shown:
 %pre
   {SNCL:s3.chess-results.com/tnr1280922.aspx?lan=1&art=3&rd=1&SNode=S0}
 %p
