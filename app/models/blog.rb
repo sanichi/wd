@@ -8,7 +8,7 @@ class Blog < ApplicationRecord
   FEN1 = /\n*\s*(FEN\s*"[^"]*")\s*\n*/
   FEN2 = /\AFEN\s*"([^"]*)"\z/
   TABLE = /(?:\A|\n)_TABLE([a-z0-9]*)_([^\n]*)(?:\z|\n)/
-  LMS = /\s*\{LMS:(\d+)\}\s*/
+  LMS = /\s*\{LMS:[ \t]*(\d+)[ \t]*\}\s*/
   SNCL = /\s*\{SNCL:([^}]+)\}\s*/
   MAX_SLUG = 25
   MAX_TITLE = 50
@@ -184,15 +184,20 @@ class Blog < ApplicationRecord
     # Format score for header
     score = "#{format_score(data[:home_score])}-#{format_score(data[:away_score])}"
 
+    # Calculate padding needed to align first and fourth pipes
+    score_extra = score.length - 3
+    home_pad = score_extra / 2
+    away_pad = score_extra - home_pad
+
     # Header row
-    rows << "|#{data[:home_team].ljust(max_home)}|#{score.center(3)}|#{data[:away_team].ljust(max_away)}|"
+    rows << "|#{data[:home_team].ljust(max_home)}|#{score}|#{data[:away_team].ljust(max_away)}|"
 
     # Separator row
-    rows << "|#{'-' * max_home}|:-:|#{'-' * max_away}|"
+    rows << "|#{'-' * (max_home + home_pad)}|:-:|#{'-' * (max_away + away_pad)}|"
 
     # Game rows
     game_rows.each do |home, result, away|
-      rows << "|#{home.ljust(max_home)}|#{result.center(3)}|#{away.ljust(max_away)}|"
+      rows << "|#{home.ljust(max_home + home_pad)}|#{result.center(3)}|#{away.ljust(max_away + away_pad)}|"
     end
 
     rows.join("\n")
