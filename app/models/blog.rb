@@ -120,6 +120,10 @@ class Blog < ApplicationRecord
     markdown.gsub!(/(\w)(\(\d{4}\))/, '\1 \2') # Orr, Mark(2100) => Orr, Mark (2100)
     markdown.gsub!(/\s+,/, ',')                # Jorge , Blanko  => Jorge, Blanco
 
+    # See lib/misc/corrections2.rb
+    markdown.gsub!(/\t/, " ")
+    markdown.gsub!(/[ ]+\n/, "\n")
+
     markdown = markdown.use_halves
     markdown
   end
