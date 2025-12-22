@@ -121,8 +121,11 @@ class Blog < ApplicationRecord
     markdown.gsub!(/\s+,/, ',')                # Jorge , Blanko  => Jorge, Blanco
 
     # See lib/misc/corrections2.rb
-    markdown.gsub!(/\t/, " ")
-    markdown.gsub!(/[ ]+\n/, "\n")
+    markdown.gsub!(/\t/, " ")                  # tabs => spaces
+    markdown.gsub!(/[ ]+\n/, "\n")             # no trailing spaces
+
+    # See lib/misc/corrections3.rb (a single space between sentences)
+    markdown.gsub!(/([a-z])([.!?])([ ]*\n[ ]*|[ ]{2,})([A-Z])/, "\\1\\2 \\4")
 
     markdown = markdown.use_halves
     markdown
