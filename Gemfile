@@ -11,6 +11,7 @@ gem 'cancancan', '~> 3.0'
 gem 'meta-tags', '~> 2.12'
 gem 'redcarpet', '~> 3.5'
 gem 'jbuilder', '~> 2.7'
+gem 'whittle' # Workaround for bundle_update_interactive with git-sourced pgn gem
 gem 'pgn', git: 'https://github.com/sanichi/pgn'
 gem 'rotp', '~> 6.2'
 gem 'rqrcode', '~> 3.1'
@@ -19,6 +20,7 @@ gem 'importmap-rails', '~> 2.1'
 gem 'turbo-rails', '~> 2.0'
 gem 'sni', git: 'https://github.com/sanichi/sni'
 gem 'mechanize', '~> 2.10'
+gem 'stimulus-rails', '~> 1.3'
 
 group :development, :test do
   gem 'rspec-rails', '< 9'
@@ -36,10 +38,10 @@ end
 
 group :development do
   gem 'puma', '< 8'
-  gem 'capistrano-rails', '~> 1.4', require: false
+  gem 'capistrano', '~> 3.20', require: false
+  gem 'capistrano-bundler', '~> 2.2', require: false
   gem 'capistrano-passenger', '~> 0.2', require: false
+  gem 'capistrano-rails', '~> 1.7', require: false
   gem 'listen', '~> 3.2'
   gem 'awesome_print', '~> 1.9', require: false
 end
-
-gem "stimulus-rails", "~> 1.3"

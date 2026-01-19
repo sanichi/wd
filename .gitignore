@@ -22,6 +22,8 @@
 /config/master.key
 /config/database.yml
 
+Gemfile.bak
+
 /.claude
 
 /spec/examples.txt
