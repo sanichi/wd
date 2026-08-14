@@ -47,7 +47,7 @@ class ChessMatchScraper
 end
 
 class LmsMatchScraper < ChessMatchScraper
-  BASE_URL = 'https://www.lms.playchess.org.uk/fixture'
+  BASE_URL = 'https://lms.playchess.org.uk/fixture'
 
   attr_reader :fixture_id
 
