@@ -15,6 +15,7 @@
         = link_to t("blog.more"), blog
       .float-end.mt-1
         - if editable
-          = link_to t("edit"), edit_blog_path(blog), class: "btn btn-primary btn-sm py-0"
+          - colour = current_user.id == blog.user.id ? "primary" : "dark"
+          = link_to t("edit"), edit_blog_path(blog), class: "btn btn-#{colour} btn-sm py-0"
         - elsif blog.user.present?
           = blog.user.handle
