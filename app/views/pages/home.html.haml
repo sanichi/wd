@@ -3,7 +3,7 @@
 .row
   .col-xl-8.col-lg-7.col-md-6.col-sm-12
     - @blogs.each do |blog|
-      = render "blogs/blog", blog: blog, home: true
+      = render "blogs/blog", blog: blog
     %article
       .footer
         = link_to t("blog.older"), blogs_path

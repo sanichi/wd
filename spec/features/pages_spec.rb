@@ -11,6 +11,35 @@ describe PagesController, js: true do
     end
   end
 
+  context "home blog footer" do
+    let(:blogger) { create(:user, roles: ["blogger"]) }
+    let(:other)   { create(:user, roles: ["blogger"]) }
+    let!(:blog)   { create(:blog, draft: false, pin: false, user: blogger) }
+
+    it "guest sees handle" do
+      visit home_path
+      expect(page).to have_content blogger.handle
+      expect(page).to_not have_link t("edit")
+    end
+
+    it "owner sees edit link" do
+      login blogger
+      visit home_path
+      expect(page).to_not have_content blogger.handle
+      click_link t("edit")
+      expect(page).to have_title t("blog.edit")
+    end
+
+    it "other blogger sees handle" do
+      login other
+      visit home_path
+      within("article", text: blog.title) do
+        expect(page).to have_content blogger.handle
+        expect(page).to_not have_link t("edit")
+      end
+    end
+  end
+
   context "help" do
     it "show" do
       click_link t("other")
