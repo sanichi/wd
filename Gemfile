@@ -29,7 +29,8 @@ group :development, :test do
   gem 'launchy', '< 4'
   gem 'factory_bot_rails', '< 7'
   gem 'faker', '< 4'
-  gem "selenium-webdriver", "~> 4.28"
+  gem 'selenium-webdriver', '~> 4.28'
+  gem 'active_record_doctor'
 end
 
 group :test do
