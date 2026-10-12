@@ -101,7 +101,7 @@ GEM
     builder (3.3.0)
     byebug (13.0.0)
       reline (>= 0.6.0)
-    cancancan (3.6.1)
+    cancancan (3.6.2)
     capistrano (3.20.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -133,7 +133,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0)
     database_cleaner-core (2.1.0)
-    date (3.5.1)
+    date (3.6.0)
     diff-lcs (1.6.2)
     domain_name (0.6.20260921)
     drb (2.2.3)
@@ -186,7 +186,7 @@ GEM
       addressable (~> 2.8)
       childprocess (~> 5.0)
       logger (~> 1.6)
-    listen (3.10.0)
+    listen (3.10.1)
       logger
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -220,7 +220,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.0922)
+    mime-types-data (3.2026.1006)
     mini_mime (1.1.5)
     minitest (6.0.6)
       drb (~> 2.0)
@@ -239,9 +239,9 @@ GEM
       net-ssh (>= 2.6.5, < 8.0.0)
     net-sftp (4.0.0)
       net-ssh (>= 5.0.0, < 8.0.0)
-    net-smtp (0.5.1)
+    net-smtp (0.5.2)
       net-protocol
-    net-ssh (7.3.3)
+    net-ssh (7.3.6)
     nio4r (2.7.5)
     nkf (0.3.0)
     nokogiri (1.19.4-arm64-darwin)
@@ -249,12 +249,12 @@ GEM
     nokogiri (1.19.4-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
-    pg (1.6.3-arm64-darwin)
-    pg (1.6.3-x86_64-linux)
+    pg (1.7.0-arm64-darwin)
+    pg (1.7.0-x86_64-linux)
     popper_js (2.11.8)
     pp (0.6.4)
       prettyprint
-    prettyprint (0.2.0)
+    prettyprint (0.2.1)
     prism (1.9.0)
     public_suffix (7.0.5)
     puma (8.0.2)
@@ -306,16 +306,15 @@ GEM
       logger
       prism (>= 1.6.0)
       tsort
-    rdoc (8.0.0)
+    rdoc (8.1.0)
       erb
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
       tsort
     redcarpet (3.6.1)
-    regexp_parser (2.13.0)
+    regexp_parser (2.13.1)
     reline (0.7.0)
       io-console (~> 0.5)
-    rexml (3.4.4)
     rotp (6.3.0)
     rqrcode (3.2.0)
       chunky_png (~> 1.0)
@@ -350,10 +349,9 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    selenium-webdriver (4.49.0)
+    selenium-webdriver (4.51.0)
       base64 (~> 0.2)
       logger (~> 1.4)
-      rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
     sprockets (4.4.1)
@@ -383,7 +381,7 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (1.1.1)
+    uri (1.1.2)
     useragent (0.16.11)
     webrick (1.9.2)
     webrobots (0.1.2)
