@@ -343,7 +343,8 @@ describe Blog do
   end
 
   describe "LMS live test" do
-    it "successfully scrapes and persists a real LMS match from the live website", skip: "lms.playchess.org.uk is behind a Cloudflare bot challenge (403 for non-browser clients)" do
+    it "successfully scrapes and persists a real LMS match from the live API" do
+      LmsFixture.create!(season_id: 11, event_id: 32, event_name: "Premier", fixture_id: 1539)
       blog = Blog.new(
         title: "LMS Live Test",
         summary: "Match result:\n\n{LMS:1539}"

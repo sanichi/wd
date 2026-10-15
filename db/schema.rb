@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_085720) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_131855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -70,6 +70,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_085720) do
     t.string "remote_ip", limit: 40
     t.string "resource", limit: 20
     t.index ["resource_id"], name: "index_journals_on_resource_id"
+  end
+
+  create_table "lms_fixtures", force: :cascade do |t|
+    t.integer "season_id", null: false
+    t.integer "event_id", null: false
+    t.string "event_name", limit: 12, null: false
+    t.integer "fixture_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fixture_id"], name: "index_lms_fixtures_on_fixture_id", unique: true
+    t.index ["season_id", "event_id"], name: "index_lms_fixtures_on_season_id_and_event_id"
   end
 
   create_table "players", force: :cascade do |t|

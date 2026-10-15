@@ -1,0 +1,7 @@
+en:
+  lms_fixture:
+    event: Event
+    event_id: Event ID
+    fixture_id: Fixture ID
+    lms_fixtures: LMS fixtures
+    season: Season

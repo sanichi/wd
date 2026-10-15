@@ -133,4 +133,26 @@ describe Ability do
       it { is_expected.to_not be_able_to(:crud, User) }
     end
   end
+
+  context "lms fixture" do
+    context "admin" do
+      let(:user) { create(:user, roles: ["admin"]) }
+
+      it { is_expected.to be_able_to(:index, LmsFixture) }
+    end
+
+    %w/blogger librarian member/.each do |role|
+      context role do
+        let(:user) { create(:user, roles: [role]) }
+
+        it { is_expected.to_not be_able_to(:index, LmsFixture) }
+      end
+    end
+
+    context "guest" do
+      let(:user) { Guest.new }
+
+      it { is_expected.to_not be_able_to(:index, LmsFixture) }
+    end
+  end
 end

@@ -28,6 +28,8 @@
               %li= link_to t("user.users"), users_path
             - if can?(:index, Journal)
               %li= link_to t("journal.journal"), journals_path
+            - if can?(:index, LmsFixture)
+              %li= link_to t("lms_fixture.lms_fixtures"), lms_fixtures_path
             - if can?(:read, Book)
               %li= link_to t("book.books"), books_path
             - if can?(:help, :page)

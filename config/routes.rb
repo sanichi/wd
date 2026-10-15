@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :dragons, only: [:index]
   resources :games
   resources :journals, only: [:index]
+  resources :lms_fixtures, only: [:index]
   resources :players do
     get :contacts, on: :collection
   end

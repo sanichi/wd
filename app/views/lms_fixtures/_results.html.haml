@@ -1,0 +1,9 @@
+- if lms_fixtures.matches.empty?
+  %tr
+    %td.text-center{colspan: 3}= t("no_matches")
+- lms_fixtures.matches.each do |fixture|
+  %tr
+    %td= fixture.event_name
+    %td.text-center= fixture.event_id
+    %td.text-center= lms_fixture_link(fixture)
+= render "utils/pagination/links", pager: lms_fixtures, columns: 3

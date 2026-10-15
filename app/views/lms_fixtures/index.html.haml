@@ -1,0 +1,24 @@
+:ruby
+  set_meta_tags title: t("lms_fixture.lms_fixtures")
+  lo = Sni::Layout.call({xs: [6,6], md: [4,4]})
+  inputs = [
+    [:season, t("lms_fixture.season"), :select, lo[0], menu: lms_season_menu(@season)],
+    [:event,  t("lms_fixture.event"),  :select, lo[1], menu: lms_event_menu(@event)],
+  ]
+
+.row
+  %div{class: Sni::Center.call(xl: 6, lg: 8, md: 10)}
+    %section
+      .header.text-center
+        %h3.d-inline= t("lms_fixture.lms_fixtures")
+      .body
+        = render "utils/search/form", index: lms_fixtures_path, inputs: inputs
+        = turbo_frame_tag :results, "data-turbo-action" => "advance" do
+          %table{class: "table table-bordered table-sm mt-3"}
+            %thead
+              %tr
+                %th= t("lms_fixture.event")
+                %th.text-center= t("lms_fixture.event_id")
+                %th.text-center= t("lms_fixture.fixture_id")
+            %tbody
+              = render "results", lms_fixtures: @lms_fixtures
