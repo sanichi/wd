@@ -30,15 +30,16 @@ class Player < ApplicationRecord
   RANK = ROLES.each_with_object({}).each_with_index{ |(r, h), i| h[r] = i }
 
   before_validation :normalize_attributes
-  before_save :set_slug
+  before_validation :set_slug
 
   validates :email, format: { with: /\A[^\s@]+@[^\s@]+\z/ }, length: { maximum: MAX_EMAIL }, uniqueness: true, allow_nil: true
-  validates :federation, format: { with: /[A-Z]{3}\z/ }
+  validates :federation, length: { maximum: MAX_FEDERATION }, format: { with: /\A[A-Z]{3}\z/ }
   validates :fide_id, :sca_id, numericality: { only_integer: true, minimum: MIN_ID }, uniqueness: true, allow_nil: true
   validates :fide_rating, :sca_rating, numericality: { only_integer: true, minimum: MIN_RATING, maximum: MAX_RATING }, allow_nil: true
   validates :first_name, length: { maximum: MAX_NAME }, format: { with: /\A[A-Z][a-z]+\z/ }, uniqueness: { scope: :last_name }
   validates :last_name, length: { maximum: MAX_NAME }, format: { with: /\A(O'|Mac|Mc)?[A-Z][a-z]+\z/ }
   validates :phone, length: { maximum: MAX_PHONE }, format: { with: /\A\d+( \d+)*\z/ }, allow_nil: true
+  validates :slug, length: { maximum: MAX_SLUG }
   validates :title, inclusion: { in: TITLES }, allow_nil: true
   validate :roles_rules
 

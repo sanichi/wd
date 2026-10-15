@@ -27,8 +27,8 @@ class User < ApplicationRecord
     format: { with: VALID_HANDLE, message: "is invalid (all caps)"},
     length: { minimum: MIN_HANDLE, maximum: MAX_HANDLE },
     uniqueness: true
-  validates :first_name, format: { with: /\A[A-Z][a-z]+\z/ }
-  validates :last_name, format: { with: /\A(O'|Mac|Mc)?[A-Z][a-z]+\z/ }
+  validates :first_name, length: { maximum: MAX_NAME }, format: { with: /\A[A-Z][a-z]+\z/ }
+  validates :last_name, length: { maximum: MAX_NAME }, format: { with: /\A(O'|Mac|Mc)?[A-Z][a-z]+\z/ }
   validates :password, length: { minimum: MIN_PASSWORD }, allow_nil: true
   validate :roles_rules
 
